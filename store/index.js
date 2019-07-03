@@ -16,6 +16,7 @@ const store = new Vuex.Store({
         login(state, userName) {
             state.userName = userName || '新用户';
             state.hasLogin = true;
+			uni.setStorageSync('userName', userName);
         },
         logout(state) {
             state.userName = "";

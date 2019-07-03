@@ -250,7 +250,10 @@ var _vuex = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.j
           url: '../main/main' });
 
       } else {
-        uni.navigateBack();
+        // uni.navigateBack();
+        uni.reLaunch({
+          url: '../main/main' });
+
       }
 
     } }),

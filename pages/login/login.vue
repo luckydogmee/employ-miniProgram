@@ -150,7 +150,10 @@
                         url: '../main/main',
                     });
                 } else {
-                    uni.navigateBack();
+                    // uni.navigateBack();
+					uni.reLaunch({
+						url:'../main/main'
+					})
                 }
 
             }

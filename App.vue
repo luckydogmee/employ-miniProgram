@@ -5,13 +5,6 @@
 	export default {
 		computed: mapState(['userName']),
 		onLaunch: function() {
-			console.log(this.userName)
-			if(this.userName === 'admin'){
-				uni.setTabBarItem({
-					index: 0,
-					text: '工作台'
-				})
-			}
 			console.log('App Launch');
 		},
 		onShow: function() {

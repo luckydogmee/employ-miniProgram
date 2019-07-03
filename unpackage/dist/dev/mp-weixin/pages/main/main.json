@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "登录模板",
-  "usingComponents": {}
+  "usingComponents": {
+    "customer-home": "/pages/customer/home/home",
+    "seller-home": "/pages/seller/home/home"
+  }
 }
