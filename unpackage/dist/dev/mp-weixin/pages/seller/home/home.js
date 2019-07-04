@@ -98,7 +98,14 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -129,7 +136,30 @@ var _default =
       duration: 500 };
 
 
-  } };exports.default = _default;
+  },
+  methods: {
+    chooseImage: function chooseImage() {
+      uni.chooseImage({
+        success: function success(res) {
+          var tempFilePath = res.tempFilePaths;
+          uni.uploadFile({
+            url: 'http://baidu.com',
+            filePath: tempFilePath[0],
+            name: 'file',
+            formData: {},
+
+
+            success: function success(uploadFileRes) {
+              console.log(uploadFileRes.data);
+            } });
+
+        } });
+
+    },
+    getUserInfo: function getUserInfo(e) {
+      console.log(e);
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
 
 /***/ }),
 

@@ -13,6 +13,13 @@
 					</view>
 				</swiper-item>
 			</swiper>	
+			<view class="upload-wrapper">
+				<image src="../../../static/img/upload.jpeg" mode="" @click="chooseImage"></image>
+			</view>
+			<view class="authorize">
+				<button type="primary" open-type="getUserInfo" @getuserinfo="getUserInfo">获取用户权限</button>
+				<button type="primary" open-type="share">分享</button>
+			</view>
 		</view>
 		
 	</view>
@@ -29,6 +36,29 @@
 				duration: 500
  
 			}
+		},
+		methods:{
+			chooseImage(){
+				uni.chooseImage({
+					success(res) {
+						const tempFilePath = res.tempFilePaths
+						uni.uploadFile({
+							url:'http://baidu.com',
+							filePath:tempFilePath[0],
+							name:'file',
+							formData:{
+								
+							},
+							success(uploadFileRes){
+								console.log(uploadFileRes.data)
+							}
+						})
+					}
+				})
+			},
+			getUserInfo(e){
+				console.log(e)
+			},
 		}
 	}
 </script>
@@ -41,5 +71,17 @@
 			height: 100%;
 			width:100%;
 		}
+	}
+	.upload-wrapper{
+		height: 320upx;
+		width:750upx;
+		margin-top: 40upx;
+		image{
+			height: 100%;
+			width:100%;
+		}
+	}
+	.authorize{
+		margin-top:40upx; 
 	}
 </style>
