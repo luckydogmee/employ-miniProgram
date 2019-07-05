@@ -1,5 +1,19 @@
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["common/vendor"],{
 
+/***/ "../../../../../../Users/romens/ray/workspace/miniProgram/config.js":
+/*!*********************************************************!*\
+  !*** /Users/romens/ray/workspace/miniProgram/config.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.config = void 0;var config = {
+  base_url: 'http://127.0.0.1',
+  appkey: 'wx63fe7790dd2e8fd5' };exports.config = config;
+
+/***/ }),
+
 /***/ "../../../../../../Users/romens/ray/workspace/miniProgram/main.js":
 /*!*******************************************************!*\
   !*** /Users/romens/ray/workspace/miniProgram/main.js ***!
@@ -17,6 +31,8 @@ var _store = _interopRequireDefault(__webpack_require__(/*! ./store */ "../../..
 _vue.default.config.productionTip = false;
 
 _vue.default.prototype.$store = _store.default;
+
+__webpack_require__(/*! ./utils/mock.js */ "../../../../../../Users/romens/ray/workspace/miniProgram/utils/mock.js");
 
 _App.default.mpType = 'app';
 
@@ -114,6 +130,42 @@ createPage(_user.default);
 
 /***/ }),
 
+/***/ "../../../../../../Users/romens/ray/workspace/miniProgram/models/user.js":
+/*!**************************************************************!*\
+  !*** /Users/romens/ray/workspace/miniProgram/models/user.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _http = __webpack_require__(/*! ../utils/http.js */ "../../../../../../Users/romens/ray/workspace/miniProgram/utils/http.js");function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}function _possibleConstructorReturn(self, call) {if (call && (typeof call === "object" || typeof call === "function")) {return call;}return _assertThisInitialized(self);}function _assertThisInitialized(self) {if (self === void 0) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return self;}function _getPrototypeOf(o) {_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {return o.__proto__ || Object.getPrototypeOf(o);};return _getPrototypeOf(o);}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function");}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });if (superClass) _setPrototypeOf(subClass, superClass);}function _setPrototypeOf(o, p) {_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {o.__proto__ = p;return o;};return _setPrototypeOf(o, p);}var
+
+UserModel = /*#__PURE__*/function (_HTTP) {_inherits(UserModel, _HTTP);
+  function UserModel(arg) {_classCallCheck(this, UserModel);return _possibleConstructorReturn(this, _getPrototypeOf(UserModel).call(this));
+
+  }_createClass(UserModel, [{ key: "test", value: function test()
+    {
+      return this.request({
+        url: '/test' });
+
+    } }]);return UserModel;}(_http.HTTP);var _default =
+
+
+UserModel;exports.default = _default;
+
+/***/ }),
+
+/***/ "../../../../../../Users/romens/ray/workspace/miniProgram/node_modules/mockjs/dist/mock.js":
+/*!********************************************************************************!*\
+  !*** /Users/romens/ray/workspace/miniProgram/node_modules/mockjs/dist/mock.js ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed (from ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js):\nError: ENOENT: no such file or directory, open '/Users/romens/ray/workspace/miniProgram/node_modules/mockjs/dist/mock.js'");
+
+/***/ }),
+
 /***/ "../../../../../../Users/romens/ray/workspace/miniProgram/pages.json":
 /*!**********************************************************!*\
   !*** /Users/romens/ray/workspace/miniProgram/pages.json ***!
@@ -200,6 +252,72 @@ var store = new _vuex.default.Store({
 
 store;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
+
+/***/ }),
+
+/***/ "../../../../../../Users/romens/ray/workspace/miniProgram/utils/http.js":
+/*!*************************************************************!*\
+  !*** /Users/romens/ray/workspace/miniProgram/utils/http.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.HTTP = void 0;var _config = __webpack_require__(/*! ../config.js */ "../../../../../../Users/romens/ray/workspace/miniProgram/config.js");function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}
+
+var tips = {
+  0: '未知错误' };var
+
+
+HTTP = /*#__PURE__*/function () {function HTTP() {_classCallCheck(this, HTTP);}_createClass(HTTP, [{ key: "request", value: function request(_ref)
+    {var _this = this;var url = _ref.url,_ref$method = _ref.method,method = _ref$method === void 0 ? "get" : _ref$method,_ref$data = _ref.data,data = _ref$data === void 0 ? {} : _ref$data;
+      return new Promise(function (resolve, reject) {
+        _this._request(url, resolve, reject, method, data);
+      });
+    } }, { key: "_request", value: function _request(
+    url, resolve, reject, method, data) {
+      var that = this;
+      uni.request({
+        url: _config.config.base_url + url,
+        method: method,
+        data: data,
+        success: function success(res) {
+          // TODO  根据返回的数据统一格式做处理
+          resolve(res);
+        },
+        fail: function fail(err) {
+          reject(err);
+          that._showError(err.code);
+        } });
+
+    } }, { key: "_showError", value: function _showError(
+    errCode) {
+      var tip = tips[errCode];
+      uni.showToast({
+        title: tip ? tip : tips[0],
+        icon: 'none',
+        duration: 3000 });
+
+    } }]);return HTTP;}();exports.HTTP = HTTP;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
+
+/***/ }),
+
+/***/ "../../../../../../Users/romens/ray/workspace/miniProgram/utils/mock.js":
+/*!*************************************************************!*\
+  !*** /Users/romens/ray/workspace/miniProgram/utils/mock.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var _mockjs = _interopRequireDefault(__webpack_require__(/*! mockjs */ "../../../../../../Users/romens/ray/workspace/miniProgram/node_modules/mockjs/dist/mock.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+_mockjs.default.mock('/test', 'get', {
+  code: 200,
+  data: {
+    name: 'zhangsan',
+    age: 24 } });
 
 /***/ }),
 

@@ -26,6 +26,10 @@
 </template>
 
 <script>
+	import UserModel from '../../../models/user.js';
+	import test from '../../../utils/mock.js'
+	const userModel = new UserModel() 
+	
 	export default {
 		data(){
 			return {
@@ -37,6 +41,11 @@
  
 			}
 		},
+		onReady() {
+			userModel.test().then(res=>{
+				console.log(res)
+			})
+		}, 
 		methods:{
 			chooseImage(){
 				uni.chooseImage({

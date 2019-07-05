@@ -1,0 +1,21 @@
+{
+  "name": "miniProgram",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luckydogmee/employ-miniProgram.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luckydogmee/employ-miniProgram/issues"
+  },
+  "homepage": "https://github.com/luckydogmee/employ-miniProgram#readme",
+  "dependencies": {}
+}

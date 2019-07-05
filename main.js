@@ -7,6 +7,8 @@ Vue.config.productionTip = false
 
 Vue.prototype.$store = store
 
+require('./utils/mock.js')
+
 App.mpType = 'app'
 
 const app = new Vue({

@@ -66,6 +66,7 @@
                             }
                             this.hasProvider = true;
                         }
+						console.log(this.providerList)
                     },
                     fail: (err) => {
                         console.error('获取服务供应商失败：' + JSON.stringify(err));

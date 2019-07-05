@@ -166,6 +166,7 @@ var _vuex = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.j
             }
             _this.hasProvider = true;
           }
+          console.log(_this.providerList);
         },
         fail: function fail(err) {
           console.error('获取服务供应商失败：' + JSON.stringify(err));

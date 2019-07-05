@@ -98,54 +98,63 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
-{
-  data: function data() {
-    return {
-      background: ['color1', 'color2', 'color3'],
-      indicatorDots: true,
-      autoplay: true,
-      interval: 2000,
-      duration: 500 };
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
-  },
-  methods: {
-    chooseImage: function chooseImage() {
-      uni.chooseImage({
-        success: function success(res) {
-          var tempFilePath = res.tempFilePaths;
-          uni.uploadFile({
-            url: 'http://baidu.com',
-            filePath: tempFilePath[0],
-            name: 'file',
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _user = _interopRequireDefault(__webpack_require__(/*! ../../../models/user.js */ "../../../../../../Users/romens/ray/workspace/miniProgram/models/user.js"));
+var _mock = _interopRequireDefault(__webpack_require__(/*! ../../../utils/mock.js */ "../../../../../../Users/romens/ray/workspace/miniProgram/utils/mock.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var userModel = new _user.default();var _default = { data: function data() {return { background: ['color1', 'color2', 'color3'], indicatorDots: true, autoplay: true, interval: 2000, duration: 500 };}, onReady: function onReady() {userModel.test().then(function (res) {console.log(res);});}, methods: { chooseImage: function chooseImage() {uni.chooseImage({ success: function success(res) {var tempFilePath = res.tempFilePaths;uni.uploadFile({ url: 'http://baidu.com', filePath: tempFilePath[0], name: 'file',
             formData: {},
 
 
