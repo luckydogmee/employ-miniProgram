@@ -1,1 +1,0 @@
-<view class="content"><block wx:if="{{loginType==='seller'}}"><seller-home vue-id="1" bind:__l="__l"></seller-home></block><block wx:else><customer-home vue-id="2" bind:__l="__l"></customer-home></block></view>

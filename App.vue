@@ -4,8 +4,12 @@
 	} from  'vuex'
 	export default {
 		computed: mapState(['userName']),
-		onLaunch: function() {
-			console.log('App Launch');
+		onLaunch(){
+			setTimeout(()=>{
+				uni.reLaunch({
+					url:'../../../pages/seller/main/main'
+				})	
+			},100)
 		},
 		onShow: function() {
 			console.log('App Show');
@@ -18,7 +22,6 @@
 
 <style>
 	/*每个页面公共css */
-	/* uni-app默认全局使用flex布局。因为flex布局有利于跨更多平台，尤其是采用原生渲染的平台。如不了解flex布局，请参考http://www.w3.org/TR/css3-flexbox/。如不使用flex布局，请删除或注释掉本行。*/
 	body,
 	page {
 		min-height: 100%;
@@ -126,5 +129,9 @@
 
 	button.primary {
 		background-color: #0faeff;
+	}
+	
+	.container{
+		background: #f1f2f7;
 	}
 </style>

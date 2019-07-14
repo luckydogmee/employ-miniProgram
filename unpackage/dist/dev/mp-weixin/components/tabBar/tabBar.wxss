@@ -1,4 +1,4 @@
-.tabbar.data-v-3d5d1532 {
+.tabbar.data-v-ac52f520 {
   width: 750rpx;
   height: 100rpx;
   background: #fff;
@@ -18,12 +18,21 @@
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
+  position: fixed;
+  padding-top: 6rpx;
+  bottom: 0;
+  left: 0;
+  -webkit-box-shadow: -10px 0px 10px #fff;
+          box-shadow: -10px 0px 10px #fff;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-top: 1rpx solid #eee;
 }
-.tabbar-item.data-v-3d5d1532 {
-  width: 100rpx;
+.tabbar-item.data-v-ac52f520 {
+  width: 150rpx;
   height: 100%;
   text-align: center;
-  font-size: 28rpx;
+  font-size: 24rpx;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -42,8 +51,15 @@
       -ms-flex-align: center;
           align-items: center;
 }
-.tabbar-item .item-icon.data-v-3d5d1532 {
+.tabbar-item .item-icon.data-v-ac52f520 {
     height: 40rpx;
-    width: 50rpx;
+    width: 40rpx;
+}
+.tabbar-item-text.data-v-ac52f520 {
+  font-size: 20rpx;
+  line-height: 40rpx;
+}
+.text-active.data-v-ac52f520 {
+  color: #ff8352;
 }
 

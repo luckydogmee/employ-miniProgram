@@ -1,35 +1,21 @@
 {
   "pages": [
-    "pages/main/main",
+    "pages/customer/main/main",
+    "pages/seller/main/main",
     "pages/login/login",
     "pages/reg/reg",
     "pages/pwd/pwd",
-    "pages/user/user"
+    "pages/user/user",
+    "pages/customer/project/project",
+    "pages/customer/resume/resume",
+    "pages/customer/user/user",
+    "pages/seller/choose/choose"
   ],
   "subPackages": [],
   "window": {
     "navigationBarTextStyle": "white",
-    "navigationBarBackgroundColor": "#0faeff",
+    "navigationBarBackgroundColor": "#e28f64",
     "backgroundColor": "#fbf9fe"
-  },
-  "tabBar": {
-    "color": "#7a7e83",
-    "selectedColor": "#0faeff",
-    "backgroundColor": "#ffffff",
-    "list": [
-      {
-        "pagePath": "pages/main/main",
-        "text": "首页",
-        "iconPath": "static/img/home.png",
-        "selectedIconPath": "static/img/homeHL.png"
-      },
-      {
-        "pagePath": "pages/user/user",
-        "text": "我的",
-        "iconPath": "static/img/user.png",
-        "selectedIconPath": "static/img/userHL.png"
-      }
-    ]
   },
   "usingComponents": {}
 }

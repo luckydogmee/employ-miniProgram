@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "街聘",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "tab-bar": "/components/TabBar/TabBar",
+    "home": "/pages/seller/home/home",
+    "choose": "/pages/seller/choose/choose",
+    "user": "/pages/seller/user/user"
+  }
+}
