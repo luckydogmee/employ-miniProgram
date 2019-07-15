@@ -26,7 +26,7 @@
 				</view>				
 			</view>
 			<view class="operation-see">
-				<button type="default">查看</button>
+				<button type="default" @click="showDetail">查看</button>
 			</view>
 			<view class="operation-date">
 				5月22日发布
@@ -41,6 +41,18 @@
 			return {
 				
 			};
+		},
+		props: {
+			data: {
+				type: Object,
+				default: ()=>({})
+			},
+		},
+		methods:{
+			showDetail(){
+				const id = this.data.id || 1
+				this.$emit('showDetail',id)
+			}
 		}
 	}
 </script>

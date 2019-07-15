@@ -1,0 +1,1 @@
+<view class="user-item"><view class="user-avatar"><image src="../../static/img/avatar.png" mode></image></view><view class="user-info"><view class="user-info-name">成都微招网络科技有限公司</view><view class="user-info-balance">履约金余额:<text class="balance">6000元</text></view></view><view class="user-setting"><image src="../../static/icon/setting.png" mode></image></view></view>

@@ -5,11 +5,11 @@
 	export default {
 		computed: mapState(['userName']),
 		onLaunch(){
-			setTimeout(()=>{
-				uni.reLaunch({
-					url:'../../../pages/seller/main/main'
-				})	
-			},100)
+			// setTimeout(()=>{
+			// 	uni.reLaunch({
+			// 		url:'../../../pages/seller/main/main'
+			// 	})	
+			// },100)
 		},
 		onShow: function() {
 			console.log('App Show');
@@ -20,7 +20,7 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
 	/*每个页面公共css */
 	body,
 	page {
@@ -130,8 +130,16 @@
 	button.primary {
 		background-color: #0faeff;
 	}
-	
+	/* 公共样式 */
 	.container{
 		background: #f1f2f7;
+	}
+	.swiper-item{
+		height:100%;
+		width:100%;
+		image{
+			height: 100%;
+			width:100%;
+		}
 	}
 </style>

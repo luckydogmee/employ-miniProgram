@@ -29,7 +29,7 @@
 			</view>
 		</view>
 		<view class="list-container">
-			<ListItem />
+			<ListItem @showDetail="showDetail" />
 			<ListItem />
 			<ListItem />
 			<ListItem />
@@ -53,7 +53,7 @@
 			}
 		},
 		onReady() {
-			
+			this.showDetail(1)
 		}, 
 		onPullDownRefresh() {
 			console.log(11111)
@@ -62,6 +62,11 @@
 			ListItem
 		},
 		methods:{
+			showDetail(id){
+				uni.navigateTo({
+					url: '../../PostDetail/PostDetail?id='+id
+				})
+			},
 			chooseImage(){
 				uni.chooseImage({
 					success(res) {
@@ -88,14 +93,6 @@
 </script>
 
 <style lang="scss">
-	.swiper-item{
-		height:100%;
-		width:100%;
-		image{
-			height: 100%;
-			width:100%;
-		}
-	}
 	.upload-wrapper{
 		height: 230upx;
 		width:750upx;

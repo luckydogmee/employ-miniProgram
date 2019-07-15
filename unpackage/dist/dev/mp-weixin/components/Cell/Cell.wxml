@@ -1,0 +1,1 @@
+<view class="cell-container"><view class="cell-title"><view class="cell-main-wrapper"><text class="main">{{title}}</text></view><view class="cell-sub-wrapper"><text class="sub">{{subTitle}}</text></view></view><view class="{{['cell-content',subTitle!==''?'nopadding':'']}}"><block wx:if="{{$slots.default}}"><slot></slot></block><block wx:else>{{content}}</block></view></view>

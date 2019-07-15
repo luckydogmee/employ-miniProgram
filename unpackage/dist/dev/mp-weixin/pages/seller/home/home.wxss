@@ -1,11 +1,3 @@
-.swiper-item {
-  height: 100%;
-  width: 100%;
-}
-.swiper-item image {
-    height: 100%;
-    width: 100%;
-}
 .upload-wrapper {
   height: 230rpx;
   width: 750rpx;

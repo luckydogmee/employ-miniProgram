@@ -1,4 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "user-item": "/components/UserItem/UserItem",
+    "user-flex": "/components/UserFlex/UserFlex"
+  },
   "component": true
 }
