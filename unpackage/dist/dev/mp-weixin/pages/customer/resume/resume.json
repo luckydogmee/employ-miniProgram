@@ -1,3 +1,5 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "list-resume": "/components/ListResume/ListResume"
+  }
 }

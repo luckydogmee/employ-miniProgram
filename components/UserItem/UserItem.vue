@@ -4,8 +4,11 @@
 			<image src="../../static/img/avatar.png" mode=""></image>
 		</view>
 		<view class="user-info">
-			<view class="user-info-name">成都微招网络科技有限公司</view>
-			<view class="user-info-balance">履约金余额: <text class="balance">6000元</text></view>
+			<view class="user-info-name">
+				<text>{{data.name}}</text>
+				<text class="tag" v-if="type === 'customer'">金牌猎手</text>
+			</view>
+			<view class="user-info-balance">{{type === 'seller' ? '履约金余额' : '累计佣金收入' }}: <text class="balance">6000元</text></view>
 		</view>
 		<view class="user-setting">
 			<image src="../../static/icon/setting.png" mode=""></image>
@@ -19,6 +22,16 @@
 			return {
 				
 			};
+		},
+		props: {
+			type: {
+				type: String,
+				default: 'seller'
+			},
+			data: {
+				type: Object,
+				default: ()=>({})
+			}
 		}
 	}
 </script>
@@ -50,6 +63,18 @@
 		line-height: 60upx;
 		.user-info-name{
 			font-size: 30upx;
+			display: flex;
+			align-items: center;
+			text.tag{
+				margin-left:20upx;
+				color: #fff;
+				font-size: 20upx;
+				border-radius: 6upx;
+				height: 30upx;
+				line-height: 30upx;
+				padding: 0 10upx;
+				background: linear-gradient(#f9b28f, #fb8c69);
+			}
 		}
 		.balance{
 			color: #fe0f03;

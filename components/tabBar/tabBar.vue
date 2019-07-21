@@ -2,23 +2,23 @@
 	<view class="tabbar-container">
 		<view class="tabbar tabbar-customer" v-if="type === 'customer'">
 			<view class="tabbar-item" @click="switchTab(0)">
-				<image class="item-icon" v-if="activeTab === 0" src="../../static/img/homeHL.png"></image>
-				<image class="item-icon" v-else src="../../static/img/home.png"></image>
+				<image class="item-icon" v-if="activeTab === 0" src="../../static/icon/customer-post-active.png"></image>
+				<image class="item-icon" v-else src="../../static/icon/customer-post.png"></image>
 				<view class="tabbar-item-text" :class="activeTab === 0 ? 'text-active':''">岗位列表</view>
 			</view>
 			<view class="tabbar-item" @click="switchTab(1)">
-				<image class="item-icon" v-if="activeTab === 1" src="../../static/img/userHL.png"></image>
-				<image class="item-icon" v-else src="../../static/img/user.png"></image>
+				<image class="item-icon" v-if="activeTab === 1" src="../../static/icon/customer-project-active.png"></image>
+				<image class="item-icon" v-else src="../../static/icon/customer-project.png"></image>
 				<view class="tabbar-item-text" :class="activeTab === 1 ? 'text-active':''">我的项目</view>
 			</view>
 			<view class="tabbar-item" @click="switchTab(2)">
-				<image class="item-icon" v-if="activeTab === 2" src="../../static/img/userHL.png"></image>
-				<image class="item-icon" v-else src="../../static/img/user.png"></image>
+				<image class="item-icon" v-if="activeTab === 2" src="../../static/icon/customer-resume-active.png"></image>
+				<image class="item-icon" v-else src="../../static/icon/customer-resume.png"></image>
 				<view class="tabbar-item-text" :class="activeTab === 2 ? 'text-active':''">我的简历库</view>
 			</view>
 			<view class="tabbar-item" @click="switchTab(3)">
-				<image class="item-icon" v-if="activeTab === 3" src="../../static/img/userHL.png"></image>
-				<image class="item-icon" v-else src="../../static/img/user.png"></image>
+				<image class="item-icon" v-if="activeTab === 3" src="../../static/icon/customer-user-active.png"></image>
+				<image class="item-icon" v-else src="../../static/icon/customer-user.png"></image>
 				<view class="tabbar-item-text" :class="activeTab === 3 ? 'text-active':''">个人中心</view>
 			</view>	
 		</view>

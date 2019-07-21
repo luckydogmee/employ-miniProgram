@@ -1,0 +1,88 @@
+.swiper-item{
+		height:100%;
+		width:100%;
+		image{
+			height: 100%;
+			width:100%;
+		}
+	}
+	.upload-wrapper{
+		height: 320upx;
+		width:750upx;
+		margin-top: 40upx;
+		image{
+			height: 100%;
+			width:100%;
+		}
+	}
+	.authorize{
+		margin-top:40upx; 
+	}
+	.swiper-container{
+		position: relative;
+		height: 300upx;
+		width: 750upx;
+	}
+	.switchToSeller{
+		position: absolute;
+		top: 20upx;
+		right: 20upx;
+	}
+	.tab-container{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 190upx;
+		background: #efeff4;
+		.tab{
+			flex: 1;
+			text-align: center;
+			height: 136upx;
+		}
+		image{
+			width: 136upx;
+			height: 136upx;
+		}
+	}
+	
+	// 登录弹框相关
+	.notice-login-dialog{
+		height: 372upx;
+		width: 480upx;
+		background: #fff;
+		border-radius: 8upx;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+		.notice-title{
+			font-size: 30upx;
+			line-height: 140upx;
+			color: #4b4b4b;
+			font-weight: 600;
+		}
+		.notice-btn{
+			margin-bottom: 54upx;
+			height: 60upx;
+			width: 368upx;
+			border-radius: 8upx;
+			text-align: center;
+			font-size: 24upx;
+			line-height: 60upx;
+			text-indent: 40upx;
+			&:after{
+				border: none;
+			}
+		}
+		.notice-wechat{
+			background: url(../../../static/img/wechat-btn.png) no-repeat;
+			background-size: 100% 100%;
+			color: #fff;
+		}
+		.notice-mobile{
+			background: url(../../../static/img/mobile-btn.png) no-repeat;
+			background-size: 100% 100%;
+			color: #4c4c4c;
+		}
+	}

@@ -1,10 +1,12 @@
 <template>
 	<view class="container customer-container">
-		<Home v-if="currentTab === 'Home'" />
-		<Project v-if="currentTab === 'Project'" />
-		<Resume v-if="currentTab === 'Resume'" />
-		<Project v-if="currentTab === 'User'" />
-		<TabBar @switchTab="switchTab" />
+		<view class="customer-wrapper">
+			<Home v-if="currentTab === 'Home'" />
+			<Project v-if="currentTab === 'Project'" />
+			<Resume v-if="currentTab === 'Resume'" />
+			<User v-if="currentTab === 'User'" />
+			<TabBar @switchTab="switchTab" />
+		</view>
 	</view>
 </template>
 
@@ -17,7 +19,7 @@
 	export default {
 		data(){
 			return {
-				index: 0,
+				index: 2,
 				tabBar:['Home','Project','Resume','User']
 			}
 		},

@@ -1,1 +1,1 @@
-<view>简历库</view>
+<view class="resume-container"><view class="tab-container"><view class="tab">全部简历</view><view class="tab">已推荐过</view><view class="tab">未推荐过</view></view><view class="search-container"><view class="search"><input type="text" placeholder="请输入姓名或手机号搜索"/><button>搜索</button></view></view><view class="list-container"><list-resume vue-id="1" bind:__l="__l"></list-resume><list-resume vue-id="2" bind:__l="__l"></list-resume><list-resume vue-id="3" bind:__l="__l"></list-resume><list-resume vue-id="4" bind:__l="__l"></list-resume></view></view>

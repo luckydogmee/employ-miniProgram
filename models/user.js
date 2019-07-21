@@ -9,6 +9,11 @@ class UserModel  extends HTTP {
 			url: '/test'
 		})
 	}
+	wxLogin(){
+		return this.request({
+			url:'/test'
+		})
+	}
 }
 
 export default UserModel

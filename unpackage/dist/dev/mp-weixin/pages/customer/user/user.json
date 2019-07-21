@@ -1,3 +1,5 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "user-item": "/components/UserItem/UserItem"
+  }
 }

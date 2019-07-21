@@ -14,7 +14,7 @@
 				</swiper-item>
 			</swiper>	
 			<view class="switchToSeller">
-				<button type="primary" hover-class="none">切换到猎头</button>
+				<button class="swiper-button" type="primary" hover-class="none">切换到猎头</button>
 			</view>
 		</view>
 		<view class="tab-container">
@@ -114,16 +114,6 @@
 		position: absolute;
 		top: 20upx;
 		right: 20upx;
-		button{
-			height: 40upx;
-			width: 160upx;
-			font-size: 20upx;
-			line-height: 40upx;
-			background: #ff9058;
-			&:after{
-				border: none;
-			}
-		}
 	}
 	.tab-container{
 		display: flex;

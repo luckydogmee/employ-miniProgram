@@ -34,4 +34,18 @@
     text-decoration: underline;
     margin-left: 10rpx;
 }
+.button-group {
+  margin-top: 106rpx;
+}
+.button-group .button-item {
+    background: #fff;
+    text-align: center;
+    height: 82rpx;
+    line-height: 82rpx;
+    font-size: 48rpx;
+    color: #ff9058;
+}
+.button-group .navigate {
+    margin-bottom: 26rpx;
+}
 

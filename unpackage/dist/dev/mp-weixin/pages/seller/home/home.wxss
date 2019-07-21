@@ -20,16 +20,6 @@
   top: 20rpx;
   right: 20rpx;
 }
-.switchToSeller button {
-    height: 40rpx;
-    width: 160rpx;
-    font-size: 20rpx;
-    line-height: 40rpx;
-    background: #ff9058;
-}
-.switchToSeller button:after {
-      border: none;
-}
 .tab-container {
   display: -webkit-box;
   display: -webkit-flex;

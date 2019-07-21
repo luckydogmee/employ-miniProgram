@@ -1,4 +1,4 @@
-.tabbar.data-v-ac52f520 {
+.tabbar.data-v-b85a8bde {
   width: 750rpx;
   height: 100rpx;
   background: #fff;
@@ -28,7 +28,7 @@
           box-sizing: border-box;
   border-top: 1rpx solid #eee;
 }
-.tabbar-item.data-v-ac52f520 {
+.tabbar-item.data-v-b85a8bde {
   width: 150rpx;
   height: 100%;
   text-align: center;
@@ -51,15 +51,15 @@
       -ms-flex-align: center;
           align-items: center;
 }
-.tabbar-item .item-icon.data-v-ac52f520 {
+.tabbar-item .item-icon.data-v-b85a8bde {
     height: 40rpx;
     width: 40rpx;
 }
-.tabbar-item-text.data-v-ac52f520 {
+.tabbar-item-text.data-v-b85a8bde {
   font-size: 20rpx;
   line-height: 40rpx;
 }
-.text-active.data-v-ac52f520 {
+.text-active.data-v-b85a8bde {
   color: #ff8352;
 }
 

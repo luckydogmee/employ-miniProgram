@@ -44,7 +44,5 @@
 </script>
 
 <style lang="scss">
-	.customer-wrapper{
-		padding-bottom: 100upx;
-	}
+	
 </style>

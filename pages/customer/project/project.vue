@@ -1,6 +1,6 @@
 <template>
 	<view>
-		项目
+		dasd
 	</view>
 </template>
 
@@ -17,6 +17,11 @@
 	}
 </script>
 
-<style>
-
+<style lang="scss">
+	.tab-container{
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		background: #fff;
+	}
 </style>

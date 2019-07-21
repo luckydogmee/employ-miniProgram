@@ -13,22 +13,43 @@
 					</view>
 				</swiper-item>
 			</swiper>	
-			<!-- <view class="upload-wrapper">
-				<image src="../../../static/img/upload.jpeg" mode="" @click="chooseImage"></image>
-			</view> -->
-			<!-- <view class="authorize">
-				<button type="primary" open-type="getUserInfo" @getuserinfo="getUserInfo">获取用户权限</button>
-				<button type="primary" open-type="share">分享</button>
-			</view> -->
 			<view class="switchToSeller">
-				<button type="primary">切换到企业</button>
+				<button class="swiper-button" type="primary" hover-class="none">切换到企业</button>
 			</view>
 		</view>
+		<view class="tab-container">
+			<view class="tab">
+				<image src="../../../static/img/currentWeek.png" mode=""></image>
+			</view>
+			<view class="tab">
+				<image src="../../../static/img/famousCompany.png" mode=""></image>
+			</view>
+			<view class="tab">
+				<image src="../../../static/img/urgent.png" mode=""></image>
+			</view>
+		</view>
+		<view class="list-container">
+			<ListItem @showDetail="showDetail" />
+			<ListItem />
+			<ListItem />
+			<ListItem />
+		</view>
+		<uni-popup ref="noticeLogin" custom="true">
+			<view class="notice-login-dialog">
+				<view class="notice-title">
+					登录微猎头快开始接单
+				</view>
+				<button class="notice-btn notice-wechat" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">微信帐号快速登录</button>
+				<button class="notice-btn notice-mobile">手机号注册/登录</button>
+			</view>
+		</uni-popup>
 	</view>
 </template>
 
 <script>
-	import UserModel from '../../../models/user.js';
+	import UserModel from '@/models/user.js';
+	import ListItem from '@/components/ListItem/ListItem.vue'
+	import uniPopup from "@/components/uni-popup/uni-popup.vue"
 	const userModel = new UserModel() 
 	export default {
 		data(){
@@ -43,6 +64,10 @@
 		onReady() {
 			
 		}, 
+		components:{
+			ListItem,
+			uniPopup
+		},
 		methods:{
 			chooseImage(){
 				uni.chooseImage({
@@ -64,40 +89,60 @@
 			},
 			getUserInfo(e){
 				console.log(e)
+			},
+			getPhoneNumber(e){
+				const { iv, encryptedData, errMsg } = e.detail
+				if( errMsg !== 'getPhoneNumber:ok' ){
+					uni.showToast({
+						title:'授权失败，请重新授权'
+					})
+				}
+				// 以下执行登录,需要后台提供一个接口
+				uni.login({
+					success(response) {
+						if(response.errMsg === ''){
+							
+							// 此处执行后台登录过程，传递的参数自己斟酌
+							userModel.wxLogin({
+								data:{
+									encryptedData,
+									ivData: iv,
+									code: response.code
+								},
+								success(res){
+									console.log(res)
+									// 此处应返回前端信息
+									if (res.data.code == 0) {
+																  
+									}else{
+										uni.showToast({
+											title:'登录失败，请重新授权'
+										})
+									}
+									
+								}
+							})	
+						}else{
+							uni.showToast({
+								title:'获取code失败'
+							})
+						}
+					}
+				})
+			},
+			showDetail(){
+				let login = false
+				// 已登录
+				if(login){
+					
+					return
+				}
+				
+				// 未登录
+				this.$refs.noticeLogin.open()
 			}
 		}
 	}
 </script>
 
-<style lang="scss">
-	.swiper-item{
-		height:100%;
-		width:100%;
-		image{
-			height: 100%;
-			width:100%;
-		}
-	}
-	.upload-wrapper{
-		height: 320upx;
-		width:750upx;
-		margin-top: 40upx;
-		image{
-			height: 100%;
-			width:100%;
-		}
-	}
-	.authorize{
-		margin-top:40upx; 
-	}
-	.swiper-container{
-		position: relative;
-		height: 300upx;
-		width: 750upx;
-	}
-	.switchToSeller{
-		position: absolute;
-		top: 20upx;
-		right: 20upx;
-	}
-</style>
+<style src="./home.scss" lang="scss"></style>
