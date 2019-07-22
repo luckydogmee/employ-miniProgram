@@ -7,6 +7,8 @@
     "pages/pwd/pwd",
     "pages/user/user",
     "pages/PostDetail/PostDetail",
+    "pages/user/register/register",
+    "pages/user/login/login",
     "pages/customer/project/project",
     "pages/customer/resume/resume",
     "pages/customer/user/user",
@@ -18,6 +20,5 @@
     "navigationBarBackgroundColor": "#e28f64",
     "backgroundColor": "#fbf9fe"
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap57.json"
+  "usingComponents": {}
 }

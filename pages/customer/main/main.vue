@@ -19,7 +19,7 @@
 	export default {
 		data(){
 			return {
-				index: 2,
+				index: 0,
 				tabBar:['Home','Project','Resume','User']
 			}
 		},

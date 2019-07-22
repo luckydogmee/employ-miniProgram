@@ -93,6 +93,7 @@
 			margin-left: 38upx;
 			font-size: 30upx;
 			padding: unset;
+			color: #fff;
 			&:after{
 				border:none;
 			}

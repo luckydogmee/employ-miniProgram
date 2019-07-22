@@ -29,7 +29,7 @@ var _user = _interopRequireDefault(__webpack_require__(/*! ../user/user */ "E:\\
 {
   data: function data() {
     return {
-      index: 2,
+      index: 0,
       tabBar: ['Home', 'Project', 'Resume', 'User'] };
 
   },

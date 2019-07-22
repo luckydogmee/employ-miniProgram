@@ -44,6 +44,18 @@
 				"navigationBarTitleText": "岗位详情"
 			}
 		},
+		{
+			"path" : "pages/user/register/register",
+			"style" : {
+				"navigationBarTitleText": "注册"
+			}
+		},
+		{
+		    "path" : "pages/user/login/login",
+		    "style" : {
+				"navigationBarTitleText": "登录"
+			}
+		},
         {
             "path" : "pages/customer/project/project",
             "style" : {}

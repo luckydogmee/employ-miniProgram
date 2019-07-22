@@ -19,7 +19,6 @@
 		}
 	}
 </script>
-
 <style lang="scss">
 	/*每个页面公共css */
 	body,
@@ -155,4 +154,37 @@
 			border: none;
 		}
 	}
+	
+	// 以下独特样式
+	
+	/* ************ 表单相关 start ************** */
+	.form-item{
+		width: 100%;
+		height: 60upx;
+	}
+	.sy-input{
+		border-bottom: 1upx solid #ffd5a3;
+		color: #989696;
+		font-size: 30upx;
+		height: 60upx;
+		line-height: 60upx;
+	}
+	.input-placeholder{
+		color: #989696;
+		font-size: 30upx;
+	}
+	.default-btn{
+		height: 48upx;
+		width: 160upx;
+		background: #ff9058;
+		font-size: 30upx;
+		line-height: 48upx;
+		color: #fff;
+		padding: unset;
+		&:after{
+			border: none;
+		}
+	}
+	
+	/* ************ 表单相关 end ************** */
 </style>
