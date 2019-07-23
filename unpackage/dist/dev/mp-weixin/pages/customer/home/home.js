@@ -109,9 +109,9 @@ var ListItem = function ListItem() {return __webpack_require__.e(/*! import() | 
       }
       // 以下执行登录,需要后台提供一个接口
       uni.login({
+        provider: 'weixin',
         success: function success(response) {
-          if (response.errMsg === '') {
-
+          if (response.errMsg === 'login:ok') {
             // 此处执行后台登录过程，传递的参数自己斟酌
             userModel.wxLogin({
               data: {
@@ -120,35 +120,44 @@ var ListItem = function ListItem() {return __webpack_require__.e(/*! import() | 
                 code: response.code },
 
               success: function success(res) {
-                console.log(res);
-                // 此处应返回前端信息
+                // 判断是成功了
                 if (res.data.code == 0) {
-
+                  // 将token存入缓存中
+                  uni.setStorageSync('token', res.data.data.token);
                 } else {
                   uni.showToast({
                     title: '登录失败，请重新授权' });
 
                 }
-
               } });
 
           } else {
             uni.showToast({
+              icon: 'none',
               title: '获取code失败' });
 
           }
         } });
 
     },
+    toRegister: function toRegister() {
+      uni.navigateTo({
+        url: '../../user/register/register' });
+
+    },
     showDetail: function showDetail() {
-      var login = false;
-      // 已登录
-      if (login) {
+      var that = this;
+      uni.checkSession({
+        success: function success(res) {
+          var token = uni.getStorageSync('token');
+          console.log(token);
+        },
+        fail: function fail(err) {
+          that.login();
+        } });
 
-        return;
-      }
-
-      // 未登录
+    },
+    login: function login() {
       this.$refs.noticeLogin.open();
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))

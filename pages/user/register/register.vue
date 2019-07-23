@@ -6,17 +6,25 @@
 			</view>
 			<view class="form">
 				<view class="form-item">
-					<input class="sy-input" maxlength="6" placeholder="您的姓名" placeholder-class="input-placeholder" />	
+					<input class="sy-input" :focus="focusArray[focusIndex] === 'name'" 
+							v-model="name" maxlength="6" placeholder="您的姓名" placeholder-class="input-placeholder"
+							@blur="handleBlur(0)" />	
 				</view>
 				<view class="form-item">
-					<input class="sy-input" maxlength="3" placeholder="您的年龄" placeholder-class="input-placeholder"  />
+					<input class="sy-input" :focus="focusArray[focusIndex]==='age'" 
+							v-model="age" maxlength="3" placeholder="您的年龄" placeholder-class="input-placeholder" 
+							@blur="handleBlur(1)" />
 				</view>
 				<view class="form-item">
-					<input class="sy-input" maxlength="15" placeholder="您的电话号码" placeholder-class="input-placeholder"  />
+					<input class="sy-input" :focus="focusArray[focusIndex] === 'phone'" 
+							v-model="phone" maxlength="15" placeholder="您的电话号码" placeholder-class="input-placeholder" 
+							@blur="handleBlur(2)" />
 				</view>
-				<view class="form-item">
-					<input class="sy-input" maxlength="6" placeholder="短信验证码" placeholder-class="input-placeholder"  />
-					<button class="default-btn verify-code-btn">{{verifyCodeText}}</button>
+				<view class="form-item verfiy-item">
+					<input class="sy-input"  :focus="focusArray[focusIndex] === 'verify'" 
+							v-model="verifyCode" maxlength="6" placeholder="短信验证码" placeholder-class="input-placeholder" 
+							@blur="handleBlur(3)" />
+					<button class="default-btn verify-code-btn" @click="getVerifyCode">{{verifyCodeText}}</button>
 				</view>
 				<view class="agreement">
 					<checkbox-group @change="agreementChange">
@@ -26,7 +34,7 @@
 					</checkbox-group>
 				</view>
 				<view class="form-item">
-					<button class="default-btn submit-btn" >{{verifyCodeText}}</button>
+					<button class="default-btn submit-btn" @click="submit" >注册</button>
 				</view>
 				<view class="form-item to-login">
 					<text>已有账号？点这里直接登录>></text>
@@ -41,14 +49,84 @@
 		data() {
 			return {
 				verifyCodeText: '发送验证码',
-				agreement:false,
-				verifyStatus:true
+				verifyStatus:true,
+				focusArray: ['name', 'age', 'phone', 'verify'],
+				focusIndex: null,  //焦点位置
+				agreement:false, // 是否同意
+				name: '',
+				age: '',
+				phone: '',
+				verifyCode: ''
 			};
 		},
 		methods:{
 			agreementChange(){
 				this.agreement = !this.agreement
 				
+			},
+			handleBlur(index){
+				let focusArray = this.focusArray
+				if(index != focusArray.length - 1 ){
+					if(!this[focusArray[index + 1]]){
+						this.focusIndex = index + 1
+						return
+					}
+					this.focusIndex = null
+					return
+				}
+				this.focusIndex = null	
+			},
+			getVerifyCode(){
+				if(!this.phone){
+					uni.showToast({
+						icon:'none',
+						title:'请输入电话号码'
+					})
+					this.focusIndex = 2
+					return
+				}
+				const phoneRule = "^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$"
+				const correctPhone = this.phone.match(phoneRule)
+				if(!correctPhone){
+					uni.showToast({
+						icon:'none',
+						title:'手机号码错误，请确认'
+					})
+					this.focusIndex = 2
+					return
+				}
+			},
+			submit(){
+				if(!this.name){
+					uni.showToast({
+						icon:'none',
+						title:'请输入姓名'
+					})
+					this.$nextTick(()=>{
+						this.focusIndex = 0
+					})
+					return
+				}
+				if(!this.age){
+					uni.showToast({
+						icon:'none',
+						title:'请输入年龄'
+					})
+					this.$nextTick(()=>{
+						this.focusIndex = 1
+					})
+					return
+				}
+				if(!this.phone){
+					uni.showToast({
+						icon:'none',
+						title:'请输入电话号码'
+					})
+					this.$nextTick(()=>{
+						this.focusIndex = 2
+					})
+					return
+				}
 			}
 		}
 	}
@@ -94,6 +172,13 @@
 			input{
 				font-weight: 600;
 				letter-spacing: 4upx;
+			}
+		}
+		.verfiy-item {
+			border-bottom: 1upx solid #ffd5a3;
+			input{
+				width: 320upx;
+				border-bottom: none;	
 			}
 		}
 		.verify-code-btn{

@@ -40,7 +40,7 @@
 					登录微猎头快开始接单
 				</view>
 				<button class="notice-btn notice-wechat" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">微信帐号快速登录</button>
-				<button class="notice-btn notice-mobile">手机号注册/登录</button>
+				<button class="notice-btn notice-mobile" @click="toRegister">手机号注册/登录</button>
 			</view>
 		</uni-popup>
 	</view>
@@ -99,9 +99,9 @@
 				}
 				// 以下执行登录,需要后台提供一个接口
 				uni.login({
+					provider: 'weixin',
 					success(response) {
-						if(response.errMsg === ''){
-							
+						if(response.errMsg === 'login:ok'){
 							// 此处执行后台登录过程，传递的参数自己斟酌
 							userModel.wxLogin({
 								data:{
@@ -110,35 +110,44 @@
 									code: response.code
 								},
 								success(res){
-									console.log(res)
-									// 此处应返回前端信息
+									// 判断是成功了
 									if (res.data.code == 0) {
-																  
+										// 将token存入缓存中
+										uni.setStorageSync('token',res.data.data.token)						  
 									}else{
 										uni.showToast({
 											title:'登录失败，请重新授权'
 										})
-									}
-									
+									}									
 								}
 							})	
 						}else{
 							uni.showToast({
+								icon: 'none',
 								title:'获取code失败'
 							})
 						}
 					}
 				})
 			},
+			toRegister(){
+				uni.navigateTo({
+					url: '../../user/register/register',
+				})
+			},
 			showDetail(){
-				let login = false
-				// 已登录
-				if(login){
-					
-					return
-				}
-				
-				// 未登录
+				const that = this
+				uni.checkSession({
+					success(res) {
+						const token = uni.getStorageSync('token')
+						console.log(token)
+					},
+					fail(err) {
+						that.login()
+					}
+				})
+			},
+			login(){
 				this.$refs.noticeLogin.open()
 			}
 		}

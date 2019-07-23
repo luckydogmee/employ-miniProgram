@@ -168,6 +168,7 @@
 		font-size: 30upx;
 		height: 60upx;
 		line-height: 60upx;
+		letter-spacing: 4upx;
 	}
 	.input-placeholder{
 		color: #989696;

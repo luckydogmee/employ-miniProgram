@@ -8,7 +8,15 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -51,15 +59,86 @@ var _default =
   data: function data() {
     return {
       verifyCodeText: '发送验证码',
-      agreement: false,
-      verifyStatus: true };
+      verifyStatus: true,
+      focusArray: ['name', 'age', 'phone', 'verify'],
+      focusIndex: null, //焦点位置
+      agreement: false, // 是否同意
+      name: '',
+      age: '',
+      phone: '',
+      verifyCode: '' };
 
   },
   methods: {
     agreementChange: function agreementChange() {
       this.agreement = !this.agreement;
 
+    },
+    handleBlur: function handleBlur(index) {
+      var focusArray = this.focusArray;
+      if (index != focusArray.length - 1) {
+        if (!this[focusArray[index + 1]]) {
+          this.focusIndex = index + 1;
+          return;
+        }
+        this.focusIndex = null;
+        return;
+      }
+      this.focusIndex = null;
+    },
+    getVerifyCode: function getVerifyCode() {
+      if (!this.phone) {
+        uni.showToast({
+          icon: 'none',
+          title: '请输入电话号码' });
+
+        this.focusIndex = 2;
+        return;
+      }
+      var phoneRule = "^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$";
+      var correctPhone = this.phone.match(phoneRule);
+      if (!correctPhone) {
+        uni.showToast({
+          icon: 'none',
+          title: '手机号码错误，请确认' });
+
+        this.focusIndex = 2;
+        return;
+      }
+    },
+    submit: function submit() {var _this = this;
+      if (!this.name) {
+        uni.showToast({
+          icon: 'none',
+          title: '请输入姓名' });
+
+        this.$nextTick(function () {
+          _this.focusIndex = 0;
+        });
+        return;
+      }
+      if (!this.age) {
+        uni.showToast({
+          icon: 'none',
+          title: '请输入年龄' });
+
+        this.$nextTick(function () {
+          _this.focusIndex = 1;
+        });
+        return;
+      }
+      if (!this.phone) {
+        uni.showToast({
+          icon: 'none',
+          title: '请输入电话号码' });
+
+        this.$nextTick(function () {
+          _this.focusIndex = 2;
+        });
+        return;
+      }
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
 
 /***/ }),
 

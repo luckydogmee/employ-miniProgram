@@ -8323,7 +8323,7 @@ module.exports = g;
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.config = void 0;var config = {
   base_url: 'http://127.0.0.1',
-  appkey: 'wx5666e9599cc559e6' };exports.config = config;
+  appkey: 'wx63fe7790dd2e8fd5' };exports.config = config;
 
 /***/ }),
 

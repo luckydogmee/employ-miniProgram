@@ -11,7 +11,7 @@
 </template>
 
 <script>
-	import TabBar from '../../../components/TabBar/TabBar.vue'
+	import TabBar from '@/components/TabBar/TabBar.vue'
 	import Home from '../home/home.vue'
 	import Project from '../project/project.vue'
 	import Resume from '../resume/resume.vue'

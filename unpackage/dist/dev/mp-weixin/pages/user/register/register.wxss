@@ -53,6 +53,13 @@
       font-weight: 600;
       letter-spacing: 4rpx;
 }
+.content .verfiy-item.data-v-1a7b8e91 {
+    border-bottom: 1rpx solid #ffd5a3;
+}
+.content .verfiy-item input.data-v-1a7b8e91 {
+      width: 320rpx;
+      border-bottom: none;
+}
 .content .verify-code-btn.data-v-1a7b8e91 {
     width: 170rpx;
     height: 46rpx;
