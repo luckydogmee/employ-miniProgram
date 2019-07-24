@@ -103,24 +103,17 @@
 					success(response) {
 						if(response.errMsg === 'login:ok'){
 							// 此处执行后台登录过程，传递的参数自己斟酌
-							userModel.wxLogin({
-								data:{
-									encryptedData,
-									ivData: iv,
-									code: response.code
-								},
-								success(res){
-									// 判断是成功了
-									if (res.data.code == 0) {
-										// 将token存入缓存中
-										uni.setStorageSync('token',res.data.data.token)						  
-									}else{
-										uni.showToast({
-											title:'登录失败，请重新授权'
-										})
-									}									
-								}
-							})	
+							userModel.wxLogin(encryptedData, ivData, response.code).then(res=>{
+								// 判断是成功了
+								if (res.data.code == 0) {
+									// 将token存入缓存中
+									uni.setStorageSync('token',res.data.data.token)						  
+								}else{
+									uni.showToast({
+										title:'登录失败，请重新授权'
+									})
+								}	
+							})
 						}else{
 							uni.showToast({
 								icon: 'none',

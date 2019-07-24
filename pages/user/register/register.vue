@@ -24,7 +24,8 @@
 					<input class="sy-input"  :focus="focusArray[focusIndex] === 'verify'" 
 							v-model="verifyCode" maxlength="6" placeholder="短信验证码" placeholder-class="input-placeholder" 
 							@blur="handleBlur(3)" />
-					<button class="default-btn verify-code-btn" @click="getVerifyCode">{{verifyCodeText}}</button>
+					<button class="default-btn verify-code-btn" :class="{'disabled':!readySendCode} " 
+						@click="getVerifyCode">{{readySendCode ? '发送验证码' : surplusSecond + ' 秒后重新发送' }}</button>
 				</view>
 				<view class="agreement">
 					<checkbox-group @change="agreementChange">
@@ -37,27 +38,47 @@
 					<button class="default-btn submit-btn" @click="submit" >注册</button>
 				</view>
 				<view class="form-item to-login">
-					<text>已有账号？点这里直接登录>></text>
+					<text @click="toLogin">已有账号？点这里直接登录>></text>
 				</view>
 			</view>
 		</view>
+		<uniPopup ref="registerSuccess" custom="true">
+			<view class="registerSuccess">
+				<view class="text-box">
+					<text>恭喜您注册成功</text>
+					<text>即将跳转到首页</text>	
+				</view>
+			</view>
+		</uniPopup>
 	</view>
 </template>
 
 <script>
+	import { verifyPhone } from '../../../utils/utils.js'
+	import UserModel from '@/models/user.js'
+	import uniPopup from "@/components/uni-popup/uni-popup.vue"
+	const userModel = new UserModel() 
 	export default {
 		data() {
 			return {
-				verifyCodeText: '发送验证码',
-				verifyStatus:true,
+				surplusSecond: 0, // 还剩多少秒可以重发
+				readySendCode: true,  // 是否准备好发送验证码
+				verifyCodeTimer: null, //定时器对象
 				focusArray: ['name', 'age', 'phone', 'verify'],
 				focusIndex: null,  //焦点位置
-				agreement:false, // 是否同意
+				agreement:false, // 是否同意用户协议
 				name: '',
 				age: '',
 				phone: '',
-				verifyCode: ''
+				verifyCode: '',
 			};
+		},
+		beforeDestroy() {
+			clearInterval(this.verifyCodeTimer)
+			this.verifyCodeTimer = null
+		},
+		components:{
+			uniPopup
 		},
 		methods:{
 			agreementChange(){
@@ -77,6 +98,9 @@
 				this.focusIndex = null	
 			},
 			getVerifyCode(){
+				if(!this.readySendCode){
+					return 
+				}
 				if(!this.phone){
 					uni.showToast({
 						icon:'none',
@@ -85,8 +109,8 @@
 					this.focusIndex = 2
 					return
 				}
-				const phoneRule = "^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$"
-				const correctPhone = this.phone.match(phoneRule)
+				
+				const correctPhone = verifyPhone(this.phone)
 				if(!correctPhone){
 					uni.showToast({
 						icon:'none',
@@ -94,7 +118,28 @@
 					})
 					this.focusIndex = 2
 					return
-				}
+				} 
+				userModel.getVerifyCode(this.phone).then(res=>{
+					// 请求成功,并判断code是否正确
+					uni.showToast({
+						title: '验证码已发送，请注意查收'
+					})
+					this.verifyCodeStatus = 1
+					this.surplusSecond = 120
+					this.focusIndex = 3
+					this.verifyCodeTimer = setInterval(()=>{
+						if(this.surplusSecond > 0){
+							this.surplusSecond -= 1
+						}else{
+							this.surplusSecond = 0
+							this.verifyCodeStatus = 0
+							clearInterval(this.verifyCodeTimer)
+						}
+					}, 1000)
+					this.focusIndex = 3
+				}).catch(err=>{
+					console.log(err)
+				})
 			},
 			submit(){
 				if(!this.name){
@@ -127,6 +172,45 @@
 					})
 					return
 				}
+				if(!this.verifyCode){
+					uni.showToast({
+						icon:'none',
+						title:'请输入验证码'
+					})
+					this.$nextTick(()=>{
+						this.focusIndex = 3
+					})
+					return
+				}
+				if(!this.agreement){
+					uni.showToast({
+						icon:'none',
+						title:'必须同意用户协议'
+					})
+					return
+				}
+				
+				// 再去验证验证码是否正确
+				userModel.verifyCode(this.phone, this.verifyCode).then(res=>{
+					// 验证成功,打开提示弹窗并跳转到首页
+					this.$refs.registerSuccess.open()
+					setTimeout(()=>{
+						uni.reLaunch({
+							url: '../../customer/main/main'
+						})
+					},2000)
+				})
+				.catch(err=>{
+					uni.showToast({
+						icon: 'none',
+						title: err.msg
+					})
+				})
+			},
+			toLogin(){
+				uni.reLaunch({
+					url: '../login/login'
+				})
 			}
 		}
 	}
@@ -190,6 +274,9 @@
 			font-size: 24upx;
 			bottom: 10upx;
 			background: #feae86; 
+			&.disabled{
+				background: #ddd;
+			}
 		}
 		.submit-btn{
 			height: 56upx;
@@ -208,6 +295,24 @@
 			checkbox{
 				transform: scale(0.5);
 			}
+		}
+	}
+	.registerSuccess{
+		width: 460upx;
+		height: 350upx;
+		background: url(../../../static/img/register-dialog.png) no-repeat ;
+		background-size: 100% 100%;
+		overflow: hidden;
+		.text-box{
+			margin-top: 220upx;
+			text-align: center;
+		}
+		text{
+			font-size: 24upx;
+			color: #333;
+			margin-bottom: 24upx;
+			width: 100%;
+			display: block;
 		}
 	}
 </style>

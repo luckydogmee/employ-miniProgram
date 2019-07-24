@@ -185,6 +185,9 @@
 		&:after{
 			border: none;
 		}
+		&.disabled{
+			background: #c8c7cc;
+		}
 	}
 	
 	/* ************ 表单相关 end ************** */

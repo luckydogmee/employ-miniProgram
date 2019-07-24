@@ -4,14 +4,35 @@ class UserModel  extends HTTP {
 	constructor(arg) {			
 	    super()
 	}
-	test(){
+	// 利用已知数据登录后台
+	wxLogin(encryptedData, iv, code){
 		return this.request({
-			url: '/test'
+			url: '/test',
+			data: {
+				encryptedData,
+				ivData: iv,
+				code	
+			}
 		})
 	}
-	wxLogin(){
+	// 获取验证码
+	getVerifyCode(phoneNumber){
 		return this.request({
-			url:'/test'
+			url: '/getVerifyCode',
+			data:{
+				phoneNumber
+			}
+		});
+	}
+	// 验证验证码是否正确
+	verifyCode(phone, code){
+		return this.request({
+			url: '',
+			method: 'POST',
+			data:{
+				phone,
+				code
+			}
 		})
 	}
 }
