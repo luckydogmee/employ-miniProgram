@@ -1,0 +1,14 @@
+.swiper-container {
+  height: 350rpx;
+  width: 750rpx;
+}
+.swiper-container .swiper {
+    height: 100%;
+}
+.content {
+  background: #fff;
+}
+.content text {
+    line-height: 48rpx;
+}
+

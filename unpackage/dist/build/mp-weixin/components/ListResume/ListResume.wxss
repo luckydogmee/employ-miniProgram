@@ -1,0 +1,94 @@
+.list-item {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  width: 750rpx;
+  height: 194rpx;
+  background: #fff;
+  padding: 18rpx 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin-bottom: 16rpx;
+}
+.image image {
+  height: 136rpx;
+  width: 136rpx;
+  border-radius: 50%;
+}
+.info {
+  width: 520rpx;
+}
+.info .describe {
+    font-size: 24rpx;
+    color: #010101;
+    font-weight: 500;
+}
+.info .describe-item {
+    height: 36rpx;
+    width: 378rpx;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+       text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.info .describe-item text:first-child {
+      margin-right: 16rpx;
+}
+.info .describe-call {
+    width: 92rpx;
+    height: 92rpx;
+    margin-left: 60rpx;
+}
+.info .describe-call image {
+      height: 100%;
+      width: 100%;
+}
+.info .up {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+.operation {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 10rpx;
+  position: relative;
+  left: -24rpx;
+}
+.operation .operation-item {
+    text-align: center;
+    width: 130rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    font-size: 24rpx;
+    padding: unset;
+    color: #fff;
+    background: #fe9560;
+}
+.operation .operation-item:after {
+      border: none;
+}
+
