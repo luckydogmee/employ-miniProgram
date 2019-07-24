@@ -94,6 +94,7 @@
 				const { iv, encryptedData, errMsg } = e.detail
 				if( errMsg !== 'getPhoneNumber:ok' ){
 					uni.showToast({
+						icon: 'none',
 						title:'授权失败，请重新授权'
 					})
 				}

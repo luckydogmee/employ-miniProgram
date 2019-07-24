@@ -35,7 +35,7 @@
 					</checkbox-group>
 				</view>
 				<view class="form-item">
-					<button class="default-btn submit-btn" @click="submit" >注册</button>
+					<button class="default-btn submit-btn" open-type="getUserInfo" @getuserinfo="getUserInfo" >注册</button>
 				</view>
 				<view class="form-item to-login">
 					<text @click="toLogin">已有账号？点这里直接登录>></text>
@@ -192,7 +192,9 @@
 				
 				// 再去验证验证码是否正确
 				userModel.verifyCode(this.phone, this.verifyCode).then(res=>{
-					// 验证成功,打开提示弹窗并跳转到首页
+					// 验证成功,打开提示弹窗并跳转到首页,此处应该执行一次微信登录
+					this.wxLogin()
+					// 这是应该在登录后执行的操作
 					this.$refs.registerSuccess.open()
 					setTimeout(()=>{
 						uni.reLaunch({
@@ -206,6 +208,43 @@
 						title: err.msg
 					})
 				})
+			},
+			getUserInfo(e){
+				const { iv, encryptedData, errMsg } = e.detail
+				if( errMsg !== 'getPhoneNumber:ok' ){
+					uni.showToast({
+						icon: 'none',
+						title:'获取用户信息失败'
+					})
+				}
+				uni.login({
+					provider: 'weixin',
+					success(response) {
+						if(response.errMsg === 'login:ok'){
+							// 此处执行后台登录过程，此处应该是获取openid
+							userModel.wxLogin(encryptedData, ivData, response.code).then(res=>{
+								// 判断是成功了
+								if (res.data.code == 0) {
+									// 将token存入缓存中
+									uni.setStorageSync('token',res.data.data.token)		
+									this.submit()
+								}else{
+									uni.showToast({
+										title:'登录失败，请重新授权'
+									})
+								}	
+							})
+						}else{
+							uni.showToast({
+								icon: 'none',
+								title:'获取code失败'
+							})
+						}
+					}
+				})
+			},
+			wxLogin(){
+				getUserInfo
 			},
 			toLogin(){
 				uni.reLaunch({

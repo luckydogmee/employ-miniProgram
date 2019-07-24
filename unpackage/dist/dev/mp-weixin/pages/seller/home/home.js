@@ -147,7 +147,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _user = _interopRequireDefault(__webpack_require__(/*! ../../../models/user.js */ 20));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var ListItem = function ListItem() {return __webpack_require__.e(/*! import() | components/ListItem/ListItem */ "components/ListItem/ListItem").then(__webpack_require__.bind(null, /*! ../../../components/ListItem/ListItem.vue */ 166));};
+var _user = _interopRequireDefault(__webpack_require__(/*! ../../../models/user.js */ 93));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var ListItem = function ListItem() {return __webpack_require__.e(/*! import() | components/ListItem/ListItem */ "components/ListItem/ListItem").then(__webpack_require__.bind(null, /*! ../../../components/ListItem/ListItem.vue */ 173));};
 var userModel = new _user.default();var _default =
 {
   data: function data() {
