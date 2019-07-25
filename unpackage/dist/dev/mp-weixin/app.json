@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/user/login/login",
     "pages/customer/main/main",
     "pages/seller/main/main",
     "pages/login/login",
@@ -8,7 +9,6 @@
     "pages/user/user",
     "pages/PostDetail/PostDetail",
     "pages/user/register/register",
-    "pages/user/login/login",
     "pages/customer/project/project",
     "pages/customer/resume/resume",
     "pages/customer/user/user",
@@ -20,6 +20,5 @@
     "navigationBarBackgroundColor": "#e28f64",
     "backgroundColor": "#fbf9fe"
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap84.json"
+  "usingComponents": {}
 }

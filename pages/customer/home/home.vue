@@ -60,9 +60,6 @@
 				interval: 2000,
 				duration: 500
 			}
-		},
-		onReady() {
-			
 		}, 
 		components:{
 			ListItem,
@@ -99,18 +96,26 @@
 					})
 				}
 				// 以下执行登录,需要后台提供一个接口
-				uni.login({
-					provider: 'weixin',
+				uni.checkSession({
 					success(response) {
 						if(response.errMsg === 'login:ok'){
-							// 此处执行后台登录过程，传递的参数自己斟酌
-							userModel.wxLogin(encryptedData, ivData, response.code).then(res=>{
-								// 判断是成功了
-								if (res.data.code == 0) {
+							// 此处执行后台登录过程，由后台得到手机号并与openid绑定，然后返回token
+							uni.showLoading({
+								title: '登录中，请稍候'
+							})
+							userModel.getBindPhoneNumber(encryptedData, ivData).then(res=>{
+								uni.hideLoading()
+								// 判断是成功了,在这里判断是否已经绑定手机号，以及是否完善信息，待写
+								if (res.code === 'success') {
 									// 将token存入缓存中
-									uni.setStorageSync('token',res.data.data.token)						  
+									uni.setStorageSync('token',res.data.token)
+									uni.showToast({
+										title:'登录成功'
+									})
+									this.$refs.noticeLogin.close()
 								}else{
 									uni.showToast({
+										icon: 'none',
 										title:'登录失败，请重新授权'
 									})
 								}	
@@ -121,6 +126,9 @@
 								title:'获取code失败'
 							})
 						}
+					},
+					fail(err) {
+						
 					}
 				})
 			},
@@ -134,14 +142,44 @@
 				uni.checkSession({
 					success(res) {
 						const token = uni.getStorageSync('token')
-						console.log(token)
 					},
 					fail(err) {
-						that.login()
+						that.selectLoginType()
 					}
 				})
 			},
 			login(){
+				uni.login({
+					provider: 'weixin',
+					success(res){
+						if(res.errMsg === 'login:ok'){
+							// 执行后台登录
+							userModel.wxLogin({
+								code: res.code
+							}).then(res=>{
+								if(res.code === 'success'){
+									// 将返回的token存入本地
+									uni.setStorageSync('token', res.data.token)
+								}else{
+									uni.showToast({
+										icon: 'none',
+										title: res.msg
+									})
+								}
+							})
+						}else{
+							uni.showToast({
+								icon: 'none',
+								title: res.errMeg
+							})
+						}
+					},
+					fail(err) {
+						console.log(err)
+					}
+				})
+			},
+			selectLoginType(){
 				this.$refs.noticeLogin.open()
 			}
 		}

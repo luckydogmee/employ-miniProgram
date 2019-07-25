@@ -1,0 +1,144 @@
+.list-item {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  width: 750rpx;
+  height: 230rpx;
+  background: #fff;
+  padding: 30rpx 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin-bottom: 16rpx;
+}
+.image image {
+  height: 170rpx;
+  width: 174rpx;
+  border-radius: 50%;
+}
+.info .info-title {
+  font-size: 32rpx;
+  color: #595959;
+  margin-top: 10rpx;
+  margin-bottom: 20rpx;
+}
+.info .info-price {
+  font-size: 26rpx;
+  margin-bottom: 20rpx;
+  color: #595959;
+}
+.info .info-location {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.info .info-location image {
+    height: 20rpx;
+    width: 16rpx;
+    margin-right: 6rpx;
+}
+.info .info-location text {
+    font-size: 20rpx;
+    color: #8e8c8c;
+}
+.operation .operation-describe {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  margin-bottom: 20rpx;
+}
+.operation .operation-describe .operation-image {
+    width: 40rpx;
+    height: 52rpx;
+    margin-right: 30rpx;
+}
+.operation .operation-describe .operation-image image {
+      width: 100%;
+      height: 100%;
+}
+.operation .operation-pay {
+  height: 52rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.operation .operation-pay .operation-pay-price {
+    color: #ff9058;
+    font-size: 26rpx;
+    line-height: 26rpx;
+    margin-bottom: 6rpx;
+}
+.operation .operation-pay .operation-pay-time {
+    color: #595959;
+    font-size: 18rpx;
+    font-weight: 600;
+}
+.operation .operation-see {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+.operation .operation-see button {
+    height: 48rpx;
+    width: 160rpx;
+    background: #ff9058;
+    font-size: 30rpx;
+    line-height: 48rpx;
+    color: #fff;
+}
+.operation .operation-see button:after {
+      border: none;
+}
+.operation .operation-date {
+  color: #595959;
+  font-size: 20rpx;
+  width: 100%;
+  text-align: center;
+}
+

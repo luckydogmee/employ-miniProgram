@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "list-item": "/components/ListItem/ListItem",
+    "uni-popup": "/components/uni-popup/uni-popup"
+  },
+  "component": true
+}
