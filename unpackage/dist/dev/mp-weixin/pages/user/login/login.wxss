@@ -180,6 +180,13 @@
       font-weight: 600;
       letter-spacing: 4rpx;
 }
+.content .verfiy-item.data-v-d699e628 {
+    border-bottom: 1rpx solid #ffd5a3;
+}
+.content .verfiy-item input.data-v-d699e628 {
+      width: 320rpx;
+      border-bottom: none;
+}
 .content .verify-code-btn.data-v-d699e628 {
     width: 170rpx;
     height: 46rpx;

@@ -1,11 +1,6 @@
 {
     "pages": [ //pages数组中第一项表示应用启动页,
-		{
-		    "path" : "pages/user/login/login",
-		    "style" : {
-				"navigationBarTitleText": "登录"
-			}
-		},
+		
 		{
 		    "path": "pages/customer/main/main",
 		    "style": {
@@ -56,7 +51,12 @@
 				"navigationBarTitleText": "注册"
 			}
 		},
-		
+		{
+		    "path" : "pages/user/login/login",
+		    "style" : {
+				"navigationBarTitleText": "登录"
+			}
+		},
         {
             "path" : "pages/customer/project/project",
             "style" : {}

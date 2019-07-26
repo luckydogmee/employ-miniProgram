@@ -16,14 +16,14 @@
 							v-model="verifyCode" maxlength="6" placeholder="短信验证码" placeholder-class="input-placeholder" 
 							@blur="handleBlur(1)" />
 					<button class="default-btn verify-code-btn" :class="{'disabled':!readySendCode} " 
-						@click="getVerifyCode">{{readySendCode ? '发送验证码' : surplusSecond + ' 秒后重新发送' }}</button>
+						@click.stop="getVerifyCode">{{readySendCode ? '发送验证码' : surplusSecond + ' 秒后重新发送' }}</button>
 				</view>
 				<view class="special-item">
 					<text class="savePhone">保存此号码供以后授权使用</text>
 					<switch :checked="savePhone" @change="savePhoneChange" color="#feae86" style="transform:scale(0.5)" />
 				</view>
 				<view class="form-item">
-					<button class="default-btn submit-btn" >登录</button>
+					<button class="default-btn submit-btn" @click="submit" >登录</button>
 				</view>
 				<!-- <view class="form-item to-login">
 					<text>已有账号？点这里直接登录>></text>
@@ -80,7 +80,7 @@
 						icon:'none',
 						title:'请输入电话号码'
 					})
-					this.focusIndex = 2
+					this.focusIndex = 0
 					return
 				}
 				
@@ -90,7 +90,7 @@
 						icon:'none',
 						title:'手机号码错误，请确认'
 					})
-					this.focusIndex = 2
+					this.focusIndex = 0
 					return
 				} 
 				userModel.getVerifyCode(this.phone).then(res=>{
@@ -100,7 +100,7 @@
 					})
 					this.verifyCodeStatus = 1
 					this.surplusSecond = 120
-					this.focusIndex = 3
+					this.focusIndex = 1
 					this.verifyCodeTimer = setInterval(()=>{
 						if(this.surplusSecond > 0){
 							this.surplusSecond -= 1
@@ -110,7 +110,7 @@
 							clearInterval(this.verifyCodeTimer)
 						}
 					}, 1000)
-					this.focusIndex = 3
+					this.focusIndex = 1
 				}).catch(err=>{
 					console.log(err)
 				})
@@ -122,7 +122,7 @@
 						title:'请输入电话号码'
 					})
 					this.$nextTick(()=>{
-						this.focusIndex = 2
+						this.focusIndex = 0
 					})
 					return
 				}
@@ -132,7 +132,7 @@
 						title:'请输入验证码'
 					})
 					this.$nextTick(()=>{
-						this.focusIndex = 3
+						this.focusIndex = 1
 					})
 					return
 				}
@@ -141,7 +141,8 @@
 				userModel.verifyCode(this.phone, this.verifyCode).then(res=>{
 					// 执行真正的登录
 					return userModel.login(this.phone, this.savePhone)
-				}).then(res=>{
+				})
+				.then(res=>{
 					// 登录成功
 					uni.showToast({
 						title: '登录成功，即将跳转到首页'
@@ -215,6 +216,13 @@
 			input{
 				font-weight: 600;
 				letter-spacing: 4upx;
+			}
+		}
+		.verfiy-item {
+			border-bottom: 1upx solid #ffd5a3;
+			input{
+				width: 320upx;
+				border-bottom: none;	
 			}
 		}
 		.verify-code-btn{

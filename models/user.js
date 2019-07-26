@@ -44,7 +44,7 @@ class UserModel  extends HTTP {
 				code
 			}
 		})
-	},
+	}
 	// 注册
 	register(name, age, phone){
 		return this.request({
@@ -56,7 +56,7 @@ class UserModel  extends HTTP {
 				phone
 			}
 		})
-	},
+	}
 	// 登录
 	login(phone, savePhoneNumber){
 		return this.request({

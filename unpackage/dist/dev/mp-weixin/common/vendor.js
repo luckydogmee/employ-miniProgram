@@ -1499,26 +1499,9 @@ uni$1;exports.default = _default;
 
 /***/ }),
 
-/***/ 106:
-/*!**************************************************************************************************************!*\
-  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fcustomer%2Fproject%2Fproject"} ***!
-  \**************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _project = _interopRequireDefault(__webpack_require__(/*! ./pages/customer/project/project.vue */ 19));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_project.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
-
-/***/ }),
-
-/***/ 107:
+/***/ 105:
 /*!************************************************************************************************************!*\
-  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fcustomer%2Fresume%2Fresume"} ***!
+  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fuser%2Fregister%2Fregister"} ***!
   \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1527,42 +1510,8 @@ createPage(_project.default);
 /* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _resume = _interopRequireDefault(__webpack_require__(/*! ./pages/customer/resume/resume.vue */ 26));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_resume.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
-
-/***/ }),
-
-/***/ 108:
-/*!********************************************************************************************************!*\
-  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fcustomer%2Fuser%2Fuser"} ***!
-  \********************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _user = _interopRequireDefault(__webpack_require__(/*! ./pages/customer/user/user.vue */ 33));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_user.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
-
-/***/ }),
-
-/***/ 109:
-/*!**********************************************************************************************************!*\
-  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fseller%2Fchoose%2Fchoose"} ***!
-  \**********************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _choose = _interopRequireDefault(__webpack_require__(/*! ./pages/seller/choose/choose.vue */ 49));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_choose.default);
+var _register = _interopRequireDefault(__webpack_require__(/*! ./pages/user/register/register.vue */ 106));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_register.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
 
 /***/ }),
@@ -1674,6 +1623,74 @@ function normalizeComponent (
 
 /***/ }),
 
+/***/ 113:
+/*!**************************************************************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fcustomer%2Fproject%2Fproject"} ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+var _project = _interopRequireDefault(__webpack_require__(/*! ./pages/customer/project/project.vue */ 38));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_project.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
+
+/***/ }),
+
+/***/ 114:
+/*!************************************************************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fcustomer%2Fresume%2Fresume"} ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+var _resume = _interopRequireDefault(__webpack_require__(/*! ./pages/customer/resume/resume.vue */ 45));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_resume.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
+
+/***/ }),
+
+/***/ 115:
+/*!********************************************************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fcustomer%2Fuser%2Fuser"} ***!
+  \********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+var _user = _interopRequireDefault(__webpack_require__(/*! ./pages/customer/user/user.vue */ 52));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_user.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
+
+/***/ }),
+
+/***/ 116:
+/*!**********************************************************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fseller%2Fchoose%2Fchoose"} ***!
+  \**********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+var _choose = _interopRequireDefault(__webpack_require__(/*! ./pages/seller/choose/choose.vue */ 65));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_choose.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
+
+/***/ }),
+
 /***/ 12:
 /*!*********************************************************************!*\
   !*** /Users/romens/ray/workspace/employ-miniProgram/store/index.js ***!
@@ -1714,7 +1731,7 @@ store;exports.default = _default;
 
 /***/ }),
 
-/***/ 122:
+/***/ 129:
 /*!**********************************************************************************************************************!*\
   !*** /Users/romens/ray/workspace/employ-miniProgram/pages/customer/home/home.scss?vue&type=style&index=0&lang=scss& ***!
   \**********************************************************************************************************************/
@@ -1723,14 +1740,31 @@ store;exports.default = _default;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_8_oneOf_1_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_5_home_scss_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!../../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-1!../../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/css-loader??ref--8-oneOf-1-2!../../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/postcss-loader/src??ref--8-oneOf-1-3!../../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/sass-loader/lib/loader.js??ref--8-oneOf-1-4!../../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-5!./home.scss?vue&type=style&index=0&lang=scss& */ 123);
+/* harmony import */ var _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_8_oneOf_1_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_5_home_scss_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!../../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-1!../../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/css-loader??ref--8-oneOf-1-2!../../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/postcss-loader/src??ref--8-oneOf-1-3!../../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/sass-loader/lib/loader.js??ref--8-oneOf-1-4!../../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-5!./home.scss?vue&type=style&index=0&lang=scss& */ 130);
 /* harmony import */ var _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_8_oneOf_1_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_5_home_scss_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_8_oneOf_1_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_5_home_scss_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_8_oneOf_1_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_5_home_scss_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_8_oneOf_1_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_5_home_scss_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
  /* harmony default export */ __webpack_exports__["default"] = (_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_8_oneOf_1_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_5_home_scss_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ 123:
+/***/ 13:
+/*!******************************************************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fuser%2Flogin%2Flogin"} ***!
+  \******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+var _login = _interopRequireDefault(__webpack_require__(/*! ./pages/user/login/login.vue */ 14));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_login.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
+
+/***/ }),
+
+/***/ 130:
 /*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-1!./node_modules/css-loader??ref--8-oneOf-1-2!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-oneOf-1-3!./node_modules/sass-loader/lib/loader.js??ref--8-oneOf-1-4!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-5!/Users/romens/ray/workspace/employ-miniProgram/pages/customer/home/home.scss?vue&type=style&index=0&lang=scss& ***!
   \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
@@ -1741,20 +1775,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 13:
-/*!********************************************************************************************************!*\
-  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fcustomer%2Fmain%2Fmain"} ***!
-  \********************************************************************************************************/
+/***/ 19:
+/*!*********************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/utils/utils.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _main = _interopRequireDefault(__webpack_require__(/*! ./pages/customer/main/main.vue */ 14));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_main.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
+Object.defineProperty(exports, "__esModule", { value: true });exports.verifyPhone = void 0;var verifyPhone = function verifyPhone() {var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  console.log(value);
+  var phoneRule = /^1[3456789]\d{9}$/;
+  return Boolean(phoneRule.test(value));
+};exports.verifyPhone = verifyPhone;
 
 /***/ }),
 
@@ -7707,6 +7740,155 @@ internalMixin(Vue);
 
 /***/ }),
 
+/***/ 20:
+/*!*********************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/models/user.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _http = __webpack_require__(/*! ../utils/http.js */ 21);function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}function _possibleConstructorReturn(self, call) {if (call && (typeof call === "object" || typeof call === "function")) {return call;}return _assertThisInitialized(self);}function _assertThisInitialized(self) {if (self === void 0) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return self;}function _getPrototypeOf(o) {_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {return o.__proto__ || Object.getPrototypeOf(o);};return _getPrototypeOf(o);}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function");}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });if (superClass) _setPrototypeOf(subClass, superClass);}function _setPrototypeOf(o, p) {_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {o.__proto__ = p;return o;};return _setPrototypeOf(o, p);}
+
+// 对自己写的接口做一个promise封装，对微信自带的方法不做处理
+var
+UserModel = /*#__PURE__*/function (_HTTP) {_inherits(UserModel, _HTTP);
+  function UserModel(arg) {_classCallCheck(this, UserModel);return _possibleConstructorReturn(this, _getPrototypeOf(UserModel).call(this));
+
+  }
+  // 根据code获取token
+  _createClass(UserModel, [{ key: "wxLogin", value: function wxLogin(code) {
+      return this.request({
+        url: '/test',
+        data: {
+          code: code } });
+
+
+    }
+    // 获取手机号登录，返回手机号
+  }, { key: "getBindPhoneNumber", value: function getBindPhoneNumber(encryptedData, ivData) {
+      return this.request({
+        url: '/test',
+        data: {
+          encryptedData: encryptedData,
+          ivData: ivData } });
+
+
+    }
+    // 获取验证码
+  }, { key: "getVerifyCode", value: function getVerifyCode(phoneNumber) {
+      return this.request({
+        url: '/getVerifyCode',
+        data: {
+          phoneNumber: phoneNumber } });
+
+
+    }
+    // 验证验证码是否正确
+  }, { key: "verifyCode", value: function verifyCode(phone, code) {
+      return this.request({
+        url: '',
+        method: 'POST',
+        data: {
+          phone: phone,
+          code: code } });
+
+
+    }
+    // 注册
+  }, { key: "register", value: function register(name, age, phone) {
+      return this.request({
+        url: '',
+        methods: 'POST',
+        data: {
+          name: name,
+          age: age,
+          phone: phone } });
+
+
+    }
+    // 登录
+  }, { key: "login", value: function login(phone, savePhoneNumber) {
+      return this.request({
+        url: '',
+        methods: 'POST',
+        data: {
+          phone: phone,
+          savePhoneNumber: savePhoneNumber } });
+
+
+    } }]);return UserModel;}(_http.HTTP);var _default =
+
+
+UserModel;exports.default = _default;
+
+/***/ }),
+
+/***/ 21:
+/*!********************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/utils/http.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.HTTP = void 0;var _config = __webpack_require__(/*! ../config.js */ 22);function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}
+
+var tips = {
+  0: '未知错误' };var
+
+
+HTTP = /*#__PURE__*/function () {function HTTP() {_classCallCheck(this, HTTP);}_createClass(HTTP, [{ key: "request", value: function request(_ref)
+    {var _this = this;var url = _ref.url,_ref$method = _ref.method,method = _ref$method === void 0 ? "get" : _ref$method,_ref$data = _ref.data,data = _ref$data === void 0 ? {} : _ref$data;
+      return new Promise(function (resolve, reject) {
+        data = Object.assign({}, {
+          token: uni.getStorageSync('token') },
+        data);
+        _this._request(url, resolve, reject, method, data);
+      });
+    } }, { key: "_request", value: function _request(
+    url, resolve, reject, method, data) {
+      var that = this;
+      uni.request({
+        url: _config.config.base_url + url,
+        method: method,
+        data: data,
+        success: function success(res) {
+          // TODO  根据返回的数据统一格式做处理
+          resolve(res);
+        },
+        fail: function fail(err) {
+          reject(err);
+          that._showError(err.code);
+        } });
+
+    } }, { key: "_showError", value: function _showError(
+    errCode) {
+      var tip = tips[errCode];
+      uni.showToast({
+        title: tip ? tip : tips[0],
+        icon: 'none',
+        duration: 3000 });
+
+    } }]);return HTTP;}();exports.HTTP = HTTP;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 22:
+/*!****************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/config.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.config = void 0;var config = {
+  base_url: 'http://127.0.0.1',
+  appkey: 'wx63fe7790dd2e8fd5' };exports.config = config;
+
+/***/ }),
+
 /***/ 3:
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
@@ -7738,6 +7920,23 @@ module.exports = g;
 
 /***/ }),
 
+/***/ 32:
+/*!********************************************************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fcustomer%2Fmain%2Fmain"} ***!
+  \********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+var _main = _interopRequireDefault(__webpack_require__(/*! ./pages/customer/main/main.vue */ 33));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_main.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
+
+/***/ }),
+
 /***/ 4:
 /*!*****************************************************************!*\
   !*** /Users/romens/ray/workspace/employ-miniProgram/pages.json ***!
@@ -7750,18 +7949,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 40:
-/*!*********************************************************************!*\
-  !*** /Users/romens/ray/workspace/employ-miniProgram/models/user.js ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/romens/ray/workspace/employ-miniProgram/models/user.js: Unexpected token (47:2)\n\n  45 | \t\t\t}\n  46 | \t\t})\n> 47 | \t},\n     | \t ^\n  48 | \t// 注册\n  49 | \tregister(name, age, phone){\n  50 | \t\treturn this.request({\n    at _class.raise (/Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@babel/parser/lib/index.js:4051:15)\n    at _class.unexpected (/Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@babel/parser/lib/index.js:5382:16)\n    at _class.parseIdentifierName (/Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@babel/parser/lib/index.js:7260:18)\n    at _class.parseIdentifier (/Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@babel/parser/lib/index.js:7234:21)\n    at _class.parseMaybePrivateName (/Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@babel/parser/lib/index.js:6572:19)\n    at _class.parsePropertyName (/Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@babel/parser/lib/index.js:7046:98)\n    at _class.parseClassPropertyName (/Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@babel/parser/lib/index.js:8454:20)\n    at _class.parseClassMemberWithIsStatic (/Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@babel/parser/lib/index.js:8377:20)\n    at _class.parseClassMember (/Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@babel/parser/lib/index.js:8348:10)\n    at /Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@babel/parser/lib/index.js:8302:16\n    at _class.withTopicForbiddingContext (/Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@babel/parser/lib/index.js:7429:14)\n    at _class.parseClassBody (/Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@babel/parser/lib/index.js:8277:10)\n    at _class.parseClass (/Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@babel/parser/lib/index.js:8248:10)\n    at _class.parseStatementContent (/Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@babel/parser/lib/index.js:7533:21)\n    at _class.parseStatement (/Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@babel/parser/lib/index.js:7505:17)\n    at _class.parseBlockOrModuleBlockBody (/Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@babel/parser/lib/index.js:8073:23)");
-
-/***/ }),
-
-/***/ 43:
+/***/ 59:
 /*!******************************************************************************************************!*\
   !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fseller%2Fmain%2Fmain"} ***!
   \******************************************************************************************************/
@@ -7772,13 +7960,13 @@ throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index
 /* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _main = _interopRequireDefault(__webpack_require__(/*! ./pages/seller/main/main.vue */ 44));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _main = _interopRequireDefault(__webpack_require__(/*! ./pages/seller/main/main.vue */ 60));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_main.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
 
 /***/ }),
 
-/***/ 54:
+/***/ 70:
 /*!***********************************************************************************************!*\
   !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Flogin%2Flogin"} ***!
   \***********************************************************************************************/
@@ -7789,13 +7977,13 @@ createPage(_main.default);
 /* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _login = _interopRequireDefault(__webpack_require__(/*! ./pages/login/login.vue */ 55));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _login = _interopRequireDefault(__webpack_require__(/*! ./pages/login/login.vue */ 71));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_login.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
 
 /***/ }),
 
-/***/ 60:
+/***/ 76:
 /*!*****************************************************************!*\
   !*** /Users/romens/ray/workspace/employ-miniProgram/service.js ***!
   \*****************************************************************/
@@ -7832,7 +8020,7 @@ var addUser = function addUser(userInfo) {
 
 /***/ }),
 
-/***/ 63:
+/***/ 79:
 /*!*******************************************************************************************!*\
   !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Freg%2Freg"} ***!
   \*******************************************************************************************/
@@ -7843,42 +8031,8 @@ var addUser = function addUser(userInfo) {
 /* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _reg = _interopRequireDefault(__webpack_require__(/*! ./pages/reg/reg.vue */ 64));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _reg = _interopRequireDefault(__webpack_require__(/*! ./pages/reg/reg.vue */ 80));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_reg.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
-
-/***/ }),
-
-/***/ 69:
-/*!*******************************************************************************************!*\
-  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fpwd%2Fpwd"} ***!
-  \*******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _pwd = _interopRequireDefault(__webpack_require__(/*! ./pages/pwd/pwd.vue */ 70));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_pwd.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
-
-/***/ }),
-
-/***/ 75:
-/*!*********************************************************************************************!*\
-  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fuser%2Fuser"} ***!
-  \*********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _user = _interopRequireDefault(__webpack_require__(/*! ./pages/user/user.vue */ 76));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_user.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
 
 /***/ }),
@@ -8834,7 +8988,41 @@ var index_esm = {
 
 /***/ }),
 
-/***/ 81:
+/***/ 85:
+/*!*******************************************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fpwd%2Fpwd"} ***!
+  \*******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+var _pwd = _interopRequireDefault(__webpack_require__(/*! ./pages/pwd/pwd.vue */ 86));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_pwd.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
+
+/***/ }),
+
+/***/ 91:
+/*!*********************************************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fuser%2Fuser"} ***!
+  \*********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+var _user = _interopRequireDefault(__webpack_require__(/*! ./pages/user/user.vue */ 92));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_user.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
+
+/***/ }),
+
+/***/ 97:
 /*!*********************************************************************************************************!*\
   !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2FPostDetail%2FPostDetail"} ***!
   \*********************************************************************************************************/
@@ -8845,58 +9033,8 @@ var index_esm = {
 /* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _PostDetail = _interopRequireDefault(__webpack_require__(/*! ./pages/PostDetail/PostDetail.vue */ 82));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _PostDetail = _interopRequireDefault(__webpack_require__(/*! ./pages/PostDetail/PostDetail.vue */ 98));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_PostDetail.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
-
-/***/ }),
-
-/***/ 89:
-/*!************************************************************************************************************!*\
-  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fuser%2Fregister%2Fregister"} ***!
-  \************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _register = _interopRequireDefault(__webpack_require__(/*! ./pages/user/register/register.vue */ 90));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_register.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
-
-/***/ }),
-
-/***/ 95:
-/*!*********************************************************************!*\
-  !*** /Users/romens/ray/workspace/employ-miniProgram/utils/utils.js ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.verifyPhone = void 0;var verifyPhone = function verifyPhone() {var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-  console.log(value);
-  var phoneRule = /^1[3456789]\d{9}$/;
-  return Boolean(phoneRule.test(value));
-};exports.verifyPhone = verifyPhone;
-
-/***/ }),
-
-/***/ 98:
-/*!******************************************************************************************************!*\
-  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fuser%2Flogin%2Flogin"} ***!
-  \******************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _login = _interopRequireDefault(__webpack_require__(/*! ./pages/user/login/login.vue */ 99));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_login.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
 
 /***/ })
