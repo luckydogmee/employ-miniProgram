@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/customer/project/detail",
     "pages/customer/main/main",
     "pages/seller/main/main",
     "pages/login/login",

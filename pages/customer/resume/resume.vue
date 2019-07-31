@@ -11,12 +11,7 @@
 				未推荐过
 			</view>
 		</view>
-		<view class="search-container">
-			<view class="search">
-				<input type="text" placeholder="请输入姓名或手机号搜索" />
-				<button>搜索</button>
-			</view>
-		</view>
+		<Search @search="search" />
 		<view class="list-container">
 			<ListResume></ListResume>
 			<ListResume></ListResume>
@@ -27,7 +22,8 @@
 </template>
 
 <script>
-	import ListResume from '../../../components/ListResume/ListResume.vue'
+	import ListResume from '@/components/ListResume/ListResume.vue'
+	import Search from '@/components/Search/Search.vue' 
 	export default {
 		data() {
 			return {
@@ -35,10 +31,13 @@
 			}
 		},
 		components:{
-			ListResume	
+			ListResume,
+			Search
 		},
 		methods: {
-			
+			search(keyword){
+				// 做搜索动作
+			}
 		}
 	}
 </script>
@@ -59,44 +58,6 @@
 			font-size: 26upx;
 			color: #ff9058;
 			text-align: center;
-		}
-	}
-	.search-container{
-		background: #efeff4;
-		height: 150upx;
-		width: 750upx;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		.search{
-			height: 62upx;
-			width: 628upx;
-			background: url(../../../static/icon/resume-search.png) no-repeat;
-			background-size: 100% 100%;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-		}
-		input{
-			background: rgba(0,0,0,0);
-			width: 400upx;
-			height: 60upx;
-			margin-left: 100upx;
-			font-size: 26upx;
-			color: #595959;
-		}
-		button{
-			background: rgba(0,0,0,0);
-			width: 90upx;
-			height: 50upx;
-			line-height: 50upx;
-			margin-left: 38upx;
-			font-size: 30upx;
-			padding: unset;
-			color: #fff;
-			&:after{
-				border:none;
-			}
 		}
 	}
 </style>

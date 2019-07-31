@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "navigationBarTitleText": "我的项目",
+  "usingComponents": {
+    "list-project": "/components/ListProject/ListProject"
+  }
 }

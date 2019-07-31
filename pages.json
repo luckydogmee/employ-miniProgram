@@ -1,6 +1,11 @@
 {
     "pages": [ //pages数组中第一项表示应用启动页,
-		
+		{
+		    "path" : "pages/customer/project/detail",
+		    "style" : {
+				"navigationBarTitleText": "我的项目"
+			}
+		},
 		{
 		    "path": "pages/customer/main/main",
 		    "style": {
@@ -59,8 +64,11 @@
 		},
         {
             "path" : "pages/customer/project/project",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText": "我的项目"
+			}
         },
+		
         {
             "path" : "pages/customer/resume/resume",
             "style" : {}
