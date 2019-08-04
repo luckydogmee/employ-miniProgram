@@ -4,12 +4,12 @@
 			<swiper class="swiper" :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration">
 				<swiper-item>
 					<view class="swiper-item uni-bg-red">
-						<image src="../../static/swiper/banner1.png" mode=""></image>
+						<image src="../../../static/swiper/banner1.png" mode=""></image>
 					</view>
 				</swiper-item>
 				<swiper-item>
 					<view class="swiper-item uni-bg-green">
-						<image src="../../static/img/upload.jpeg" mode=""></image>
+						<image src="../../../static/img/upload.jpeg" mode=""></image>
 					</view>
 				</swiper-item>
 			</swiper>	
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-	import Cell from '../../components/Cell/Cell.vue'
+	import Cell from '../../../components/Cell/Cell.vue'
 	export default {
 		data() {
 			return {

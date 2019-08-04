@@ -5,11 +5,12 @@
 			<Choose v-if="currentTab === 'Choose'" />
 			<User v-if="currentTab === 'User'" />	
 		</view>
-		<TabBar type="seller" @switchTab="switchTab" :index="index" />
+		<TabBar type="seller" @switchTab="switchTabBar" :index="tabIndex" />
 	</view>
 </template>
 
 <script>
+	import { mapState, mapMutations } from 'vuex'
 	import TabBar from '../../../components/TabBar/TabBar.vue'
 	import Home from '../home/home.vue'
 	import Choose from '../choose/choose.vue'
@@ -17,7 +18,6 @@
 	export default {
 		data(){
 			return {
-				index: 0,
 				tabBar:['Home','Choose','User']
 			}
 		},
@@ -28,6 +28,7 @@
 			User
 		},
 		computed:{
+			...mapState(['tabIndex']),
 			currentTab(){
 				return this.tabBar[this.index]
 			}
@@ -36,8 +37,9 @@
 			console.log(222)
 		},
 		methods:{
-			switchTab(type){
-				this.index = type
+			...mapMutations(['switchTab']),
+			switchTabBar(type){
+				this.tabIndex = type
 			}
 		}
 	}

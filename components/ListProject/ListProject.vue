@@ -15,35 +15,14 @@
 			</view>
 		</view>
 		<view class="operation">
-			<view class="operation-all" v-if="type === 'all'">
-				<view class="operation-describe" >
-					<view class="operation-image">
-						<image src="../../static/icon/money.png" mode=""></image>
-					</view>
-					<view class="operation-pay">
-						<view class="operation-pay-price">
-							300元/天
-						</view>
-						<view class="operation-pay-time">
-							30天返费
-						</view>
-					</view>				
-				</view>
-				<view class="operation-see">
-					<button class="default-btn" @click="show">查&nbsp;&nbsp;看</button>
-				</view>
-				<view class="operation-date">
-					2019年5月22日接单
-				</view>	
-			</view>
-			<view class="operation-single" v-if="type === 'started'">
+			<view class="operation-single" v-if="data.type === 'started'">
 				<button class="default-btn" @click="showDetail">岗位详情</button>
 				<button class="default-btn" @click="showDeliveryDetail">交付详情</button>
 				<view class="operation-date">
 					2019年5月22日接单
 				</view>	
 			</view>
-			<view class="operation-single" v-if="type === 'notStart'">
+			<view class="operation-single" v-if="data.type === 'notStart'">
 				<button class="default-btn" @click="showDetail">岗位详情</button>
 				<button class="default-btn" @click="recommend">立即推荐</button>
 			</view>
@@ -63,10 +42,6 @@
 				type: Object,
 				default: ()=>({})
 			},
-			type: {
-				type: String,
-				default: ''
-			}
 		},
 		methods:{
 			show(){

@@ -53,7 +53,7 @@
 				this.$emit('on-click-record')
 			},
 			recommedClick(){
-				this.$emit('on-click-recommed')
+				this.$emit('on-click-recommend')
 			},
 			callClick(){
 				this.$emit('on-click-call')

@@ -10,7 +10,9 @@ const store = new Vuex.Store({
          */
         forcedLogin: false,
         hasLogin: false,
-        userName: ""
+        userName: "",
+		tabIndex: 2,
+		currentResume: ''
     },
     mutations: {
         login(state, userName) {
@@ -21,7 +23,13 @@ const store = new Vuex.Store({
         logout(state) {
             state.userName = "";
             state.hasLogin = false;
-        }
+        },
+		switchTab(state, index){
+			state.tabIndex = index
+		},
+		setCurrentResume(state, id){
+			state.currentResume = id
+		}
     }
 })
 

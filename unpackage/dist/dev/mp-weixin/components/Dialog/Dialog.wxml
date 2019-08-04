@@ -1,0 +1,1 @@
+<view class="dialog-container"><uni-popup class="vue-ref" vue-id="1" custom="true" showMask="{{false}}" maskClick="{{false}}" data-ref="dialog" bind:__l="__l" vue-slots="{{['default']}}"><block wx:if="{{type==='alert'}}"><view class="dialog-alert"><slot></slot></view></block><block wx:if="{{type==='confirm'}}"><view class="dialog-confirm"></view></block></uni-popup></view>

@@ -5,12 +5,13 @@
 			<Project v-if="currentTab === 'Project'" />
 			<Resume v-if="currentTab === 'Resume'" />
 			<User v-if="currentTab === 'User'" />
-			<TabBar @switchTab="switchTab" />
+			<TabBar @switchTab="switchTabBar" :index="tabIndex" />
 		</view>
 	</view>
 </template>
 
 <script>
+	import { mapState, mapMutations } from 'vuex'
 	import TabBar from '@/components/TabBar/TabBar.vue'
 	import Home from '../home/home.vue'
 	import Project from '../project/project.vue'
@@ -21,7 +22,6 @@
 	export default {
 		data(){
 			return {
-				index: 1,
 				tabBar:['Home','Project','Resume','User']
 			}
 		},
@@ -34,6 +34,7 @@
 		},
 		onReady() {
 			// 第一次进入的时候
+			
 			const token = uni.getStorageSync('token')
 			if(token){
 				uni.checkSession({
@@ -50,13 +51,15 @@
 			
 		},
 		computed:{
+			...mapState(['tabIndex']),
 			currentTab(){
-				return this.tabBar[this.index]
+				return this.tabBar[this.tabIndex]
 			}
 		},
 		methods:{
-			switchTab(type){
-				this.index = type
+			...mapMutations(['switchTab']),
+			switchTabBar(type){
+				this.switchTab(type)
 			},
 			login(){
 				uni.login({

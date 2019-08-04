@@ -1,16 +1,17 @@
 {
   "pages": [
-    "pages/customer/project/detail",
+    "pages/public/addResume/addResume",
     "pages/customer/main/main",
     "pages/seller/main/main",
     "pages/login/login",
     "pages/reg/reg",
     "pages/pwd/pwd",
     "pages/user/user",
-    "pages/PostDetail/PostDetail",
+    "pages/public/PostDetail/PostDetail",
     "pages/user/register/register",
     "pages/user/login/login",
     "pages/customer/project/project",
+    "pages/customer/project/detail",
     "pages/customer/resume/resume",
     "pages/customer/user/user",
     "pages/seller/choose/choose"

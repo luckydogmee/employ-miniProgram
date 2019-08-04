@@ -1,0 +1,7 @@
+.add-container {
+  width: 750rpx;
+  padding: 0 34rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+

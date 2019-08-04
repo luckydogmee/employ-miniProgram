@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<UserItem type="customer" :data="userData" />
+		<UserItem type="customer" :userData="userData" />
 		<view class="flex-container">
 			<view class="flex-item">
 				<view class="flex-title">共推荐求职者</view>

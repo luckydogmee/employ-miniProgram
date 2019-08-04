@@ -13,7 +13,9 @@
 		</view>
 		<view class="project-list">
 			<ListProject 
-				:type="type" 
+				v-for="item in projectList"
+				:key="item.id"
+				:data="item"
 				@show="show(status,id)" 
 				@showDetail="showDetail(id)" 
 				@showDeliveryDetail="showDeliveryDetail(id)" 
@@ -24,12 +26,24 @@
 </template>
 
 <script>
+	import { mapState } from 'vuex'
 	import ListProject from '@/components/ListProject/ListProject.vue'
 	export default {
 		data() {
 			return {
+				projectList: [
+					{
+						type: 'started'
+					},
+					{
+						type: 'notStart'
+					}
+				],
 				type: 'all'
 			}
+		},
+		computed:{
+			...mapState(['currentResume'])
 		},
 		components: {
 			ListProject
@@ -56,7 +70,26 @@
 				})
 			},
 			recommend(id){
-				
+				let success = false
+				// if success
+				if(success){
+					uni.showModal({
+						title: '',
+						content: '推荐成功!\r\n您可在“我的项目”栏目查看该人员的面试、入职流程',
+						showCancel: false,
+						confirmText: '知道了',
+						success: res => {},
+					})	
+				}else{
+					// if fail
+					uni.showModal({
+						title: '',
+						content: '抱歉!\r\n该简历年龄与岗位要求不符,无法推荐!',
+						showCancel: false,
+						confirmText: '知道了',
+						success: res => {},
+					})
+				}
 			}
 		}
 	}

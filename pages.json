@@ -1,9 +1,9 @@
 {
     "pages": [ //pages数组中第一项表示应用启动页,
 		{
-		    "path" : "pages/customer/project/detail",
+		    "path" : "pages/public/addResume/addResume",
 		    "style" : {
-				"navigationBarTitleText": "我的项目"
+				"navigationBarTitleText": "新增简历"
 			}
 		},
 		{
@@ -45,7 +45,7 @@
             }
         },
 		{
-			"path" : "pages/PostDetail/PostDetail",
+			"path" : "pages/public/PostDetail/PostDetail",
 			"style" : {
 				"navigationBarTitleText": "岗位详情"
 			}
@@ -68,7 +68,12 @@
 				"navigationBarTitleText": "我的项目"
 			}
         },
-		
+		{
+		    "path" : "pages/customer/project/detail",
+		    "style" : {
+				"navigationBarTitleText": "我的项目"
+			}
+		},
         {
             "path" : "pages/customer/resume/resume",
             "style" : {}

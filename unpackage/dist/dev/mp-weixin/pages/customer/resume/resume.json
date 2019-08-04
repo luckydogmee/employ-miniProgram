@@ -1,6 +1,8 @@
 {
   "usingComponents": {
     "list-resume": "/components/ListResume/ListResume",
-    "search": "/components/Search/Search"
+    "search": "/components/Search/Search",
+    "uni-popup": "/components/uni-popup/uni-popup",
+    "dialog": "/components/Dialog/Dialog"
   }
 }

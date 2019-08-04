@@ -3,6 +3,7 @@
     v-if="show"
     class="uni-popup">
     <view
+	  v-if="showMask"
       :class="[ani, animation ? 'ani' : '', !custom ? 'uni-custom' : '']"
       class="uni-popup__mask"
       @click="close(true)"/>
@@ -40,7 +41,11 @@ export default {
     maskClick: {
       type: Boolean,
       default: true
-    }
+    },
+	showMask:{
+	  type: Boolean,
+	  default: true
+	}
   },
   data () {
     return {
