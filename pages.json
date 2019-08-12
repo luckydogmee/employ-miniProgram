@@ -1,12 +1,6 @@
 {
     "pages": [ //pages数组中第一项表示应用启动页,
 		{
-		    "path" : "pages/public/addResume/addResume",
-		    "style" : {
-				"navigationBarTitleText": "新增简历"
-			}
-		},
-		{
 		    "path": "pages/customer/main/main",
 		    "style": {
 		        "navigationBarTitleText": "街聘",
@@ -85,7 +79,13 @@
         {
             "path" : "pages/seller/choose/choose",
             "style" : {}
-        }
+        },
+		{
+		    "path" : "pages/public/addResume/addResume",
+		    "style" : {
+				"navigationBarTitleText": "新增简历"
+			}
+		}
     ],
     "globalStyle": {
         "navigationBarTextStyle": "white",

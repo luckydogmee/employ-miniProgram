@@ -13,7 +13,7 @@
 		</view>
 		<Search @search="search" />
 		<view class="list-container">
-			<ListResume @on-click-record="showRecord" @on-click-recommend="recommendHim" ></ListResume>
+			<ListResume @on-click-record="showRecord" @on-click-recommend="recommendHim" @on-click-detail="showDetail" ></ListResume>
 			<ListResume></ListResume>
 			<ListResume></ListResume>
 			<ListResume></ListResume>
@@ -95,12 +95,20 @@
 			closeRecommendDialog(){
 				this.$refs.recommendRecord.close()
 			},
+			showDetail(){
+				uni.navigateTo({
+					url: '../../public/addResume/addResume?isEdit=false',
+					success: res => {},
+					fail: () => {},
+					complete: () => {}
+				});
+			},
 			recommendHim(){
 				
 			},
 			showAddResume(){
 				uni.navigateTo({
-					url: '../../public/addResume/addResume',
+					url: '../../public/addResume/addResume?isEdit=true',
 					success: res => {},
 					fail: () => {},
 					complete: () => {}
