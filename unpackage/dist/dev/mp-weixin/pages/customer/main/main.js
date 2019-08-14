@@ -181,16 +181,15 @@ var userModel = new _user2.default();var _default =
         success: function success(res) {
           if (res.errMsg === 'login:ok') {
             // 执行后台登录
-            userModel.wxLogin({
-              code: res.code }).
-            then(function (res) {
-              if (res.code === 'success') {
+            userModel.wxLogin(res.code).then(function (res) {var _res$data =
+              res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
+              if (code === '0') {
                 // 将返回的token存入本地
-                uni.setStorageSync('token', res.data.token);
+                uni.setStorageSync('token', data);
               } else {
                 uni.showToast({
                   icon: 'none',
-                  title: res.msg });
+                  title: message });
 
               }
             });
@@ -338,7 +337,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _vuex = __webpack_require__(/*! vuex */ 8);function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var ListProject = function ListProject() {return __webpack_require__.e(/*! import() | components/ListProject/ListProject */ "components/ListProject/ListProject").then(__webpack_require__.bind(null, /*! @/components/ListProject/ListProject.vue */ 147));};var _default =
+var _vuex = __webpack_require__(/*! vuex */ 8);function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var ListProject = function ListProject() {return __webpack_require__.e(/*! import() | components/ListProject/ListProject */ "components/ListProject/ListProject").then(__webpack_require__.bind(null, /*! @/components/ListProject/ListProject.vue */ 148));};var _default =
 
 {
   data: function data() {
@@ -585,7 +584,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _vuex = __webpack_require__(/*! vuex */ 8);function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var ListResume = function ListResume() {return __webpack_require__.e(/*! import() | components/ListResume/ListResume */ "components/ListResume/ListResume").then(__webpack_require__.bind(null, /*! @/components/ListResume/ListResume.vue */ 154));};var Search = function Search() {return __webpack_require__.e(/*! import() | components/Search/Search */ "components/Search/Search").then(__webpack_require__.bind(null, /*! @/components/Search/Search.vue */ 161));};var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 104));};var Dialog = function Dialog() {return __webpack_require__.e(/*! import() | components/Dialog/Dialog */ "components/Dialog/Dialog").then(__webpack_require__.bind(null, /*! @/components/Dialog/Dialog.vue */ 168));};var _default =
+var _vuex = __webpack_require__(/*! vuex */ 8);function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var ListResume = function ListResume() {return __webpack_require__.e(/*! import() | components/ListResume/ListResume */ "components/ListResume/ListResume").then(__webpack_require__.bind(null, /*! @/components/ListResume/ListResume.vue */ 155));};var Search = function Search() {return __webpack_require__.e(/*! import() | components/Search/Search */ "components/Search/Search").then(__webpack_require__.bind(null, /*! @/components/Search/Search.vue */ 162));};var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 104));};var Dialog = function Dialog() {return __webpack_require__.e(/*! import() | components/Dialog/Dialog */ "components/Dialog/Dialog").then(__webpack_require__.bind(null, /*! @/components/Dialog/Dialog.vue */ 169));};var _default =
 
 
 
@@ -777,7 +776,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var UserItem = function UserItem() {return __webpack_require__.e(/*! import() | components/UserItem/UserItem */ "components/UserItem/UserItem").then(__webpack_require__.bind(null, /*! ../../../components/UserItem/UserItem.vue */ 173));};var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var UserItem = function UserItem() {return __webpack_require__.e(/*! import() | components/UserItem/UserItem */ "components/UserItem/UserItem").then(__webpack_require__.bind(null, /*! ../../../components/UserItem/UserItem.vue */ 174));};var _default =
 
 
 

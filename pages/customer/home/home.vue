@@ -29,10 +29,7 @@
 			</view>
 		</view>
 		<view class="list-container">
-			<ListItem @showDetail="showDetail" />
-			<ListItem />
-			<ListItem />
-			<ListItem />
+			<ListItem v-for="item in postList" :key="item.id" :postData="item" @showDetail="showDetail" />
 		</view>
 		<uni-popup ref="noticeLogin" custom="true">
 			<view class="notice-login-dialog">
@@ -47,10 +44,12 @@
 </template>
 
 <script>
-	import UserModel from '@/models/user.js';
+	import UserModel from '@/models/user.js'
+	import PostModel from '@/models/post.js'
 	import ListItem from '@/components/ListItem/ListItem.vue'
 	import uniPopup from "@/components/uni-popup/uni-popup.vue"
 	const userModel = new UserModel() 
+	const postModel = new PostModel()
 	export default {
 		data(){
 			return {
@@ -58,12 +57,36 @@
 				indicatorDots: true,
 				autoplay: true,
 				interval: 2000,
-				duration: 500
+				duration: 500,
+				postList: [],
+				pageNum: 1,
+				pageSize: 10,
+				keyword: '',
+				label:''
 			}
 		}, 
 		components:{
 			ListItem,
 			uniPopup
+		},
+		created() {
+			postModel.getPostList(this.pageNum, this.pageSize, this.keyword, this.label).then(res=>{
+				const { code, message, data } = res.data
+				if(code === '0'){
+					this.postList = data
+					console.log(this.postList)
+				}else{
+					uni.showToast({
+						icon: 'none',
+						title: message
+					})
+				}
+			}).catch(err=>{
+				uni.showToast({
+					icon: 'none',
+					title:'获取岗位列表信息失败'
+				})
+			})
 		},
 		methods:{
 			chooseImage(){
@@ -94,19 +117,20 @@
 						icon: 'none',
 						title:'授权失败，请重新授权'
 					})
+					return 
 				}
 				// 以下执行登录,需要后台提供一个接口
 				uni.checkSession({
 					success(response) {
-						if(response.errMsg === 'login:ok'){
+						if(response.errMsg === 'checkSession:ok'){
 							// 此处执行后台登录过程，由后台得到手机号并与openid绑定，然后返回token
 							uni.showLoading({
 								title: '登录中，请稍候'
 							})
-							userModel.getBindPhoneNumber(encryptedData, ivData).then(res=>{
+							userModel.getBindPhoneNumber(encryptedData, iv).then(res=>{
 								uni.hideLoading()
 								// 判断是成功了,在这里判断是否已经绑定手机号，以及是否完善信息，待写
-								if (res.code === 'success') {
+								if (res.code === '0') {
 									// 将token存入缓存中
 									uni.setStorageSync('token',res.data.token)
 									uni.showToast({
@@ -137,11 +161,18 @@
 					url: '../../user/register/register',
 				})
 			},
-			showDetail(){
+			showDetail(id){
 				const that = this
 				uni.checkSession({
 					success(res) {
 						const token = uni.getStorageSync('token')
+						if(!token){
+							that.selectLoginType()
+						}else{
+							uni.navigateTo({
+								url: '../../public/PostDetail/PostDetail'
+							})
+						}
 					},
 					fail(err) {
 						that.selectLoginType()

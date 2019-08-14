@@ -9,7 +9,8 @@ class UserModel  extends HTTP {
 	// 根据code获取token
 	wxLogin(code){
 		return this.request({
-			url: '/test',
+			url: '/login/wxLogin',
+			method: 'POST',
 			data: {
 				code	
 			}
@@ -18,7 +19,8 @@ class UserModel  extends HTTP {
 	// 获取手机号登录，返回手机号
 	getBindPhoneNumber(encryptedData, ivData){
 		return this.request({
-			url: '/test',
+			url: '/login/getPhoneNumber',
+			method: 'POST',
 			data: {
 				encryptedData,
 				ivData
@@ -26,9 +28,16 @@ class UserModel  extends HTTP {
 		})
 	}
 	// 获取验证码
-	getVerifyCode(phoneNumber){
+	getVerifyCode(phoneNumber, type){
+		let url = null
+		if(type === 'A'){
+			url = '/login/sendVerdifyCode'
+		}else{
+			url = '/login/sendVerdifyCodeForB'
+		}
 		return this.request({
-			url: '/getVerifyCode',
+			url,
+			method: 'POST',
 			data:{
 				phoneNumber
 			}
@@ -58,13 +67,19 @@ class UserModel  extends HTTP {
 		})
 	}
 	// 登录
-	login(phone, savePhoneNumber){
+	login(phone, verifyCode, type){
+		let url = null
+		if(type === 'A'){
+			url = '/login/loginByCode'
+		}else{
+			url = '/login/loginByCodeforB'
+		}
 		return this.request({
-			url: '',
+			url,
 			methods: 'POST',
 			data: {
 				phone,
-				savePhoneNumber
+				verifyCode
 			}
 		})	
 	}

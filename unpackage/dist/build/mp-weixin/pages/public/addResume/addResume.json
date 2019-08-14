@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "新增简历",
+  "usingComponents": {
+    "input-cell": "/components/InputCell/InputCell"
+  }
+}

@@ -105,7 +105,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var ListProjectDetail = function ListProjectDetail() {return __webpack_require__.e(/*! import() | components/ListProjectDetail/ListProjectDetail */ "components/ListProjectDetail/ListProjectDetail").then(__webpack_require__.bind(null, /*! @/components/ListProjectDetail/ListProjectDetail.vue */ 208));};var Search = function Search() {return __webpack_require__.e(/*! import() | components/Search/Search */ "components/Search/Search").then(__webpack_require__.bind(null, /*! @/components/Search/Search.vue */ 161));};var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var ListProjectDetail = function ListProjectDetail() {return __webpack_require__.e(/*! import() | components/ListProjectDetail/ListProjectDetail */ "components/ListProjectDetail/ListProjectDetail").then(__webpack_require__.bind(null, /*! @/components/ListProjectDetail/ListProjectDetail.vue */ 209));};var Search = function Search() {return __webpack_require__.e(/*! import() | components/Search/Search */ "components/Search/Search").then(__webpack_require__.bind(null, /*! @/components/Search/Search.vue */ 162));};var _default =
 
 
 

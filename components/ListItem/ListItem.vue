@@ -4,11 +4,11 @@
 			<image src="../../static/img/avatar.png" mode=""></image>
 		</view>
 		<view class="info">
-			<view class="info-title">销售经理</view>
-			<view class="info-price">3000-6000元/月</view>
+			<view class="info-title">{{postData.jobName}}</view>
+			<view class="info-price">{{postData.avgSalary}}元/月</view>
 			<view class="info-location">
 				<image src="../../static/icon/location.png"></image>
-				<text>成华区钻石广场A座</text>
+				<text>{{postData.address}}</text>
 			</view>
 		</view>
 		<view class="operation">
@@ -18,10 +18,10 @@
 				</view>
 				<view class="operation-pay">
 					<view class="operation-pay-price">
-						300元/天
+						{{postData.reward}}元/人
 					</view>
 					<view class="operation-pay-time">
-						30天返费
+						{{postData.trialTime}}返费
 					</view>
 				</view>				
 			</view>
@@ -29,7 +29,7 @@
 				<button type="default" @click="showDetail">查看</button>
 			</view>
 			<view class="operation-date">
-				5月22日发布
+				{{postData.createTime}}发布
 			</view>
 		</view>
 	</view>
@@ -43,14 +43,14 @@
 			};
 		},
 		props: {
-			data: {
+			postData: {
 				type: Object,
 				default: ()=>({})
 			},
 		},
 		methods:{
 			showDetail(){
-				const id = this.data.id || 1
+				const id = this.postData.id || 1
 				this.$emit('showDetail',id)
 			}
 		}

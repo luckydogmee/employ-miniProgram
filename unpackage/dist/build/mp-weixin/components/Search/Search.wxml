@@ -1,0 +1,1 @@
+<view class="search-container"><view class="search"><input type="text" placeholder="请输入姓名或手机号搜索" data-event-opts="{{[['input',[['__set_model',['','keyword','$event',[]]],['handleSearch',['$event']]]]]}}" value="{{keyword}}" bindinput="__e"/><button>搜索</button></view></view>

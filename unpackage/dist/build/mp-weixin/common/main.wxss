@@ -156,5 +156,8 @@ button.swiper-button:after {
 .default-btn:after {
     border: none;
 }
+.default-btn.disabled {
+    background: #c8c7cc;
+}
 /* ************ 表单相关 end ************** */
 

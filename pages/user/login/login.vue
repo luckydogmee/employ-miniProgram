@@ -2,8 +2,7 @@
 	<view class="register-container">
 		<view class="content">
 			<view class="logo">
-				测试登录
-				<!-- <image src="../../../static/img/logo.png" mode=""></image> -->
+				<image src="../../../static/img/logo.png" mode=""></image>
 			</view>
 			<view class="form">
 				<view class="form-item">
@@ -18,10 +17,10 @@
 					<button class="default-btn verify-code-btn" :class="{'disabled':!readySendCode} " 
 						@click.stop="getVerifyCode">{{readySendCode ? '发送验证码' : surplusSecond + ' 秒后重新发送' }}</button>
 				</view>
-				<view class="special-item">
+				<!-- <view class="special-item">
 					<text class="savePhone">保存此号码供以后授权使用</text>
 					<switch :checked="savePhone" @change="savePhoneChange" color="#feae86" style="transform:scale(0.5)" />
-				</view>
+				</view> -->
 				<view class="form-item">
 					<button class="default-btn submit-btn" @click="submit" >登录</button>
 				</view>
@@ -93,26 +92,37 @@
 					this.focusIndex = 0
 					return
 				} 
-				userModel.getVerifyCode(this.phone).then(res=>{
+				userModel.getVerifyCode(this.phone, 'A').then(res=>{
 					// 请求成功,并判断code是否正确
-					uni.showToast({
-						title: '验证码已发送，请注意查收'
-					})
-					this.verifyCodeStatus = 1
-					this.surplusSecond = 120
-					this.focusIndex = 1
-					this.verifyCodeTimer = setInterval(()=>{
-						if(this.surplusSecond > 0){
-							this.surplusSecond -= 1
-						}else{
-							this.surplusSecond = 0
-							this.verifyCodeStatus = 0
-							clearInterval(this.verifyCodeTimer)
-						}
-					}, 1000)
-					this.focusIndex = 1
+					if(res.code === '0'){
+						uni.showToast({
+							title: '验证码已发送，请注意查收'
+						})
+						this.verifyCodeStatus = 1
+						this.surplusSecond = 120
+						this.focusIndex = 1
+						this.verifyCodeTimer = setInterval(()=>{
+							if(this.surplusSecond > 0){
+								this.surplusSecond -= 1
+							}else{
+								this.surplusSecond = 0
+								this.verifyCodeStatus = 0
+								clearInterval(this.verifyCodeTimer)
+							}
+						}, 1000)
+						this.focusIndex = 1	
+					}else{
+						uni.showToast({
+							icon:'none',
+							title:res.message
+						})
+					}
+					
 				}).catch(err=>{
-					console.log(err)
+					uni.showToast({
+						icon:'none',
+						title:err.message
+					})
 				})
 			},
 			submit(){
@@ -137,21 +147,29 @@
 					return
 				}
 				
-				// 再去验证验证码是否正确
-				userModel.verifyCode(this.phone, this.verifyCode).then(res=>{
-					// 执行真正的登录
-					return userModel.login(this.phone, this.savePhone)
-				})
-				.then(res=>{
-					// 登录成功
-					uni.showToast({
-						title: '登录成功，即将跳转到首页'
-					})
-					setTimeout(()=>{
-						uni.reLaunch({
-							url: '../../customer/main/main'
+				// 再去验证验证码是否正确,这步省略，直接登录
+				// userModel.verifyCode(this.phone, this.verifyCode).then(res=>{
+				// 	// 执行真正的登录
+				// 	return userModel.login(this.phone, 'A')
+				// })
+				userModel.login(this.phone, this.verifyCode, 'A').then(res=>{
+					if(res.code === '0'){
+						// 登录成功
+						uni.showToast({
+							title: '登录成功，即将跳转到首页'
 						})
-					},2000)
+						setTimeout(()=>{
+							uni.reLaunch({
+								url: '../../customer/main/main'
+							})
+						},2000)	
+					}else{
+						uni.showToast({
+							icon: 'none',
+							title: res.message
+						})
+					}
+					
 				})
 				.catch(err=>{
 					uni.showToast({

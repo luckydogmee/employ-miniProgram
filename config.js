@@ -1,5 +1,5 @@
 const config = {
-	base_url: 'http://127.0.0.1',
-	appkey: 'wx63fe7790dd2e8fd5'
+	base_url: 'http://wzkjsyp.natapp1.cc',
+	appkey: 'wx5666e9599cc559e6'
 }
 export { config } 

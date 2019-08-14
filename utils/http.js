@@ -19,6 +19,9 @@ class HTTP{
 			url: config.base_url + url,
 			method,
 			data,
+			header: {
+				"Content-Type": "application/x-www-form-urlencoded"
+			},
 			success(res) {
 				// TODO  根据返回的数据统一格式做处理
 				resolve(res)

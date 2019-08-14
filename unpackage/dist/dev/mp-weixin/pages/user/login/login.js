@@ -100,11 +100,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 var _utils = __webpack_require__(/*! ../../../utils/utils.js */ 95);
 var _user = _interopRequireDefault(__webpack_require__(/*! @/models/user.js */ 40));
 var _uniPopup = _interopRequireDefault(__webpack_require__(/*! @/components/uni-popup/uni-popup.vue */ 104));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
-//
 //
 //
 //
@@ -142,7 +140,8 @@ var userModel = new _user.default();var _default = { data: function data() {retu
       readySendCode: true, // 是否准备好发送验证码
       verifyCodeTimer: null, //定时器对象
       focusArray: ['phone', 'verify'], focusIndex: null, //焦点位置
-      phone: '', verifyCode: '' };}, beforeDestroy: function beforeDestroy() {clearInterval(this.verifyCodeTimer);this.verifyCodeTimer = null;}, methods: { savePhoneChange: function savePhoneChange() {this.savePhone = !this.savePhone;}, handleBlur: function handleBlur(index) {var focusArray = this.focusArray;if (index != focusArray.length - 1) {if (!this[focusArray[index + 1]]) {this.focusIndex = index + 1;return;}this.focusIndex = null;return;}this.focusIndex = null;}, getVerifyCode: function getVerifyCode() {var _this = this;if (!this.readySendCode) {return;}if (!this.phone) {
+      phone: '', verifyCode: '' };}, beforeDestroy: function beforeDestroy() {clearInterval(this.verifyCodeTimer);this.verifyCodeTimer = null;}, methods: { savePhoneChange: function savePhoneChange() {this.savePhone = !this.savePhone;}, handleBlur: function handleBlur(index) {var focusArray = this.focusArray;if (index != focusArray.length - 1) {if (!this[focusArray[index + 1]]) {this.focusIndex = index + 1;return;}this.focusIndex = null;return;}this.focusIndex = null;}, getVerifyCode: function getVerifyCode() {var _this = this;if (!this.readySendCode) {return;}
+      if (!this.phone) {
         uni.showToast({
           icon: 'none',
           title: '请输入电话号码' });
@@ -160,26 +159,37 @@ var userModel = new _user.default();var _default = { data: function data() {retu
         this.focusIndex = 0;
         return;
       }
-      userModel.getVerifyCode(this.phone).then(function (res) {
+      userModel.getVerifyCode(this.phone, 'A').then(function (res) {
         // 请求成功,并判断code是否正确
-        uni.showToast({
-          title: '验证码已发送，请注意查收' });
+        if (res.code === '0') {
+          uni.showToast({
+            title: '验证码已发送，请注意查收' });
 
-        _this.verifyCodeStatus = 1;
-        _this.surplusSecond = 120;
-        _this.focusIndex = 1;
-        _this.verifyCodeTimer = setInterval(function () {
-          if (_this.surplusSecond > 0) {
-            _this.surplusSecond -= 1;
-          } else {
-            _this.surplusSecond = 0;
-            _this.verifyCodeStatus = 0;
-            clearInterval(_this.verifyCodeTimer);
-          }
-        }, 1000);
-        _this.focusIndex = 1;
+          _this.verifyCodeStatus = 1;
+          _this.surplusSecond = 120;
+          _this.focusIndex = 1;
+          _this.verifyCodeTimer = setInterval(function () {
+            if (_this.surplusSecond > 0) {
+              _this.surplusSecond -= 1;
+            } else {
+              _this.surplusSecond = 0;
+              _this.verifyCodeStatus = 0;
+              clearInterval(_this.verifyCodeTimer);
+            }
+          }, 1000);
+          _this.focusIndex = 1;
+        } else {
+          uni.showToast({
+            icon: 'none',
+            title: res.message });
+
+        }
+
       }).catch(function (err) {
-        console.log(err);
+        uni.showToast({
+          icon: 'none',
+          title: err.message });
+
       });
     },
     submit: function submit() {var _this2 = this;
@@ -204,21 +214,29 @@ var userModel = new _user.default();var _default = { data: function data() {retu
         return;
       }
 
-      // 再去验证验证码是否正确
-      userModel.verifyCode(this.phone, this.verifyCode).then(function (res) {
-        // 执行真正的登录
-        return userModel.login(_this2.phone, _this2.savePhone);
-      }).
-      then(function (res) {
-        // 登录成功
-        uni.showToast({
-          title: '登录成功，即将跳转到首页' });
+      // 再去验证验证码是否正确,这步省略，直接登录
+      // userModel.verifyCode(this.phone, this.verifyCode).then(res=>{
+      // 	// 执行真正的登录
+      // 	return userModel.login(this.phone, 'A')
+      // })
+      userModel.login(this.phone, this.verifyCode, 'A').then(function (res) {
+        if (res.code === '0') {
+          // 登录成功
+          uni.showToast({
+            title: '登录成功，即将跳转到首页' });
 
-        setTimeout(function () {
-          uni.reLaunch({
-            url: '../../customer/main/main' });
+          setTimeout(function () {
+            uni.reLaunch({
+              url: '../../customer/main/main' });
 
-        }, 2000);
+          }, 2000);
+        } else {
+          uni.showToast({
+            icon: 'none',
+            title: res.message });
+
+        }
+
       }).
       catch(function (err) {
         uni.showToast({

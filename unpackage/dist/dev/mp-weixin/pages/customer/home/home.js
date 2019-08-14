@@ -12,7 +12,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _home_vue_vue_type_template_id_4f593838___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./home.vue?vue&type=template&id=4f593838& */ 141);
 /* harmony import */ var _home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home.vue?vue&type=script&lang=js& */ 143);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _home_scss_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home.scss?vue&type=style&index=0&lang=scss& */ 145);
+/* harmony import */ var _home_scss_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home.scss?vue&type=style&index=0&lang=scss& */ 146);
 /* harmony import */ var _D_work_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/lib/runtime/componentNormalizer.js */ 11);
 
 
@@ -151,75 +151,99 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var _user = _interopRequireDefault(__webpack_require__(/*! @/models/user.js */ 40));
+var _post = _interopRequireDefault(__webpack_require__(/*! @/models/post.js */ 145));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var ListItem = function ListItem() {return __webpack_require__.e(/*! import() | components/ListItem/ListItem */ "components/ListItem/ListItem").then(__webpack_require__.bind(null, /*! @/components/ListItem/ListItem.vue */ 223));};var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 104));};var userModel = new _user.default();var postModel = new _post.default();var _default = { data: function data() {return { background: ['color1', 'color2', 'color3'], indicatorDots: true, autoplay: true, interval: 2000, duration: 500, postList: [], pageNum: 1, pageSize: 10, keyword: '', label: '' };}, components: { ListItem: ListItem, uniPopup: uniPopup }, created: function created() {var _this = this;postModel.getPostList(this.pageNum, this.pageSize, this.keyword, this.label).then(function (res) {var _res$data = res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;if (code === '0') {_this.postList = data;console.log(_this.postList);} else {uni.showToast({ icon: 'none', title: message });}}).catch(function (err) {uni.showToast({ icon: 'none', title: '获取岗位列表信息失败' });});}, methods: { chooseImage: function chooseImage() {uni.chooseImage({
+        success: function success(res) {
+          var tempFilePath = res.tempFilePaths;
+          uni.uploadFile({
+            url: 'http://baidu.com',
+            filePath: tempFilePath[0],
+            name: 'file',
+            formData: {},
 
 
+            success: function success(uploadFileRes) {
+              console.log(uploadFileRes.data);
+            } });
 
-var _user = _interopRequireDefault(__webpack_require__(/*! @/models/user.js */ 40));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var ListItem = function ListItem() {return __webpack_require__.e(/*! import() | components/ListItem/ListItem */ "components/ListItem/ListItem").then(__webpack_require__.bind(null, /*! @/components/ListItem/ListItem.vue */ 222));};var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 104));};var userModel = new _user.default();var _default = { data: function data() {return { background: ['color1', 'color2', 'color3'], indicatorDots: true, autoplay: true, interval: 2000, duration: 500 };}, components: { ListItem: ListItem, uniPopup: uniPopup }, methods: { chooseImage: function chooseImage() {uni.chooseImage({ success: function success(res) {var tempFilePath = res.tempFilePaths;uni.uploadFile({ url: 'http://baidu.com', filePath: tempFilePath[0], name: 'file', formData: {}, success: function success(uploadFileRes) {console.log(uploadFileRes.data);} });} });}, getUserInfo: function getUserInfo(e) {console.log(e);}, getPhoneNumber: function getPhoneNumber(e) {var _e$detail = e.detail,iv = _e$detail.iv,encryptedData = _e$detail.encryptedData,errMsg = _e$detail.errMsg;if (errMsg !== 'getPhoneNumber:ok') {uni.showToast({ icon: 'none', title: '授权失败，请重新授权' });} // 以下执行登录,需要后台提供一个接口
+        } });
+
+    },
+    getUserInfo: function getUserInfo(e) {
+      console.log(e);
+    },
+    getPhoneNumber: function getPhoneNumber(e) {var _e$detail =
+      e.detail,iv = _e$detail.iv,encryptedData = _e$detail.encryptedData,errMsg = _e$detail.errMsg;
+      if (errMsg !== 'getPhoneNumber:ok') {
+        uni.showToast({
+          icon: 'none',
+          title: '授权失败，请重新授权' });
+
+        return;
+      }
+      // 以下执行登录,需要后台提供一个接口
       uni.checkSession({
-        success: function success(response) {var _this = this;
-          if (response.errMsg === 'login:ok') {
+        success: function success(response) {var _this2 = this;
+          if (response.errMsg === 'checkSession:ok') {
             // 此处执行后台登录过程，由后台得到手机号并与openid绑定，然后返回token
             uni.showLoading({
               title: '登录中，请稍候' });
 
-            userModel.getBindPhoneNumber(encryptedData, ivData).then(function (res) {
+            userModel.getBindPhoneNumber(encryptedData, iv).then(function (res) {
               uni.hideLoading();
               // 判断是成功了,在这里判断是否已经绑定手机号，以及是否完善信息，待写
-              if (res.code === 'success') {
+              if (res.code === '0') {
                 // 将token存入缓存中
                 uni.setStorageSync('token', res.data.token);
                 uni.showToast({
                   title: '登录成功' });
 
-                _this.$refs.noticeLogin.close();
+                _this2.$refs.noticeLogin.close();
               } else {
                 uni.showToast({
                   icon: 'none',
@@ -244,11 +268,18 @@ var ListItem = function ListItem() {return __webpack_require__.e(/*! import() | 
         url: '../../user/register/register' });
 
     },
-    showDetail: function showDetail() {
+    showDetail: function showDetail(id) {
       var that = this;
       uni.checkSession({
         success: function success(res) {
           var token = uni.getStorageSync('token');
+          if (!token) {
+            that.selectLoginType();
+          } else {
+            uni.navigateTo({
+              url: '../../public/PostDetail/PostDetail' });
+
+          }
         },
         fail: function fail(err) {
           that.selectLoginType();

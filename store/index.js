@@ -11,7 +11,7 @@ const store = new Vuex.Store({
         forcedLogin: false,
         hasLogin: false,
         userName: "",
-		tabIndex: 2,
+		tabIndex: 0,
 		currentResume: ''
     },
     mutations: {

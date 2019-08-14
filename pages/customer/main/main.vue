@@ -67,16 +67,15 @@
 					success(res){
 						if(res.errMsg === 'login:ok'){
 							// 执行后台登录
-							userModel.wxLogin({
-								code: res.code
-							}).then(res=>{
-								if(res.code === 'success'){
+							userModel.wxLogin(res.code).then(res=>{
+								const { code, message, data } = res.data
+								if(code === '0'){
 									// 将返回的token存入本地
-									uni.setStorageSync('token', res.data.token)
+									uni.setStorageSync('token', data)
 								}else{
 									uni.showToast({
 										icon: 'none',
-										title: res.msg
+										title: message
 									})
 								}
 							})
