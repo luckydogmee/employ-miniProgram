@@ -28,6 +28,8 @@
 <script>
 	import { mapState } from 'vuex'
 	import ListProject from '@/components/ListProject/ListProject.vue'
+	import JobModel from '@/models/job.js'
+	const jobModel = new JobModel()
 	export default {
 		data() {
 			return {
@@ -39,22 +41,41 @@
 						type: 'notStart'
 					}
 				],
-				type: 'all'
+				type: 'all',
+				pageNum: 1,
+				pageSize: 10,
 			}
 		},
 		computed:{
-			...mapState(['currentResume'])
+			...mapState(['currentResume']),
+			
+		},
+		mounted(){
+			this.getJobList()
 		},
 		components: {
 			ListProject
 		},
 		methods: {
+			getJobList(){
+				const type = this.type
+				let status = ''
+				if(type === 'started'){
+					status = 1
+				}else if(type === 'notStart'){
+					status = 0
+				}
+				jobModel.collectionJobList(this.pageNum, this.pageSize, status).then(res=>{
+					
+				})
+			},
 			switchTab(type){
 				if(type === this.type){
 					return 
 				}
 				this.type = type
-				// 请求数据
+				this.pageNum = 1
+				this.getJobList()
 			},
 			show(status,id){
 				// 根据状态判断

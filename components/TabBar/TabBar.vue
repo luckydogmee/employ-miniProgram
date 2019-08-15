@@ -63,9 +63,17 @@
 			this.activeTab = this.index
 		},
 		methods:{
-			switchTab(type){
-				this.activeTab = type
-				this.$emit('switchTab',type)
+			switchTab(index){
+				const token = uni.getStorageSync('token')
+				const isLogin = uni.getStorageSync('isLogin')
+				if(index !== 0){
+					if(!token || isLogin !== 0 ){
+						this.$emit('showLogin')
+						return 
+					}
+				}
+				this.activeTab = index
+				this.$emit('switchTab', index)
 			}
 		}
 	}

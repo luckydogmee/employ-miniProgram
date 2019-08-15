@@ -7,21 +7,22 @@ const tips = {
 class HTTP{
 	request({url, method="POST", data={}}){
 		return new Promise((resolve, reject)=>{
-			data = Object.assign({}, {
-				token: uni.getStorageSync('token')
-			}, data)
 			this._request(url, resolve, reject, method, data)
 		})
 	}
 	_request(url, resolve, reject, method, data){
 		const that = this
+		let header = {
+			"Content-Type": "application/x-www-form-urlencoded"
+		}
+		if(uni.getStorageSync('token')){
+			header.authorization =  uni.getStorageSync('token')
+		}
 		uni.request({
 			url: config.base_url + url,
 			method,
 			data,
-			header: {
-				"Content-Type": "application/x-www-form-urlencoded"
-			},
+			header,
 			success(res) {
 				// TODO  根据返回的数据统一格式做处理
 				resolve(res)

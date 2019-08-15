@@ -17,13 +17,13 @@ class UserModel  extends HTTP {
 		})
 	}
 	// 获取手机号登录，返回手机号
-	getBindPhoneNumber(encryptedData, ivData){
+	getBindPhoneNumber(encryptedData, iv){
 		return this.request({
 			url: '/login/getPhoneNumber',
 			method: 'POST',
 			data: {
 				encryptedData,
-				ivData
+				iv
 			}
 		})
 	}

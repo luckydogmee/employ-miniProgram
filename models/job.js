@@ -5,10 +5,9 @@ class PostModel extends HTTP {
 	    super()
 	}
 	// 获取岗位列表
-	getPostList(pageNum, pageSize, keyWord, label){
+	jobList(pageNum, pageSize, keyWord, label){
 		return this.request({
 			url: '/job/jobList',
-			method: 'POST',
 			data: {
 				pageNum, 
 				pageSize, 
@@ -18,10 +17,9 @@ class PostModel extends HTTP {
 		})
 	}
 	//获取岗位详情
-	getPostDetail(id){
+	jobDetail(id){
 		return this.request({
 			url: '/job/jobDetail',
-			method: 'POST',
 			data: {
 				id	
 			}
@@ -31,17 +29,15 @@ class PostModel extends HTTP {
 	collectionJob(id){
 		return this.request({
 			url: '/job/collectionJob',
-			method: 'POST',
 			data: {
 				id	
 			}
 		})
 	}
 	// 获取我的项目列表
-	collectionJobList(pageNum=1, pageSize=10, status=0){
+	collectionJobList(pageNum=1, pageSize=10, status){
 		return this.request({
 			url: '/job/collectionJobList',
-			method: 'POST',
 			data: {
 				pageNum,
 				pageSize,
@@ -56,7 +52,6 @@ class PostModel extends HTTP {
 	publishJobList(pageNum=1, pageSize=10, jobName, status=0){
 		return this.request({
 			url: '/job/publishJobList',
-			method: 'POST',
 			data: {
 				pageNum,
 				pageSize,
@@ -84,7 +79,6 @@ class PostModel extends HTTP {
 	){
 		return this.request({
 			url: '/job/saveJob',
-			method: 'POST',
 			data: {
 				id, 
 				industryCode,
@@ -107,7 +101,6 @@ class PostModel extends HTTP {
 	updateStatus(id, status){
 		return this.request({
 			url: '/job/updateStatus',
-			method: 'POST',
 			data: {
 				id,
 				status
@@ -118,7 +111,6 @@ class PostModel extends HTTP {
 	getArea(parentCode="root"){
 		return this.request({
 			url: '/job/getArea',
-			method: 'POST',
 			data: {
 				id,
 				parentCode
@@ -129,7 +121,6 @@ class PostModel extends HTTP {
 	getIndustry(){
 		return this.request({
 			url: '/job/getIndustry',
-			method: 'POST',
 			data: {}
 		})
 	}
