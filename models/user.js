@@ -83,6 +83,41 @@ class UserModel  extends HTTP {
 			}
 		})	
 	}
+	// 获取用户信息
+	getUserInfo(){
+		return this.request({
+			url: '/user/getUserInfo'
+		})
+	}
+	//保存、更改用户信息
+	updateUserInfo(name, age){
+		return this.request({
+			url: '/user/updateUserInfo',
+			data: {
+				name,
+				age
+			}
+		})
+	}
+	// 申请提现
+	cashout(){
+		this.request({
+			url: '/user/cashout',
+		})
+	}
+	// 获取用户详情 （B）
+	getStoreInfo(){
+		this.request({
+			url: '/user/getStoreInfo',
+		})
+	}
+	
+	// 获取用户花费详情 （B）
+	getCashoutDetail(){
+		this.request({
+			url: '/user/getCashoutDetail'
+		})
+	}
 }
 
 export default UserModel

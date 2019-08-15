@@ -1,9 +1,9 @@
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["common/vendor"],{
 
 /***/ 0:
-/*!***********************************************!*\
-  !*** E:/workspace/employ-miniProgram/main.js ***!
-  \***********************************************/
+/*!**************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -762,7 +762,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1607,9 +1607,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 113:
-/*!***********************************************************************************************!*\
-  !*** E:/workspace/employ-miniProgram/main.js?{"page":"pages%2Fcustomer%2Fproject%2Fproject"} ***!
-  \***********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fcustomer%2Fproject%2Fproject"} ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1624,9 +1624,9 @@ createPage(_project.default);
 /***/ }),
 
 /***/ 114:
-/*!**********************************************************************************************!*\
-  !*** E:/workspace/employ-miniProgram/main.js?{"page":"pages%2Fcustomer%2Fproject%2Fdetail"} ***!
-  \**********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fcustomer%2Fproject%2Fdetail"} ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1641,9 +1641,9 @@ createPage(_detail.default);
 /***/ }),
 
 /***/ 12:
-/*!******************************************************!*\
-  !*** E:/workspace/employ-miniProgram/store/index.js ***!
-  \******************************************************/
+/*!*********************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/store/index.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1689,9 +1689,9 @@ store;exports.default = _default;
 /***/ }),
 
 /***/ 122:
-/*!*********************************************************************************************!*\
-  !*** E:/workspace/employ-miniProgram/main.js?{"page":"pages%2Fcustomer%2Fresume%2Fresume"} ***!
-  \*********************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fcustomer%2Fresume%2Fresume"} ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1706,9 +1706,9 @@ createPage(_resume.default);
 /***/ }),
 
 /***/ 123:
-/*!*****************************************************************************************!*\
-  !*** E:/workspace/employ-miniProgram/main.js?{"page":"pages%2Fcustomer%2Fuser%2Fuser"} ***!
-  \*****************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fcustomer%2Fuser%2Fuser"} ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1723,9 +1723,9 @@ createPage(_user.default);
 /***/ }),
 
 /***/ 124:
-/*!*******************************************************************************************!*\
-  !*** E:/workspace/employ-miniProgram/main.js?{"page":"pages%2Fseller%2Fchoose%2Fchoose"} ***!
-  \*******************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fseller%2Fchoose%2Fchoose"} ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1740,9 +1740,9 @@ createPage(_choose.default);
 /***/ }),
 
 /***/ 125:
-/*!*************************************************************************************************!*\
-  !*** E:/workspace/employ-miniProgram/main.js?{"page":"pages%2Fpublic%2FaddResume%2FaddResume"} ***!
-  \*************************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fpublic%2FaddResume%2FaddResume"} ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1757,9 +1757,9 @@ createPage(_addResume.default);
 /***/ }),
 
 /***/ 13:
-/*!*****************************************************************************************!*\
-  !*** E:/workspace/employ-miniProgram/main.js?{"page":"pages%2Fcustomer%2Fmain%2Fmain"} ***!
-  \*****************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fcustomer%2Fmain%2Fmain"} ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1774,9 +1774,9 @@ createPage(_main.default);
 /***/ }),
 
 /***/ 145:
-/*!******************************************************!*\
-  !*** E:/workspace/employ-miniProgram/models/post.js ***!
-  \******************************************************/
+/*!********************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/models/job.js ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1809,6 +1809,112 @@ PostModel = /*#__PURE__*/function (_HTTP) {_inherits(PostModel, _HTTP);
           id: id } });
 
 
+    }
+    // A端接单
+  }, { key: "collectionJob", value: function collectionJob(id) {
+      return this.request({
+        url: '/job/collectionJob',
+        method: 'POST',
+        data: {
+          id: id } });
+
+
+    }
+    // 获取我的项目列表
+  }, { key: "collectionJobList", value: function collectionJobList() {var pageNum = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;var pageSize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;var status = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+      return this.request({
+        url: '/job/collectionJobList',
+        method: 'POST',
+        data: {
+          pageNum: pageNum,
+          pageSize: pageSize,
+          status: status } });
+
+
+    }
+
+    /********** 以下B端接口 *************/
+
+    // 查看 发布的项目 （B）
+  }, { key: "publishJobList", value: function publishJobList() {var pageNum = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;var pageSize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;var jobName = arguments.length > 2 ? arguments[2] : undefined;var status = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+      return this.request({
+        url: '/job/publishJobList',
+        method: 'POST',
+        data: {
+          pageNum: pageNum,
+          pageSize: pageSize,
+          jobName: jobName,
+          status: status } });
+
+
+    }
+    // 保存/修改岗位信息
+  }, { key: "saveJob", value: function saveJob(
+    id,
+    industryCode, // 行业代码
+    jobName, // 岗位名称
+    description, // 岗位描述
+    num, // 招聘人数
+    educationDegree, // 学历 0、1、2、3
+    workExperience, // 工作经验 0、1、2、3
+    probation, //是否有试用期 0、1
+    trialTime, // 可面试时间
+    trialSalary, // 试用薪资
+    officialSalary, // 正式薪资
+    avgSalary, // 平均薪资
+    reward, // 岗位赏金
+    overtime // 过保时间
+    ) {
+      return this.request({
+        url: '/job/saveJob',
+        method: 'POST',
+        data: {
+          id: id,
+          industryCode: industryCode,
+          jobName: jobName,
+          description: description,
+          num: num,
+          educationDegree: educationDegree,
+          workExperience: workExperience,
+          probation: probation,
+          trialTime: trialTime,
+          trialSalary: trialSalary,
+          avgSalary: avgSalary,
+          reward: reward,
+          overtime: overtime } });
+
+
+    }
+    // 更改岗位状态
+    // status 0 审核中 1 已发布 2 已下架
+  }, { key: "updateStatus", value: function updateStatus(id, status) {
+      return this.request({
+        url: '/job/updateStatus',
+        method: 'POST',
+        data: {
+          id: id,
+          status: status } });
+
+
+    }
+    // 获取区域信息
+  }, { key: "getArea", value: function getArea() {var parentCode = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "root";
+      return this.request({
+        url: '/job/getArea',
+        method: 'POST',
+        data: {
+          id: id,
+          parentCode: parentCode } });
+
+
+    }
+    // 获取行业信息
+  }, { key: "getIndustry", value: function getIndustry() {
+      return this.request({
+        url: '/job/getIndustry',
+        method: 'POST',
+        data: {} });
+
     } }]);return PostModel;}(_http.HTTP);var _default =
 
 
@@ -1817,25 +1923,25 @@ PostModel;exports.default = _default;
 /***/ }),
 
 /***/ 146:
-/*!*******************************************************************************************************!*\
-  !*** E:/workspace/employ-miniProgram/pages/customer/home/home.scss?vue&type=style&index=0&lang=scss& ***!
-  \*******************************************************************************************************/
+/*!**********************************************************************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/pages/customer/home/home.scss?vue&type=style&index=0&lang=scss& ***!
+  \**********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _D_work_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_D_work_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_1_D_work_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_8_oneOf_1_2_D_work_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_D_work_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_D_work_HBuilderX_plugins_uniapp_cli_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_D_work_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_5_home_scss_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!./node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-1!./node_modules/css-loader??ref--8-oneOf-1-2!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-oneOf-1-3!./node_modules/sass-loader/lib/loader.js??ref--8-oneOf-1-4!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-5!./home.scss?vue&type=style&index=0&lang=scss& */ 147);
-/* harmony import */ var _D_work_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_D_work_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_1_D_work_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_8_oneOf_1_2_D_work_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_D_work_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_D_work_HBuilderX_plugins_uniapp_cli_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_D_work_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_5_home_scss_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_D_work_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_D_work_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_1_D_work_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_8_oneOf_1_2_D_work_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_D_work_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_D_work_HBuilderX_plugins_uniapp_cli_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_D_work_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_5_home_scss_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _D_work_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_D_work_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_1_D_work_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_8_oneOf_1_2_D_work_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_D_work_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_D_work_HBuilderX_plugins_uniapp_cli_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_D_work_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_5_home_scss_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _D_work_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_D_work_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_1_D_work_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_8_oneOf_1_2_D_work_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_D_work_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_D_work_HBuilderX_plugins_uniapp_cli_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_D_work_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_5_home_scss_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_D_work_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_D_work_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_1_D_work_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_8_oneOf_1_2_D_work_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_D_work_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_D_work_HBuilderX_plugins_uniapp_cli_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_D_work_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_5_home_scss_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_8_oneOf_1_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_5_home_scss_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!../../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-1!../../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/css-loader??ref--8-oneOf-1-2!../../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/postcss-loader/src??ref--8-oneOf-1-3!../../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/sass-loader/lib/loader.js??ref--8-oneOf-1-4!../../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-5!./home.scss?vue&type=style&index=0&lang=scss& */ 147);
+/* harmony import */ var _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_8_oneOf_1_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_5_home_scss_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_8_oneOf_1_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_5_home_scss_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_8_oneOf_1_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_5_home_scss_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_8_oneOf_1_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_5_home_scss_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_8_oneOf_1_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_5_home_scss_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
 /***/ 147:
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-1!./node_modules/css-loader??ref--8-oneOf-1-2!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-oneOf-1-3!./node_modules/sass-loader/lib/loader.js??ref--8-oneOf-1-4!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-5!E:/workspace/employ-miniProgram/pages/customer/home/home.scss?vue&type=style&index=0&lang=scss& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-1!./node_modules/css-loader??ref--8-oneOf-1-2!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-oneOf-1-3!./node_modules/sass-loader/lib/loader.js??ref--8-oneOf-1-4!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-5!/Users/romens/ray/workspace/employ-miniProgram/pages/customer/home/home.scss?vue&type=style&index=0&lang=scss& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7311,7 +7417,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -7332,14 +7438,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -7415,7 +7521,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -7824,9 +7930,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 4:
-/*!**************************************************!*\
-  !*** E:/workspace/employ-miniProgram/pages.json ***!
-  \**************************************************/
+/*!*****************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/pages.json ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7836,9 +7942,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 40:
-/*!******************************************************!*\
-  !*** E:/workspace/employ-miniProgram/models/user.js ***!
-  \******************************************************/
+/*!*********************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/models/user.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7927,6 +8033,41 @@ UserModel = /*#__PURE__*/function (_HTTP) {_inherits(UserModel, _HTTP);
           verifyCode: verifyCode } });
 
 
+    }
+    // 获取用户信息
+  }, { key: "getUserInfo", value: function getUserInfo() {
+      return this.request({
+        url: '/user/getUserInfo' });
+
+    }
+    //保存、更改用户信息
+  }, { key: "updateUserInfo", value: function updateUserInfo(name, age) {
+      return this.request({
+        url: '/user/updateUserInfo',
+        data: {
+          name: name,
+          age: age } });
+
+
+    }
+    // 申请提现
+  }, { key: "cashout", value: function cashout() {
+      this.request({
+        url: '/user/cashout' });
+
+    }
+    // 获取用户详情 （B）
+  }, { key: "getStoreInfo", value: function getStoreInfo() {
+      this.request({
+        url: '/user/getStoreInfo' });
+
+    }
+
+    // 获取用户花费详情 （B）
+  }, { key: "getCashoutDetail", value: function getCashoutDetail() {
+      this.request({
+        url: '/user/getCashoutDetail' });
+
     } }]);return UserModel;}(_http.HTTP);var _default =
 
 
@@ -7935,9 +8076,9 @@ UserModel;exports.default = _default;
 /***/ }),
 
 /***/ 41:
-/*!*****************************************************!*\
-  !*** E:/workspace/employ-miniProgram/utils/http.js ***!
-  \*****************************************************/
+/*!********************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/utils/http.js ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7949,7 +8090,7 @@ var tips = {
 
 
 HTTP = /*#__PURE__*/function () {function HTTP() {_classCallCheck(this, HTTP);}_createClass(HTTP, [{ key: "request", value: function request(_ref)
-    {var _this = this;var url = _ref.url,_ref$method = _ref.method,method = _ref$method === void 0 ? "get" : _ref$method,_ref$data = _ref.data,data = _ref$data === void 0 ? {} : _ref$data;
+    {var _this = this;var url = _ref.url,_ref$method = _ref.method,method = _ref$method === void 0 ? "POST" : _ref$method,_ref$data = _ref.data,data = _ref$data === void 0 ? {} : _ref$data;
       return new Promise(function (resolve, reject) {
         data = Object.assign({}, {
           token: uni.getStorageSync('token') },
@@ -7989,9 +8130,9 @@ HTTP = /*#__PURE__*/function () {function HTTP() {_classCallCheck(this, HTTP);}_
 /***/ }),
 
 /***/ 42:
-/*!*************************************************!*\
-  !*** E:/workspace/employ-miniProgram/config.js ***!
-  \*************************************************/
+/*!****************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/config.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8003,9 +8144,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.config = v
 /***/ }),
 
 /***/ 43:
-/*!***************************************************************************************!*\
-  !*** E:/workspace/employ-miniProgram/main.js?{"page":"pages%2Fseller%2Fmain%2Fmain"} ***!
-  \***************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fseller%2Fmain%2Fmain"} ***!
+  \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8020,9 +8161,9 @@ createPage(_main.default);
 /***/ }),
 
 /***/ 54:
-/*!********************************************************************************!*\
-  !*** E:/workspace/employ-miniProgram/main.js?{"page":"pages%2Flogin%2Flogin"} ***!
-  \********************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Flogin%2Flogin"} ***!
+  \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8037,9 +8178,9 @@ createPage(_login.default);
 /***/ }),
 
 /***/ 60:
-/*!**************************************************!*\
-  !*** E:/workspace/employ-miniProgram/service.js ***!
-  \**************************************************/
+/*!*****************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/service.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8074,9 +8215,9 @@ var addUser = function addUser(userInfo) {
 /***/ }),
 
 /***/ 63:
-/*!****************************************************************************!*\
-  !*** E:/workspace/employ-miniProgram/main.js?{"page":"pages%2Freg%2Freg"} ***!
-  \****************************************************************************/
+/*!*******************************************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Freg%2Freg"} ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8091,9 +8232,9 @@ createPage(_reg.default);
 /***/ }),
 
 /***/ 69:
-/*!****************************************************************************!*\
-  !*** E:/workspace/employ-miniProgram/main.js?{"page":"pages%2Fpwd%2Fpwd"} ***!
-  \****************************************************************************/
+/*!*******************************************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fpwd%2Fpwd"} ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8108,9 +8249,9 @@ createPage(_pwd.default);
 /***/ }),
 
 /***/ 75:
-/*!******************************************************************************!*\
-  !*** E:/workspace/employ-miniProgram/main.js?{"page":"pages%2Fuser%2Fuser"} ***!
-  \******************************************************************************/
+/*!*********************************************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fuser%2Fuser"} ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9076,9 +9217,9 @@ var index_esm = {
 /***/ }),
 
 /***/ 81:
-/*!***************************************************************************************************!*\
-  !*** E:/workspace/employ-miniProgram/main.js?{"page":"pages%2Fpublic%2FPostDetail%2FPostDetail"} ***!
-  \***************************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fpublic%2FPostDetail%2FPostDetail"} ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9093,9 +9234,9 @@ createPage(_PostDetail.default);
 /***/ }),
 
 /***/ 89:
-/*!*********************************************************************************************!*\
-  !*** E:/workspace/employ-miniProgram/main.js?{"page":"pages%2Fuser%2Fregister%2Fregister"} ***!
-  \*********************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fuser%2Fregister%2Fregister"} ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9110,9 +9251,9 @@ createPage(_register.default);
 /***/ }),
 
 /***/ 95:
-/*!******************************************************!*\
-  !*** E:/workspace/employ-miniProgram/utils/utils.js ***!
-  \******************************************************/
+/*!*********************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/utils/utils.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9126,9 +9267,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.verifyPhon
 /***/ }),
 
 /***/ 98:
-/*!***************************************************************************************!*\
-  !*** E:/workspace/employ-miniProgram/main.js?{"page":"pages%2Fuser%2Flogin%2Flogin"} ***!
-  \***************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /Users/romens/ray/workspace/employ-miniProgram/main.js?{"page":"pages%2Fuser%2Flogin%2Flogin"} ***!
+  \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

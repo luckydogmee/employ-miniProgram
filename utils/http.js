@@ -5,7 +5,7 @@ const tips = {
 }
 
 class HTTP{
-	request({url, method="get", data={}}){
+	request({url, method="POST", data={}}){
 		return new Promise((resolve, reject)=>{
 			data = Object.assign({}, {
 				token: uni.getStorageSync('token')

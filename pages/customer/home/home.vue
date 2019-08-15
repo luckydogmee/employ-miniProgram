@@ -45,7 +45,7 @@
 
 <script>
 	import UserModel from '@/models/user.js'
-	import PostModel from '@/models/post.js'
+	import PostModel from '@/models/job.js'
 	import ListItem from '@/components/ListItem/ListItem.vue'
 	import uniPopup from "@/components/uni-popup/uni-popup.vue"
 	const userModel = new UserModel() 
