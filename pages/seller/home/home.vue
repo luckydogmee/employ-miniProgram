@@ -14,7 +14,7 @@
 				</swiper-item>
 			</swiper>	
 			<view class="switchToSeller">
-				<button class="swiper-button" type="primary" hover-class="none">切换到猎头</button>
+				<button class="swiper-button" type="primary" hover-class="none" @click="switchToCustomer">切换到猎头</button>
 			</view>
 		</view>
 		<view class="tab-container">
@@ -87,6 +87,11 @@
 			},
 			getUserInfo(e){
 				console.log(e)
+			},
+			switchToCustomer(){
+				uni.reLaunch({
+					url: '../../customer/main/main'
+				})
 			}
 		}
 	}

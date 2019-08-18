@@ -30,7 +30,7 @@
 		computed:{
 			...mapState(['tabIndex']),
 			currentTab(){
-				return this.tabBar[this.index]
+				return this.tabBar[this.tabIndex]
 			}
 		},
 		onPullDownRefresh() {
@@ -39,8 +39,8 @@
 		methods:{
 			...mapMutations(['switchTab']),
 			switchTabBar(type){
-				this.tabIndex = type
-			}
+				this.switchTab(type)
+			},
 		}
 	}
 </script>

@@ -119,26 +119,38 @@
 					this.focusIndex = 2
 					return
 				} 
-				userModel.getVerifyCode(this.phone).then(res=>{
+				userModel.getVerifyCode(this.phone, 'A').then(res=>{
 					// 请求成功,并判断code是否正确
-					uni.showToast({
-						title: '验证码已发送，请注意查收'
-					})
-					this.verifyCodeStatus = 1
-					this.surplusSecond = 120
-					this.focusIndex = 3
-					this.verifyCodeTimer = setInterval(()=>{
-						if(this.surplusSecond > 0){
-							this.surplusSecond -= 1
-						}else{
-							this.surplusSecond = 0
-							this.verifyCodeStatus = 0
-							clearInterval(this.verifyCodeTimer)
-						}
-					}, 1000)
-					this.focusIndex = 3
+					const { code, message, data } = res.data 
+					if(code === '0'){
+						uni.showToast({
+							title: '验证码已发送，请注意查收'
+						})
+						this.verifyCodeStatus = 1
+						this.surplusSecond = 120
+						this.focusIndex = 3
+						this.verifyCodeTimer = setInterval(()=>{
+							if(this.surplusSecond > 0){
+								this.surplusSecond -= 1
+							}else{
+								this.surplusSecond = 0
+								this.verifyCodeStatus = 0
+								clearInterval(this.verifyCodeTimer)
+							}
+						}, 1000)
+						this.focusIndex = 3	
+					}else{
+						uni.showToast({
+							icon:'none',
+							title: message
+						})
+					}
+					
 				}).catch(err=>{
-					console.log(err)
+					uni.showToast({
+						icon:'none',
+						title:'获取验证码失败'
+					})
 				})
 			},
 			submit(){

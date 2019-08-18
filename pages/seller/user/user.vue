@@ -44,6 +44,29 @@
 </script>
 
 <style lang="scss">
+	.flex-container{
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		background: #fff;
+		height: 88upx;
+	}
+	.flex-item{
+		flex: 1;
+		font-size: 24upx;
+		line-height: 36upx;
+		text-align: center;
+		.flex-title{
+			color: #010101;
+		}
+		.flex-sub{
+			color: #ff9058
+		}
+		.flex-detail{
+			text-decoration: underline;
+			margin-left: 10upx;
+		}
+	}
 	.button-group{
 		margin-top: 106upx;
 		.button-item{

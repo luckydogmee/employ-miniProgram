@@ -1,0 +1,27 @@
+.upload-container {
+  margin-right: 96rpx;
+  margin-top: 24rpx;
+}
+.upload-title {
+  color: #272626;
+  font-size: 24rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+.upload-required {
+  color: #ff8352;
+  font-size: 24rpx;
+  margin-left: 4rpx;
+}
+.upload-content {
+  width: 210rpx;
+  height: 180rpx;
+  margin-top: 16rpx;
+}
+.upload-content image {
+    width: 100%;
+    height: 100%;
+}
+

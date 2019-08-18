@@ -1,7 +1,19 @@
 <template>
-	<view class="cell-container">
-		<view class="cell-title">{{label}}{{required? '*' : '' }}</view>
-		<input class="cell-content" :class="{'scale': scaleInput}" :disabled="disabled" @input="handleInput" :value="value" />
+	<view class="cell-container" :class="[isSell?'sell':'']">
+		<view class="cell-title">{{label}}<text class="required">{{required? '*' : '' }}</text></view>
+		<input 
+			class="cell-content" 
+			:class="{'scale': scaleInput,'floatleft':inputFloat === 'left'}" 
+			:placeholder="placeholder" 
+			:disabled="disabled" 
+			@input="handleInput" 
+			:value="value" 
+			@click="handleClick"
+			placeholder-class="placeholder"
+		/>
+		<view v-if="hasSlot" class="slot">
+			<slot></slot>
+		</view>
 	</view>
 </template>
 
@@ -27,6 +39,22 @@
 			scaleInput:{
 				type: Boolean,
 				default: false
+			},
+			placeholder: {
+				type: String,
+				default: ''
+			},
+			isSell: {
+				type: Boolean,
+				default: false
+			},
+			inputFloat:{
+				type: String,
+				default: 'right'
+			},
+			hasSlot: {
+				type: Boolean,
+				default: false
 			}
 		},
 		data(){
@@ -40,6 +68,9 @@
 		methods: {
 			handleInput(e){
 				
+			},
+			handleClick(e){
+				this.$emit('on-click')
 			}
 		}
 	}
@@ -58,6 +89,29 @@
 		margin-bottom: 20upx;
 		font-size: 30upx;
 		line-height: 70upx;
+		&.sell{
+			border: unset;
+			border-bottom: 1upx solid #cccccc;
+			padding: unset;
+			margin-top: 24upx;
+			margin-bottom: unset;
+			height: 60upx;
+			line-height: 60upx;
+			font-size: 24upx;
+			.placeholder{
+				color: #595959;
+				font-size: 24upx;
+			}
+		}
+		.cell-title{
+			color: #272626;
+		}
+		.cell-content{
+			color: #595959;
+		}
+		::-webkit-input-placeholder{
+			
+		}
 	}
 	.cell-title{
 		min-width: 200upx;
@@ -73,5 +127,14 @@
 		&.scale{
 			width: 300upx !important;
 		}
+		&.floatleft{
+			text-align: left;
+		}
+	}
+	.slot{
+		margin-left: 20upx;
+	}
+	.required{
+		color: #ff8352;
 	}
 </style>

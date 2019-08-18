@@ -1,0 +1,1 @@
+<view class="upload-container"><view class="upload-title"><view>{{title}}</view><view class="upload-required">*</view></view><view class="upload-content"><image src="../../static/upload.png" mode data-event-opts="{{[['tap',[['selectImage',['$event']]]]]}}" bindtap="__e"></image></view></view>

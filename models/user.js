@@ -28,7 +28,7 @@ class UserModel  extends HTTP {
 		})
 	}
 	// 获取验证码
-	getVerifyCode(phoneNumber, type){
+	getVerifyCode(phone, type){
 		let url = null
 		if(type === 'A'){
 			url = '/login/sendVerdifyCode'
@@ -39,7 +39,7 @@ class UserModel  extends HTTP {
 			url,
 			method: 'POST',
 			data:{
-				phoneNumber
+				phone
 			}
 		});
 	}

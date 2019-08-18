@@ -14,7 +14,7 @@
 				</swiper-item>
 			</swiper>	
 			<view class="switchToSeller">
-				<button class="swiper-button" type="primary" hover-class="none">切换到企业</button>
+				<button class="swiper-button" type="primary" hover-class="none" @click.prevent="switchToSeller">切换到企业</button>
 			</view>
 		</view>
 		<view class="tab-container">
@@ -153,6 +153,11 @@
 			},
 			selectLoginType(){
 				this.$emit('showLogin')
+			},
+			switchToSeller(){
+				uni.reLaunch({
+					url: '../../seller/main/main'
+				})
 			}
 		}
 	}
