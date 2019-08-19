@@ -89,6 +89,7 @@
 		margin-bottom: 20upx;
 		font-size: 30upx;
 		line-height: 70upx;
+		background: #FFFFFF;
 		&.sell{
 			border: unset;
 			border-bottom: 1upx solid #cccccc;

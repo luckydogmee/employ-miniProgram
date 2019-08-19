@@ -2,7 +2,7 @@
 	<view class="register-container">
 		<view class="content">
 			<view class="logo">
-				<image src="../../../static/img/logo.png" mode=""></image>
+				请完善个人信息
 			</view>
 			<view class="form">
 				<view class="form-item">
@@ -15,18 +15,6 @@
 							v-model="age" maxlength="3" placeholder="您的年龄" placeholder-class="input-placeholder" 
 							@blur="handleBlur(1)" />
 				</view>
-				<view class="form-item">
-					<input class="sy-input" :focus="focusArray[focusIndex] === 'phone'" 
-							v-model="phone" maxlength="15" placeholder="您的电话号码" placeholder-class="input-placeholder" 
-							@blur="handleBlur(2)" />
-				</view>
-				<view class="form-item verfiy-item">
-					<input class="sy-input"  :focus="focusArray[focusIndex] === 'verify'" 
-							v-model="verifyCode" maxlength="6" placeholder="短信验证码" placeholder-class="input-placeholder" 
-							@blur="handleBlur(3)" />
-					<button class="default-btn verify-code-btn" :class="{'disabled':!readySendCode} " 
-						@click="getVerifyCode">{{readySendCode ? '发送验证码' : surplusSecond + ' 秒后重新发送' }}</button>
-				</view>
 				<view class="agreement">
 					<checkbox-group @change="agreementChange">
 						<label>
@@ -35,10 +23,7 @@
 					</checkbox-group>
 				</view>
 				<view class="form-item">
-					<button class="default-btn submit-btn" @click="submit" >注册</button>
-				</view>
-				<view class="form-item to-login">
-					<text @click="toLogin">已有账号？点这里直接登录>></text>
+					<button class="default-btn submit-btn" @click="submit" >同意并登录</button>
 				</view>
 			</view>
 		</view>
@@ -64,7 +49,7 @@
 				surplusSecond: 0, // 还剩多少秒可以重发
 				readySendCode: true,  // 是否准备好发送验证码
 				verifyCodeTimer: null, //定时器对象
-				focusArray: ['name', 'age', 'phone', 'verify'],
+				focusArray: ['name', 'age'],
 				focusIndex: null,  //焦点位置
 				agreement:false, // 是否同意用户协议
 				name: '',
@@ -79,6 +64,12 @@
 		},
 		components:{
 			uniPopup
+		},
+		mounted() {
+			uni.showToast({
+				icon: 'none',
+				title: '请完善信息'
+			})
 		},
 		methods:{
 			agreementChange(){
@@ -96,62 +87,6 @@
 					return
 				}
 				this.focusIndex = null	
-			},
-			getVerifyCode(){
-				if(!this.readySendCode){
-					return 
-				}
-				if(!this.phone){
-					uni.showToast({
-						icon:'none',
-						title:'请输入电话号码'
-					})
-					this.focusIndex = 2
-					return
-				}
-				
-				const correctPhone = verifyPhone(this.phone)
-				if(!correctPhone){
-					uni.showToast({
-						icon:'none',
-						title:'手机号码错误，请确认'
-					})
-					this.focusIndex = 2
-					return
-				} 
-				userModel.getVerifyCode(this.phone, 'A').then(res=>{
-					// 请求成功,并判断code是否正确
-					const { code, message, data } = res.data 
-					if(code === '0'){
-						uni.showToast({
-							title: '验证码已发送，请注意查收'
-						})
-						this.verifyCodeStatus = 1
-						this.surplusSecond = 120
-						this.focusIndex = 3
-						this.verifyCodeTimer = setInterval(()=>{
-							if(this.surplusSecond > 0){
-								this.surplusSecond -= 1
-							}else{
-								this.surplusSecond = 0
-								this.verifyCodeStatus = 0
-								clearInterval(this.verifyCodeTimer)
-							}
-						}, 1000)
-						this.focusIndex = 3	
-					}else{
-						uni.showToast({
-							icon:'none',
-							title: message
-						})
-					}
-					
-				}).catch(err=>{
-					uni.showToast({
-						icon:'none',
-						title:'获取验证码失败'
-					})
-				})
 			},
 			submit(){
 				if(!this.name){
@@ -174,26 +109,6 @@
 					})
 					return
 				}
-				if(!this.phone){
-					uni.showToast({
-						icon:'none',
-						title:'请输入电话号码'
-					})
-					this.$nextTick(()=>{
-						this.focusIndex = 2
-					})
-					return
-				}
-				if(!this.verifyCode){
-					uni.showToast({
-						icon:'none',
-						title:'请输入验证码'
-					})
-					this.$nextTick(()=>{
-						this.focusIndex = 3
-					})
-					return
-				}
 				if(!this.agreement){
 					uni.showToast({
 						icon:'none',
@@ -201,22 +116,31 @@
 					})
 					return
 				}
-				
-				// 再去验证验证码是否正确
-				userModel.verifyCode(this.phone, this.verifyCode).then(res=>{
-					// 执行真正的登录
-					return userModel.register(this.name, this.age, this.phone)
-					
-				}).then(res=>{
+				userModel.register(this.name, this.age).then(res=>{
 					// 注册成功
-					if(res.code === '0'){
+					const { code, message, data } = res.data
+					if(code === '0'){
+						uni.setStorageSync('isRegister', 0)
 						this.$refs.registerSuccess.open()
+						// uni.showToast({
+						// 	title: '登录成功，即将跳转'
+						// })
 						setTimeout(()=>{
 							uni.reLaunch({
 								url: '../../customer/main/main'
 							})
 						},2000)	
+					}else{
+						uni.showToast({
+							icon:'none',
+							title: message
+						})
 					}
+				}).catch(err=>{
+					uni.showToast({
+						icon:'none',
+						title: '提交失败，请稍候重试'
+					})
 				})
 			},
 			toLogin(){
@@ -238,22 +162,22 @@
 	.content{
 		width: 500upx;
 		margin: 0 auto;
-		margin-top: 200upx;
+		margin-top: 260upx;
 		background: rgba(0,0,0,0);
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 		.logo{
-			width: 194upx;
+			width: 360upx;
 			height: 98upx;
-			image{
-				width: 100%;
-				height: 100%;
-			}
+			font-size: 44upx;
+			color: #f79966;
+			font-weight: 600;
 		}
 		.form{
-			margin-top: 64upx;
+			// margin-top: 24upx;
+			font-weight:600;
 			width: 100%;
 			.form-item{
 				margin-top: 38upx;
@@ -304,6 +228,8 @@
 			margin-top: 24upx;
 			font-size: 20upx;
 			color: #989696;
+			position: relative;
+			left: -16upx;
 			checkbox{
 				transform: scale(0.5);
 			}

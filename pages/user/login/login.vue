@@ -94,12 +94,14 @@
 				} 
 				userModel.getVerifyCode(this.phone, 'A').then(res=>{
 					// 请求成功,并判断code是否正确
-					if(res.code === '0'){
+					const {code, message, data} = res.data
+					if(code === '0'){
 						uni.showToast({
 							title: '验证码已发送，请注意查收'
 						})
 						this.verifyCodeStatus = 1
-						this.surplusSecond = 120
+						this.readySendCode = false
+						this.surplusSecond = 60
 						this.focusIndex = 1
 						this.verifyCodeTimer = setInterval(()=>{
 							if(this.surplusSecond > 0){
@@ -107,6 +109,7 @@
 							}else{
 								this.surplusSecond = 0
 								this.verifyCodeStatus = 0
+								this.readySendCode = true
 								clearInterval(this.verifyCodeTimer)
 							}
 						}, 1000)
@@ -114,14 +117,14 @@
 					}else{
 						uni.showToast({
 							icon:'none',
-							title:res.message
+							title:message
 						})
 					}
 					
 				}).catch(err=>{
 					uni.showToast({
 						icon:'none',
-						title:err.message
+						title:'获取验证码失败，请稍后重试'
 					})
 				})
 			},
@@ -153,11 +156,13 @@
 				// 	return userModel.login(this.phone, 'A')
 				// })
 				userModel.login(this.phone, this.verifyCode, 'A').then(res=>{
-					if(res.code === '0'){
+					const { code, data, message } = res.data
+					if(code === '0'){
 						// 登录成功
 						uni.showToast({
 							title: '登录成功，即将跳转到首页'
 						})
+						uni.setStorageSync('token', data.token)
 						setTimeout(()=>{
 							uni.reLaunch({
 								url: '../../customer/main/main'
@@ -166,7 +171,7 @@
 					}else{
 						uni.showToast({
 							icon: 'none',
-							title: res.message
+							title: message
 						})
 					}
 					
@@ -174,7 +179,7 @@
 				.catch(err=>{
 					uni.showToast({
 						icon: 'none',
-						title: err.msg
+						title: '登录失败，请稍候再试'
 					})
 				})
 			}
@@ -256,7 +261,7 @@
 		.submit-btn{
 			height: 56upx;
 			line-height: 56upx;
-			width: 210upx;
+			width: 250upx;
 			border-radius: 28upx;
 			font-size: 30upx;
 			letter-spacing: 4upx;

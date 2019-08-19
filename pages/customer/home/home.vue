@@ -58,7 +58,7 @@
 		components:{
 			ListItem
 		},
-		created() {
+		mounted() {
 			this.getJobList()
 		},
 		methods:{

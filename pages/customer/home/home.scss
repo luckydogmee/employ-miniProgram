@@ -1,46 +1,46 @@
 .swiper-item{
+	height: 100%;
+	width: 100%;
+	image{
 		height: 100%;
 		width: 100%;
-		image{
-			height: 100%;
-			width: 100%;
-		}
 	}
-	.upload-wrapper{
-		height: 320upx;
-		width: 750upx;
-		margin-top: 40upx;
-		image{
-			height: 100%;
-			width: 100%;
-		}
+}
+.upload-wrapper{
+	height: 320upx;
+	width: 750upx;
+	margin-top: 40upx;
+	image{
+		height: 100%;
+		width: 100%;
 	}
-	.authorize{
-		margin-top: 40upx; 
+}
+.authorize{
+	margin-top: 40upx; 
+}
+.swiper-container{
+	position: relative;
+	height: 300upx;
+	width: 750upx;
+}
+.switchToSeller{
+	position: absolute;
+	top: 20upx;
+	right: 20upx;
+}
+.tab-container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 190upx;
+	background: #efeff4;
+	.tab{
+		flex: 1;
+		text-align: center;
+		height: 136upx;
 	}
-	.swiper-container{
-		position: relative;
-		height: 300upx;
-		width: 750upx;
+	image{
+		width: 136upx;
+		height: 136upx;
 	}
-	.switchToSeller{
-		position: absolute;
-		top: 20upx;
-		right: 20upx;
-	}
-	.tab-container{
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		height: 190upx;
-		background: #efeff4;
-		.tab{
-			flex: 1;
-			text-align: center;
-			height: 136upx;
-		}
-		image{
-			width: 136upx;
-			height: 136upx;
-		}
-	}
+}

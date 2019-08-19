@@ -1,31 +1,36 @@
 <template>
 	<view class="add-container">
-		<InputCell label="公司名称" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="resume.name" placeholder="请输入名称"></InputCell>
-		<InputCell label="所在区域" :required="isEdit" :disabled="true" :isSell="true" :content="resume.sex" placeholder="请选择区域"></InputCell>
-		<InputCell label="公司地址" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="resume.age" placeholder="请输入详细地址>"></InputCell>
-		<InputCell label="所在行业" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="resume.education" placeholder="请输入行业"></InputCell>
-		<InputCell label="招聘联系人" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="resume.exprience" placeholder="请输入联系人"></InputCell>
-		
-		<view class="upload-wrapper">
-			<UploadItem title="上传营业执照" />
-			<UploadItem title="上传公司logo" />
-			<UploadItem title="上传工作场景照" />
+		<view class="add-top">
+			<InputCell label="公司名称" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="resume.name" placeholder="请输入名称"></InputCell>
+			<InputCell label="所在区域" :required="isEdit" :disabled="true" :isSell="true" :content="resume.sex" placeholder="请选择区域"></InputCell>
+			<InputCell label="公司地址" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="resume.age" placeholder="请输入详细地址>"></InputCell>
+			<InputCell label="所在行业" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="resume.education" placeholder="请输入行业"></InputCell>
+			<InputCell label="招聘联系人" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="resume.exprience" placeholder="请输入联系人"></InputCell>
+			
+			<view class="upload-wrapper">
+				<UploadItem title="上传营业执照" />
+				<UploadItem title="上传公司logo" />
+				<UploadItem title="上传工作场景照" />
+			</view>	
 		</view>
-		<InputCell label="联系电话" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="resume.introduction"></InputCell>
+		<view class="add-bottom">
+			<InputCell label="联系电话" :required="isEdit" :disabled="!isEdit" :isSell="true" placeholder="请输入联系电话" :content="resume.introduction"></InputCell>
+			
+			<!-- <view class="add-avatar">
+				<view v-if="isEdit" class="avatar new-avatar">
+					<image 
+						class="avatar new-avatar" 
+						src="../../../static/icon/add-avatar.png" 
+						mode=""
+						@click="chooseImage"
+					></image>
+				</view>
+			</view> -->
+			<inputCell label="验证码" :required="isEdit" :isSell="true" placeholder="请输入验证码" floatleft="left" :hasSlot="true">
+				<button class="default-btn verifyBtn">{{verifyText}}</button>
+			</inputCell>	
+		</view>
 		
-		<!-- <view class="add-avatar">
-			<view v-if="isEdit" class="avatar new-avatar">
-				<image 
-					class="avatar new-avatar" 
-					src="../../../static/icon/add-avatar.png" 
-					mode=""
-					@click="chooseImage"
-				></image>
-			</view>
-		</view> -->
-		<inputCell label="验证码" :required="isEdit" :isSell="true" floatleft="left" :hasSlot="true">
-			<button class="default-btn">{{verifyText}}</button>
-		</inputCell>
 		<button class="default-btn submit">提交审核</button>
 	</view>
 </template>
@@ -85,8 +90,7 @@
 <style lang="scss">
 	.add-container{
 		width: 750upx;
-		padding: 0 34upx;
-		box-sizing: border-box;
+		background: #f1f2f7;
 	}
 	.add-avatar{
 		padding: 20upx 0;
@@ -115,5 +119,19 @@
 	}
 	.submit{
 		margin-top: 40upx;
+		font-size: 24upx;
+		margin-bottom: 40upx;
+	}
+	.verifyBtn{
+		font-size: 20upx;
+		width: 140upx;
+		height: 38upx;
+		line-height: 38upx;
+	}
+	.add-top,.add-bottom{
+		background: #FFFFFF;
+		padding: 0 34upx;
+		box-sizing: border-box;
+		padding-bottom: 20upx;
 	}
 </style>

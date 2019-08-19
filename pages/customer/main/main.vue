@@ -1,7 +1,7 @@
 <template>
 	<view class="container customer-container">
 		<view class="customer-wrapper">
-			<Home v-if="currentTab === 'Home'" @showLogin="showLogin" @hideLogin="hideLogin" />
+			<Home v-if="currentTab === 'Home' && hasToken" @showLogin="showLogin" @hideLogin="hideLogin" />
 			<Project v-if="currentTab === 'Project'" @showLogin="showLogin" @hideLogin="hideLogin" />
 			<Resume v-if="currentTab === 'Resume'" @showLogin="showLogin" @hideLogin="hideLogin" />
 			<User v-if="currentTab === 'User'" @showLogin="showLogin" @hideLogin="hideLogin" />
@@ -12,7 +12,7 @@
 						登录微猎头快开始接单
 					</view>
 					<button class="notice-btn notice-wechat" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">微信帐号快速登录</button>
-					<button class="notice-btn notice-mobile" @click="toRegister">手机号注册/登录</button>
+					<button class="notice-btn notice-mobile" @click="toLogin">手机号注册/登录</button>
 				</view>
 			</uni-popup>
 		</view>
@@ -32,7 +32,8 @@
 	export default {
 		data(){
 			return {
-				tabBar:['Home','Project','Resume','User']
+				tabBar: ['Home','Project','Resume','User'],
+				hasToken: false
 			}
 		},
 		components:{
@@ -45,11 +46,13 @@
 		},
 		onReady() {
 			// 第一次进入的时候
+			const that = this
 			const token = uni.getStorageSync('token')
 			if(token){
 				uni.checkSession({
 					success(res) {
 						// 当前用户登录未过期，用原来的token即可
+						that.hasToken = true
 					},
 					fail(err) {
 						this.login()
@@ -72,6 +75,10 @@
 				this.switchTab(type)
 			},
 			login(){
+				const that = this
+				uni.showLoading({
+					mask: true
+				})
 				uni.login({
 					provider: 'weixin',
 					success(res){
@@ -83,6 +90,9 @@
 									// 将返回的token存入本地
 									uni.setStorageSync('token', data.token)
 									uni.setStorageSync('isLogin',data.isLogin)
+									uni.hideLoading()
+									that.hasToken = true
+									that.$refs.home.getJobList()
 								}else{
 									uni.showToast({
 										icon: 'none',
@@ -135,10 +145,17 @@
 									// 将token存入缓存中
 									uni.setStorageSync('phoneNumber',data)
 									uni.setStorageSync('isLogin', 0)
-									uni.showToast({
-										title:'登录成功'
-									})
-									that.hideLogin()
+									if(data.isRegister === '0'){
+										uni.setStorageSync('isRegister', 0)
+										uni.showToast({
+											title:'登录成功'
+										})		
+									}else{
+										uni.navigateTo({
+											url: '../../user/inputInfo/inputInfo',
+										})
+									}
+									
 								}else{
 									uni.showToast({
 										icon: 'none',
@@ -158,9 +175,9 @@
 					}
 				})
 			},
-			toRegister(){
+			toLogin(){
 				uni.navigateTo({
-					url: '../../user/register/register',
+					url: '../../user/login/login',
 				})
 			},
 		},

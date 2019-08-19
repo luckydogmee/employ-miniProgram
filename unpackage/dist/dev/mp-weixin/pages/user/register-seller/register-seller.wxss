@@ -1,8 +1,6 @@
 .add-container {
   width: 750rpx;
-  padding: 0 34rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  background: #f1f2f7;
 }
 .add-avatar {
   padding: 20rpx 0;
@@ -46,5 +44,20 @@
 }
 .submit {
   margin-top: 40rpx;
+  font-size: 24rpx;
+  margin-bottom: 40rpx;
+}
+.verifyBtn {
+  font-size: 20rpx;
+  width: 140rpx;
+  height: 38rpx;
+  line-height: 38rpx;
+}
+.add-top, .add-bottom {
+  background: #FFFFFF;
+  padding: 0 34rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding-bottom: 20rpx;
 }
 

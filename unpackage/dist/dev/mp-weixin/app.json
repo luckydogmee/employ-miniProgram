@@ -1,7 +1,5 @@
 {
   "pages": [
-    "pages/user/register-seller/register-seller",
-    "pages/user/register/register",
     "pages/customer/main/main",
     "pages/seller/main/main",
     "pages/login/login",
@@ -14,7 +12,9 @@
     "pages/customer/resume/resume",
     "pages/customer/user/user",
     "pages/seller/choose/choose",
-    "pages/public/addResume/addResume"
+    "pages/public/addResume/addResume",
+    "pages/user/register-seller/register-seller",
+    "pages/user/inputInfo/inputInfo"
   ],
   "subPackages": [],
   "window": {
@@ -22,5 +22,6 @@
     "navigationBarBackgroundColor": "#e28f64",
     "backgroundColor": "#fbf9fe"
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap87.json"
 }

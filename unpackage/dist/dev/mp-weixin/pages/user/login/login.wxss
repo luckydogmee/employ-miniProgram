@@ -200,7 +200,7 @@
 .content .submit-btn.data-v-733294c5 {
     height: 56rpx;
     line-height: 56rpx;
-    width: 210rpx;
+    width: 250rpx;
     border-radius: 28rpx;
     font-size: 30rpx;
     letter-spacing: 4rpx;

@@ -1,17 +1,11 @@
 {
     "pages": [ //pages数组中第一项表示应用启动页,
-		{
-			"path" : "pages/user/register-seller/register-seller",
-			"style" : {
-				"navigationBarTitleText": "企业注册"
-			}
-		},
-		{
-			"path" : "pages/user/register/register",
-			"style" : {
-				"navigationBarTitleText": "注册"
-			}
-		},
+		// {
+		// 	"path" : "pages/user/register/register",
+		// 	"style" : {
+		// 		"navigationBarTitleText": "注册"
+		// 	}
+		// },
 		{
 		    "path": "pages/customer/main/main",
 		    "style": {
@@ -86,8 +80,19 @@
 		    "style" : {
 				"navigationBarTitleText": "新增简历"
 			}
-		}
-		
+		},
+		{
+			"path" : "pages/user/register-seller/register-seller",
+			"style" : {
+				"navigationBarTitleText": "企业注册"
+			}
+		},
+        {
+            "path" : "pages/user/inputInfo/inputInfo",
+            "style" : {
+            	"navigationBarTitleText": "完善信息"
+            }
+        }
     ],
     "globalStyle": {
         "navigationBarTextStyle": "white",
