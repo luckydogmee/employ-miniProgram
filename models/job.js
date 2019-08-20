@@ -35,13 +35,13 @@ class PostModel extends HTTP {
 		})
 	}
 	// 获取我的项目列表
-	collectionJobList(pageNum=1, pageSize=10, status){
+	collectionJobList(pageNum=1, pageSize=10, collectionJobStatus){
 		return this.request({
 			url: '/job/collectionJobList',
 			data: {
 				pageNum,
 				pageSize,
-				status
+				collectionJobStatus
 			}
 		})
 	}

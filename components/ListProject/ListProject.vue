@@ -4,25 +4,27 @@
 			<image src="../../static/img/avatar.png" mode=""></image>
 		</view>
 		<view class="info">
-			<view class="info-title">销售经理</view>
-			<view class="info-price">3000-6000元/月</view>
+			<view class="info-title">{{data.jobName}}</view>
+			<view class="info-price">{{data.avgSalary}}元/月</view>
 			<view class="info-location">
 				<image src="../../static/icon/location.png"></image>
-				<text>成华区钻石广场A座</text>
+				<text>{{data.address}}</text>
 			</view>
 			<view class="info-date">
-				2019年5月22日发布
+				{{data.createTime}}
 			</view>
 		</view>
 		<view class="operation">
-			<view class="operation-single" v-if="data.type === 'started'">
+			<!-- <view class="operation-single" v-if="data.type === 'started'"> -->
+			<view class="operation-single" v-if="data.collectionJobStatus == 1">
 				<button class="default-btn" @click="showDetail">岗位详情</button>
 				<button class="default-btn" @click="showDeliveryDetail">交付详情</button>
 				<view class="operation-date">
-					2019年5月22日接单
+					{{data.recriptTime}}
 				</view>	
 			</view>
-			<view class="operation-single" v-if="data.type === 'notStart'">
+			<!-- <view class="operation-single" v-if="data.type === 'notStart'"> -->
+			<view class="operation-single" v-if="data.collectionJobStatus == 0">
 				<button class="default-btn" @click="showDetail">岗位详情</button>
 				<button class="default-btn" @click="recommend">立即推荐</button>
 			</view>
@@ -45,8 +47,8 @@
 		},
 		methods:{
 			show(){
-				const { id=1, status } = this.data
-				this.$emit('show',status,id)
+				const { id=1, collectionJobStatus } = this.data
+				this.$emit('show',collectionJobStatus,id)
 			},
 			showDetail(){
 				const id = this.data.id || 1
