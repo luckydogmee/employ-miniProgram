@@ -16,8 +16,8 @@
 				v-for="item in projectList"
 				:key="item.id"
 				:data="item"
-				@show="show(status,id)" 
-				@showDetail="showDetail(id)" 
+				@show="show(collectionJobStatus,id)" 
+				@showDetail="showDetail(item.id)" 
 				@showDeliveryDetail="showDeliveryDetail(id)" 
 				@recommend="recommend(id)" 
 			/>
@@ -41,7 +41,8 @@
 						type: 'notStart'
 					}
 				],
-				type: 'all',
+				// type: 'all',
+				type: 'started',
 				pageNum: 1,
 				pageSize: 10,
 			}
@@ -59,14 +60,28 @@
 		methods: {
 			getJobList(){
 				const type = this.type
-				let status = ''
+				let collectionJobStatus = ''
 				if(type === 'started'){
-					status = 1
+					collectionJobStatus = 1
 				}else if(type === 'notStart'){
-					status = 0
+					collectionJobStatus = 0
 				}
-				jobModel.collectionJobList(this.pageNum, this.pageSize, status).then(res=>{
-					
+				jobModel.collectionJobList(this.pageNum, this.pageSize, collectionJobStatus).then(res=>{
+					//数据绑定
+					const { code, message, data } = res.data
+					if(code === '0'){
+						this.projectList = data
+					}else{
+						uni.showToast({
+							icon: 'none',
+							title: message
+						})
+					}
+				}).catch(err=>{
+					uni.showToast({
+						icon: 'none',
+						title:'获取岗位列表信息失败'
+					})
 				})
 			},
 			switchTab(type){
@@ -77,13 +92,18 @@
 				this.pageNum = 1
 				this.getJobList()
 			},
-			show(status,id){
+			show(collectionJobStatus,id){
 				// 根据状态判断
 			},
 			showDetail(id){
+				console.log(id)
 				uni.navigateTo({
-					url: '../../PostDetail/PostDetail'
+					url: '../../public/PostDetail/PostDetail?id='+id
 				})
+				
+				// uni.navigateTo({
+				// 	url: '../../PostDetail/PostDetail'
+				// })
 			},
 			showDeliveryDetail(id){
 				uni.navigateTo({
