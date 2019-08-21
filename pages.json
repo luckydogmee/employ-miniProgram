@@ -7,6 +7,12 @@
 		// 	}
 		// },
 		{
+			"path" : "pages/user/register-seller/register-seller",
+			"style" : {
+				"navigationBarTitleText": "企业注册"
+			}
+		},
+		{
 		    "path": "pages/customer/main/main",
 		    "style": {
 		        "navigationBarTitleText": "街聘",
@@ -81,12 +87,7 @@
 				"navigationBarTitleText": "新增简历"
 			}
 		},
-		{
-			"path" : "pages/user/register-seller/register-seller",
-			"style" : {
-				"navigationBarTitleText": "企业注册"
-			}
-		},
+		
         {
             "path" : "pages/user/inputInfo/inputInfo",
             "style" : {

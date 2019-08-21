@@ -60,4 +60,8 @@
           box-sizing: border-box;
   padding-bottom: 20rpx;
 }
+.picker .select {
+  width: 260rpx;
+  height: 52rpx;
+}
 

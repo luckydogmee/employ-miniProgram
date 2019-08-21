@@ -5,7 +5,7 @@
 			<view class="upload-required">*</view>
 		</view>
 		<view class="upload-content">
-			<image src="../../static/upload.png" @click="selectImage" mode=""></image>
+			<image :src="imgSrc" @click="selectImage" mode=""></image>
 		</view>
 	</view>
 </template>
@@ -25,6 +25,15 @@
 			required: {
 				type: Boolean,
 				default: true
+			},
+			imageUrl: {
+				type: String,
+				default: ''
+			}
+		},
+		computed: {
+			imgSrc(){
+				return this.imageUrl || '../../static/upload.png'
 			}
 		},
 		methods: {

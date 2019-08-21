@@ -23,6 +23,7 @@
   font-size: 30rpx;
   line-height: 70rpx;
   background: #FFFFFF;
+  position: relative;
 }
 .cell-container.sell {
     border: unset;
@@ -64,6 +65,12 @@
 }
 .slot {
   margin-left: 20rpx;
+}
+.plugin {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 9999;
 }
 .required {
   color: #ff8352;

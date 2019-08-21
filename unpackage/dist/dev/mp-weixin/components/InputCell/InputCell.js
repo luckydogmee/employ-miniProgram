@@ -161,17 +161,24 @@ var _default =
 
     hasSlot: {
       type: Boolean,
+      default: false },
+
+    // 用于城市选择器
+    withPlugin: {
+      type: Boolean,
       default: false } },
 
 
   data: function data() {
     return {
-      value: '' };
+      // value: ''
+    };
+  },
+  computed: {
+    value: function value() {
+      return this.content;
+    } },
 
-  },
-  mounted: function mounted() {
-    this.value = this.content;
-  },
   methods: {
     handleInput: function handleInput(e) {
 

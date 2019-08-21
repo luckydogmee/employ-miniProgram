@@ -154,26 +154,35 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
 {
   data: function data() {
     return {
       isEdit: true, // 是否编辑状态
-      avatar: '../../../static/img/avatar.png', //头像地址
       resume: {
-        name: '',
-        sex: '',
-        age: '',
-        education: '',
-        phone: '',
-        exprience: '',
-        introduction: '',
-        university: '',
-        nativePlace: '' },
-
-      pictureArray: ['从相册选择', '相机拍摄'],
+        name: '', // 公司名称
+        cityCode: '', // 城市码
+        address: '', // 地址
+        industryCode: '', // 所在行业
+        contactName: '', // 招聘联系人
+        businessImg: '', // 营业执照
+        companyImg: '', // 工作场景
+        logo: '', // 公司logo
+        phone: '' // 电话号码
+      },
       pictureIndex: 0,
-      verifyText: '发送验证码' };
-
+      verifyText: '发送验证码',
+      cityCodeText: '', // 区域文字
+      citySelected: [] // 已选中的城市
+    };
   },
   components: {
     InputCell: InputCell,
@@ -196,6 +205,21 @@ __webpack_require__.r(__webpack_exports__);
         sourceType: ['album', 'camera'],
         success: function success(res) {
           _this.avatar = res.tempFilePaths[0];
+        } });
+
+    },
+    cityPickerChange: function cityPickerChange(e) {var _e$detail =
+      e.detail,code = _e$detail.code,value = _e$detail.value;
+      this.resume.cityCode = code;
+      this.cityCodeText = Array.from(new Set(value)).join('');
+    },
+    uploadImage: function uploadImage() {var _this2 = this;
+      uni.chooseImage({
+        count: 1,
+        sizeType: 'compressed',
+        sourceType: ['album', 'camera'],
+        success: function success(res) {
+          _this2.avatar = res.tempFilePaths[0];
         } });
 
     } } };exports.default = _default;

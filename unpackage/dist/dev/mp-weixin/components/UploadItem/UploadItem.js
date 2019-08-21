@@ -131,8 +131,17 @@ var _default =
 
     required: {
       type: Boolean,
-      default: true } },
+      default: true },
 
+    imageUrl: {
+      type: String,
+      default: '' } },
+
+
+  computed: {
+    imgSrc: function imgSrc() {
+      return this.imageUrl || '../../static/upload.png';
+    } },
 
   methods: {
     selectImage: function selectImage() {

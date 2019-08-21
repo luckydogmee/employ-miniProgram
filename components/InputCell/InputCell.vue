@@ -11,8 +11,8 @@
 			@click="handleClick"
 			placeholder-class="placeholder"
 		/>
-		<view v-if="hasSlot" class="slot">
-			<slot></slot>
+		<view v-if="hasSlot" class="slot" :class="{plugin: withPlugin}">
+				<slot></slot>
 		</view>
 	</view>
 </template>
@@ -55,15 +55,22 @@
 			hasSlot: {
 				type: Boolean,
 				default: false
+			},
+			// 用于城市选择器
+			withPlugin: {
+				type: Boolean,
+				default: false
 			}
 		},
 		data(){
 			return {
-				value: ''
+				// value: ''
 			}
 		},
-		mounted(){
-			this.value = this.content
+		computed: {
+			value(){
+				return this.content
+			}
 		},
 		methods: {
 			handleInput(e){
@@ -90,6 +97,7 @@
 		font-size: 30upx;
 		line-height: 70upx;
 		background: #FFFFFF;
+		position:relative;
 		&.sell{
 			border: unset;
 			border-bottom: 1upx solid #cccccc;
@@ -134,6 +142,12 @@
 	}
 	.slot{
 		margin-left: 20upx;
+	}
+	.plugin{
+		position: absolute;
+		right: 0;
+		top: 0;
+		z-index: 9999;
 	}
 	.required{
 		color: #ff8352;
