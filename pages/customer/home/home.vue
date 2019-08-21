@@ -107,9 +107,14 @@
 					success(res) {
 						const token = uni.getStorageSync('token')
 						const isLogin = uni.getStorageSync('isLogin')
-						if(token && isLogin === 0){
+						const isRegister = uni.getStorageSync('isRegister')
+						if(token && isLogin === 0 && isRegister === 0){
 							uni.navigateTo({
 								url: '../../public/PostDetail/PostDetail?id='+id
+							})
+						}else if(token && isLogin === 0){
+							uni.navigateTo({
+								url: '../../user/inputInfo/inputInfo'
 							})
 						}else{
 							that.selectLoginType()

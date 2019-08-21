@@ -26,7 +26,7 @@
 </template>
 
 <script>
-	import { mapState } from 'vuex'
+	import { mapState, mapMutations } from 'vuex'
 	import ListProject from '@/components/ListProject/ListProject.vue'
 	import JobModel from '@/models/job.js'
 	const jobModel = new JobModel()
@@ -58,6 +58,7 @@
 			ListProject
 		},
 		methods: {
+			...mapMutations(['switchTab']),
 			getJobList(){
 				const type = this.type
 				let collectionJobStatus = ''
@@ -113,6 +114,7 @@
 			recommend(id){
 				let success = false
 				// if success
+				
 				if(success){
 					uni.showModal({
 						title: '',

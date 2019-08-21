@@ -116,8 +116,13 @@
 					})
 					return
 				}
+				uni.showLoading({
+					mask: true,
+					title: '提交中，请稍候'
+				})
 				userModel.register(this.name, this.age).then(res=>{
 					// 注册成功
+					uni.hideLoading()
 					const { code, message, data } = res.data
 					if(code === '0'){
 						uni.setStorageSync('isRegister', 0)
@@ -137,6 +142,7 @@
 						})
 					}
 				}).catch(err=>{
+					uni.hideLoading()
 					uni.showToast({
 						icon:'none',
 						title: '提交失败，请稍候重试'

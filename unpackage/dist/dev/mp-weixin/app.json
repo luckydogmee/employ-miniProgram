@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/user/register-seller/register-seller",
     "pages/customer/main/main",
     "pages/seller/main/main",
     "pages/login/login",
@@ -14,6 +13,7 @@
     "pages/customer/user/user",
     "pages/seller/choose/choose",
     "pages/public/addResume/addResume",
+    "pages/user/register-seller/register-seller",
     "pages/user/inputInfo/inputInfo"
   ],
   "subPackages": [],
@@ -22,5 +22,6 @@
     "navigationBarBackgroundColor": "#e28f64",
     "backgroundColor": "#fbf9fe"
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap14.json"
 }

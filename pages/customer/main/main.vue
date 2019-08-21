@@ -48,20 +48,22 @@
 			// 第一次进入的时候
 			const that = this
 			const token = uni.getStorageSync('token')
-			if(token){
-				uni.checkSession({
-					success(res) {
+			uni.checkSession({
+				success(res) {
+					console.log(res)
+					if(token){
 						// 当前用户登录未过期，用原来的token即可
 						that.hasToken = true
-					},
-					fail(err) {
-						this.login()
+					}else{
+						that.login()
 					}
-				})	
-			}else{
-				this.login()
-			}
-			
+				},
+				fail(err) {
+					that.login()
+				}
+			})	
+			// 直接login，避免麻烦
+			// this.login()
 		},
 		computed:{
 			...mapState(['tabIndex']),
@@ -92,7 +94,6 @@
 									uni.setStorageSync('isLogin',data.isLogin)
 									uni.hideLoading()
 									that.hasToken = true
-									that.$refs.home.getJobList()
 								}else{
 									uni.showToast({
 										icon: 'none',

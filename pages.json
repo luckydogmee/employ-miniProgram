@@ -6,12 +6,7 @@
 		// 		"navigationBarTitleText": "注册"
 		// 	}
 		// },
-		{
-			"path" : "pages/user/register-seller/register-seller",
-			"style" : {
-				"navigationBarTitleText": "企业注册"
-			}
-		},
+		
 		{
 		    "path": "pages/customer/main/main",
 		    "style": {
@@ -87,7 +82,12 @@
 				"navigationBarTitleText": "新增简历"
 			}
 		},
-		
+		{
+			"path" : "pages/user/register-seller/register-seller",
+			"style" : {
+				"navigationBarTitleText": "企业注册"
+			}
+		},
         {
             "path" : "pages/user/inputInfo/inputInfo",
             "style" : {
