@@ -74,7 +74,7 @@
 		},
 		methods: {
 			handleInput(e){
-				
+				this.$emit('on-input',e.detail.value)
 			},
 			handleClick(e){
 				this.$emit('on-click')

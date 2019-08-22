@@ -181,7 +181,7 @@ var _default =
 
   methods: {
     handleInput: function handleInput(e) {
-
+      this.$emit('on-input', e.detail.value);
     },
     handleClick: function handleClick(e) {
       this.$emit('on-click');

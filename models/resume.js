@@ -1,8 +1,8 @@
-import { HTTP } from '/utils/http.js'
+import { HTTP } from '../utils/http.js'
 
 class ResumeModel extends HTTP {
 	constructor(arg){
-		suer()
+		super()
 	}
 	// 查看自己创建的建立列表
 	resumeList(pageNum=1, pageSize=10, status=1, name, phone){
@@ -29,7 +29,6 @@ class ResumeModel extends HTTP {
 		workExperience,
 		university,
 		nativePlace,
-		pastWork,
 		intentionalWork
 	){
 		return this.request({
@@ -45,7 +44,6 @@ class ResumeModel extends HTTP {
 				workExperience,
 				university,
 				nativePlace,
-				pastWork,
 				intentionalWork
 			}
 		})

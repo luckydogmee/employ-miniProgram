@@ -158,30 +158,53 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _vuex = __webpack_require__(/*! vuex */ 8);function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var ListResume = function ListResume() {return __webpack_require__.e(/*! import() | components/ListResume/ListResume */ "components/ListResume/ListResume").then(__webpack_require__.bind(null, /*! @/components/ListResume/ListResume.vue */ 159));};var Search = function Search() {return __webpack_require__.e(/*! import() | components/Search/Search */ "components/Search/Search").then(__webpack_require__.bind(null, /*! @/components/Search/Search.vue */ 166));};var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 93));};var Dialog = function Dialog() {return __webpack_require__.e(/*! import() | components/Dialog/Dialog */ "components/Dialog/Dialog").then(__webpack_require__.bind(null, /*! @/components/Dialog/Dialog.vue */ 173));};var _default =
 
 
 
 
+
+
+
+
+
+
+var _vuex = __webpack_require__(/*! vuex */ 8);
+
+
+
+
+var _resume = _interopRequireDefault(__webpack_require__(/*! @/models/resume.js */ 276));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var ListResume = function ListResume() {return __webpack_require__.e(/*! import() | components/ListResume/ListResume */ "components/ListResume/ListResume").then(__webpack_require__.bind(null, /*! @/components/ListResume/ListResume.vue */ 159));};var Search = function Search() {return __webpack_require__.e(/*! import() | components/Search/Search */ "components/Search/Search").then(__webpack_require__.bind(null, /*! @/components/Search/Search.vue */ 166));};var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 93));};var Dialog = function Dialog() {return __webpack_require__.e(/*! import() | components/Dialog/Dialog */ "components/Dialog/Dialog").then(__webpack_require__.bind(null, /*! @/components/Dialog/Dialog.vue */ 173));};
+var resumeModel = new _resume.default();var _default =
 {
   data: function data() {
     return {
-      recommendRecord: [
+      // recommendRecord:[
+      // 	{
+      // 		id: 1,
+      // 		time: '2019.9.15',
+      // 		post: '销售经理',
+      // 		company: '成都微招科技网络有限公司',
+      // 		status: '已终止'
+      // 	},
+      // 	{
+      // 		id: 2,
+      // 		time: '2019.9.15',
+      // 		post: '销售经理',
+      // 		company: '成都微招科技网络有限公司',
+      // 		status: '已终止'
+      // 	}
+      // ],
+      resumeList: [
       {
-        id: 1,
-        time: '2019.9.15',
-        post: '销售经理',
-        company: '成都微招科技网络有限公司',
-        status: '已终止' },
+        type: 'started' },
 
       {
-        id: 2,
-        time: '2019.9.15',
-        post: '销售经理',
-        company: '成都微招科技网络有限公司',
-        status: '已终止' }],
+        type: 'notStart' }],
 
 
+      type: 'started',
+      pageNum: 1,
+      pageSize: 10,
       showDialog: false };
 
   },
@@ -191,10 +214,45 @@ var _vuex = __webpack_require__(/*! vuex */ 8);function _objectSpread(target) {f
     uniPopup: uniPopup,
     Dialog: Dialog },
 
+  computed: _objectSpread({},
+  (0, _vuex.mapState)(['currentResume'])),
+
+
+  mounted: function mounted() {
+    this.getResumeList();
+  },
   methods: _objectSpread({},
   (0, _vuex.mapMutations)(['switchTab']), {
     search: function search(keyword) {
       // 做搜索动作
+    },
+    getResumeList: function getResumeList() {var _this = this;
+      var type = this.type;
+      var status = '';
+      var name = '';
+      var phone = '';
+      if (type === 'started') {
+        status = 1;
+      } else if (type === 'notStart') {
+        status = 0;
+      }
+      resumeModel.resumeList(this.pageNum, this.pageSize, status, name, phone).then(function (res) {
+        //数据绑定
+        var _res$data = res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
+        if (code === '0') {
+          _this.resumeList = data;
+        } else {
+          uni.showToast({
+            icon: 'none',
+            title: message });
+
+        }
+      }).catch(function (err) {
+        uni.showToast({
+          icon: 'none',
+          title: '获取岗位列表信息失败' });
+
+      });
     },
     showRecord: function showRecord() {
       this.$refs.recommendRecord.open();

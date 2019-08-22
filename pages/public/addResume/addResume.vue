@@ -14,43 +14,90 @@
 				></image>
 			</view>
 		</view>
-		<InputCell label="姓名" :required="isEdit" :disabled="!isEdit" :content="resume.name"></InputCell>
-		<InputCell label="性别" :required="isEdit" :disabled="!isEdit" :content="resume.sex"></InputCell>
-		<InputCell label="年龄" :required="isEdit" :disabled="!isEdit" :content="resume.age"></InputCell>
-		<InputCell label="学历" :disabled="!isEdit" :content="resume.education"></InputCell>
-		<InputCell label="电话(不会对企业公开)" :scaleInput="true" :required="isEdit" :disabled="!isEdit" :content="resume.phone"></InputCell>
-		<InputCell label="工作经验" :disabled="!isEdit" :content="resume.exprience"></InputCell>
-		<InputCell label="人员介绍" :disabled="!isEdit" :content="resume.introduction"></InputCell>
-		<InputCell label="毕业院校" :disabled="!isEdit" :content="resume.university"></InputCell>
-		<InputCell label="籍贯" :disabled="!isEdit" :content="resume.nativePlace"></InputCell>
-		<button class="default-btn">提 交</button>
+		<InputCell label="姓名" @on-input="nameChange" :required="isEdit" :disabled="!isEdit" :content="resume.name"></InputCell>
+		<InputCell label="性别" :required="isEdit" :disabled="true" :withPlugin="true" :hasSlot="true" :content="genderText" placeholder="点击选择">
+			<picker
+				@change="genderChange"
+				class="picker"
+				:range="genderArray"
+				:disabled="!isEdit"
+				:value="resume.gender"
+			>
+				<view class="select"></view>
+			</picker>
+		</InputCell>
+		<InputCell label="年龄" @on-input="ageChange" :required="isEdit" :disabled="!isEdit" :content="resume.age"></InputCell>
+		<InputCell label="学历" :required="isEdit" :disabled="true" :withPlugin="true" :hasSlot="true" :content="educationDegreeText" placeholder="点击选择">
+			<picker
+				@change="educationDegreeChange"
+				class="picker"
+				:range="educationDegreeArray"
+				:disabled="!isEdit"
+				:value="resume.educationDegree"
+			>
+				<view class="select"></view>
+			</picker>
+		</InputCell>
+		<InputCell label="电话(不会对企业公开)" @on-input="phoneChange" :scaleInput="true" :required="isEdit" :disabled="!isEdit" :content="resume.phone"></InputCell>
+		<InputCell label="工作经验" :required="isEdit" :disabled="true" :withPlugin="true" :hasSlot="true" :content="workExperienceText" placeholder="点击选择">
+			<picker
+				@change="workExperienceChange"
+				class="picker"
+				:range="workExperienceArray"
+				:disabled="!isEdit"
+				:value="resume.workExperience"
+			>
+				<view class="select"></view>
+			</picker>
+		</InputCell>
+		<InputCell label="毕业院校" @on-input="universityChange" :disabled="!isEdit" :content="resume.university"></InputCell>
+		<InputCell label="籍贯" @on-input="nativePlaceChange" :disabled="!isEdit" :content="resume.nativePlace"></InputCell>
+		<InputCell label="期望工作" @on-input="intentionalWorkChange" :disabled="!isEdit" :content="resume.intentionalWork"></InputCell>
+		<button class="default-btn" @click="submit">提 交</button>
 	</view>
 </template>
 
 <script>
 	import InputCell from '@/components/InputCell/InputCell.vue'
+	import ResumeModel from '@/models/resume.js'
+	const resumeModel = new ResumeModel()
 	export default {
 		data() {
 			return {
 				isEdit: true, // 是否编辑状态
 				avatar: '../../../static/img/avatar.png', //头像地址
 				resume: {
+					id: '',
 					name: '',
-					sex:　'',
-					age: '',
-					education: '',
 					phone: '',
-					exprience: '',
-					introduction: '',
+					gender: '',
+					age: '',
+					educationDegree: '',
+					workExperience: '',
 					university: '',
-					nativePlace: ''
+					nativePlace: '',
+					intentionalWork:''
 				},
 				pictureArray: ['从相册选择', '相机拍摄'],
-				pictureIndex: 0
+				pictureIndex: 0,
+				genderArray:['男', '女'],
+				educationDegreeArray: ['高中以下','高中','大专','本科及以上'],
+				workExperienceArray: ['一年以下', '一年至三年','三年至五年','五年以上']
 			}
 		},
 		components: {
 			InputCell
+		},
+		computed:{
+			genderText(){
+				return this.genderArray[this.resume.gender] || ''
+			},
+			educationDegreeText(){
+				return this.educationDegreeArray[this.resume.educationDegree] || ''
+			},
+			workExperienceText(){
+				return this.workExperienceArray[this.resume.workExperience] || ''
+			}
 		},
 		onLoad(options){
 			if(options.isEdit === 'false'){
@@ -59,6 +106,8 @@
 			if(options.isEdit === 'true'){
 				this.isEdit = true
 			}
+			// 这里去请求获取简历详情并更新 resume
+			
 		},
 		methods:{
 			chooseImage(){
@@ -69,9 +118,60 @@
 					sourceType: ['album', 'camera'],
 					success: (res) => {
 						this.avatar = res.tempFilePaths[0]
+						// 执行上传头像
+						
 					}
 				})
 			},
+			genderChange(e){
+				this.resume.gender = e.target.value
+			},
+			educationDegreeChange(e){
+				this.resume.educationDegree = e.target.value
+			},
+			workExperienceChange(e){
+				this.resume.workExperience = e.target.value
+			},
+			nameChange(e){
+				this.resume.name = e
+			},
+			ageChange(e){
+				this.resume.age = e
+			},
+			phoneChange(e){
+				this.resume.phone = e
+			},
+			universityChange(e){
+				this.resume.university = e
+			},
+			nativePlaceChange(e){
+				this.resume.nativePlace = e
+			},
+			intentionalWorkChange(e){
+				this.resume.intentionalWork = e
+			},
+			submit(){
+				// 做表单验证
+				const array = Object.values(this.resume)
+				resumeModel.saveResume(...array).then(res=>{
+					const { code, message, data } = res.data
+					if(code === '0'){
+						// 成功，做下一步操作
+						
+					}else{
+						// 错误处理
+						uni.showToast({
+							icon:'none',
+							title: message
+						})
+					}
+				}).catch(err=>{
+					uni.showToast({
+						icon:'none',
+						title: '提交失败，请稍候再试'
+					})
+				})
+			}
 		}
 	}
 </script>
@@ -101,5 +201,11 @@
 	.default-btn{
 		height: 50upx;
 		width: 164upx;
+	}
+	.picker{
+		.select{
+			width: 260upx;
+			height: 52upx;	
+		}
 	}
 </style>

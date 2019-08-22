@@ -1,39 +1,46 @@
 <template>
 	<view class="container detail-container">
-		<view class="swiper-container">
-			<swiper class="swiper" :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration">
-				<swiper-item>
-					<view class="swiper-item uni-bg-red">
-						<image src="../../../static/img/banner1.png" mode=""></image>
+		<view class="detail-wrapper">
+			<view class="swiper-container">
+				<swiper class="swiper" :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration">
+					<swiper-item>
+						<view class="swiper-item uni-bg-red">
+							<image src="../../../static/img/banner1.png" mode=""></image>
+						</view>
+					</swiper-item>
+					<swiper-item>
+						<view class="swiper-item uni-bg-green">
+							<image src="../../../static/img/banner2.png" mode=""></image>
+						</view>
+					</swiper-item>
+				</swiper>	
+			</view>
+			<view class="detail-content">
+				<Cell :title="jobInfo.storeName">
+					<view class="content">
+						<text>招聘人数： {{jobInfo.num}}人</text>
+						<text>地址：{{jobInfo.address}}</text>	
 					</view>
-				</swiper-item>
-				<swiper-item>
-					<view class="swiper-item uni-bg-green">
-						<image src="../../../static/img/banner2.png" mode=""></image>
+				</Cell>
+				<Cell title="职位名称" :content="jobInfo.jobName" />
+				<Cell title="职位描述" :content="jobInfo.description" />
+				<Cell title="岗位要求" :content="required"></Cell>
+				<Cell title="试用期" :content="jobInfo | filterProbation" />
+				<Cell title="转正后">
+					<view class="content">
+						<text>底薪：{{jobInfo.officialSalary}}元/月</text>
+						<text>月均收入：{{jobInfo.avgSalary}}元</text>
 					</view>
-				</swiper-item>
-			</swiper>	
+				</Cell>
+				<Cell title="悬赏信息" :subTitle="jobInfo.reward+'元/人'" />
+				<Cell title="面试时间" :content="jobInfo.interviewTime" />
+				<Cell title="过保时间" :subTitle="jobInfo.overtime+'天'" />
+			</view>	
 		</view>
-		<view class="detail-content">
-			<Cell :title="jobInfo.storeName">
-				<view class="content">
-					<text>招聘人数： {{jobInfo.num}}人</text>
-					<text>地址：{{jobInfo.address}}</text>	
-				</view>
-			</Cell>
-			<Cell title="职位名称" :content="jobInfo.jobName" />
-			<Cell title="职位描述" :content="jobInfo.description" />
-			<Cell title="岗位要求" :content="required"></Cell>
-			<Cell title="试用期" :content="jobInfo | filterProbation" />
-			<Cell title="转正后">
-				<view class="content">
-					<text>底薪：{{jobInfo.officialSalary}}元/月</text>
-					<text>月均收入：{{jobInfo.avgSalary}}元</text>
-				</view>
-			</Cell>
-			<Cell title="悬赏信息" :subTitle="jobInfo.reward+'元/人'" />
-			<Cell title="面试时间" :content="jobInfo.interviewTime" />
-			<Cell title="过保时间" :subTitle="jobInfo.overtime+'天'" />
+		<view class="detail-footer">
+			<button class="default-btn" @click="recceiveOrder">接单</button>
+			<button class="default-btn">复制链接</button>
+			<button class="default-btn">分享</button>
 		</view>
 	</view>
 </template>
@@ -99,6 +106,28 @@
 						title: '获取岗位详情失败'
 					})
 				})
+			},
+			recceiveOrder(){
+				const { id } = this.jobInfo
+				jobModel.collectionJob(id).then(res=>{
+					const {code, message, data } = res.data
+					if(code === '0'){
+						// 执行接单成功后续动作
+						uni.showToast({
+							title: '接单成功'
+						})
+					}else{
+						uni.showToast({
+							icon: 'none',
+							title: message
+						})
+					}
+				}).catch(err=>{
+					uni.showToast({
+						icon: 'none',
+						title: '操作失败，请稍后再试'
+					})
+				})
 			}
 		}
 	}
@@ -117,5 +146,18 @@
 		text{
 			line-height: 48upx;
 		}
+	}
+	.detail-wrapper{
+		padding-bottom: 150upx;
+	}
+	.detail-footer{
+		height: 150upx;
+		width: 750upx;
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		background: #f1f2f7;
+		display: flex;
+		align-items: center;
 	}
 </style>

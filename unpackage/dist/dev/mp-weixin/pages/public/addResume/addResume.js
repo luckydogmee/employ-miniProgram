@@ -105,7 +105,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var InputCell = function InputCell() {return __webpack_require__.e(/*! import() | components/InputCell/InputCell */ "components/InputCell/InputCell").then(__webpack_require__.bind(null, /*! @/components/InputCell/InputCell.vue */ 220));};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -136,28 +136,75 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _resume = _interopRequireDefault(__webpack_require__(/*! @/models/resume.js */ 276));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var InputCell = function InputCell() {return __webpack_require__.e(/*! import() | components/InputCell/InputCell */ "components/InputCell/InputCell").then(__webpack_require__.bind(null, /*! @/components/InputCell/InputCell.vue */ 220));};
+var resumeModel = new _resume.default();var _default =
 {
   data: function data() {
     return {
       isEdit: true, // 是否编辑状态
       avatar: '../../../static/img/avatar.png', //头像地址
       resume: {
+        id: '',
         name: '',
-        sex: '',
-        age: '',
-        education: '',
         phone: '',
-        exprience: '',
-        introduction: '',
+        gender: '',
+        age: '',
+        educationDegree: '',
+        workExperience: '',
         university: '',
-        nativePlace: '' },
+        nativePlace: '',
+        intentionalWork: '' },
 
       pictureArray: ['从相册选择', '相机拍摄'],
-      pictureIndex: 0 };
+      pictureIndex: 0,
+      genderArray: ['男', '女'],
+      educationDegreeArray: ['高中以下', '高中', '大专', '本科及以上'],
+      workExperienceArray: ['一年以下', '一年至三年', '三年至五年', '五年以上'] };
 
   },
   components: {
     InputCell: InputCell },
+
+  computed: {
+    genderText: function genderText() {
+      return this.genderArray[this.resume.gender] || '';
+    },
+    educationDegreeText: function educationDegreeText() {
+      return this.educationDegreeArray[this.resume.educationDegree] || '';
+    },
+    workExperienceText: function workExperienceText() {
+      return this.workExperienceArray[this.resume.workExperience] || '';
+    } },
 
   onLoad: function onLoad(options) {
     if (options.isEdit === 'false') {
@@ -166,6 +213,8 @@ __webpack_require__.r(__webpack_exports__);
     if (options.isEdit === 'true') {
       this.isEdit = true;
     }
+    // 这里去请求获取简历详情并更新 resume
+
   },
   methods: {
     chooseImage: function chooseImage() {var _this = this;
@@ -176,8 +225,59 @@ __webpack_require__.r(__webpack_exports__);
         sourceType: ['album', 'camera'],
         success: function success(res) {
           _this.avatar = res.tempFilePaths[0];
+          // 执行上传头像
+
         } });
 
+    },
+    genderChange: function genderChange(e) {
+      this.resume.gender = e.target.value;
+    },
+    educationDegreeChange: function educationDegreeChange(e) {
+      this.resume.educationDegree = e.target.value;
+    },
+    workExperienceChange: function workExperienceChange(e) {
+      this.resume.workExperience = e.target.value;
+    },
+    nameChange: function nameChange(e) {
+      this.resume.name = e;
+    },
+    ageChange: function ageChange(e) {
+      this.resume.age = e;
+    },
+    phoneChange: function phoneChange(e) {
+      this.resume.phone = e;
+    },
+    universityChange: function universityChange(e) {
+      this.resume.university = e;
+    },
+    nativePlaceChange: function nativePlaceChange(e) {
+      this.resume.nativePlace = e;
+    },
+    intentionalWorkChange: function intentionalWorkChange(e) {
+      this.resume.intentionalWork = e;
+    },
+    submit: function submit() {
+      // 做表单验证
+      var array = Object.values(this.resume);
+      resumeModel.saveResume.apply(resumeModel, _toConsumableArray(array)).then(function (res) {var _res$data =
+        res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
+        if (code === '0') {
+          // 成功，做下一步操作
+
+        } else {
+          // 错误处理
+          uni.showToast({
+            icon: 'none',
+            title: message });
+
+        }
+      }).catch(function (err) {
+        uni.showToast({
+          icon: 'none',
+          title: '提交失败，请稍候再试' });
+
+      });
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

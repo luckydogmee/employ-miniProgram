@@ -760,7 +760,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -7308,7 +7308,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -7329,14 +7329,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -7412,7 +7412,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -7995,6 +7995,125 @@ HTTP = /*#__PURE__*/function () {function HTTP() {_classCallCheck(this, HTTP);}_
 Object.defineProperty(exports, "__esModule", { value: true });exports.config = void 0;var config = {
   base_url: 'http://wzkjsyp.natapp1.cc',
   appkey: 'wx5666e9599cc559e6' };exports.config = config;
+
+/***/ }),
+
+/***/ 276:
+/*!********************************************************!*\
+  !*** E:/workspace/employ-miniProgram/models/resume.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _http = __webpack_require__(/*! ../utils/http.js */ 25);function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}function _possibleConstructorReturn(self, call) {if (call && (typeof call === "object" || typeof call === "function")) {return call;}return _assertThisInitialized(self);}function _assertThisInitialized(self) {if (self === void 0) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return self;}function _getPrototypeOf(o) {_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {return o.__proto__ || Object.getPrototypeOf(o);};return _getPrototypeOf(o);}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function");}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });if (superClass) _setPrototypeOf(subClass, superClass);}function _setPrototypeOf(o, p) {_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {o.__proto__ = p;return o;};return _setPrototypeOf(o, p);}var
+
+ResumeModel = /*#__PURE__*/function (_HTTP) {_inherits(ResumeModel, _HTTP);
+  function ResumeModel(arg) {_classCallCheck(this, ResumeModel);return _possibleConstructorReturn(this, _getPrototypeOf(ResumeModel).call(this));
+
+  }
+  // 查看自己创建的建立列表
+  _createClass(ResumeModel, [{ key: "resumeList", value: function resumeList() {var pageNum = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;var pageSize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;var status = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;var name = arguments.length > 3 ? arguments[3] : undefined;var phone = arguments.length > 4 ? arguments[4] : undefined;
+      return this.request({
+        url: '/resume/resumeList',
+        method: 'POST',
+        data: {
+          pageNum: pageNum,
+          pageSize: pageSize,
+          status: status,
+          name: name,
+          phone: phone } });
+
+
+    }
+    // 保存、修改简历
+  }, { key: "saveResume", value: function saveResume(
+    id,
+    name,
+    phone,
+    gender,
+    age,
+    educationDegree,
+    workExperience,
+    university,
+    nativePlace,
+    intentionalWork)
+    {
+      return this.request({
+        url: '/resume/saveResume',
+        method: 'POST',
+        data: {
+          id: id,
+          name: name,
+          phone: phone,
+          gender: gender,
+          age: age,
+          educationDegree: educationDegree,
+          workExperience: workExperience,
+          university: university,
+          nativePlace: nativePlace,
+          intentionalWork: intentionalWork } });
+
+
+    }
+    // 删除简历
+  }, { key: "deleteResume", value: function deleteResume(id) {
+      return this.request({
+        url: '/resume/deleteResume',
+        data: {
+          id: id } });
+
+
+    }
+    //推送简历
+  }, { key: "pushResume", value: function pushResume(jobId, resumeId, interviewDate, interviewTime) {
+      return this.request({
+        url: '/resume/pushResume',
+        data: {
+          jobId: jobId,
+          resumeId: resumeId,
+          interviewDate: interviewDate,
+          interviewTime: interviewTime } });
+
+
+    }
+    //查看推送的简历列表
+  }, { key: "pushResumeList", value: function pushResumeList() {var pageNum = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;var pageSize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;var jobId = arguments.length > 2 ? arguments[2] : undefined;var name = arguments.length > 3 ? arguments[3] : undefined;var phone = arguments.length > 4 ? arguments[4] : undefined;
+      return this.request({
+        url: '/resume/pushResumeList',
+        data: {
+          pageNum: pageNum,
+          pageSize: pageSize,
+          jobId: jobId,
+          name: name,
+          phone: phone } });
+
+
+    }
+    // 获取简历详情
+  }, { key: "resumeDetail", value: function resumeDetail(id) {
+      return this.request({
+        url: '/resume/resumeDetail',
+        data: {
+          id: id } });
+
+
+    }
+    // 获取简历推荐记录
+  }, { key: "resumeRecord", value: function resumeRecord() {var pageNum = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;var pageSize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;var id = arguments.length > 2 ? arguments[2] : undefined;
+      return this.request({
+        url: '/resume/resumeRecord',
+        data: {
+          pageNum: pageNum,
+          pageSize: pageSize,
+          id: id } });
+
+
+    }
+    /*** 以下B端 ***/ }]);return ResumeModel;}(_http.HTTP);var _default =
+
+
+ResumeModel;exports.default = _default;
 
 /***/ }),
 

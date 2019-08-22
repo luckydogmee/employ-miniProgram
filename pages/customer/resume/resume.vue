@@ -1,22 +1,32 @@
 <template>
 	<view class="resume-container">
 		<view class="tab-container">
-			<view class="tab">
+			<view class="tab" @click="switchTab('all')" :class="{'active':type === 'all'}">
 				全部简历
 			</view>
-			<view class="tab">
+			<view class="tab" @click="switchTab('started')" :class="{'active':type === 'started'}">
 				已推荐过
 			</view>
-			<view class="tab">
+			<view class="tab" @click="switchTab('notStart')" :class="{'active':type === 'notStart'}">
 				未推荐过
 			</view>
 		</view>
 		<Search @search="search" />
 		<view class="list-container">
-			<ListResume @on-click-record="showRecord" @on-click-recommend="recommendHim" @on-click-detail="showDetail" ></ListResume>
+<!-- 			<ListResume @on-click-record="showRecord" @on-click-recommend="recommendHim" @on-click-detail="showDetail" ></ListResume>
 			<ListResume></ListResume>
 			<ListResume></ListResume>
-			<ListResume></ListResume>
+			<ListResume></ListResume> -->
+			
+			<ListResume
+				v-for="item in resumeList"
+				:key="item.id"
+				:data="item"
+				@show="show(status,id)" 
+				@showDetail="showDetail(item.id)" 
+				@showDeliveryDetail="showDeliveryDetail(id)" 
+				@recommend="recommend(id)" 
+			/>
 		</view>
 		<view class="resume-add" @click="showAddResume">
 			<image src="../../../static/icon/add.png" mode=""></image>
@@ -51,30 +61,43 @@
 </template>
 
 <script>
-	import { mapMutations } from 'vuex'
+	import { mapState, mapMutations } from 'vuex'
 	import ListResume from '@/components/ListResume/ListResume.vue'
 	import Search from '@/components/Search/Search.vue' 
 	import uniPopup from "@/components/uni-popup/uni-popup.vue"
 	import Dialog from '@/components/Dialog/Dialog.vue'
+	import ResumeModel from '@/models/resume.js'
+	const resumeModel = new ResumeModel()
 	export default {
 		data() {
 			return {
-				recommendRecord:[
+				// recommendRecord:[
+				// 	{
+				// 		id: 1,
+				// 		time: '2019.9.15',
+				// 		post: '销售经理',
+				// 		company: '成都微招科技网络有限公司',
+				// 		status: '已终止'
+				// 	},
+				// 	{
+				// 		id: 2,
+				// 		time: '2019.9.15',
+				// 		post: '销售经理',
+				// 		company: '成都微招科技网络有限公司',
+				// 		status: '已终止'
+				// 	}
+				// ],
+				resumeList: [
 					{
-						id: 1,
-						time: '2019.9.15',
-						post: '销售经理',
-						company: '成都微招科技网络有限公司',
-						status: '已终止'
+						type: 'started'
 					},
 					{
-						id: 2,
-						time: '2019.9.15',
-						post: '销售经理',
-						company: '成都微招科技网络有限公司',
-						status: '已终止'
+						type: 'notStart'
 					}
 				],
+				type: 'started',
+				pageNum: 1,
+				pageSize: 10,
 				showDialog: false
 			}
 		},
@@ -84,10 +107,45 @@
 			uniPopup,
 			Dialog
 		},
+		computed:{
+			...mapState(['currentResume']),
+			
+		},
+		mounted(){
+			this.getResumeList()
+		},
 		methods: {
 			...mapMutations(['switchTab']),
 			search(keyword){
 				// 做搜索动作
+			},
+			getResumeList(){
+				const type = this.type
+				let status = ''
+				let name = ''
+				let phone = ''
+				if(type === 'started'){
+					status = 1
+				}else if(type === 'notStart'){
+					status = 0
+				}
+				resumeModel.resumeList(this.pageNum,this.pageSize,status,name,phone).then(res=>{
+					//数据绑定
+					const { code, message, data } = res.data
+					if(code === '0'){
+						this.resumeList = data
+					}else{
+						uni.showToast({
+							icon: 'none',
+							title: message
+						})
+					}
+				}).catch(err=>{
+					uni.showToast({
+						icon: 'none',
+						title:'获取岗位列表信息失败'
+					})
+				})
 			},
 			showRecord(){
 				this.$refs.recommendRecord.open()

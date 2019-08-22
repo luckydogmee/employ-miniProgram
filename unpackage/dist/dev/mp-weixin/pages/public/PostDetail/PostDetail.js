@@ -158,6 +158,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
 var _utils = __webpack_require__(/*! ../../../utils/utils.js */ 84);
 var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 24));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var Cell = function Cell() {return __webpack_require__.e(/*! import() | components/Cell/Cell */ "components/Cell/Cell").then(__webpack_require__.bind(null, /*! ../../../components/Cell/Cell.vue */ 206));};
 var jobModel = new _job.default();var _default =
@@ -214,6 +221,28 @@ var jobModel = new _job.default();var _default =
         uni.showToast({
           icon: 'none',
           title: '获取岗位详情失败' });
+
+      });
+    },
+    recceiveOrder: function recceiveOrder() {var
+      id = this.jobInfo.id;
+      jobModel.collectionJob(id).then(function (res) {var _res$data2 =
+        res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
+        if (code === '0') {
+          // 执行接单成功后续动作
+          uni.showToast({
+            title: '接单成功' });
+
+        } else {
+          uni.showToast({
+            icon: 'none',
+            title: message });
+
+        }
+      }).catch(function (err) {
+        uni.showToast({
+          icon: 'none',
+          title: '操作失败，请稍后再试' });
 
       });
     } } };exports.default = _default;

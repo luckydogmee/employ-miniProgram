@@ -30,4 +30,8 @@
   height: 50rpx;
   width: 164rpx;
 }
+.picker .select {
+  width: 260rpx;
+  height: 52rpx;
+}
 
