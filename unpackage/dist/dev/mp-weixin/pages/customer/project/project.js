@@ -135,7 +135,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var _vuex = __webpack_require__(/*! vuex */ 8);
 
-var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 24));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var ListProject = function ListProject() {return __webpack_require__.e(/*! import() | components/ListProject/ListProject */ "components/ListProject/ListProject").then(__webpack_require__.bind(null, /*! @/components/ListProject/ListProject.vue */ 152));};
+var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 24));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var ListProject = function ListProject() {return __webpack_require__.e(/*! import() | components/ListProject/ListProject */ "components/ListProject/ListProject").then(__webpack_require__.bind(null, /*! @/components/ListProject/ListProject.vue */ 153));};
 var jobModel = new _job.default();var _default =
 {
   data: function data() {
@@ -148,8 +148,8 @@ var jobModel = new _job.default();var _default =
         type: 'notStart' }],
 
 
-      // type: 'all',
-      type: 'started',
+      type: 'all',
+      // type: 'started',
       pageNum: 1,
       pageSize: 10 };
 
@@ -192,7 +192,7 @@ var jobModel = new _job.default();var _default =
 
       });
     },
-    switchTab: function switchTab(type) {
+    switchProjectTab: function switchProjectTab(type) {
       if (type === this.type) {
         return;
       }
@@ -219,6 +219,8 @@ var jobModel = new _job.default();var _default =
 
     },
     recommend: function recommend(id) {
+      this.switchTab(2, { jobId: id });
+      return;
       var success = false;
       // if success
 
@@ -272,5 +274,5 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ })
 
-},[[102,"common/runtime","common/vendor"]]]);
+},[[103,"common/runtime","common/vendor"]]]);
 //# sourceMappingURL=../../../../.sourcemap/mp-weixin/pages/customer/project/project.js.map

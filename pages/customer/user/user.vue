@@ -4,15 +4,15 @@
 		<view class="flex-container">
 			<view class="flex-item">
 				<view class="flex-title">共推荐求职者</view>
-				<view class="flex-sub">22个</view>
+				<view class="flex-sub">{{user.totalNumber}}个</view>
 			</view>
 			<view class="flex-item">
 				<view class="flex-title">应聘成功</view>
-				<view class="flex-sub">50人</view>
+				<view class="flex-sub">{{user.successNum}}人</view>
 			</view>
 			<view class="flex-item">
 				<view class="flex-title">未提现金额</view>
-				<view class="flex-sub">7500元</view>
+				<view class="flex-sub">{{user.noCashout}}元</view>
 			</view>
 		</view>
 		<view class="button-group">
@@ -28,19 +28,47 @@
 
 <script>
 	import UserItem from '../../../components/UserItem/UserItem.vue'
+	import UserModel from '@/models/user.js'
+	const userModel = new UserModel()
 	export default {
 		data() {
 			return {
 				userData: {
-					name: '张三'
-				}
+					// name: '张三'
+				},
+				user:{}
 			}
 		},
 		components: {
 			UserItem,
 		},
+		// onLoad(){
+		// 	this.getUserInfo()
+		// },
+		mounted(){
+			this.getUserInfo()
+		},
 		methods: {
-			
+			getUserInfo(){
+				userModel.getUserInfo().then(res=>{
+					//数据绑定
+					const { code, message, data } = res.data
+					if(code === '0'){
+						this.user = data
+						this.userData = data
+					}else{
+						uni.showToast({
+							icon: 'none',
+							title: message
+						})
+					}
+				}).catch(err=>{
+					uni.showToast({
+						icon: 'none',
+						title:'获取用户信息失败'
+					})
+				})
+			},
 		}
 	}
 </script>

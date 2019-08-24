@@ -113,6 +113,26 @@
 					const {code, message, data } = res.data
 					if(code === '0'){
 						// 执行接单成功后续动作
+						uni.showModal({
+							content: '接单成功！\r\n是否立即推荐候选人',
+							confirmText: '立即推荐',
+							confirmColor: '#f1f2f7',
+							cancelText: '再等等吧',
+							cancelColor: '#f1f2f7',
+							success(res) {
+								if(res.confirm){
+									uni.reLaunch({
+										url: '../../customer/main/main'
+									})
+									
+								}else if(res.cancel){
+									uni.showModel({
+										content: '您可进入【我的项目】继续操作',
+										confirmText: '知道了'
+									})
+								}
+							}
+						})
 						uni.showToast({
 							title: '接单成功'
 						})

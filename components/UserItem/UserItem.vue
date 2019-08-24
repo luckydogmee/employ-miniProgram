@@ -8,7 +8,7 @@
 				<text>{{userData.name}}</text>
 				<text class="tag" v-if="type === 'customer'">金牌猎手</text>
 			</view>
-			<view class="user-info-balance">{{type === 'seller' ? '履约金余额' : '累计佣金收入' }}: <text class="balance">6000元</text></view>
+			<view class="user-info-balance">{{type === 'seller' ? '履约金余额' : '累计佣金收入' }}: <text class="balance">{{userData.totalMoney}}元</text></view>
 		</view>
 		<view class="user-setting">
 			<image src="../../static/icon/setting.png" mode=""></image>

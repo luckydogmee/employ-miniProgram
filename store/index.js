@@ -12,6 +12,7 @@ const store = new Vuex.Store({
         hasLogin: false,
         userName: "",
 		tabIndex: 0,
+		jobId: '',
 		currentResume: ''
     },
     mutations: {
@@ -24,8 +25,13 @@ const store = new Vuex.Store({
             state.userName = "";
             state.hasLogin = false;
         },
-		switchTab(state, index){
+		switchTab(state, index,payload){
 			state.tabIndex = index
+			if(payload && payload.jobId){
+				state.jobId = payload.jobId
+			}else{
+				state.jobId = ''
+			}
 		},
 		setCurrentResume(state, id){
 			state.currentResume = id

@@ -107,9 +107,35 @@
 				this.isEdit = true
 			}
 			// 这里去请求获取简历详情并更新 resume
-			
+			if(options.id){
+				this.resume.id = options.id
+				this.getResumeDetail()
+			}
 		},
 		methods:{
+			getResumeDetail(){
+				uni.showLoading({
+					mask: true
+				})
+				resumeModel.resumeDetail(this.resume.id).then(res=>{
+					uni.hideLoading()
+					const { code, data, message } = res.data
+					if(code === '0'){
+						this.resume = data
+					}else{
+						uni.showToast({
+							icon: 'none',
+							title: message
+						})
+					}
+				}).catch(err=>{
+					uni.hideLoading()
+					uni.showToast({
+						icon: 'none',
+						title: '获取岗位详情失败'
+					})
+				})
+			},
 			chooseImage(){
 				// 让用户选择相册或者拍照
 				uni.chooseImage({
@@ -157,7 +183,20 @@
 					const { code, message, data } = res.data
 					if(code === '0'){
 						// 成功，做下一步操作
-						
+						// 将id赋值给当前简历
+						if(this.resume.id){
+							uni.showToast({
+								title: '更新简历成功!'
+							})	
+						}else{
+							uni.showToast({
+								title: '新增简历成功!'
+							})
+							this.resume.id = data.id
+						}						
+						uni.navigateBack({
+							delta:1
+						})
 					}else{
 						// 错误处理
 						uni.showToast({

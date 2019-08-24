@@ -48,19 +48,19 @@
 		methods:{
 			show(){
 				const { id=1, collectionJobStatus } = this.data
-				this.$emit('show',collectionJobStatus,id)
+				this.$emit('on-show',collectionJobStatus,id)
 			},
 			showDetail(){
 				const id = this.data.id || 1
-				this.$emit('showDetail',id)
+				this.$emit('on-showDetail',id)
 			},
 			showDeliveryDetail(){
 				const id = this.data.id || 1
-				this.$emit('showDeliveryDetail',id)
+				this.$emit('on-showDeliveryDetail',id)
 			},
 			recommend(){
 				const id = this.data.id || 1
-				this.$emit('recommend',id)
+				this.$emit('on-recommend',id)
 			}
 		}
 	}

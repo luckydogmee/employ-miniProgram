@@ -4,15 +4,15 @@
 		<view class="flex-container">
 			<view class="flex-item">
 				<view class="flex-title">共发布岗位</view>
-				<view class="flex-sub">11个</view>
+				<view class="flex-sub">{{user.jobNum}}</view>
 			</view>
 			<view class="flex-item">
 				<view class="flex-title">已收到简历</view>
-				<view class="flex-sub">24份</view>
+				<view class="flex-sub">{{user.resumeNum}}份</view>
 			</view>
 			<view class="flex-item">
 				<view class="flex-title">累积花费<text class="flex-detail">详单</text></view>
-				<view class="flex-sub">4500元</view>
+				<view class="flex-sub">{{user.sumMoney}}元</view>
 			</view>
 		</view>
 		<view class="button-group">
@@ -28,17 +28,44 @@
 
 <script>
 	import UserItem from '../../../components/UserItem/UserItem.vue'
+	import UserModel from '@/models/user.js'
+	const userModel = new UserModel()
 	export default {
 		data() {
 			return {
-				
+				userData: {
+					// name: '张三'
+				},
+				user:{}
 			}
 		},
 		components: {
 			UserItem,
 		},
+		mounted(){
+			this.UserInfo()
+		},
 		methods: {
-			
+			UserInfo(){
+				userModel.getStoreInfo().then(res=>{
+					//数据绑定
+					const { code, message, data } = res.data
+					if(code === '0'){
+						this.user = data
+						this.userData = data
+					}else{
+						uni.showToast({
+							icon: 'none',
+							title: message
+						})
+					}
+				}).catch(err=>{
+					uni.showToast({
+						icon: 'none',
+						title:'获取用户信息失败'
+					})
+				})
+			},
 		}
 	}
 </script>

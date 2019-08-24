@@ -6,13 +6,13 @@
 		<view class="info">
 			<view class="up">
 				<view class="describe">
-					<view class="describe-item describe-name">王大拿</view>
+					<view class="describe-item describe-name">{{data.name}}{{data.gender == 0 ? " (男)" : " (女)"}}</view>
 					<view class="describe-item describe-record">
-						<text>年龄: 27</text>
-						<text>学历: 大专</text>
+						<text>年龄: {{data.age}}</text>
+						<text>学历: {{returnEducation(data.educationDegree)}}</text>
 					</view>
 					<view class="describe-item describe-expection">
-						期望的工作: 市场专员、房地产市场专员、房地产市场专员、房地产
+						期望工作: {{data.intentionalWork}}
 					</view>
 				</view>	
 				<view class="describe-call">
@@ -45,6 +45,26 @@
 			showDetail(){
 				const id = this.data.id || 1
 				this.$emit('showDetail',id)
+			},
+			returnEducation(item){
+				if(item == null || item == undefined){
+					return
+				}
+				if(item == 0 ){
+					return "初中"
+				}else if(item == 1){
+					return "中专"
+				}else if(item == 2){
+					return "高中"
+				}else if(item == 3){
+					return "大专"
+				}else if(item == 4){
+					return "本科"
+				}else if(item == 5){
+					return "本科以上"
+				}else{
+					return
+				}
 			},
 			detailClick(){
 				this.$emit('on-click-detail')

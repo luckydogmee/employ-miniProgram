@@ -1,13 +1,13 @@
 <template>
 	<view class="project-container">
 		<view class="tab-container">
-			<view class="tab" @click="switchTab('all')" :class="{'active':type === 'all'}">
+			<view class="tab" @click="switchProjectTab('all')" :class="{'active':type === 'all'}">
 				全部岗位
 			</view>
-			<view class="tab" @click="switchTab('started')" :class="{'active':type === 'started'}">
+			<view class="tab" @click="switchProjectTab('started')" :class="{'active':type === 'started'}">
 				已开始
 			</view>
-			<view class="tab" @click="switchTab('notStart')" :class="{'active':type === 'notStart'}">
+			<view class="tab" @click="switchProjectTab('notStart')" :class="{'active':type === 'notStart'}">
 				未开始
 			</view>
 		</view>
@@ -16,10 +16,10 @@
 				v-for="item in projectList"
 				:key="item.id"
 				:data="item"
-				@show="show(collectionJobStatus,id)" 
-				@showDetail="showDetail(item.id)" 
-				@showDeliveryDetail="showDeliveryDetail(id)" 
-				@recommend="recommend(id)" 
+				@on-show="show(collectionJobStatus,id)" 
+				@on-showDetail="showDetail(item.id)" 
+				@on-showDeliveryDetail="showDeliveryDetail(id)" 
+				@on-recommend="recommend(id)" 
 			/>
 		</view>
 	</view>
@@ -41,8 +41,8 @@
 						type: 'notStart'
 					}
 				],
-				// type: 'all',
-				type: 'started',
+				type: 'all',
+				// type: 'started',
 				pageNum: 1,
 				pageSize: 10,
 			}
@@ -85,7 +85,7 @@
 					})
 				})
 			},
-			switchTab(type){
+			switchProjectTab(type){
 				if(type === this.type){
 					return 
 				}
@@ -112,6 +112,8 @@
 				})
 			},
 			recommend(id){
+				this.switchTab(2, {jobId:id})
+				return
 				let success = false
 				// if success
 				

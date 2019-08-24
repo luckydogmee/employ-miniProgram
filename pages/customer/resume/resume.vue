@@ -22,6 +22,9 @@
 				v-for="item in resumeList"
 				:key="item.id"
 				:data="item"
+				@on-click-record="showRecord"
+				@on-click-recommend="recommendHim"
+				@on-click-detail="showDetail(item.id)"
 				@show="show(status,id)" 
 				@showDetail="showDetail(item.id)" 
 				@showDeliveryDetail="showDeliveryDetail(id)" 
@@ -71,22 +74,6 @@
 	export default {
 		data() {
 			return {
-				// recommendRecord:[
-				// 	{
-				// 		id: 1,
-				// 		time: '2019.9.15',
-				// 		post: '销售经理',
-				// 		company: '成都微招科技网络有限公司',
-				// 		status: '已终止'
-				// 	},
-				// 	{
-				// 		id: 2,
-				// 		time: '2019.9.15',
-				// 		post: '销售经理',
-				// 		company: '成都微招科技网络有限公司',
-				// 		status: '已终止'
-				// 	}
-				// ],
 				resumeList: [
 					{
 						type: 'started'
@@ -108,7 +95,7 @@
 			Dialog
 		},
 		computed:{
-			...mapState(['currentResume']),
+			...mapState(['currentResume', 'jobId']),
 			
 		},
 		mounted(){
@@ -118,6 +105,7 @@
 			...mapMutations(['switchTab']),
 			search(keyword){
 				// 做搜索动作
+				
 			},
 			getResumeList(){
 				const type = this.type
@@ -143,9 +131,17 @@
 				}).catch(err=>{
 					uni.showToast({
 						icon: 'none',
-						title:'获取岗位列表信息失败'
+						title:'获取简历信息失败'
 					})
 				})
+			},
+			switchTab(type){
+				if(type === this.type){
+					return 
+				}
+				this.type = type
+				this.pageNum = 1
+				this.getResumeList()
 			},
 			showRecord(){
 				this.$refs.recommendRecord.open()
@@ -153,9 +149,10 @@
 			closeRecommendDialog(){
 				this.$refs.recommendRecord.close()
 			},
-			showDetail(){
+			showDetail(id){
+				console.log("进入方法")
 				uni.navigateTo({
-					url: '../../public/addResume/addResume?isEdit=false',
+					url: '../../public/addResume/addResume?isEdit=false&id='+id,
 					success: res => {},
 					fail: () => {},
 					complete: () => {}
