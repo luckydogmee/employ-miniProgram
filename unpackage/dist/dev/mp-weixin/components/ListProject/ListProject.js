@@ -147,26 +147,26 @@ var _default2 =
 
   },
   props: {
-    data: {
+    projectData: {
       type: Object,
       default: function _default() {return {};} } },
 
 
   methods: {
-    show: function show() {var _this$data =
-      this.data,_this$data$id = _this$data.id,id = _this$data$id === void 0 ? 1 : _this$data$id,collectionJobStatus = _this$data.collectionJobStatus;
+    show: function show() {var _this$projectData =
+      this.projectData,id = _this$projectData.id,collectionJobStatus = _this$projectData.collectionJobStatus;
       this.$emit('on-show', collectionJobStatus, id);
     },
     showDetail: function showDetail() {
-      var id = this.data.id || 1;
+      var id = this.projectData.id;
       this.$emit('on-showDetail', id);
     },
     showDeliveryDetail: function showDeliveryDetail() {
-      var id = this.data.id || 1;
+      var id = this.projectData.id;
       this.$emit('on-showDeliveryDetail', id);
     },
     recommend: function recommend() {
-      var id = this.data.id || 1;
+      var id = this.projectData.id;
       this.$emit('on-recommend', id);
     } } };exports.default = _default2;
 

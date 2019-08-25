@@ -4,27 +4,27 @@
 			<image src="../../static/img/avatar.png" mode=""></image>
 		</view>
 		<view class="info">
-			<view class="info-title">{{data.jobName}}</view>
-			<view class="info-price">{{data.avgSalary}}元/月</view>
+			<view class="info-title">{{projectData.jobName}}</view>
+			<view class="info-price">{{projectData.avgSalary}}元/月</view>
 			<view class="info-location">
 				<image src="../../static/icon/location.png"></image>
-				<text>{{data.address}}</text>
+				<text>{{projectData.address}}</text>
 			</view>
 			<view class="info-date">
-				{{data.createTime}}
+				{{projectData.createTime}}
 			</view>
 		</view>
 		<view class="operation">
 			<!-- <view class="operation-single" v-if="data.type === 'started'"> -->
-			<view class="operation-single" v-if="data.collectionJobStatus == 1">
+			<view class="operation-single" v-if="projectData.collectionJobStatus == 1">
 				<button class="default-btn" @click="showDetail">岗位详情</button>
 				<button class="default-btn" @click="showDeliveryDetail">交付详情</button>
 				<view class="operation-date">
-					{{data.recriptTime}}
+					{{projectData.recriptTime}}
 				</view>	
 			</view>
 			<!-- <view class="operation-single" v-if="data.type === 'notStart'"> -->
-			<view class="operation-single" v-if="data.collectionJobStatus == 0">
+			<view class="operation-single" v-if="projectData.collectionJobStatus == 0">
 				<button class="default-btn" @click="showDetail">岗位详情</button>
 				<button class="default-btn" @click="recommend">立即推荐</button>
 			</view>
@@ -40,26 +40,26 @@
 			};
 		},
 		props: {
-			data: {
+			projectData: {
 				type: Object,
 				default: ()=>({})
 			},
 		},
 		methods:{
 			show(){
-				const { id=1, collectionJobStatus } = this.data
+				const { id, collectionJobStatus } = this.projectData
 				this.$emit('on-show',collectionJobStatus,id)
 			},
 			showDetail(){
-				const id = this.data.id || 1
+				const id = this.projectData.id
 				this.$emit('on-showDetail',id)
 			},
 			showDeliveryDetail(){
-				const id = this.data.id || 1
+				const id = this.projectData.id
 				this.$emit('on-showDeliveryDetail',id)
 			},
 			recommend(){
-				const id = this.data.id || 1
+				const id = this.projectData.id
 				this.$emit('on-recommend',id)
 			}
 		}

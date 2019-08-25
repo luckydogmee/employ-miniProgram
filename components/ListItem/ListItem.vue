@@ -26,7 +26,7 @@
 				</view>				
 			</view>
 			<view class="operation-see">
-				<button type="default" @click="showDetail">查看</button>
+				<button type="default" @click="showDetail">{{btnText}}</button>
 			</view>
 			<view class="operation-date">
 				{{postData.createTime}}发布
@@ -47,6 +47,10 @@
 				type: Object,
 				default: ()=>({})
 			},
+			btnText: {
+				type: String,
+				default: '接单'
+			}
 		},
 		methods:{
 			showDetail(){

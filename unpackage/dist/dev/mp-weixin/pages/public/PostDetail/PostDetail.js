@@ -164,9 +164,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
+var _vuex = __webpack_require__(/*! vuex */ 8);
 var _utils = __webpack_require__(/*! ../../../utils/utils.js */ 85);
-var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 24));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var Cell = function Cell() {return __webpack_require__.e(/*! import() | components/Cell/Cell */ "components/Cell/Cell").then(__webpack_require__.bind(null, /*! ../../../components/Cell/Cell.vue */ 269));};
+var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 24));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var Cell = function Cell() {return __webpack_require__.e(/*! import() | components/Cell/Cell */ "components/Cell/Cell").then(__webpack_require__.bind(null, /*! ../../../components/Cell/Cell.vue */ 207));};
 var jobModel = new _job.default();var _default =
 {
   data: function data() {
@@ -200,7 +200,8 @@ var jobModel = new _job.default();var _default =
       return (0, _utils.computedRequired)(this.jobInfo);
     } },
 
-  methods: {
+  methods: _objectSpread({},
+  (0, _vuex.mapMutations)(['switchTab']), {
     getJobDetail: function getJobDetail() {var _this = this;
       uni.showLoading({
         mask: true });
@@ -224,34 +225,39 @@ var jobModel = new _job.default();var _default =
 
       });
     },
-    recceiveOrder: function recceiveOrder() {var
+    recceiveOrder: function recceiveOrder() {var _this2 = this;var
       id = this.jobInfo.id;
       jobModel.collectionJob(id).then(function (res) {var _res$data2 =
         res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
         if (code === '0') {
           // 执行接单成功后续动作
           uni.showModal({
+            title: '',
             content: '接单成功！\r\n是否立即推荐候选人',
             confirmText: '立即推荐',
-            confirmColor: '#f1f2f7',
+            confirmColor: '#ff9058',
             cancelText: '再等等吧',
-            cancelColor: '#f1f2f7',
-            success: function success(res) {
-              if (res.confirm) {
+            cancelColor: '#ff9058',
+            success: function success(response) {
+              if (response.confirm) {
+                _this2.switchTab({ index: 2, jobId: id });
                 uni.reLaunch({
                   url: '../../customer/main/main' });
 
 
-              } else if (res.cancel) {
-                uni.showModel({
+              } else if (response.cancel) {
+                uni.showModal({
+                  title: '',
                   content: '您可进入【我的项目】继续操作',
-                  confirmText: '知道了' });
+                  confirmText: '知道了',
+                  confirmColor: '#ff9058',
+                  showCancel: false });
 
               }
+            },
+            fail: function fail(err) {
+              console.log(err);
             } });
-
-          uni.showToast({
-            title: '接单成功' });
 
         } else {
           uni.showToast({
@@ -265,7 +271,7 @@ var jobModel = new _job.default();var _default =
           title: '操作失败，请稍后再试' });
 
       });
-    } } };exports.default = _default;
+    } }) };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

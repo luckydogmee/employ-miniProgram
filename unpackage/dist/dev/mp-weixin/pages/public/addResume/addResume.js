@@ -173,6 +173,7 @@ var resumeModel = new _resume.default();var _default =
     return {
       isEdit: true, // 是否编辑状态
       avatar: '../../../static/img/avatar.png', //头像地址
+      changedAvatar: false,
       resume: {
         id: '',
         name: '',
@@ -243,16 +244,16 @@ var resumeModel = new _resume.default();var _default =
 
       });
     },
-    chooseImage: function chooseImage() {var _this2 = this;
+    chooseImage: function chooseImage() {
+      var that = this;
       // 让用户选择相册或者拍照
       uni.chooseImage({
         count: 1,
         sizeType: 'compressed',
         sourceType: ['album', 'camera'],
         success: function success(res) {
-          _this2.avatar = res.tempFilePaths[0];
-          // 执行上传头像
-
+          that.changedAvatar = true;
+          that.avatar = res.tempFilePaths[0];
         } });
 
     },
@@ -283,27 +284,34 @@ var resumeModel = new _resume.default();var _default =
     intentionalWorkChange: function intentionalWorkChange(e) {
       this.resume.intentionalWork = e;
     },
-    submit: function submit() {var _this3 = this;
+    submit: function submit() {
+      var that = this;
       // 做表单验证
+
+      uni.showLoading({
+        title: '提交中...' });
+
       var array = Object.values(this.resume);
       resumeModel.saveResume.apply(resumeModel, _toConsumableArray(array)).then(function (res) {var _res$data2 =
         res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
         if (code === '0') {
-          // 成功，做下一步操作
-          // 将id赋值给当前简历
-          if (_this3.resume.id) {
-            uni.showToast({
-              title: '更新简历成功!' });
+          // 成功,得到id 再上传头像
+          // 执行上传头像
+          if (that.changedAvatar) {
+            uni.uploadFile({
+              url: '/',
+              filePath: that.avatar,
+              name: 'file',
+              formData: {
+                id: data.id },
+
+              success: function success(response) {
+                showResponse();
+              } });
 
           } else {
-            uni.showToast({
-              title: '新增简历成功!' });
-
-            _this3.resume.id = data.id;
+            showResponse();
           }
-          uni.navigateBack({
-            delta: 1 });
-
         } else {
           // 错误处理
           uni.showToast({
@@ -317,6 +325,22 @@ var resumeModel = new _resume.default();var _default =
           title: '提交失败，请稍候再试' });
 
       });
+    },
+    showResponse: function showResponse() {
+      if (this.resume.id) {
+        uni.showToast({
+          title: '更新简历成功!' });
+
+      } else {
+        uni.showToast({
+          title: '新增简历成功!' });
+
+      }
+      setTimeout(function () {
+        uni.navigateBack({
+          delta: 1 });
+
+      }, 1500);
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

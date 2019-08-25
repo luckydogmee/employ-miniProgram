@@ -2,17 +2,17 @@
 	<view class="add-container">
 		<view class="add-avatar">
 			<view class="avatar old-avatar">
-				<image :src="avatar" mode=""></image>
-				<view v-if="isEdit" class="text">默认头像</view>
+				<image :src="avatar" mode="" @click="chooseImage"></image>
+				<!-- <view v-if="isEdit" class="text">默认头像</view> -->
 			</view>
-			<view v-if="isEdit" class="avatar new-avatar">
+			<!-- <view v-if="isEdit" class="avatar new-avatar">
 				<image 
 					class="avatar new-avatar" 
 					src="../../../static/icon/add-avatar.png" 
 					mode=""
 					@click="chooseImage"
 				></image>
-			</view>
+			</view> -->
 		</view>
 		<InputCell label="姓名" @on-input="nameChange" :required="isEdit" :disabled="!isEdit" :content="resume.name"></InputCell>
 		<InputCell label="性别" :required="isEdit" :disabled="true" :withPlugin="true" :hasSlot="true" :content="genderText" placeholder="点击选择">
@@ -66,6 +66,7 @@
 			return {
 				isEdit: true, // 是否编辑状态
 				avatar: '../../../static/img/avatar.png', //头像地址
+				changedAvatar: false,
 				resume: {
 					id: '',
 					name: '',
@@ -137,15 +138,15 @@
 				})
 			},
 			chooseImage(){
+				const that = this
 				// 让用户选择相册或者拍照
 				uni.chooseImage({
 					count:1,
 					sizeType: 'compressed',
 					sourceType: ['album', 'camera'],
 					success: (res) => {
-						this.avatar = res.tempFilePaths[0]
-						// 执行上传头像
-						
+						that.changedAvatar = true
+						that.avatar = res.tempFilePaths[0]
 					}
 				})
 			},
@@ -177,26 +178,33 @@
 				this.resume.intentionalWork = e
 			},
 			submit(){
+				const that = this
 				// 做表单验证
+				
+				uni.showLoading({
+					title: '提交中...'
+				})
 				const array = Object.values(this.resume)
 				resumeModel.saveResume(...array).then(res=>{
 					const { code, message, data } = res.data
 					if(code === '0'){
-						// 成功，做下一步操作
-						// 将id赋值给当前简历
-						if(this.resume.id){
-							uni.showToast({
-								title: '更新简历成功!'
+						// 成功,得到id 再上传头像
+						// 执行上传头像
+						if(that.changedAvatar){
+							uni.uploadFile({
+								url: '/',
+								filePath: that.avatar,
+								name: 'file',
+								formData: {
+									id: data.id
+								},
+								success(response) {
+									showResponse()
+								}
 							})	
 						}else{
-							uni.showToast({
-								title: '新增简历成功!'
-							})
-							this.resume.id = data.id
-						}						
-						uni.navigateBack({
-							delta:1
-						})
+							showResponse()
+						}
 					}else{
 						// 错误处理
 						uni.showToast({
@@ -210,6 +218,22 @@
 						title: '提交失败，请稍候再试'
 					})
 				})
+			},
+			showResponse(){
+				if(this.resume.id){
+					uni.showToast({
+						title: '更新简历成功!'
+					})	
+				}else{
+					uni.showToast({
+						title: '新增简历成功!'
+					})
+				}
+				setTimeout(()=>{
+					uni.navigateBack({
+						delta:1
+					})	
+				},1500)
 			}
 		}
 	}

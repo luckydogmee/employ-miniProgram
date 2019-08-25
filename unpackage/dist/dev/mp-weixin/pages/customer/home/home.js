@@ -179,7 +179,9 @@ var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 24)
 //
 //
 //
-var ListItem = function ListItem() {return __webpack_require__.e(/*! import() | components/ListItem/ListItem */ "components/ListItem/ListItem").then(__webpack_require__.bind(null, /*! @/components/ListItem/ListItem.vue */ 235));};var userModel = new _user.default();var postModel = new _job.default();var _default = { data: function data() {return { background: ['color1', 'color2', 'color3'], indicatorDots: true, autoplay: true, interval: 2000, duration: 500, postList: [], pageNum: 1, pageSize: 10, keyword: '', label: '' };}, components: { ListItem: ListItem }, mounted: function mounted() {this.getJobList();}, methods: { chooseImage: function chooseImage() {uni.chooseImage({ success: function success(res) {var tempFilePath = res.tempFilePaths;uni.uploadFile({ url: 'http://baidu.com', filePath: tempFilePath[0], name: 'file', formData: {},
+var ListItem = function ListItem() {return __webpack_require__.e(/*! import() | components/ListItem/ListItem */ "components/ListItem/ListItem").then(__webpack_require__.bind(null, /*! @/components/ListItem/ListItem.vue */ 235));};var userModel = new _user.default();var postModel = new _job.default();var _default = { data: function data() {return { background: ['color1', 'color2', 'color3'], indicatorDots: true, autoplay: true, interval: 2000, duration: 500, postList: [], pageNum: 1, pageSize: 10, keyword: '', label: '', userType: 0 };}, components: { ListItem: ListItem }, mounted: function mounted() {this.userType = uni.getStorageSync('userType') || 0;this.getJobList();}, methods: { chooseImage: function chooseImage() {uni.chooseImage({ success: function success(res) {var tempFilePath = res.tempFilePaths;uni.uploadFile({ url: 'http://baidu.com', filePath: tempFilePath[0], name: 'file', formData: {},
+
+
             success: function success(uploadFileRes) {
               console.log(uploadFileRes.data);
             } });

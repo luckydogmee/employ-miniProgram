@@ -219,7 +219,7 @@ var jobModel = new _job.default();var _default =
 
     },
     recommend: function recommend(id) {
-      this.switchTab(2, { jobId: id });
+      this.switchTab({ index: 2, jobId: id });
       return;
       var success = false;
       // if success

@@ -152,7 +152,11 @@ var _default2 =
   props: {
     postData: {
       type: Object,
-      default: function _default() {return {};} } },
+      default: function _default() {return {};} },
+
+    btnText: {
+      type: String,
+      default: '接单' } },
 
 
   methods: {

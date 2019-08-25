@@ -47,7 +47,7 @@
 
 <script>
 	import Cell from '../../../components/Cell/Cell.vue'
-	
+	import { mapMutations } from 'vuex'
 	import { computedRequired } from '../../../utils/utils.js'
 	import JobModel from '@/models/job.js'
 	const jobModel = new JobModel()
@@ -84,6 +84,7 @@
 			}
 		},
 		methods: {
+			...mapMutations(['switchTab']),
 			getJobDetail(){
 				uni.showLoading({
 					mask: true
@@ -114,27 +115,32 @@
 					if(code === '0'){
 						// 执行接单成功后续动作
 						uni.showModal({
+							title: '',
 							content: '接单成功！\r\n是否立即推荐候选人',
 							confirmText: '立即推荐',
-							confirmColor: '#f1f2f7',
+							confirmColor: '#ff9058',
 							cancelText: '再等等吧',
-							cancelColor: '#f1f2f7',
-							success(res) {
-								if(res.confirm){
+							cancelColor: '#ff9058',
+							success: (response)=>{
+								if(response.confirm){
+									this.switchTab({index: 2,jobId:id})
 									uni.reLaunch({
 										url: '../../customer/main/main'
 									})
 									
-								}else if(res.cancel){
-									uni.showModel({
+								}else if(response.cancel){
+									uni.showModal({
+										title: '',
 										content: '您可进入【我的项目】继续操作',
-										confirmText: '知道了'
+										confirmText: '知道了',
+										confirmColor: '#ff9058',
+										showCancel: false
 									})
 								}
+							},
+							fail: err=>{
+								console.log(err)
 							}
-						})
-						uni.showToast({
-							title: '接单成功'
 						})
 					}else{
 						uni.showToast({

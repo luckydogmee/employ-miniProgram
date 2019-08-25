@@ -74,7 +74,7 @@
 		methods:{
 			...mapMutations(['switchTab']),
 			switchTabBar(type){
-				this.switchTab(type)
+				this.switchTab({index: type})
 			},
 			login(){
 				const that = this
@@ -139,25 +139,15 @@
 								title: '登录中，请稍候'
 							})
 							userModel.getBindPhoneNumber(encryptedData, iv).then(res=>{
-								uni.hideLoading()
 								const { code, data, message } = res.data
 								// 判断是成功了,在这里判断是否已经绑定手机号，以及是否完善信息，待写
 								if (code === '0') {
 									// 将token存入缓存中
 									uni.setStorageSync('phoneNumber',data)
-									uni.setStorageSync('isLogin', 0)
-									if(data.isRegister === '0'){
-										uni.setStorageSync('isRegister', 0)
-										uni.showToast({
-											title:'登录成功'
-										})		
-									}else{
-										uni.navigateTo({
-											url: '../../user/inputInfo/inputInfo',
-										})
-									}
+									that.fastLogin(data)
 									
 								}else{
+									uni.hideLoading()
 									uni.showToast({
 										icon: 'none',
 										title:'登录失败，请重新授权'
@@ -165,6 +155,7 @@
 								}	
 							})
 						}else{
+							uni.hideLoading()
 							uni.showToast({
 								icon: 'none',
 								title:'获取code失败'
@@ -172,8 +163,40 @@
 						}
 					},
 					fail(err) {
-						
+						console.log(err)
 					}
+				})
+			},
+			fastLogin(phoneNumber){
+				const that = this
+				userModel.fastLogin(phoneNumber).then(res=>{
+					uni.hideLoading()
+					const { code, data, message } = res.data
+					if(code === '0'){
+						that.hideLogin()
+						uni.setStorageSync('isLogin', 0)
+						uni.setStorageSync('userType', data.type)
+						if(data.isRegister === '0'){
+							uni.setStorageSync('isRegister', 0)
+							uni.showToast({
+								title:'登录成功'
+							})		
+						}else{
+							uni.navigateTo({
+								url: '../../user/inputInfo/inputInfo',
+							})
+						}
+					}else{
+						uni.showToast({
+							icon: 'none',
+							title: message
+						})
+					}
+				}).catch(err=>{
+					uni.showToast({
+						icon: 'none',
+						title: '登录失败，请稍候重试'
+					})
 				})
 			},
 			toLogin(){

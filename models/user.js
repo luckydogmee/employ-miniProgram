@@ -27,6 +27,16 @@ class UserModel  extends HTTP {
 			}
 		})
 	}
+	// 绑定电话号码
+	fastLogin(phoneNumber){
+		return this.request({
+			url: '/login/fastLogin',
+			method: 'POST',
+			data: {
+				phoneNumber
+			}
+		})
+	}
 	// 获取验证码
 	getVerifyCode(phone, type){
 		let url = null

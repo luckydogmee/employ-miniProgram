@@ -171,6 +171,49 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _vuex = __webpack_require__(/*! vuex */ 8);
 
 
@@ -189,10 +232,14 @@ var resumeModel = new _resume.default();var _default =
         type: 'notStart' }],
 
 
-      type: 'started',
+      type: 'all',
       pageNum: 1,
       pageSize: 10,
-      showDialog: false };
+      showDialog: false,
+      resumeId: '',
+      date: '',
+      timeStart: '',
+      timeEnd: '' };
 
   },
   components: {
@@ -257,16 +304,43 @@ var resumeModel = new _resume.default();var _default =
       this.$refs.recommendRecord.close();
     },
     showDetail: function showDetail(id) {
-      console.log("进入方法");
       uni.navigateTo({
-        url: '../../public/addResume/addResume?isEdit=false&id=' + id,
+        url: '../../public/addResume/addResume?isEdit=true&id=' + id,
         success: function success(res) {},
         fail: function fail() {},
         complete: function complete() {} });
 
     },
-    recommendHim: function recommendHim() {
+    recommendHim: function recommendHim(id) {
+      var jobId = this.jobId;
+      this.resumeId = id;
+      if (jobId) {
+        this.$refs.selectDate.open();
+      }
+    },
+    pushResume: function pushResume() {
+      var jobId = this.jobId;
+      var resumeId = this.resumeId;
+      var interviewDate = this.date;
+      var interviewTime = this.timeStart + this.timeEnd;
+      resumeModel.pushResume(jobId, resumeId, interviewDate, interviewTime).then(function (res) {var _res$data2 =
+        res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
+        if (code === '0') {
+          // 推荐成功
+          uni.showModal({
+            title: '',
+            content: '推荐成功!\r\n您可在“我的项目”栏目查看该人员的面试、入职流程',
+            showCancel: false,
+            confirmText: '知道了',
+            success: function success(res) {} });
 
+        } else {
+          uni.showToast({
+            icon: 'none',
+            title: message });
+
+        }
+      });
     },
     showAddResume: function showAddResume() {
       uni.navigateTo({
@@ -275,6 +349,15 @@ var resumeModel = new _resume.default();var _default =
         fail: function fail() {},
         complete: function complete() {} });
 
+    },
+    bindDateChange: function bindDateChange(e) {
+      this.date = e.target.value;
+    },
+    bindTimeStartChange: function bindTimeStartChange(e) {
+      this.timeStart = e.target.value;
+    },
+    bindTimeEndChange: function bindTimeEndChange(e) {
+      this.timeEnd = e.target.value;
     } }) };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

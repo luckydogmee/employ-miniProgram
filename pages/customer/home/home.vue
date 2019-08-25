@@ -29,7 +29,7 @@
 			</view>
 		</view>
 		<view class="list-container">
-			<ListItem v-for="item in postList" :key="item.id" :postData="item" @showDetail="showDetail" />
+			<ListItem v-for="item in postList" :key="item.id" :postData="item" @showDetail="showDetail" :btnText="userType===0?'接单':'查看'" />
 		</view>
 	</view>
 </template>
@@ -52,13 +52,15 @@
 				pageNum: 1,
 				pageSize: 10,
 				keyword: '',
-				label:''
+				label:'',
+				userType: 0
 			}
 		}, 
 		components:{
 			ListItem
 		},
 		mounted() {
+			this.userType = uni.getStorageSync('userType') || 0
 			this.getJobList()
 		},
 		methods:{

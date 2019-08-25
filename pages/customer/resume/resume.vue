@@ -21,7 +21,7 @@
 			<ListResume
 				v-for="item in resumeList"
 				:key="item.id"
-				:data="item"
+				:resumeData="item"
 				@on-click-record="showRecord"
 				@on-click-recommend="recommendHim"
 				@on-click-detail="showDetail(item.id)"
@@ -57,6 +57,49 @@
 				<image class="close-icon" src="../../../static/icon/close.png" @click="closeRecommendDialog" />
 			</view>
 		</uni-popup>
+		<!-- 选择面试时间dialog -->
+		<uni-popup ref="selectDate" custom="true" :showMask="false" :maskClick="false">
+			<view class="selectDateDialog">
+				<view class="selectDate-title">
+					请选择面试时间
+				</view>
+				<view class="selectDate-content">
+					<view class="selectDate-picker date-picker">
+						<view class="selectDate-label">
+							日期：
+						</view>
+						<view class="selectDate-content">
+							<picker mode="date" :value="date" :start="startDate" :end="endDate" @change="bindDateChange">
+								<view class="view date-view">{{date}}</view>
+							</picker>
+						</view>
+					</view>
+					<view class="selectDate-picker time-picker">
+						<view class="selectDate-label">
+							时间：
+						</view>
+						<view class="selectDate-content">
+							<picker mode="time" :value="timeStart" @change="bindTimeStartChange">
+								<view class="view time-view">{{timeStart}}</view>
+							</picker>
+							<view class="view-line">-</view>
+							<picker mode="time" :value="timeEnd" @change="bindTimeEndChange">
+								<view class="view time-view">{{timeEnd}}</view>
+							</picker>
+						</view>
+					</view>
+				</view>
+				<view class="selectDate-footer">
+					<view class="selectDate-btn confirm" @click="pushResume">
+						确认推荐
+					</view>
+					<view class="selectDate-btn cancel">
+						再等等看
+					</view>
+				</view>
+				<!-- <image class="close-icon" src="../../../static/icon/close.png" @click="closeRecommendDialog" /> -->
+			</view>
+		</uni-popup>
 		<Dialog :showDialog="showDialog">
 			
 		</Dialog>
@@ -82,10 +125,14 @@
 						type: 'notStart'
 					}
 				],
-				type: 'started',
+				type: 'all',
 				pageNum: 1,
 				pageSize: 10,
-				showDialog: false
+				showDialog: false,
+				resumeId: '',
+				date: '',
+				timeStart: '',
+				timeEnd: ''
 			}
 		},
 		components:{
@@ -150,16 +197,43 @@
 				this.$refs.recommendRecord.close()
 			},
 			showDetail(id){
-				console.log("进入方法")
 				uni.navigateTo({
-					url: '../../public/addResume/addResume?isEdit=false&id='+id,
+					url: '../../public/addResume/addResume?isEdit=true&id='+id,
 					success: res => {},
 					fail: () => {},
 					complete: () => {}
 				});
 			},
-			recommendHim(){
-				
+			recommendHim(id){
+				const jobId = this.jobId
+				this.resumeId = id
+				if(jobId){
+					this.$refs.selectDate.open()
+				}
+			},	
+			pushResume(){
+				const jobId = this.jobId
+				const resumeId = this.resumeId
+				const interviewDate = this.date
+				const interviewTime = this.timeStart + this.timeEnd
+				resumeModel.pushResume(jobId, resumeId, interviewDate, interviewTime).then(res=>{
+					const { code, message, data } = res.data
+					if(code === '0'){
+						// 推荐成功
+						uni.showModal({
+							title: '',
+							content: '推荐成功!\r\n您可在“我的项目”栏目查看该人员的面试、入职流程',
+							showCancel: false,
+							confirmText: '知道了',
+							success: res => {},
+						})
+					}else{
+						uni.showToast({
+							icon: 'none',
+							title: message
+						})
+					}
+				})
 			},
 			showAddResume(){
 				uni.navigateTo({
@@ -168,7 +242,16 @@
 					fail: () => {},
 					complete: () => {}
 				});
-			}
+			},
+			bindDateChange(e){
+				this.date = e.target.value
+			},
+			bindTimeStartChange(e){
+				this.timeStart = e.target.value
+			},
+			bindTimeEndChange(e){
+				this.timeEnd = e.target.value
+			},
 		}
 	}
 </script>
@@ -275,4 +358,86 @@
 		border: 1upx solid red;
 		box-sizing: border-box;
 	}
+	.selectDateDialog{
+		height: 360upx;
+		width: 461upx;
+	}
+	.selectDate-footer{
+		height: 86upx;
+		width: 462upx;
+		padding-top: 1upx;
+		box-sizing: border-box;
+		display: flex;
+		justify-content:space-between;
+		background:#e7e7e7;
+		align-items: center;
+		.selectDate-btn{
+			width: 230upx;
+			height: 100%;
+			line-height: 84upx;
+			background: #FFFFFF;
+			text-align: center;
+			font-size: 30upx;
+			color: #ff8353;
+		}
+	}
+	.selectDate-title{
+		color: #ff9760;
+		font-size: 22upx;
+		line-height: 60upx;
+		background: #FFFFFF;
+		font-weight: blod;
+		padding-left: 30upx;
+	}
+	.selectDate-content{
+		background: #FFFFFF;
+		height: 210upx;
+		width: 462upx;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+		.selectDate-picker{
+			display: flex;
+			justify-content: center;
+			height: 46upx;
+			align-items: center;
+			width: 256upx;
+			flex-wrap: wrap;
+			.selectDate-label{
+				width: 72upx;
+				height: 30upx;
+				font-size: 22upx;
+				color: #565656;
+			}
+			.selectDate-content{
+				width: 184upx;
+				height: 30upx;
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				justify-content: center;
+			}
+			.date-view{
+				width: 184upx;
+				height: 30upx;
+				font-size: 20upx;
+				color: #666;
+				text-align: center;
+				border: 1upx solid #fe9661;
+			}
+			.time-view{
+				width: 80upx;
+				height: 30upx;
+				font-size: 20upx;
+				color: #666;
+				text-align: center;
+				border: 1upx solid #fe9661;
+			}
+			.view-line{
+				width: 20upx;
+			}
+		}	
+	}
+	
 </style>

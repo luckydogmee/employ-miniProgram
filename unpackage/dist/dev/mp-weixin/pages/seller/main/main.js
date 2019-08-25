@@ -144,7 +144,7 @@ var _choose = _interopRequireDefault(__webpack_require__(/*! ../choose/choose.vu
   methods: _objectSpread({},
   (0, _vuex.mapMutations)(['switchTab']), {
     switchTabBar: function switchTabBar(type) {
-      this.switchTab(type);
+      this.switchTab({ index: type });
     } }) };exports.default = _default;
 
 /***/ }),

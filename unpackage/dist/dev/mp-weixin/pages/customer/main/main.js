@@ -190,7 +190,7 @@ var userModel = new _user2.default();var _default =
   methods: _objectSpread({},
   (0, _vuex.mapMutations)(['switchTab']), {
     switchTabBar: function switchTabBar(type) {
-      this.switchTab(type);
+      this.switchTab({ index: type });
     },
     login: function login() {
       var that = this;
@@ -254,26 +254,16 @@ var userModel = new _user2.default();var _default =
             uni.showLoading({
               title: '登录中，请稍候' });
 
-            userModel.getBindPhoneNumber(encryptedData, iv).then(function (res) {
-              uni.hideLoading();var _res$data2 =
+            userModel.getBindPhoneNumber(encryptedData, iv).then(function (res) {var _res$data2 =
               res.data,code = _res$data2.code,data = _res$data2.data,message = _res$data2.message;
               // 判断是成功了,在这里判断是否已经绑定手机号，以及是否完善信息，待写
               if (code === '0') {
                 // 将token存入缓存中
                 uni.setStorageSync('phoneNumber', data);
-                uni.setStorageSync('isLogin', 0);
-                if (data.isRegister === '0') {
-                  uni.setStorageSync('isRegister', 0);
-                  uni.showToast({
-                    title: '登录成功' });
-
-                } else {
-                  uni.navigateTo({
-                    url: '../../user/inputInfo/inputInfo' });
-
-                }
+                that.fastLogin(data);
 
               } else {
+                uni.hideLoading();
                 uni.showToast({
                   icon: 'none',
                   title: '登录失败，请重新授权' });
@@ -281,6 +271,7 @@ var userModel = new _user2.default();var _default =
               }
             });
           } else {
+            uni.hideLoading();
             uni.showToast({
               icon: 'none',
               title: '获取code失败' });
@@ -288,9 +279,41 @@ var userModel = new _user2.default();var _default =
           }
         },
         fail: function fail(err) {
-
+          console.log(err);
         } });
 
+    },
+    fastLogin: function fastLogin(phoneNumber) {
+      var that = this;
+      userModel.fastLogin(phoneNumber).then(function (res) {
+        uni.hideLoading();var _res$data3 =
+        res.data,code = _res$data3.code,data = _res$data3.data,message = _res$data3.message;
+        if (code === '0') {
+          that.hideLogin();
+          uni.setStorageSync('isLogin', 0);
+          uni.setStorageSync('userType', data.type);
+          if (data.isRegister === '0') {
+            uni.setStorageSync('isRegister', 0);
+            uni.showToast({
+              title: '登录成功' });
+
+          } else {
+            uni.navigateTo({
+              url: '../../user/inputInfo/inputInfo' });
+
+          }
+        } else {
+          uni.showToast({
+            icon: 'none',
+            title: message });
+
+        }
+      }).catch(function (err) {
+        uni.showToast({
+          icon: 'none',
+          title: '登录失败，请稍候重试' });
+
+      });
     },
     toLogin: function toLogin() {
       uni.navigateTo({
@@ -515,7 +538,7 @@ var jobModel = new _job.default();var _default =
 
     },
     recommend: function recommend(id) {
-      this.switchTab(2, { jobId: id });
+      this.switchTab({ index: 2, jobId: id });
       return;
       var success = false;
       // if success
@@ -737,6 +760,49 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _vuex = __webpack_require__(/*! vuex */ 8);
 
 
@@ -755,10 +821,14 @@ var resumeModel = new _resume.default();var _default =
         type: 'notStart' }],
 
 
-      type: 'started',
+      type: 'all',
       pageNum: 1,
       pageSize: 10,
-      showDialog: false };
+      showDialog: false,
+      resumeId: '',
+      date: '',
+      timeStart: '',
+      timeEnd: '' };
 
   },
   components: {
@@ -823,16 +893,43 @@ var resumeModel = new _resume.default();var _default =
       this.$refs.recommendRecord.close();
     },
     showDetail: function showDetail(id) {
-      console.log("进入方法");
       uni.navigateTo({
-        url: '../../public/addResume/addResume?isEdit=false&id=' + id,
+        url: '../../public/addResume/addResume?isEdit=true&id=' + id,
         success: function success(res) {},
         fail: function fail() {},
         complete: function complete() {} });
 
     },
-    recommendHim: function recommendHim() {
+    recommendHim: function recommendHim(id) {
+      var jobId = this.jobId;
+      this.resumeId = id;
+      if (jobId) {
+        this.$refs.selectDate.open();
+      }
+    },
+    pushResume: function pushResume() {
+      var jobId = this.jobId;
+      var resumeId = this.resumeId;
+      var interviewDate = this.date;
+      var interviewTime = this.timeStart + this.timeEnd;
+      resumeModel.pushResume(jobId, resumeId, interviewDate, interviewTime).then(function (res) {var _res$data2 =
+        res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
+        if (code === '0') {
+          // 推荐成功
+          uni.showModal({
+            title: '',
+            content: '推荐成功!\r\n您可在“我的项目”栏目查看该人员的面试、入职流程',
+            showCancel: false,
+            confirmText: '知道了',
+            success: function success(res) {} });
 
+        } else {
+          uni.showToast({
+            icon: 'none',
+            title: message });
+
+        }
+      });
     },
     showAddResume: function showAddResume() {
       uni.navigateTo({
@@ -841,6 +938,15 @@ var resumeModel = new _resume.default();var _default =
         fail: function fail() {},
         complete: function complete() {} });
 
+    },
+    bindDateChange: function bindDateChange(e) {
+      this.date = e.target.value;
+    },
+    bindTimeStartChange: function bindTimeStartChange(e) {
+      this.timeStart = e.target.value;
+    },
+    bindTimeEndChange: function bindTimeEndChange(e) {
+      this.timeEnd = e.target.value;
     } }) };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

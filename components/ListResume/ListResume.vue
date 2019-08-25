@@ -6,13 +6,13 @@
 		<view class="info">
 			<view class="up">
 				<view class="describe">
-					<view class="describe-item describe-name">{{data.name}}{{data.gender == 0 ? " (男)" : " (女)"}}</view>
+					<view class="describe-item describe-name">{{resumeData.name}}{{resumeData.gender == 0 ? " (男)" : " (女)"}}</view>
 					<view class="describe-item describe-record">
-						<text>年龄: {{data.age}}</text>
-						<text>学历: {{returnEducation(data.educationDegree)}}</text>
+						<text>年龄: {{resumeData.age}}</text>
+						<text>学历: {{returnEducation(resumeData.educationDegree)}}</text>
 					</view>
 					<view class="describe-item describe-expection">
-						期望工作: {{data.intentionalWork}}
+						期望工作: {{resumeData.intentionalWork}}
 					</view>
 				</view>	
 				<view class="describe-call">
@@ -36,14 +36,14 @@
 			};
 		},
 		props: {
-			data: {
+			resumeData: {
 				type: Object,
 				default: ()=>({})
 			},
 		},
 		methods:{
 			showDetail(){
-				const id = this.data.id || 1
+				const id = this.resumeData.id || 1
 				this.$emit('showDetail',id)
 			},
 			returnEducation(item){
@@ -67,13 +67,13 @@
 				}
 			},
 			detailClick(){
-				this.$emit('on-click-detail')
+				this.$emit('on-click-detail',this.resumeData.id)
 			},
 			recordClick(){
-				this.$emit('on-click-record')
+				this.$emit('on-click-record',this.resumeData.id)
 			},
 			recommedClick(){
-				this.$emit('on-click-recommend')
+				this.$emit('on-click-recommend',this.resumeData.id)
 			},
 			callClick(){
 				this.$emit('on-click-call')

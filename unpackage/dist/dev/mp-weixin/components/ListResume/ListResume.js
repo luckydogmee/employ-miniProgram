@@ -73,7 +73,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var m0 = _vm.returnEducation(_vm.data.educationDegree)
+  var m0 = _vm.returnEducation(_vm.resumeData.educationDegree)
   _vm.$mp.data = Object.assign(
     {},
     {
@@ -152,14 +152,14 @@ var _default2 =
 
   },
   props: {
-    data: {
+    resumeData: {
       type: Object,
       default: function _default() {return {};} } },
 
 
   methods: {
     showDetail: function showDetail() {
-      var id = this.data.id || 1;
+      var id = this.resumeData.id || 1;
       this.$emit('showDetail', id);
     },
     returnEducation: function returnEducation(item) {
@@ -183,13 +183,13 @@ var _default2 =
       }
     },
     detailClick: function detailClick() {
-      this.$emit('on-click-detail');
+      this.$emit('on-click-detail', this.resumeData.id);
     },
     recordClick: function recordClick() {
-      this.$emit('on-click-record');
+      this.$emit('on-click-record', this.resumeData.id);
     },
     recommedClick: function recommedClick() {
-      this.$emit('on-click-recommend');
+      this.$emit('on-click-recommend', this.resumeData.id);
     },
     callClick: function callClick() {
       this.$emit('on-click-call');

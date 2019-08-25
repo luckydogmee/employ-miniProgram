@@ -15,11 +15,11 @@
 			<ListProject 
 				v-for="item in projectList"
 				:key="item.id"
-				:data="item"
+				:projectData="item"
 				@on-show="show(collectionJobStatus,id)" 
-				@on-showDetail="showDetail(item.id)" 
-				@on-showDeliveryDetail="showDeliveryDetail(id)" 
-				@on-recommend="recommend(id)" 
+				@on-showDetail="showDetail" 
+				@on-showDeliveryDetail="showDeliveryDetail" 
+				@on-recommend="recommend" 
 			/>
 		</view>
 	</view>
@@ -112,7 +112,7 @@
 				})
 			},
 			recommend(id){
-				this.switchTab(2, {jobId:id})
+				this.switchTab({index:2,jobId:id})
 				return
 				let success = false
 				// if success

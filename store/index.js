@@ -25,8 +25,8 @@ const store = new Vuex.Store({
             state.userName = "";
             state.hasLogin = false;
         },
-		switchTab(state, index,payload){
-			state.tabIndex = index
+		switchTab(state, payload){
+			state.tabIndex = payload.index
 			if(payload && payload.jobId){
 				state.jobId = payload.jobId
 			}else{

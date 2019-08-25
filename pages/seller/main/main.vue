@@ -39,7 +39,7 @@
 		methods:{
 			...mapMutations(['switchTab']),
 			switchTabBar(type){
-				this.switchTab(type)
+				this.switchTab({index:type})
 			},
 		}
 	}
