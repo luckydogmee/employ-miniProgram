@@ -153,8 +153,8 @@ var _default =
 {
   data: function data() {
     return {
-      activeTab: 0 };
-
+      // activeTab: 0
+    };
   },
   props: {
     type: {
@@ -166,9 +166,11 @@ var _default =
       default: 0 } },
 
 
-  mounted: function mounted() {
-    this.activeTab = this.index;
-  },
+  computed: {
+    activeTab: function activeTab() {
+      return this.index;
+    } },
+
   methods: {
     switchTab: function switchTab(index) {
       var token = uni.getStorageSync('token');
@@ -179,7 +181,7 @@ var _default =
           return;
         }
       }
-      this.activeTab = index;
+      // this.activeTab = index
       this.$emit('switchTab', index);
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

@@ -246,4 +246,10 @@
 .selectDate-content .selectDate-picker .view-line {
       width: 20rpx;
 }
+.selectDate-content .text {
+    color: #8F8F94;
+    text-align: center;
+    line-height: 40rpx;
+    font-size: 20rpx;
+}
 

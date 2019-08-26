@@ -1,7 +1,8 @@
 <template>
 	<view class="list-item">
 		<view class="image">
-			<image src="../../static/img/avatar.png" mode=""></image>
+			<!-- <image src="../../static/img/avatar.png" mode=""></image> -->
+			<image :src="resumeData.avatar" mode=""></image>
 		</view>
 		<view class="info">
 			<view class="up">

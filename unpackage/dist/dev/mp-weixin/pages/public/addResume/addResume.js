@@ -287,6 +287,46 @@ var resumeModel = new _resume.default();var _default =
     submit: function submit() {
       var that = this;
       // 做表单验证
+      console.log(that.changedAvatar);
+      if (!that.changedAvatar) {
+        that.showMessage("头像不能为空！");
+        return;
+      }
+      if (that.isNull(that.resume.name)) {
+        that.showMessage("姓名不能为空！");
+        return;
+      }
+      if (that.isNull(that.resume.gender)) {
+        that.showMessage("性别不能为空！");
+        return;
+      }
+      if (that.isNull(that.resume.educationDegree)) {
+        that.showMessage("学历不能为空！");
+        return;
+      }
+      if (that.isNull(that.resume.phone)) {
+        that.showMessage("电话不能为空！");
+        return;
+      } else if (!that.checkPhone(that.resume.phone)) {
+        that.showMessage("电话输入有误请重新输入！");
+        return;
+      }
+      if (that.isNull(that.resume.workExperience)) {
+        that.showMessage("工作经验不能为空");
+        return;
+      }
+      if (that.isNull(that.resume.university)) {
+        that.showMessage("毕业院校不能为空");
+        return;
+      }
+      if (that.isNull(that.resume.nativePlace)) {
+        that.showMessage("籍贯不能为空");
+        return;
+      }
+      if (that.isNull(that.resume.intentionalWork)) {
+        that.showMessage("期望工作不能为空");
+        return;
+      }
 
       uni.showLoading({
         title: '提交中...' });
@@ -299,14 +339,14 @@ var resumeModel = new _resume.default();var _default =
           // 执行上传头像
           if (that.changedAvatar) {
             uni.uploadFile({
-              url: '/',
+              url: 'http://wzkjsyp.natapp1.cc/resume/bindingAvatar',
               filePath: that.avatar,
               name: 'file',
               formData: {
                 id: data.id },
 
               success: function success(response) {
-                showResponse();
+                that.showResponse();
               } });
 
           } else {
@@ -341,6 +381,24 @@ var resumeModel = new _resume.default();var _default =
           delta: 1 });
 
       }, 1500);
+    },
+    showMessage: function showMessage(message) {
+      uni.showToast({
+        title: message,
+        icon: "none" });
+
+    },
+    isNull: function isNull(str) {
+      if (str == null || str == undefined || str == "") {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    checkPhone: function checkPhone(phone) {
+      var reg = /^1(3|4|5|7|8)[0-9]{9}$/; //验证规则
+      var flag = reg.test(phone);
+      return flag;
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

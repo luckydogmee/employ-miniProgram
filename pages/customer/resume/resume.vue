@@ -1,13 +1,13 @@
 <template>
 	<view class="resume-container">
 		<view class="tab-container">
-			<view class="tab" @click="switchTab('all')" :class="{'active':type === 'all'}">
+			<view class="tab" @click="switchResumeTab('all')" :class="{'active':type === 'all'}">
 				全部简历
 			</view>
-			<view class="tab" @click="switchTab('started')" :class="{'active':type === 'started'}">
+			<view class="tab" @click="switchResumeTab('started')" :class="{'active':type === 'started'}">
 				已推荐过
 			</view>
-			<view class="tab" @click="switchTab('notStart')" :class="{'active':type === 'notStart'}">
+			<view class="tab" @click="switchResumeTab('notStart')" :class="{'active':type === 'notStart'}">
 				未推荐过
 			</view>
 		</view>
@@ -88,12 +88,18 @@
 							</picker>
 						</view>
 					</view>
+					<view class="text">
+						确认推荐后
+					</view>
+					<view class="text">
+						系统将自动向求职者发送面试邀请
+					</view>
 				</view>
 				<view class="selectDate-footer">
 					<view class="selectDate-btn confirm" @click="pushResume">
 						确认推荐
 					</view>
-					<view class="selectDate-btn cancel">
+					<view class="selectDate-btn cancel" @click="cancelPush">
 						再等等看
 					</view>
 				</view>
@@ -182,7 +188,7 @@
 					})
 				})
 			},
-			switchTab(type){
+			switchResumeTab(type){
 				if(type === this.type){
 					return 
 				}
@@ -209,6 +215,8 @@
 				this.resumeId = id
 				if(jobId){
 					this.$refs.selectDate.open()
+				}else{
+					this.switchTab({index:1,resumeId: this.resumeId})
 				}
 			},	
 			pushResume(){
@@ -234,6 +242,9 @@
 						})
 					}
 				})
+			},
+			cancelPush(){
+				this.$refs.selectDate.close()
 			},
 			showAddResume(){
 				uni.navigateTo({
@@ -438,6 +449,12 @@
 				width: 20upx;
 			}
 		}	
+		.text{
+			color: #8F8F94;
+			text-align: center;
+			line-height: 40upx;
+			font-size: 20upx;
+		}
 	}
 	
 </style>

@@ -133,9 +133,61 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _vuex = __webpack_require__(/*! vuex */ 8);
 
-var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 24));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var ListProject = function ListProject() {return __webpack_require__.e(/*! import() | components/ListProject/ListProject */ "components/ListProject/ListProject").then(__webpack_require__.bind(null, /*! @/components/ListProject/ListProject.vue */ 153));};
+
+var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 24));
+var _resume = _interopRequireDefault(__webpack_require__(/*! @/models/resume.js */ 34));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 94));};var ListProject = function ListProject() {return __webpack_require__.e(/*! import() | components/ListProject/ListProject */ "components/ListProject/ListProject").then(__webpack_require__.bind(null, /*! @/components/ListProject/ListProject.vue */ 153));};
+var resumeModel = new _resume.default();
 var jobModel = new _job.default();var _default =
 {
   data: function data() {
@@ -151,18 +203,23 @@ var jobModel = new _job.default();var _default =
       type: 'all',
       // type: 'started',
       pageNum: 1,
-      pageSize: 10 };
+      pageSize: 10,
+      jobId: '',
+      date: '',
+      timeStart: '',
+      timeEnd: '' };
 
   },
   computed: _objectSpread({},
-  (0, _vuex.mapState)(['currentResume'])),
+  (0, _vuex.mapState)(['resumeId'])),
 
 
   mounted: function mounted() {
     this.getJobList();
   },
   components: {
-    ListProject: ListProject },
+    ListProject: ListProject,
+    uniPopup: uniPopup },
 
   methods: _objectSpread({},
   (0, _vuex.mapMutations)(['switchTab']), {
@@ -219,29 +276,48 @@ var jobModel = new _job.default();var _default =
 
     },
     recommend: function recommend(id) {
-      this.switchTab({ index: 2, jobId: id });
-      return;
-      var success = false;
-      // if success
-
-      if (success) {
-        uni.showModal({
-          title: '',
-          content: '推荐成功!\r\n您可在“我的项目”栏目查看该人员的面试、入职流程',
-          showCancel: false,
-          confirmText: '知道了',
-          success: function success(res) {} });
-
+      this.jobId = id;
+      if (this.resumeId) {
+        this.$refs.selectDate.open();
       } else {
-        // if fail
-        uni.showModal({
-          title: '',
-          content: '抱歉!\r\n该简历年龄与岗位要求不符,无法推荐!',
-          showCancel: false,
-          confirmText: '知道了',
-          success: function success(res) {} });
-
+        this.switchTab({ index: 2, jobId: id });
       }
+    },
+    pushResume: function pushResume() {
+      var jobId = this.jobId;
+      var resumeId = this.resumeId;
+      var interviewDate = this.date;
+      var interviewTime = this.timeStart + this.timeEnd;
+      resumeModel.pushResume(jobId, resumeId, interviewDate, interviewTime).then(function (res) {var _res$data2 =
+        res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
+        if (code === '0') {
+          // 推荐成功
+          uni.showModal({
+            title: '',
+            content: '推荐成功!\r\n您可在“我的项目”栏目查看该人员的面试、入职流程',
+            showCancel: false,
+            confirmText: '知道了',
+            success: function success(res) {} });
+
+        } else {
+          uni.showToast({
+            icon: 'none',
+            title: message });
+
+        }
+      });
+    },
+    cancelPush: function cancelPush() {
+      this.$refs.selectDate.close();
+    },
+    bindDateChange: function bindDateChange(e) {
+      this.date = e.target.value;
+    },
+    bindTimeStartChange: function bindTimeStartChange(e) {
+      this.timeStart = e.target.value;
+    },
+    bindTimeEndChange: function bindTimeEndChange(e) {
+      this.timeEnd = e.target.value;
     } }) };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

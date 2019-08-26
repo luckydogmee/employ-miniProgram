@@ -214,6 +214,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
 var _vuex = __webpack_require__(/*! vuex */ 8);
 
 
@@ -289,7 +295,7 @@ var resumeModel = new _resume.default();var _default =
 
       });
     },
-    switchTab: function switchTab(type) {
+    switchResumeTab: function switchResumeTab(type) {
       if (type === this.type) {
         return;
       }
@@ -316,6 +322,8 @@ var resumeModel = new _resume.default();var _default =
       this.resumeId = id;
       if (jobId) {
         this.$refs.selectDate.open();
+      } else {
+        this.switchTab({ index: 1, resumeId: this.resumeId });
       }
     },
     pushResume: function pushResume() {
@@ -341,6 +349,9 @@ var resumeModel = new _resume.default();var _default =
 
         }
       });
+    },
+    cancelPush: function cancelPush() {
+      this.$refs.selectDate.close();
     },
     showAddResume: function showAddResume() {
       uni.navigateTo({

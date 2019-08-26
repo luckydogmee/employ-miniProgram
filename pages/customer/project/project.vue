@@ -22,13 +22,65 @@
 				@on-recommend="recommend" 
 			/>
 		</view>
+		<!-- 选择面试时间dialog -->
+		<uni-popup ref="selectDate" custom="true" :showMask="false" :maskClick="false">
+			<view class="selectDateDialog">
+				<view class="selectDate-title">
+					请选择面试时间
+				</view>
+				<view class="selectDate-content">
+					<view class="selectDate-picker date-picker">
+						<view class="selectDate-label">
+							日期：
+						</view>
+						<view class="selectDate-content">
+							<picker mode="date" :value="date" :start="startDate" :end="endDate" @change="bindDateChange">
+								<view class="view date-view">{{date}}</view>
+							</picker>
+						</view>
+					</view>
+					<view class="selectDate-picker time-picker">
+						<view class="selectDate-label">
+							时间：
+						</view>
+						<view class="selectDate-content">
+							<picker mode="time" :value="timeStart" @change="bindTimeStartChange">
+								<view class="view time-view">{{timeStart}}</view>
+							</picker>
+							<view class="view-line">-</view>
+							<picker mode="time" :value="timeEnd" @change="bindTimeEndChange">
+								<view class="view time-view">{{timeEnd}}</view>
+							</picker>
+						</view>
+					</view>
+					<view class="text">
+						确认推荐后
+					</view>
+					<view class="text">
+						系统将自动向求职者发送面试邀请
+					</view>
+				</view>
+				<view class="selectDate-footer">
+					<view class="selectDate-btn confirm" @click="pushResume">
+						确认推荐
+					</view>
+					<view class="selectDate-btn cancel" @click="cancelPush">
+						再等等看
+					</view>
+				</view>
+				<!-- <image class="close-icon" src="../../../static/icon/close.png" @click="closeRecommendDialog" /> -->
+			</view>
+		</uni-popup>
 	</view>
 </template>
 
 <script>
 	import { mapState, mapMutations } from 'vuex'
+	import uniPopup from "@/components/uni-popup/uni-popup.vue"
 	import ListProject from '@/components/ListProject/ListProject.vue'
 	import JobModel from '@/models/job.js'
+	import ResumeModel from '@/models/resume.js'
+	const resumeModel = new ResumeModel()
 	const jobModel = new JobModel()
 	export default {
 		data() {
@@ -45,17 +97,22 @@
 				// type: 'started',
 				pageNum: 1,
 				pageSize: 10,
+				jobId: '',
+				date: '',
+				timeStart: '',
+				timeEnd: ''
 			}
 		},
 		computed:{
-			...mapState(['currentResume']),
+			...mapState(['resumeId']),
 			
 		},
 		mounted(){
 			this.getJobList()
 		},
 		components: {
-			ListProject
+			ListProject,
+			uniPopup
 		},
 		methods: {
 			...mapMutations(['switchTab']),
@@ -112,30 +169,49 @@
 				})
 			},
 			recommend(id){
-				this.switchTab({index:2,jobId:id})
-				return
-				let success = false
-				// if success
-				
-				if(success){
-					uni.showModal({
-						title: '',
-						content: '推荐成功!\r\n您可在“我的项目”栏目查看该人员的面试、入职流程',
-						showCancel: false,
-						confirmText: '知道了',
-						success: res => {},
-					})	
+				this.jobId = id
+				if(this.resumeId){
+					this.$refs.selectDate.open()
 				}else{
-					// if fail
-					uni.showModal({
-						title: '',
-						content: '抱歉!\r\n该简历年龄与岗位要求不符,无法推荐!',
-						showCancel: false,
-						confirmText: '知道了',
-						success: res => {},
-					})
+					this.switchTab({index:2,jobId:id})
 				}
-			}
+			},
+			pushResume(){
+				const jobId = this.jobId
+				const resumeId = this.resumeId
+				const interviewDate = this.date
+				const interviewTime = this.timeStart + this.timeEnd
+				resumeModel.pushResume(jobId, resumeId, interviewDate, interviewTime).then(res=>{
+					const { code, message, data } = res.data
+					if(code === '0'){
+						// 推荐成功
+						uni.showModal({
+							title: '',
+							content: '推荐成功!\r\n您可在“我的项目”栏目查看该人员的面试、入职流程',
+							showCancel: false,
+							confirmText: '知道了',
+							success: res => {},
+						})
+					}else{
+						uni.showToast({
+							icon: 'none',
+							title: message
+						})
+					}
+				})
+			},
+			cancelPush(){
+				this.$refs.selectDate.close()
+			},
+			bindDateChange(e){
+				this.date = e.target.value
+			},
+			bindTimeStartChange(e){
+				this.timeStart = e.target.value
+			},
+			bindTimeEndChange(e){
+				this.timeEnd = e.target.value
+			},
 		}
 	}
 </script>

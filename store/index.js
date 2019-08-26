@@ -13,7 +13,7 @@ const store = new Vuex.Store({
         userName: "",
 		tabIndex: 0,
 		jobId: '',
-		currentResume: ''
+		resumeId: ''
     },
     mutations: {
         login(state, userName) {
@@ -31,6 +31,11 @@ const store = new Vuex.Store({
 				state.jobId = payload.jobId
 			}else{
 				state.jobId = ''
+			}
+			if(payload && payload.resumeId){
+				state.resumeId = payload.resumeId
+			}else {
+				state.resumeId = ''
 			}
 		},
 		setCurrentResume(state, id){

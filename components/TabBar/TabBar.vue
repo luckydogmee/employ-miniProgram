@@ -46,7 +46,7 @@
 	export default {
 		data() {
 			return {
-				activeTab: 0
+				// activeTab: 0
 			};
 		},
 		props:{
@@ -59,8 +59,10 @@
 				default:0
 			}
 		},
-		mounted() {
-			this.activeTab = this.index
+		computed: {
+			activeTab(){
+				return this.index
+			}
 		},
 		methods:{
 			switchTab(index){
@@ -72,7 +74,7 @@
 						return 
 					}
 				}
-				this.activeTab = index
+				// this.activeTab = index
 				this.$emit('switchTab', index)
 			}
 		}
