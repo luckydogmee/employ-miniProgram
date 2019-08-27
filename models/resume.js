@@ -58,25 +58,27 @@ class ResumeModel extends HTTP {
 		})
 	}
 	//推送简历
-	pushResume(jobId, resumeId, interviewDate, interviewTime){
+	pushResume(jobId, resumeId, interviewDate, interviewTime,formId){
 		return this.request({
 			url: '/resume/pushResume',
 			data: {
 				jobId, 
 				resumeId, 
 				interviewDate, 
-				interviewTime
+				interviewTime,
+				formId
 			}
 		})
 	}
 	//查看推送的简历列表
-	pushResumeList(pageNum=1, pageSize=10, jobId, name, phone){
+	pushResumeList(pageNum=1, pageSize=10, jobId, status, name, phone){
 		return this.request({
 			url: '/resume/pushResumeList',
 			data: {
 				pageNum, 
 				pageSize, 
 				jobId, 
+				status,
 				name, 
 				phone
 			}

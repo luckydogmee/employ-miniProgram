@@ -42,16 +42,18 @@
 				</view>
 				<view class="recommend-table">
 					<view class="tr">
-						<view class="th t1">推荐时间</view>
-						<view class="th t2">岗位</view>
-						<view class="th t3">公司</view>
-						<view class="th t4">当前状态</view>
+						<view class="th t1"><text>推荐时间</text><image src="../../../static/icon/time.png" mode=""></image></view>
+						<view class="th t2"><text>岗位</text><image src="../../../static/icon/post.png" mode=""></image></view>
+						<view class="th t3"><text>公司</text><image src="../../../static/icon/company.png" mode=""></image></view>
+						<view class="th t4"><text>当前状态</text><image src="../../../static/icon/status.png" mode=""></image></view>
 					</view>
-					<view class="tr" v-for="item in recommendRecord" :key="item.id">
-						<view class="td t1">{{item.time}}</view>
-						<view class="td t2">{{item.post}}</view>
-						<view class="td t3">{{item.company}}</view>
-						<view class="td t4">{{item.status}}</view>
+					<view class="scroll">
+						<view class="tr " v-for="item in recommendRecord" :key="item.id">
+							<view class="td t1">{{item.time}}</view>
+							<view class="td t2">{{item.post}}</view>
+							<view class="td t3">{{item.company}}</view>
+							<view class="td t4">{{item.status}}</view>
+						</view>	
 					</view>
 				</view>
 				<image class="close-icon" src="../../../static/icon/close.png" @click="closeRecommendDialog" />
@@ -96,8 +98,11 @@
 					</view>
 				</view>
 				<view class="selectDate-footer">
+					
 					<view class="selectDate-btn confirm" @click="pushResume">
-						确认推荐
+						<form name="test" @submit="getFormId" report-submit="true">
+							<button class="dialog-btn" form-type="submit">确认推荐</button>
+						</form>
 					</view>
 					<view class="selectDate-btn cancel" @click="cancelPush">
 						再等等看
@@ -135,10 +140,12 @@
 				pageNum: 1,
 				pageSize: 10,
 				showDialog: false,
+				recommendRecord: [],
 				resumeId: '',
 				date: '',
 				timeStart: '',
-				timeEnd: ''
+				timeEnd: '',
+				formId: '' // 推送相关
 			}
 		},
 		components:{
@@ -196,8 +203,29 @@
 				this.pageNum = 1
 				this.getResumeList()
 			},
-			showRecord(){
-				this.$refs.recommendRecord.open()
+			showRecord(id){
+				uni.showLoading({
+					mask:true
+				})
+				resumeModel.resumeRecord(this.pageSize, this.pageNum,id).then(res=>{
+					uni.hideLoading()
+					this.$refs.recommendRecord.open()
+					const { code, message, data} = res.data
+					if(code === '0'){
+						this.recommendRecord = data
+						
+					}else {
+						uni.showToast({
+							icon: 'none',
+							title: message
+						})
+					}
+				}).catch(err=>{
+					uni.showToast({
+						icon: 'none',
+						title:'获取推荐记录失败'
+					})
+				})
 			},
 			closeRecommendDialog(){
 				this.$refs.recommendRecord.close()
@@ -220,12 +248,19 @@
 				}
 			},	
 			pushResume(){
+				const that = this
 				const jobId = this.jobId
 				const resumeId = this.resumeId
 				const interviewDate = this.date
+				const formId = this.formId
 				const interviewTime = this.timeStart + this.timeEnd
-				resumeModel.pushResume(jobId, resumeId, interviewDate, interviewTime).then(res=>{
+				uni.showLoading({
+					title: '提交中...'
+				})
+				resumeModel.pushResume(jobId, resumeId, interviewDate, interviewTime, formId).then(res=>{
 					const { code, message, data } = res.data
+					that.formId = ''
+					uni.hideLoading()
 					if(code === '0'){
 						// 推荐成功
 						uni.showModal({
@@ -241,6 +276,13 @@
 							title: message
 						})
 					}
+				}).catch(err=>{
+					that.formId = ''
+					uni.hideLoading()
+					uni.showToast({
+						icon: 'none',
+						title:'推送失败'
+					})
 				})
 			},
 			cancelPush(){
@@ -263,6 +305,9 @@
 			bindTimeEndChange(e){
 				this.timeEnd = e.target.value
 			},
+			getFormId(e){
+				this.formId = e.detail.formId
+			}
 		}
 	}
 </script>
@@ -308,48 +353,65 @@
 		margin-top: 30upx;
 	}
 	.recommend-table{
-		width: 553upx;
+		width: 668upx;
 		margin: 30upx auto;
-		border-top: 1upx solid #595959;
-		border-left: 1upx solid #595959;
-		overflow: auto;
+		border-top: 1upx solid #FFFFFF;
+		border-left: 1upx solid #FFFFFF;
 		.tr{
-			border-bottom: 1upx solid #595959;
+			border-bottom: 1upx solid #FFFFFF;
 			display: flex;
 			align-items: center;
 		}
+		.scroll{
+			overflow: auto;
+			max-height: 350upx;
+		}
 		.th,.td{
 			box-sizing: border-box;
-			border-right: 1upx solid #595959;
+			border-right: 1upx solid #FFFFFF;
 			text-align: center;
-			color: #ff9058;
+			color: #FFFFFF;
+			width: 167upx;
 		}
 		.th{
 			height: 60upx;
 			line-height: 60upx;
 			font-size: 24upx;	
 			font-weight: 600;
+			background: #f2a184;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text{
+				
+			}
+			image{
+				height: 28upx;
+				width: 28upx;
+				margin-left: 10upx;
+			}
 		}
 		.td{
 			height: 76upx;
 			font-size: 18upx;
 			padding-top: 20upx;
+			background: #bb836d;
 			&.t3{
 				padding: 20upx 16upx;
 			}
 		}
-		.t1{
-			width: 150upx;
-		}
-		.t2{
-			width: 105upx;
-		}
-		.t3{
-			width: 148upx;
-		}
-		.t4{
-			width: 150upx;
-		}
+		// .t1{
+		// 	width: 150upx;
+		// }
+		// .t2{
+		// 	width: 105upx;
+		// }
+		// .t3{
+		// 	width: 148upx;
+		// }
+		// .t4{
+		// 	width: 150upx;
+		// }
 	}
 	.resume-add{
 		position: fixed;

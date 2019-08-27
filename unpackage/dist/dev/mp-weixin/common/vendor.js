@@ -1657,7 +1657,7 @@ function normalizeComponent (
 /* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _resume = _interopRequireDefault(__webpack_require__(/*! ./pages/customer/resume/resume.vue */ 29));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _resume = _interopRequireDefault(__webpack_require__(/*! ./pages/customer/resume/resume.vue */ 30));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_resume.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
 
@@ -8009,38 +8009,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.config = v
 
 /***/ }),
 
-/***/ 3:
-/*!***********************************!*\
-  !*** (webpack)/buildin/global.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || new Function("return this")();
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-
-/***/ 34:
+/***/ 27:
 /*!********************************************************!*\
   !*** E:/workspace/employ-miniProgram/models/resume.js ***!
   \********************************************************/
@@ -8108,25 +8077,27 @@ ResumeModel = /*#__PURE__*/function (_HTTP) {_inherits(ResumeModel, _HTTP);
 
     }
     //推送简历
-  }, { key: "pushResume", value: function pushResume(jobId, resumeId, interviewDate, interviewTime) {
+  }, { key: "pushResume", value: function pushResume(jobId, resumeId, interviewDate, interviewTime, formId) {
       return this.request({
         url: '/resume/pushResume',
         data: {
           jobId: jobId,
           resumeId: resumeId,
           interviewDate: interviewDate,
-          interviewTime: interviewTime } });
+          interviewTime: interviewTime,
+          formId: formId } });
 
 
     }
     //查看推送的简历列表
-  }, { key: "pushResumeList", value: function pushResumeList() {var pageNum = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;var pageSize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;var jobId = arguments.length > 2 ? arguments[2] : undefined;var name = arguments.length > 3 ? arguments[3] : undefined;var phone = arguments.length > 4 ? arguments[4] : undefined;
+  }, { key: "pushResumeList", value: function pushResumeList() {var pageNum = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;var pageSize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;var jobId = arguments.length > 2 ? arguments[2] : undefined;var status = arguments.length > 3 ? arguments[3] : undefined;var name = arguments.length > 4 ? arguments[4] : undefined;var phone = arguments.length > 5 ? arguments[5] : undefined;
       return this.request({
         url: '/resume/pushResumeList',
         data: {
           pageNum: pageNum,
           pageSize: pageSize,
           jobId: jobId,
+          status: status,
           name: name,
           phone: phone } });
 
@@ -8156,6 +8127,37 @@ ResumeModel = /*#__PURE__*/function (_HTTP) {_inherits(ResumeModel, _HTTP);
 
 
 ResumeModel;exports.default = _default;
+
+/***/ }),
+
+/***/ 3:
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
 
 /***/ }),
 

@@ -270,9 +270,13 @@
 					})
 				}
 				setTimeout(()=>{
-					uni.navigateBack({
-						delta:1
-					})	
+					// uni.navigateBack({
+					// 	delta:1
+					// })
+						that.switchTab({index: 2})
+						uni.redirectTo({
+							url: '../../customer/main/main'
+						})
 				},1500)
 			},
 			showMessage(message){

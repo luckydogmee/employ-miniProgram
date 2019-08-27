@@ -133,7 +133,7 @@ var _default2 =
 
   },
   props: {
-    data: {
+    receviedInfo: {
       type: Object,
       default: function _default() {return {};} },
 

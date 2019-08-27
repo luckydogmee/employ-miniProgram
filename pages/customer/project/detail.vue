@@ -1,19 +1,26 @@
 <template>
 	<view class="project-container">
 		<view class="tab-container">
-			<view class="tab" @click="switchTab('all')" :class="{'active':type === 'all'}">
-				全部岗位
+			<view class="tab" @click="switchTab('continue')" :class="{'active':type === 'continue'}">
+				交付中
 			</view>
-			<view class="tab" @click="switchTab('started')" :class="{'active':type === 'started'}">
-				已开始
+			<view class="tab" @click="switchTab('finish')" :class="{'active':type === 'finish'}">
+				已完成
 			</view>
-			<view class="tab" @click="switchTab('notStart')" :class="{'active':type === 'notStart'}">
-				未开始
+			<view class="tab" @click="switchTab('fail')" :class="{'active':type === 'fail'}">
+				未完成
 			</view>
 		</view>
 		<Search @search="search" />
 		<view class="project-list">
-			<ListProjectDetail :type="type" 
+<!-- 			<ListProjectDetail :type="type" 
+				@showDetail="showDetail(id)" 
+			/> -->
+			
+			<ListProjectDetail :type="type"
+				v-for="item in receviedList"
+				:key="item.id"
+				:receviedInfo="item"
 				@showDetail="showDetail(id)" 
 			/>
 		</view>
@@ -23,16 +30,37 @@
 <script>
 	import ListProjectDetail from '@/components/ListProjectDetail/ListProjectDetail.vue'
 	import Search from '@/components/Search/Search.vue'
+	import ResumeModel from '@/models/resume.js'
+	const resumeModel = new ResumeModel()
 	export default {
 		data() {
 			return {
-				type: 'all'
+				receviedList: [
+					{
+						type: 'finish'
+					},
+					{
+						type: 'fail'
+					}
+				],
+				type: 'continue',
+				jobId:''
 			}
 		},
 		components: {
 			ListProjectDetail,
 			Search
 		},
+		onLoad(option){
+			console.log("执行onLoad")
+			let jobId = option.id
+			this.jobId = jobId
+			this.getPushResumeList()
+		},
+		// mounted(){
+		// 	console.log("执行mouted")
+		// 	this.getPushResumeList()
+		// },
 		methods: {
 			switchTab(type){
 				if(type === this.type){
@@ -40,6 +68,38 @@
 				}
 				this.type = type
 				// 请求数据
+				this.pageNum = 1
+				this.getPushResumeList()
+			},
+			getPushResumeList(){
+				const type = this.type
+				let status = ''
+				let name = ''
+				let phone = ''
+				if(type === 'continue'){
+					status = 0
+				}else if(type === 'finish'){
+					status = 1
+				}else if(type === 'fail'){
+					status = -1
+				}
+				resumeModel.pushResumeList(this.pageNum, this.pageSize,this.jobId, status,name,phone).then(res=>{
+					//数据绑定
+					const { code, message, data } = res.data
+					if(code === '0'){
+						this.receviedList = data
+					}else{
+						uni.showToast({
+							icon: 'none',
+							title: message
+						})
+					}
+				}).catch(err=>{
+					uni.showToast({
+						icon: 'none',
+						title:'获取简历列表信息失败'
+					})
+				})
 			},
 			showDetail(id){
 				// 跳转到聊天页面

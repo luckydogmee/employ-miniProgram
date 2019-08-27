@@ -1,15 +1,15 @@
 <template>
 	<view class="list-item">
 		<view class="image">
-			<image src="../../static/img/avatar.png" mode=""></image>
+			<image :src="receviedInfo.avatar" mode=""></image>
 		</view>
 		<view class="info">
 			<view class="info-top">
-				<view class="info-top-item info-title">销售经理</view>
-				<view class="info-top-item info-name">被推荐人姓名：啦啦啦</view>	
+				<view class="info-top-item info-title">{{receviedInfo.jobName}}</view>
+				<view class="info-top-item info-name">被推荐人姓名: {{receviedInfo.name}}</view>	
 			</view>
 			<view class="info-bottom">
-				将于2019年10月19日面试
+				{{receviedInfo.latestFeedback}}
 			</view>
 		</view>
 		<view class="operation">
@@ -26,7 +26,7 @@
 			};
 		},
 		props: {
-			data: {
+			receviedInfo: {
 				type: Object,
 				default: ()=>({})
 			},

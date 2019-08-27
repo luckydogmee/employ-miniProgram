@@ -189,6 +189,16 @@
 			background: #c8c7cc;
 		}
 	}
+	.dialog-btn{
+		height: 84upx;
+		width: 100%;
+		background: rgba(0,0,0,0);
+		font-size: 30upx;
+		color:#ff8353;
+		&:after{
+			border: none;
+		}
+	}
 	
 	/* ************ 表单相关 end ************** */
 </style>

@@ -159,5 +159,15 @@ button.swiper-button:after {
 .default-btn.disabled {
     background: #c8c7cc;
 }
+.dialog-btn {
+  height: 84rpx;
+  width: 100%;
+  background: transparent;
+  font-size: 30rpx;
+  color: #ff8353;
+}
+.dialog-btn:after {
+    border: none;
+}
 /* ************ 表单相关 end ************** */
 

@@ -105,7 +105,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var ListProjectDetail = function ListProjectDetail() {return __webpack_require__.e(/*! import() | components/ListProjectDetail/ListProjectDetail */ "components/ListProjectDetail/ListProjectDetail").then(__webpack_require__.bind(null, /*! @/components/ListProjectDetail/ListProjectDetail.vue */ 214));};var Search = function Search() {return __webpack_require__.e(/*! import() | components/Search/Search */ "components/Search/Search").then(__webpack_require__.bind(null, /*! @/components/Search/Search.vue */ 167));};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -130,16 +130,44 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
+
+
+
+
+var _resume = _interopRequireDefault(__webpack_require__(/*! @/models/resume.js */ 27));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var ListProjectDetail = function ListProjectDetail() {return __webpack_require__.e(/*! import() | components/ListProjectDetail/ListProjectDetail */ "components/ListProjectDetail/ListProjectDetail").then(__webpack_require__.bind(null, /*! @/components/ListProjectDetail/ListProjectDetail.vue */ 214));};var Search = function Search() {return __webpack_require__.e(/*! import() | components/Search/Search */ "components/Search/Search").then(__webpack_require__.bind(null, /*! @/components/Search/Search.vue */ 167));};
+var resumeModel = new _resume.default();var _default =
 {
   data: function data() {
     return {
-      type: 'all' };
+      receviedList: [
+      {
+        type: 'finish' },
+
+      {
+        type: 'fail' }],
+
+
+      type: 'continue',
+      jobId: '' };
 
   },
   components: {
     ListProjectDetail: ListProjectDetail,
     Search: Search },
 
+  onLoad: function onLoad(option) {
+    console.log("执行onLoad");
+    var jobId = option.id;
+    this.jobId = jobId;
+    this.getPushResumeList();
+  },
+  // mounted(){
+  // 	console.log("执行mouted")
+  // 	this.getPushResumeList()
+  // },
   methods: {
     switchTab: function switchTab(type) {
       if (type === this.type) {
@@ -147,6 +175,38 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       }
       this.type = type;
       // 请求数据
+      this.pageNum = 1;
+      this.getPushResumeList();
+    },
+    getPushResumeList: function getPushResumeList() {var _this = this;
+      var type = this.type;
+      var status = '';
+      var name = '';
+      var phone = '';
+      if (type === 'continue') {
+        status = 0;
+      } else if (type === 'finish') {
+        status = 1;
+      } else if (type === 'fail') {
+        status = -1;
+      }
+      resumeModel.pushResumeList(this.pageNum, this.pageSize, this.jobId, status, name, phone).then(function (res) {
+        //数据绑定
+        var _res$data = res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
+        if (code === '0') {
+          _this.receviedList = data;
+        } else {
+          uni.showToast({
+            icon: 'none',
+            title: message });
+
+        }
+      }).catch(function (err) {
+        uni.showToast({
+          icon: 'none',
+          title: '获取简历列表信息失败' });
+
+      });
     },
     showDetail: function showDetail(id) {
       // 跳转到聊天页面
@@ -154,6 +214,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     search: function search(keyword) {
       // 搜索动作
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

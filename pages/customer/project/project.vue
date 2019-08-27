@@ -165,7 +165,7 @@
 			},
 			showDeliveryDetail(id){
 				uni.navigateTo({
-					url: '../../customer/project/detail'
+					url: '../../customer/project/detail?id='+id
 				})
 			},
 			recommend(id){
