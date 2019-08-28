@@ -181,6 +181,11 @@ var userModel = new _user2.default();var _default =
     // 直接login，避免麻烦
     // this.login()
   },
+  onPullDownRefresh: function onPullDownRefresh() {
+    if (this.tabIndex === 0) {
+      this.$refs.home.refreshJobList();
+    }
+  },
   computed: _objectSpread({},
   (0, _vuex.mapState)(['tabIndex']), {
     currentTab: function currentTab() {

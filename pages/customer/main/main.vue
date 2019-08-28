@@ -1,9 +1,9 @@
 <template>
 	<view class="container customer-container">
 		<view class="customer-wrapper">
-			<Home v-if="currentTab === 'Home' && hasToken" @showLogin="showLogin" @hideLogin="hideLogin" />
-			<Project v-if="currentTab === 'Project'" @showLogin="showLogin" @hideLogin="hideLogin" />
-			<Resume v-if="currentTab === 'Resume'" @showLogin="showLogin" @hideLogin="hideLogin" />
+			<Home v-if="currentTab === 'Home' && hasToken" ref="home" @showLogin="showLogin" @hideLogin="hideLogin" />
+			<Project v-if="currentTab === 'Project'" ref="project" @showLogin="showLogin" @hideLogin="hideLogin" />
+			<Resume v-if="currentTab === 'Resume'" ref="resume" @showLogin="showLogin" @hideLogin="hideLogin" />
 			<User v-if="currentTab === 'User'" @showLogin="showLogin" @hideLogin="hideLogin" />
 			<TabBar @switchTab="switchTabBar" :index="tabIndex" @showLogin="showLogin" @hideLogin="hideLogin"  />
 			<uni-popup ref="noticeLogin" custom="true">
@@ -64,6 +64,11 @@
 			})	
 			// 直接login，避免麻烦
 			// this.login()
+		},
+		onPullDownRefresh(){
+			if(this.tabIndex === 0){
+				this.$refs.home.refreshJobList()
+			}
 		},
 		computed:{
 			...mapState(['tabIndex']),

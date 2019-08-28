@@ -179,27 +179,7 @@ var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 24)
 //
 //
 //
-var ListItem = function ListItem() {return __webpack_require__.e(/*! import() | components/ListItem/ListItem */ "components/ListItem/ListItem").then(__webpack_require__.bind(null, /*! @/components/ListItem/ListItem.vue */ 235));};var userModel = new _user.default();var postModel = new _job.default();var _default = { data: function data() {return { background: ['color1', 'color2', 'color3'], indicatorDots: true, autoplay: true, interval: 2000, duration: 500, postList: [], pageNum: 1, pageSize: 10, keyword: '', label: '', userType: 0 };}, components: { ListItem: ListItem }, mounted: function mounted() {this.userType = uni.getStorageSync('userType') || 0;this.getJobList();}, methods: { chooseImage: function chooseImage() {uni.chooseImage({ success: function success(res) {var tempFilePath = res.tempFilePaths;uni.uploadFile({ url: 'http://baidu.com', filePath: tempFilePath[0], name: 'file', formData: {},
-
-
-            success: function success(uploadFileRes) {
-              console.log(uploadFileRes.data);
-            } });
-
-        } });
-
-    },
-    getUserInfo: function getUserInfo(e) {
-      console.log(e);
-    },
-    getJobList: function getJobList() {var _this = this;
-      postModel.jobList(this.pageNum, this.pageSize, this.keyword, this.label).then(function (res) {var _res$data =
-        res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
-        if (code === '0') {
-          _this.postList = data;
-        } else {
-          uni.showToast({
-            icon: 'none',
+var ListItem = function ListItem() {return __webpack_require__.e(/*! import() | components/ListItem/ListItem */ "components/ListItem/ListItem").then(__webpack_require__.bind(null, /*! @/components/ListItem/ListItem.vue */ 235));};var userModel = new _user.default();var postModel = new _job.default();var _default = { data: function data() {return { background: ['color1', 'color2', 'color3'], indicatorDots: true, autoplay: true, interval: 2000, duration: 500, postList: [], pageNum: 1, pageSize: 10, keyword: '', label: '', userType: 0 };}, components: { ListItem: ListItem }, mounted: function mounted() {this.userType = uni.getStorageSync('userType') || 0;this.getJobList();}, methods: { getJobList: function getJobList() {postModel.jobList(this.pageNum, this.pageSize, this.keyword, this.label).then(function (res) {var _res$data = res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;if (code === '0') {that.postList = data;} else {uni.showToast({ icon: 'none',
             title: message });
 
         }
@@ -209,6 +189,10 @@ var ListItem = function ListItem() {return __webpack_require__.e(/*! import() | 
           title: '获取岗位列表信息失败' });
 
       });
+    },
+    refreshJobList: function refreshJobList() {
+      this.pageNum = 1;
+      this.getJobList();
     },
     showDetail: function showDetail(id) {
       var that = this;
@@ -234,44 +218,15 @@ var ListItem = function ListItem() {return __webpack_require__.e(/*! import() | 
         } });
 
     },
-    login: function login() {
-      uni.login({
-        provider: 'weixin',
-        success: function success(res) {
-          if (res.errMsg === 'login:ok') {
-            // 执行后台登录
-            userModel.wxLogin({
-              code: res.code }).
-            then(function (res) {
-              if (res.code === 'success') {
-                // 将返回的token存入本地
-                uni.setStorageSync('token', res.data.token);
-              } else {
-                uni.showToast({
-                  icon: 'none',
-                  title: res.msg });
-
-              }
-            });
-          } else {
-            uni.showToast({
-              icon: 'none',
-              title: res.errMeg });
-
-          }
-        },
-        fail: function fail(err) {
-          console.log(err);
-        } });
-
-    },
-    selectLoginType: function selectLoginType() {
-      this.$emit('showLogin');
-    },
     switchToSeller: function switchToSeller() {
       uni.reLaunch({
         url: '../../seller/main/main' });
 
+    },
+    switchLabel: function switchLabel(label) {
+      this.label = label;
+      this.pageNum = 1;
+      this.getJobList();
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

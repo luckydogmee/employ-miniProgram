@@ -147,7 +147,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _user = _interopRequireDefault(__webpack_require__(/*! ../../../models/user.js */ 42));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var ListItem = function ListItem() {return __webpack_require__.e(/*! import() | components/ListItem/ListItem */ "components/ListItem/ListItem").then(__webpack_require__.bind(null, /*! ../../../components/ListItem/ListItem.vue */ 235));};
+var _user = _interopRequireDefault(__webpack_require__(/*! ../../../models/user.js */ 42));
+var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 24));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var ListItem = function ListItem() {return __webpack_require__.e(/*! import() | components/ListItem/ListItem */ "components/ListItem/ListItem").then(__webpack_require__.bind(null, /*! ../../../components/ListItem/ListItem.vue */ 235));};
+var postModel = new _job.default();
 var userModel = new _user.default();var _default =
 {
   data: function data() {
@@ -156,11 +158,12 @@ var userModel = new _user.default();var _default =
       indicatorDots: true,
       autoplay: true,
       interval: 2000,
-      duration: 500 };
+      duration: 500,
+      jobList: [] };
 
   },
   onReady: function onReady() {
-    this.showDetail(1);
+    this.getPublishJobList();
   },
   onPullDownRefresh: function onPullDownRefresh() {
     console.log(11111);
@@ -174,24 +177,7 @@ var userModel = new _user.default();var _default =
         url: '../../PostDetail/PostDetail?id=' + id });
 
     },
-    chooseImage: function chooseImage() {
-      uni.chooseImage({
-        success: function success(res) {
-          var tempFilePath = res.tempFilePaths;
-          uni.uploadFile({
-            url: 'http://baidu.com',
-            filePath: tempFilePath[0],
-            name: 'file',
-            formData: {},
 
-
-            success: function success(uploadFileRes) {
-              console.log(uploadFileRes.data);
-            } });
-
-        } });
-
-    },
     getUserInfo: function getUserInfo(e) {
       console.log(e);
     },
@@ -199,6 +185,24 @@ var userModel = new _user.default();var _default =
       uni.reLaunch({
         url: '../../customer/main/main' });
 
+    },
+    getPublishJobList: function getPublishJobList() {var _this = this;
+      postModel.publishJobList(this.pageNum, this.pageSize, this.status).then(function (res) {var _res$data =
+        res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
+        if (code === '0') {
+          _this.jobList = data;
+        } else {
+          uni.showToast({
+            icon: 'none',
+            title: res.message });
+
+        }
+      }).catch(function (err) {
+        uni.showToast({
+          icon: 'none',
+          title: '获取项目信息失败' });
+
+      });
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

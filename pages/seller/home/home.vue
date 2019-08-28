@@ -41,6 +41,8 @@
 	import ListItem from '../../../components/ListItem/ListItem.vue'
 	
 	import UserModel from '../../../models/user.js';
+	import PostModel from '@/models/job.js'
+	const postModel = new PostModel()
 	const userModel = new UserModel() 
 	export default {
 		data(){
@@ -49,11 +51,12 @@
 				indicatorDots: true,
 				autoplay: true,
 				interval: 2000,
-				duration: 500
+				duration: 500,
+				jobList: []
 			}
 		},
 		onReady() {
-			this.showDetail(1)
+			this.getPublishJobList()
 		}, 
 		onPullDownRefresh() {
 			console.log(11111)
@@ -67,30 +70,31 @@
 					url: '../../PostDetail/PostDetail?id='+id
 				})
 			},
-			chooseImage(){
-				uni.chooseImage({
-					success(res) {
-						const tempFilePath = res.tempFilePaths
-						uni.uploadFile({
-							url:'http://baidu.com',
-							filePath:tempFilePath[0],
-							name:'file',
-							formData:{
-								
-							},
-							success(uploadFileRes){
-								console.log(uploadFileRes.data)
-							}
-						})
-					}
-				})
-			},
+
 			getUserInfo(e){
 				console.log(e)
 			},
 			switchToCustomer(){
 				uni.reLaunch({
 					url: '../../customer/main/main'
+				})
+			},
+			getPublishJobList(){
+				postModel.publishJobList(this.pageNum, this.pageSize, this.status).then(res=>{
+					const { code, message, data } = res.data
+					if(code === '0'){
+						this.jobList = data
+					}else {
+						uni.showToast({
+							icon: 'none',
+							title: res.message
+						})
+					}
+				}).catch(err=>{
+					uni.showToast({
+						icon: 'none',
+						title:'获取项目信息失败'
+					})
 				})
 			}
 		}

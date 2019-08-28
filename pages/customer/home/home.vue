@@ -18,13 +18,13 @@
 			</view>
 		</view>
 		<view class="tab-container">
-			<view class="tab">
+			<view class="tab" @click="switchLabel(0)">
 				<image src="../../../static/img/currentWeek.png" mode=""></image>
 			</view>
-			<view class="tab">
+			<view class="tab" @click="switchLabel(1)">
 				<image src="../../../static/img/famousCompany.png" mode=""></image>
 			</view>
-			<view class="tab">
+			<view class="tab" @click="switchLabel(2)">
 				<image src="../../../static/img/urgent.png" mode=""></image>
 			</view>
 		</view>
@@ -64,32 +64,12 @@
 			this.getJobList()
 		},
 		methods:{
-			chooseImage(){
-				uni.chooseImage({
-					success(res) {
-						const tempFilePath = res.tempFilePaths
-						uni.uploadFile({
-							url:'http://baidu.com',
-							filePath:tempFilePath[0],
-							name:'file',
-							formData:{
-								
-							},
-							success(uploadFileRes){
-								console.log(uploadFileRes.data)
-							}
-						})
-					}
-				})
-			},
-			getUserInfo(e){
-				console.log(e)
-			},
 			getJobList(){
 				postModel.jobList(this.pageNum, this.pageSize, this.keyword, this.label).then(res=>{
 					const { code, message, data } = res.data
 					if(code === '0'){
-						this.postList = data
+						that.postList = data
+						
 					}else{
 						uni.showToast({
 							icon: 'none',
@@ -102,6 +82,10 @@
 						title:'获取岗位列表信息失败'
 					})
 				})
+			},
+			refreshJobList(){
+				this.pageNum = 1
+				this.getJobList()
 			},
 			showDetail(id){
 				const that = this
@@ -127,44 +111,15 @@
 					}
 				})
 			},
-			login(){
-				uni.login({
-					provider: 'weixin',
-					success(res){
-						if(res.errMsg === 'login:ok'){
-							// 执行后台登录
-							userModel.wxLogin({
-								code: res.code
-							}).then(res=>{
-								if(res.code === 'success'){
-									// 将返回的token存入本地
-									uni.setStorageSync('token', res.data.token)
-								}else{
-									uni.showToast({
-										icon: 'none',
-										title: res.msg
-									})
-								}
-							})
-						}else{
-							uni.showToast({
-								icon: 'none',
-								title: res.errMeg
-							})
-						}
-					},
-					fail(err) {
-						console.log(err)
-					}
-				})
-			},
-			selectLoginType(){
-				this.$emit('showLogin')
-			},
 			switchToSeller(){
 				uni.reLaunch({
 					url: '../../seller/main/main'
 				})
+			},
+			switchLabel(label){
+				this.label = label
+				this.pageNum = 1
+				this.getJobList()
 			}
 		}
 	}
