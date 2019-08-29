@@ -142,44 +142,56 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
 var _user = _interopRequireDefault(__webpack_require__(/*! @/models/user.js */ 42));
-var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 24));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var ListItem = function ListItem() {return __webpack_require__.e(/*! import() | components/ListItem/ListItem */ "components/ListItem/ListItem").then(__webpack_require__.bind(null, /*! @/components/ListItem/ListItem.vue */ 235));};var userModel = new _user.default();var postModel = new _job.default();var _default = { data: function data() {return { background: ['color1', 'color2', 'color3'], indicatorDots: true, autoplay: true, interval: 2000, duration: 500, postList: [], pageNum: 1, pageSize: 10, keyword: '', label: '', userType: 0 };}, components: { ListItem: ListItem }, mounted: function mounted() {this.userType = uni.getStorageSync('userType') || 0;this.getJobList();}, methods: { getJobList: function getJobList() {postModel.jobList(this.pageNum, this.pageSize, this.keyword, this.label).then(function (res) {var _res$data = res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;if (code === '0') {that.postList = data;} else {uni.showToast({ icon: 'none',
+var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 24));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var ListItem = function ListItem() {return __webpack_require__.e(/*! import() | components/ListItem/ListItem */ "components/ListItem/ListItem").then(__webpack_require__.bind(null, /*! @/components/ListItem/ListItem.vue */ 235));};
+
+var userModel = new _user.default();
+var postModel = new _job.default();var _default =
+{
+  data: function data() {
+    return {
+      background: ['color1', 'color2', 'color3'],
+      indicatorDots: true,
+      autoplay: true,
+      interval: 2000,
+      duration: 500,
+      postList: [],
+      pageNum: 1,
+      pageSize: 8,
+      loading: false,
+      hasEnd: false, // 是否已加载完成
+      keyword: '',
+      label: '',
+      userType: 0 };
+
+  },
+  components: {
+    ListItem: ListItem },
+
+  mounted: function mounted() {
+    this.userType = uni.getStorageSync('userType') || 0;
+    this.getJobList();
+  },
+  methods: {
+    getJobList: function getJobList() {var _this = this;
+      var that = this;
+      postModel.jobList(this.pageNum, this.pageSize, this.keyword, this.label).then(function (res) {var _res$data =
+        res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
+        if (code === '0') {
+          if (_this.pageNum === 1) {
+            that.postList = data;
+          } else {
+            that.postList = [].concat(_toConsumableArray(that.postList), _toConsumableArray(data));
+          }
+          if (data.length < that.pageSize) {
+            that.hasEnd = true;
+          }
+        } else {
+          uni.showToast({
+            icon: 'none',
             title: message });
 
         }
@@ -190,9 +202,17 @@ var ListItem = function ListItem() {return __webpack_require__.e(/*! import() | 
 
       });
     },
-    refreshJobList: function refreshJobList() {
+    refresh: function refresh() {
       this.pageNum = 1;
+      this.hasEnd = false;
+      this.label = '';
       this.getJobList();
+    },
+    getNext: function getNext() {
+      if (!this.hasEnd) {
+        this.pageNum += 1;
+        this.getJobList();
+      }
     },
     showDetail: function showDetail(id) {
       var that = this;
@@ -219,6 +239,9 @@ var ListItem = function ListItem() {return __webpack_require__.e(/*! import() | 
 
     },
     switchToSeller: function switchToSeller() {
+      // 判断该用户是否存在b
+
+      // 存在B端用户信息时
       uni.reLaunch({
         url: '../../seller/main/main' });
 
@@ -226,6 +249,7 @@ var ListItem = function ListItem() {return __webpack_require__.e(/*! import() | 
     switchLabel: function switchLabel(label) {
       this.label = label;
       this.pageNum = 1;
+      this.hasEnd = false;
       this.getJobList();
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

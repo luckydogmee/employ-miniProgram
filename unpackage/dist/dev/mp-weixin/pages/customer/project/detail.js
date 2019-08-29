@@ -151,7 +151,8 @@ var resumeModel = new _resume.default();var _default =
 
 
       type: 'continue',
-      jobId: '' };
+      jobId: '',
+      keyWord: '' };
 
   },
   components: {
@@ -159,15 +160,13 @@ var resumeModel = new _resume.default();var _default =
     Search: Search },
 
   onLoad: function onLoad(option) {
-    console.log("执行onLoad");
     var jobId = option.id;
     this.jobId = jobId;
     this.getPushResumeList();
   },
-  // mounted(){
-  // 	console.log("执行mouted")
-  // 	this.getPushResumeList()
-  // },
+  mounted: function mounted() {
+    this.getPushResumeList();
+  },
   methods: {
     switchTab: function switchTab(type) {
       if (type === this.type) {
@@ -181,8 +180,6 @@ var resumeModel = new _resume.default();var _default =
     getPushResumeList: function getPushResumeList() {var _this = this;
       var type = this.type;
       var status = '';
-      var name = '';
-      var phone = '';
       if (type === 'continue') {
         status = 0;
       } else if (type === 'finish') {
@@ -190,7 +187,7 @@ var resumeModel = new _resume.default();var _default =
       } else if (type === 'fail') {
         status = -1;
       }
-      resumeModel.pushResumeList(this.pageNum, this.pageSize, this.jobId, status, name, phone).then(function (res) {
+      resumeModel.pushResumeList(this.pageNum, this.pageSize, this.jobId, status, this.keyWord).then(function (res) {
         //数据绑定
         var _res$data = res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
         if (code === '0') {
@@ -211,8 +208,11 @@ var resumeModel = new _resume.default();var _default =
     showDetail: function showDetail(id) {
       // 跳转到聊天页面
     },
-    search: function search(keyword) {
+    search: function search(keyWord) {
       // 搜索动作
+      console.log("进来了");
+      this.keyWord = keyWord;
+      this.getPushResumeList();
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

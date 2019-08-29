@@ -97,6 +97,7 @@
 				// type: 'started',
 				pageNum: 1,
 				pageSize: 10,
+				hasEnd: false,
 				jobId: '',
 				date: '',
 				timeStart: '',
@@ -128,7 +129,14 @@
 					//数据绑定
 					const { code, message, data } = res.data
 					if(code === '0'){
-						this.projectList = data
+						if(this.pageNum === 1){
+							that.projectList = data
+						}else {
+							that.projectList = [...that.projectList, ...data]
+						}
+						if(data.length < that.pageSize){
+							that.hasEnd = true
+						}
 					}else{
 						uni.showToast({
 							icon: 'none',
@@ -142,12 +150,24 @@
 					})
 				})
 			},
+			refresh(){
+				this.pageNum = 1
+				this.hasEnd = false
+				this.getJobList()
+			},
+			getNext(){
+				if(!this.hasEnd){
+					this.pageNum += 1
+					this.getJobList()
+				}
+			},
 			switchProjectTab(type){
 				if(type === this.type){
 					return 
 				}
 				this.type = type
 				this.pageNum = 1
+				this.hasEnd = false
 				this.getJobList()
 			},
 			show(collectionJobStatus,id){

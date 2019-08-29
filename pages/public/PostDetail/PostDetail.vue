@@ -40,7 +40,7 @@
 		<view class="detail-footer">
 			<button class="default-btn" @click="recceiveOrder">接单</button>
 			<button class="default-btn">复制链接</button>
-			<button class="default-btn">分享</button>
+			<button class="default-btn" @click="share">分享</button>
 		</view>
 	</view>
 </template>
@@ -154,6 +154,23 @@
 						title: '操作失败，请稍后再试'
 					})
 				})
+			},
+			share(){
+				uni.share({
+				    provider: "weixin",
+				    scene: "WXSenceTimeline",
+				    type: 0,
+				    href: "http://uniapp.dcloud.io/",
+				    title: "标题",
+				    summary: "我正在使用HBuilderX开发uni-app，赶紧跟我一起来体验！",
+				    imageUrl: "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/uni@2x.png",
+				    success: function (res) {
+				    	console.log("success:" + JSON.stringify(res));
+				    },
+				    fail: function (err) {
+				    	console.log("fail:" + JSON.stringify(err));
+				    }
+				});
 			}
 		}
 	}

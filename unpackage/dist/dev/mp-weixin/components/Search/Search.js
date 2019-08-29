@@ -124,7 +124,10 @@ var _default =
   methods: {
     handleSearch: function handleSearch() {
       // 此处做防抖
-      this.$emit('search', this.keyword);
+      this.$emit('on-search', this.keyword);
+    },
+    handleInput: function handleInput() {
+      this.$emit('on-input', this.keyword);
     } } };exports.default = _default;
 
 /***/ }),

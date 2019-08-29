@@ -8024,7 +8024,7 @@ ResumeModel = /*#__PURE__*/function (_HTTP) {_inherits(ResumeModel, _HTTP);
 
   }
   // 查看自己创建的建立列表
-  _createClass(ResumeModel, [{ key: "resumeList", value: function resumeList() {var pageNum = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;var pageSize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;var status = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;var name = arguments.length > 3 ? arguments[3] : undefined;var phone = arguments.length > 4 ? arguments[4] : undefined;
+  _createClass(ResumeModel, [{ key: "resumeList", value: function resumeList() {var pageNum = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;var pageSize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;var status = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;var keyWord = arguments.length > 3 ? arguments[3] : undefined;
       return this.request({
         url: '/resume/resumeList',
         method: 'POST',
@@ -8032,8 +8032,7 @@ ResumeModel = /*#__PURE__*/function (_HTTP) {_inherits(ResumeModel, _HTTP);
           pageNum: pageNum,
           pageSize: pageSize,
           status: status,
-          name: name,
-          phone: phone } });
+          keyWord: keyWord } });
 
 
     }
@@ -8090,7 +8089,7 @@ ResumeModel = /*#__PURE__*/function (_HTTP) {_inherits(ResumeModel, _HTTP);
 
     }
     //查看推送的简历列表
-  }, { key: "pushResumeList", value: function pushResumeList() {var pageNum = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;var pageSize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;var jobId = arguments.length > 2 ? arguments[2] : undefined;var status = arguments.length > 3 ? arguments[3] : undefined;var name = arguments.length > 4 ? arguments[4] : undefined;var phone = arguments.length > 5 ? arguments[5] : undefined;
+  }, { key: "pushResumeList", value: function pushResumeList() {var pageNum = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;var pageSize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;var jobId = arguments.length > 2 ? arguments[2] : undefined;var status = arguments.length > 3 ? arguments[3] : undefined;var keyWord = arguments.length > 4 ? arguments[4] : undefined;
       return this.request({
         url: '/resume/pushResumeList',
         data: {
@@ -8098,8 +8097,7 @@ ResumeModel = /*#__PURE__*/function (_HTTP) {_inherits(ResumeModel, _HTTP);
           pageSize: pageSize,
           jobId: jobId,
           status: status,
-          name: name,
-          phone: phone } });
+          keyWord: keyWord } });
 
 
     }

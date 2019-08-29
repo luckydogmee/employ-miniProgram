@@ -172,7 +172,7 @@ var resumeModel = new _resume.default();var _default =
   data: function data() {
     return {
       isEdit: true, // 是否编辑状态
-      avatar: '../../../static/img/avatar.png', //头像地址
+      avatar: '../../../static/icon/add-avatar.png', //头像地址
       changedAvatar: false,
       resume: {
         id: '',

@@ -183,7 +183,24 @@ var userModel = new _user2.default();var _default =
   },
   onPullDownRefresh: function onPullDownRefresh() {
     if (this.tabIndex === 0) {
-      this.$refs.home.refreshJobList();
+      this.$refs.home.refresh();
+    }
+    if (this.tabIndex === 1) {
+      this.$refs.project.refresh();
+    }
+    if (this.tabIndex === 2) {
+      this.$refs.resume.refresh();
+    }
+  },
+  onReachBottom: function onReachBottom() {
+    if (this.tabIndex === 0) {
+      this.$refs.home.getNext();
+    }
+    if (this.tabIndex === 1) {
+      this.$refs.project.getNext();
+    }
+    if (this.tabIndex === 2) {
+      this.$refs.resume.getNext();
     }
   },
   computed: _objectSpread({},
@@ -510,7 +527,7 @@ var _vuex = __webpack_require__(/*! vuex */ 8);
 
 
 var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 24));
-var _resume = _interopRequireDefault(__webpack_require__(/*! @/models/resume.js */ 27));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 94));};var ListProject = function ListProject() {return __webpack_require__.e(/*! import() | components/ListProject/ListProject */ "components/ListProject/ListProject").then(__webpack_require__.bind(null, /*! @/components/ListProject/ListProject.vue */ 153));};
+var _resume = _interopRequireDefault(__webpack_require__(/*! @/models/resume.js */ 27));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 94));};var ListProject = function ListProject() {return __webpack_require__.e(/*! import() | components/ListProject/ListProject */ "components/ListProject/ListProject").then(__webpack_require__.bind(null, /*! @/components/ListProject/ListProject.vue */ 153));};
 var resumeModel = new _resume.default();
 var jobModel = new _job.default();var _default =
 {
@@ -528,6 +545,7 @@ var jobModel = new _job.default();var _default =
       // type: 'started',
       pageNum: 1,
       pageSize: 10,
+      hasEnd: false,
       jobId: '',
       date: '',
       timeStart: '',
@@ -559,7 +577,14 @@ var jobModel = new _job.default();var _default =
         //数据绑定
         var _res$data = res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
         if (code === '0') {
-          _this.projectList = data;
+          if (_this.pageNum === 1) {
+            that.projectList = data;
+          } else {
+            that.projectList = [].concat(_toConsumableArray(that.projectList), _toConsumableArray(data));
+          }
+          if (data.length < that.pageSize) {
+            that.hasEnd = true;
+          }
         } else {
           uni.showToast({
             icon: 'none',
@@ -573,12 +598,24 @@ var jobModel = new _job.default();var _default =
 
       });
     },
+    refresh: function refresh() {
+      this.pageNum = 1;
+      this.hasEnd = false;
+      this.getJobList();
+    },
+    getNext: function getNext() {
+      if (!this.hasEnd) {
+        this.pageNum += 1;
+        this.getJobList();
+      }
+    },
     switchProjectTab: function switchProjectTab(type) {
       if (type === this.type) {
         return;
       }
       this.type = type;
       this.pageNum = 1;
+      this.hasEnd = false;
       this.getJobList();
     },
     show: function show(collectionJobStatus, id) {
@@ -891,17 +928,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
 var _vuex = __webpack_require__(/*! vuex */ 8);
 
 
 
 
-var _resume = _interopRequireDefault(__webpack_require__(/*! @/models/resume.js */ 27));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var ListResume = function ListResume() {return __webpack_require__.e(/*! import() | components/ListResume/ListResume */ "components/ListResume/ListResume").then(__webpack_require__.bind(null, /*! @/components/ListResume/ListResume.vue */ 160));};var Search = function Search() {return __webpack_require__.e(/*! import() | components/Search/Search */ "components/Search/Search").then(__webpack_require__.bind(null, /*! @/components/Search/Search.vue */ 167));};var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 94));};var Dialog = function Dialog() {return __webpack_require__.e(/*! import() | components/Dialog/Dialog */ "components/Dialog/Dialog").then(__webpack_require__.bind(null, /*! @/components/Dialog/Dialog.vue */ 174));};
+var _resume = _interopRequireDefault(__webpack_require__(/*! @/models/resume.js */ 27));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var ListResume = function ListResume() {return __webpack_require__.e(/*! import() | components/ListResume/ListResume */ "components/ListResume/ListResume").then(__webpack_require__.bind(null, /*! @/components/ListResume/ListResume.vue */ 160));};var Search = function Search() {return __webpack_require__.e(/*! import() | components/Search/Search */ "components/Search/Search").then(__webpack_require__.bind(null, /*! @/components/Search/Search.vue */ 167));};var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 94));};var Dialog = function Dialog() {return __webpack_require__.e(/*! import() | components/Dialog/Dialog */ "components/Dialog/Dialog").then(__webpack_require__.bind(null, /*! @/components/Dialog/Dialog.vue */ 174));};
 var resumeModel = new _resume.default();var _default =
 {
   data: function data() {
@@ -917,14 +949,16 @@ var resumeModel = new _resume.default();var _default =
       type: 'all',
       pageNum: 1,
       pageSize: 10,
+      hasEnd: false,
       showDialog: false,
       recommendRecord: [],
       resumeId: '',
       date: '',
       timeStart: '',
       timeEnd: '',
-      formId: '' // 推送相关
-    };
+      formId: '', // 推送相关
+      keyWord: '' };
+
   },
   components: {
     ListResume: ListResume,
@@ -941,25 +975,32 @@ var resumeModel = new _resume.default();var _default =
   },
   methods: _objectSpread({},
   (0, _vuex.mapMutations)(['switchTab']), {
-    search: function search(keyword) {
+    search: function search(keyWord) {
       // 做搜索动作
-
+      console.log(keyWord);
+      this.keyWord = keyWord;
+      this.getResumeList();
     },
     getResumeList: function getResumeList() {var _this = this;
       var type = this.type;
       var status = '';
-      var name = '';
-      var phone = '';
       if (type === 'started') {
         status = 1;
       } else if (type === 'notStart') {
         status = 0;
       }
-      resumeModel.resumeList(this.pageNum, this.pageSize, status, name, phone).then(function (res) {
+      resumeModel.resumeList(this.pageNum, this.pageSize, status, this.keyWord).then(function (res) {
         //数据绑定
         var _res$data = res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
         if (code === '0') {
-          _this.resumeList = data;
+          if (_this.pageNum === 1) {
+            that.resumeList = data;
+          } else {
+            that.resumeList = [].concat(_toConsumableArray(that.resumeList), _toConsumableArray(data));
+          }
+          if (data.length < that.pageSize) {
+            that.hasEnd = true;
+          }
         } else {
           uni.showToast({
             icon: 'none',
@@ -973,12 +1014,24 @@ var resumeModel = new _resume.default();var _default =
 
       });
     },
+    refresh: function refresh() {
+      this.pageSize = 1;
+      this.hasEnd = false;
+      this.getResumeList();
+    },
+    getNext: function getNext() {
+      if (!this.hasEnd) {
+        this.pageNum += 1;
+        this.getResumeList();
+      }
+    },
     switchResumeTab: function switchResumeTab(type) {
       if (type === this.type) {
         return;
       }
       this.type = type;
       this.pageNum = 1;
+      this.hasEnd = false;
       this.getResumeList();
     },
     showRecord: function showRecord(id) {var _this2 = this;

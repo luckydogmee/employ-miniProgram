@@ -11,13 +11,8 @@
 				未推荐过
 			</view>
 		</view>
-		<Search @search="search" />
-		<view class="list-container">
-<!-- 			<ListResume @on-click-record="showRecord" @on-click-recommend="recommendHim" @on-click-detail="showDetail" ></ListResume>
-			<ListResume></ListResume>
-			<ListResume></ListResume>
-			<ListResume></ListResume> -->
-			
+		<Search @on-search="search" />
+		<view class="list-container">			
 			<ListResume
 				v-for="item in resumeList"
 				:key="item.id"
@@ -50,9 +45,9 @@
 					<view class="scroll">
 						<view class="tr " v-for="item in recommendRecord" :key="item.id">
 							<view class="td t1">{{item.time}}</view>
-							<view class="td t2">{{item.post}}</view>
-							<view class="td t3">{{item.company}}</view>
-							<view class="td t4">{{item.status}}</view>
+							<view class="td t2">{{item.jobName}}</view>
+							<view class="td t3">{{item.storeName}}</view>
+							<view class="td t4">{{item.statusContent}}</view>
 						</view>	
 					</view>
 				</view>
@@ -139,13 +134,15 @@
 				type: 'all',
 				pageNum: 1,
 				pageSize: 10,
+				hasEnd: false,
 				showDialog: false,
 				recommendRecord: [],
 				resumeId: '',
 				date: '',
 				timeStart: '',
 				timeEnd: '',
-				formId: '' // 推送相关
+				formId: '' , // 推送相关
+				keyWord:''
 			}
 		},
 		components:{
@@ -163,25 +160,32 @@
 		},
 		methods: {
 			...mapMutations(['switchTab']),
-			search(keyword){
+			search(keyWord){
 				// 做搜索动作
-				
+				console.log(keyWord)
+				this.keyWord = keyWord
+				this.getResumeList()
 			},
 			getResumeList(){
 				const type = this.type
 				let status = ''
-				let name = ''
-				let phone = ''
 				if(type === 'started'){
 					status = 1
 				}else if(type === 'notStart'){
 					status = 0
 				}
-				resumeModel.resumeList(this.pageNum,this.pageSize,status,name,phone).then(res=>{
+				resumeModel.resumeList(this.pageNum,this.pageSize,status,this.keyWord).then(res=>{
 					//数据绑定
 					const { code, message, data } = res.data
 					if(code === '0'){
-						this.resumeList = data
+						if(this.pageNum === 1){
+							that.resumeList = data
+						}else {
+							that.resumeList = [...that.resumeList, ...data]
+						}
+						if(data.length < that.pageSize){
+							that.hasEnd = true
+						}
 					}else{
 						uni.showToast({
 							icon: 'none',
@@ -195,12 +199,24 @@
 					})
 				})
 			},
+			refresh(){
+				this.pageSize = 1
+				this.hasEnd = false
+				this.getResumeList()
+			},
+			getNext(){
+				if(!this.hasEnd){
+					this.pageNum += 1
+					this.getResumeList()
+				}
+			},
 			switchResumeTab(type){
 				if(type === this.type){
 					return 
 				}
 				this.type = type
 				this.pageNum = 1
+				this.hasEnd = false
 				this.getResumeList()
 			},
 			showRecord(id){

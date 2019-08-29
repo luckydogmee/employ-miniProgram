@@ -271,6 +271,23 @@ var jobModel = new _job.default();var _default =
           title: '操作失败，请稍后再试' });
 
       });
+    },
+    share: function share() {
+      uni.share({
+        provider: "weixin",
+        scene: "WXSenceTimeline",
+        type: 0,
+        href: "http://uniapp.dcloud.io/",
+        title: "标题",
+        summary: "我正在使用HBuilderX开发uni-app，赶紧跟我一起来体验！",
+        imageUrl: "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/uni@2x.png",
+        success: function success(res) {
+          console.log("success:" + JSON.stringify(res));
+        },
+        fail: function fail(err) {
+          console.log("fail:" + JSON.stringify(err));
+        } });
+
     } }) };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

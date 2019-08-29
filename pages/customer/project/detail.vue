@@ -11,7 +11,7 @@
 				未完成
 			</view>
 		</view>
-		<Search @search="search" />
+		<Search @on-search="search" />
 		<view class="project-list">
 <!-- 			<ListProjectDetail :type="type" 
 				@showDetail="showDetail(id)" 
@@ -44,7 +44,8 @@
 					}
 				],
 				type: 'continue',
-				jobId:''
+				jobId:'',
+				keyWord:''
 			}
 		},
 		components: {
@@ -52,15 +53,13 @@
 			Search
 		},
 		onLoad(option){
-			console.log("执行onLoad")
 			let jobId = option.id
 			this.jobId = jobId
 			this.getPushResumeList()
 		},
-		// mounted(){
-		// 	console.log("执行mouted")
-		// 	this.getPushResumeList()
-		// },
+		mounted(){
+			this.getPushResumeList()
+		},
 		methods: {
 			switchTab(type){
 				if(type === this.type){
@@ -74,8 +73,6 @@
 			getPushResumeList(){
 				const type = this.type
 				let status = ''
-				let name = ''
-				let phone = ''
 				if(type === 'continue'){
 					status = 0
 				}else if(type === 'finish'){
@@ -83,7 +80,7 @@
 				}else if(type === 'fail'){
 					status = -1
 				}
-				resumeModel.pushResumeList(this.pageNum, this.pageSize,this.jobId, status,name,phone).then(res=>{
+				resumeModel.pushResumeList(this.pageNum, this.pageSize,this.jobId, status,this.keyWord).then(res=>{
 					//数据绑定
 					const { code, message, data } = res.data
 					if(code === '0'){
@@ -104,8 +101,11 @@
 			showDetail(id){
 				// 跳转到聊天页面
 			},
-			search(keyword){
+			search(keyWord){
 				// 搜索动作
+				console.log("进来了")
+				this.keyWord = keyWord
+				this.getPushResumeList()
 			}
 		}
 	}

@@ -56,4 +56,13 @@
     width: 136rpx;
     height: 136rpx;
 }
+.hasend {
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  width: 750rpx;
+  font-size: 20rpx;
+  color: #666;
+  margin-top: 10rpx;
+}
 

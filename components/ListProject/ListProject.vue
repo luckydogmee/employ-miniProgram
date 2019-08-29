@@ -19,6 +19,7 @@
 			<view class="operation-single" v-if="projectData.collectionJobStatus == 1">
 				<button class="default-btn" @click="showDetail">岗位详情</button>
 				<button class="default-btn" @click="showDeliveryDetail">交付详情</button>
+				<button class="default-btn" @click="recommend">立即推荐</button>
 				<view class="operation-date">
 					{{projectData.recriptTime}}
 				</view>	

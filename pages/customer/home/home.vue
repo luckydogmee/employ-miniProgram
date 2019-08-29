@@ -30,6 +30,9 @@
 		</view>
 		<view class="list-container">
 			<ListItem v-for="item in postList" :key="item.id" :postData="item" @showDetail="showDetail" :btnText="userType===0?'接单':'查看'" />
+			<view v-if="hasEnd" class="hasend">
+				已经拉到底了哦
+			</view>
 		</view>
 	</view>
 </template>
@@ -50,7 +53,9 @@
 				duration: 500,
 				postList: [],
 				pageNum: 1,
-				pageSize: 10,
+				pageSize: 8,
+				loading: false, 
+				hasEnd: false, // 是否已加载完成
 				keyword: '',
 				label:'',
 				userType: 0
@@ -65,11 +70,18 @@
 		},
 		methods:{
 			getJobList(){
+				const that = this
 				postModel.jobList(this.pageNum, this.pageSize, this.keyword, this.label).then(res=>{
 					const { code, message, data } = res.data
 					if(code === '0'){
-						that.postList = data
-						
+						if(this.pageNum === 1){
+							that.postList = data
+						}else {
+							that.postList = [...that.postList, ...data]
+						}
+						if(data.length < that.pageSize){
+							that.hasEnd = true
+						}
 					}else{
 						uni.showToast({
 							icon: 'none',
@@ -83,9 +95,17 @@
 					})
 				})
 			},
-			refreshJobList(){
+			refresh(){
 				this.pageNum = 1
+				this.hasEnd = false
+				this.label = ''
 				this.getJobList()
+			},
+			getNext(){
+				if(!this.hasEnd){
+					this.pageNum += 1
+					this.getJobList()
+				}
 			},
 			showDetail(id){
 				const that = this
@@ -112,6 +132,9 @@
 				})
 			},
 			switchToSeller(){
+				// 判断该用户是否存在b
+				
+				// 存在B端用户信息时
 				uni.reLaunch({
 					url: '../../seller/main/main'
 				})
@@ -119,6 +142,7 @@
 			switchLabel(label){
 				this.label = label
 				this.pageNum = 1
+				this.hasEnd = false
 				this.getJobList()
 			}
 		}

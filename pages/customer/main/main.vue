@@ -67,7 +67,24 @@
 		},
 		onPullDownRefresh(){
 			if(this.tabIndex === 0){
-				this.$refs.home.refreshJobList()
+				this.$refs.home.refresh()
+			}
+			if(this.tabIndex === 1){
+				this.$refs.project.refresh()
+			}
+			if(this.tabIndex === 2){
+				this.$refs.resume.refresh()
+			}
+		},
+		onReachBottom() {
+			if(this.tabIndex === 0){
+				this.$refs.home.getNext()
+			}
+			if(this.tabIndex === 1){
+				this.$refs.project.getNext()
+			}
+			if(this.tabIndex === 2){
+				this.$refs.resume.getNext()
 			}
 		},
 		computed:{

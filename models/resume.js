@@ -5,7 +5,7 @@ class ResumeModel extends HTTP {
 		super()
 	}
 	// 查看自己创建的建立列表
-	resumeList(pageNum=1, pageSize=10, status=1, name, phone){
+	resumeList(pageNum=1, pageSize=10, status=1, keyWord){
 		return this.request({
 			url: '/resume/resumeList',
 			method: 'POST',
@@ -13,8 +13,7 @@ class ResumeModel extends HTTP {
 				pageNum, 
 				pageSize, 
 				status, 
-				name,
-				phone
+				keyWord
 			}
 		})
 	}
@@ -71,7 +70,7 @@ class ResumeModel extends HTTP {
 		})
 	}
 	//查看推送的简历列表
-	pushResumeList(pageNum=1, pageSize=10, jobId, status, name, phone){
+	pushResumeList(pageNum=1, pageSize=10, jobId, status, keyWord){
 		return this.request({
 			url: '/resume/pushResumeList',
 			data: {
@@ -79,8 +78,7 @@ class ResumeModel extends HTTP {
 				pageSize, 
 				jobId, 
 				status,
-				name, 
-				phone
+				keyWord
 			}
 		})
 	}
