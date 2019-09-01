@@ -85,14 +85,7 @@
 	export default {
 		data() {
 			return {
-				projectList: [
-					{
-						type: 'started'
-					},
-					{
-						type: 'notStart'
-					}
-				],
+				projectList: [],
 				type: 'all',
 				// type: 'started',
 				pageNum: 1,
@@ -119,17 +112,25 @@
 			...mapMutations(['switchTab']),
 			getJobList(){
 				const type = this.type
+				const that = this
 				let collectionJobStatus = ''
 				if(type === 'started'){
 					collectionJobStatus = 1
 				}else if(type === 'notStart'){
 					collectionJobStatus = 0
 				}
+				if(this.pageNum === 1){
+					uni.showLoading({
+						mask: true
+					})
+				}
 				jobModel.collectionJobList(this.pageNum, this.pageSize, collectionJobStatus).then(res=>{
+					uni.hideLoading()
+					uni.stopPullDownRefresh()
 					//数据绑定
 					const { code, message, data } = res.data
 					if(code === '0'){
-						if(this.pageNum === 1){
+						if(that.pageNum === 1){
 							that.projectList = data
 						}else {
 							that.projectList = [...that.projectList, ...data]
@@ -144,6 +145,8 @@
 						})
 					}
 				}).catch(err=>{
+					uni.hideLoading()
+					uni.stopPullDownRefresh()
 					uni.showToast({
 						icon: 'none',
 						title:'获取岗位列表信息失败'

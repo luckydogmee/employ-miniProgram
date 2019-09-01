@@ -1,9 +1,9 @@
 <template>
 	<view class="container customer-container">
 		<view class="customer-wrapper">
-			<Home v-if="currentTab === 'Home'" />
-			<Choose v-if="currentTab === 'Choose'" />
-			<User v-if="currentTab === 'User'" />	
+			<Home v-if="currentTab === 'Home'" ref="home" />
+			<Choose v-if="currentTab === 'Choose'" ref="choose" />
+			<User v-if="currentTab === 'User'" res="user" />	
 		</view>
 		<TabBar type="seller" @switchTab="switchTabBar" :index="tabIndex" />
 	</view>
@@ -33,8 +33,15 @@
 				return this.tabBar[this.tabIndex]
 			}
 		},
-		onPullDownRefresh() {
-			console.log(222)
+		onPullDownRefresh(){
+			if(this.tabIndex === 0){
+				this.$refs.home.refresh()
+			}	
+		},
+		onReachBottom() {
+			if(this.tabIndex === 0){
+				this.$refs.home.getNext()
+			}
 		},
 		methods:{
 			...mapMutations(['switchTab']),

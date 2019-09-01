@@ -173,6 +173,8 @@ var resumeModel = new _resume.default();var _default =
     return {
       isEdit: true, // 是否编辑状态
       avatar: '../../../static/icon/add-avatar.png', //头像地址
+      avatarWomen: '../../../static/img/avatar-women.png',
+      avatarMen: '../../../static/img/avatar-men.png',
       changedAvatar: false,
       resume: {
         id: '',
@@ -230,6 +232,14 @@ var resumeModel = new _resume.default();var _default =
         res.data,code = _res$data.code,data = _res$data.data,message = _res$data.message;
         if (code === '0') {
           _this.resume = data;
+          if (data.avatar) {
+            _this.avatar = data.avatar;
+          } else {
+            if (data.gender == 0) {
+              _this.avatar = _this.avatarMen;
+              _this.avatar = _this.avatarWomen;
+            }
+          }
         } else {
           uni.showToast({
             icon: 'none',

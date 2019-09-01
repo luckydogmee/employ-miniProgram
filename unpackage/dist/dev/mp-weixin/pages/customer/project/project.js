@@ -192,14 +192,7 @@ var jobModel = new _job.default();var _default =
 {
   data: function data() {
     return {
-      projectList: [
-      {
-        type: 'started' },
-
-      {
-        type: 'notStart' }],
-
-
+      projectList: [],
       type: 'all',
       // type: 'started',
       pageNum: 1,
@@ -224,19 +217,27 @@ var jobModel = new _job.default();var _default =
 
   methods: _objectSpread({},
   (0, _vuex.mapMutations)(['switchTab']), {
-    getJobList: function getJobList() {var _this = this;
+    getJobList: function getJobList() {
       var type = this.type;
+      var that = this;
       var collectionJobStatus = '';
       if (type === 'started') {
         collectionJobStatus = 1;
       } else if (type === 'notStart') {
         collectionJobStatus = 0;
       }
+      if (this.pageNum === 1) {
+        uni.showLoading({
+          mask: true });
+
+      }
       jobModel.collectionJobList(this.pageNum, this.pageSize, collectionJobStatus).then(function (res) {
+        uni.hideLoading();
+        uni.stopPullDownRefresh();
         //数据绑定
         var _res$data = res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
         if (code === '0') {
-          if (_this.pageNum === 1) {
+          if (that.pageNum === 1) {
             that.projectList = data;
           } else {
             that.projectList = [].concat(_toConsumableArray(that.projectList), _toConsumableArray(data));
@@ -251,6 +252,8 @@ var jobModel = new _job.default();var _default =
 
         }
       }).catch(function (err) {
+        uni.hideLoading();
+        uni.stopPullDownRefresh();
         uni.showToast({
           icon: 'none',
           title: '获取岗位列表信息失败' });

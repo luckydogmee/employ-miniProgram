@@ -40,7 +40,7 @@
 		<view class="detail-footer">
 			<button class="default-btn" @click="recceiveOrder">接单</button>
 			<button class="default-btn">复制链接</button>
-			<button class="default-btn" @click="share">分享</button>
+			<button class="default-btn" open-type="share">分享</button>
 		</view>
 	</view>
 </template>
@@ -60,7 +60,18 @@
 				interval: 2000,
 				duration: 500,
 				id: '',
-				jobInfo:{}
+				jobInfo:{
+					storeName: ' ',
+					num: ' ',
+					address: ' ',
+					jobName: ' ',
+					description: ' ',
+					officialSalary: ' ',
+					avgSalary: ' ',
+					reward: ' ',
+					interviewTime: ' ',
+					overtime: ' '
+				}
 			}
 		},
 		onLoad(option){
@@ -75,13 +86,16 @@
 				if(data.probation === 0){
 					return '无试用期'
 				}
-				return `时间：${data.trialTime} | 薪资: ${data.trialSalary}`
+				return `时间：${data.trialTime|| ' '} | 薪资: ${data.trialSalary|| ' '}`
 			}
 		},
 		computed: {
 			required(){
 				return computedRequired(this.jobInfo)
 			}
+		},
+		onShareAppMessage(e) {
+			
 		},
 		methods: {
 			...mapMutations(['switchTab']),

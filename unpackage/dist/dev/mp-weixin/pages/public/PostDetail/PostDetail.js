@@ -177,7 +177,18 @@ var jobModel = new _job.default();var _default =
       interval: 2000,
       duration: 500,
       id: '',
-      jobInfo: {} };
+      jobInfo: {
+        storeName: ' ',
+        num: ' ',
+        address: ' ',
+        jobName: ' ',
+        description: ' ',
+        officialSalary: ' ',
+        avgSalary: ' ',
+        reward: ' ',
+        interviewTime: ' ',
+        overtime: ' ' } };
+
 
   },
   onLoad: function onLoad(option) {
@@ -192,7 +203,7 @@ var jobModel = new _job.default();var _default =
       if (data.probation === 0) {
         return '无试用期';
       }
-      return "\u65F6\u95F4\uFF1A".concat(data.trialTime, " | \u85AA\u8D44: ").concat(data.trialSalary);
+      return "\u65F6\u95F4\uFF1A".concat(data.trialTime || ' ', " | \u85AA\u8D44: ").concat(data.trialSalary || ' ');
     } },
 
   computed: {
@@ -200,6 +211,9 @@ var jobModel = new _job.default();var _default =
       return (0, _utils.computedRequired)(this.jobInfo);
     } },
 
+  onShareAppMessage: function onShareAppMessage(e) {
+
+  },
   methods: _objectSpread({},
   (0, _vuex.mapMutations)(['switchTab']), {
     getJobDetail: function getJobDetail() {var _this = this;

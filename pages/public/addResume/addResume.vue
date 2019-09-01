@@ -66,6 +66,8 @@
 			return {
 				isEdit: true, // 是否编辑状态
 				avatar: '../../../static/icon/add-avatar.png', //头像地址
+				avatarWomen: '../../../static/img/avatar-women.png',
+				avatarMen: '../../../static/img/avatar-men.png',
 				changedAvatar: false,
 				resume: {
 					id: '',
@@ -123,6 +125,14 @@
 					const { code, data, message } = res.data
 					if(code === '0'){
 						this.resume = data
+						if(data.avatar){
+							this.avatar = data.avatar
+						}else{
+							if(data.gender == 0){
+								this.avatar = this.avatarMen
+								this.avatar = this.avatarWomen
+							}
+						}
 					}else{
 						uni.showToast({
 							icon: 'none',

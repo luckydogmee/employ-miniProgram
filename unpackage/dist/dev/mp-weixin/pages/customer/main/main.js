@@ -533,14 +533,7 @@ var jobModel = new _job.default();var _default =
 {
   data: function data() {
     return {
-      projectList: [
-      {
-        type: 'started' },
-
-      {
-        type: 'notStart' }],
-
-
+      projectList: [],
       type: 'all',
       // type: 'started',
       pageNum: 1,
@@ -565,19 +558,27 @@ var jobModel = new _job.default();var _default =
 
   methods: _objectSpread({},
   (0, _vuex.mapMutations)(['switchTab']), {
-    getJobList: function getJobList() {var _this = this;
+    getJobList: function getJobList() {
       var type = this.type;
+      var that = this;
       var collectionJobStatus = '';
       if (type === 'started') {
         collectionJobStatus = 1;
       } else if (type === 'notStart') {
         collectionJobStatus = 0;
       }
+      if (this.pageNum === 1) {
+        uni.showLoading({
+          mask: true });
+
+      }
       jobModel.collectionJobList(this.pageNum, this.pageSize, collectionJobStatus).then(function (res) {
+        uni.hideLoading();
+        uni.stopPullDownRefresh();
         //数据绑定
         var _res$data = res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
         if (code === '0') {
-          if (_this.pageNum === 1) {
+          if (that.pageNum === 1) {
             that.projectList = data;
           } else {
             that.projectList = [].concat(_toConsumableArray(that.projectList), _toConsumableArray(data));
@@ -592,6 +593,8 @@ var jobModel = new _job.default();var _default =
 
         }
       }).catch(function (err) {
+        uni.hideLoading();
+        uni.stopPullDownRefresh();
         uni.showToast({
           icon: 'none',
           title: '获取岗位列表信息失败' });
@@ -938,14 +941,7 @@ var resumeModel = new _resume.default();var _default =
 {
   data: function data() {
     return {
-      resumeList: [
-      {
-        type: 'started' },
-
-      {
-        type: 'notStart' }],
-
-
+      resumeList: [],
       type: 'all',
       pageNum: 1,
       pageSize: 10,
@@ -981,19 +977,27 @@ var resumeModel = new _resume.default();var _default =
       this.keyWord = keyWord;
       this.getResumeList();
     },
-    getResumeList: function getResumeList() {var _this = this;
+    getResumeList: function getResumeList() {
       var type = this.type;
+      var that = this;
       var status = '';
       if (type === 'started') {
         status = 1;
       } else if (type === 'notStart') {
         status = 0;
       }
+      if (this.pageNum === 1) {
+        uni.showLoading({
+          mask: true });
+
+      }
       resumeModel.resumeList(this.pageNum, this.pageSize, status, this.keyWord).then(function (res) {
         //数据绑定
-        var _res$data = res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
+        uni.hideLoading();
+        uni.stopPullDownRefresh();var _res$data =
+        res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
         if (code === '0') {
-          if (_this.pageNum === 1) {
+          if (that.pageNum === 1) {
             that.resumeList = data;
           } else {
             that.resumeList = [].concat(_toConsumableArray(that.resumeList), _toConsumableArray(data));
@@ -1008,6 +1012,8 @@ var resumeModel = new _resume.default();var _default =
 
         }
       }).catch(function (err) {
+        uni.hideLoading();
+        uni.stopPullDownRefresh();
         uni.showToast({
           icon: 'none',
           title: '获取简历信息失败' });
@@ -1034,16 +1040,16 @@ var resumeModel = new _resume.default();var _default =
       this.hasEnd = false;
       this.getResumeList();
     },
-    showRecord: function showRecord(id) {var _this2 = this;
+    showRecord: function showRecord(id) {var _this = this;
       uni.showLoading({
         mask: true });
 
       resumeModel.resumeRecord(this.pageSize, this.pageNum, id).then(function (res) {
         uni.hideLoading();
-        _this2.$refs.recommendRecord.open();var _res$data2 =
+        _this.$refs.recommendRecord.open();var _res$data2 =
         res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
         if (code === '0') {
-          _this2.recommendRecord = data;
+          _this.recommendRecord = data;
 
         } else {
           uni.showToast({

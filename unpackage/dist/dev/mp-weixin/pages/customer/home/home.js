@@ -145,6 +145,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
 var _user = _interopRequireDefault(__webpack_require__(/*! @/models/user.js */ 42));
 var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 24));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var ListItem = function ListItem() {return __webpack_require__.e(/*! import() | components/ListItem/ListItem */ "components/ListItem/ListItem").then(__webpack_require__.bind(null, /*! @/components/ListItem/ListItem.vue */ 235));};
 
@@ -164,22 +167,27 @@ var postModel = new _job.default();var _default =
       loading: false,
       hasEnd: false, // 是否已加载完成
       keyword: '',
-      label: '',
-      userType: 0 };
+      label: '' };
 
   },
   components: {
     ListItem: ListItem },
 
   mounted: function mounted() {
-    this.userType = uni.getStorageSync('userType') || 0;
     this.getJobList();
   },
   methods: {
     getJobList: function getJobList() {var _this = this;
       var that = this;
+      if (this.pageNum === 1) {
+        uni.showLoading({
+          mask: true });
+
+      }
       postModel.jobList(this.pageNum, this.pageSize, this.keyword, this.label).then(function (res) {var _res$data =
         res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
+        uni.hideLoading();
+        uni.stopPullDownRefresh();
         if (code === '0') {
           if (_this.pageNum === 1) {
             that.postList = data;
@@ -196,6 +204,8 @@ var postModel = new _job.default();var _default =
 
         }
       }).catch(function (err) {
+        uni.hideLoading();
+        uni.stopPullDownRefresh();
         uni.showToast({
           icon: 'none',
           title: '获取岗位列表信息失败' });

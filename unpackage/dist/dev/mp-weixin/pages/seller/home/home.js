@@ -147,8 +147,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
 var _user = _interopRequireDefault(__webpack_require__(/*! ../../../models/user.js */ 42));
-var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 24));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var ListItem = function ListItem() {return __webpack_require__.e(/*! import() | components/ListItem/ListItem */ "components/ListItem/ListItem").then(__webpack_require__.bind(null, /*! ../../../components/ListItem/ListItem.vue */ 235));};
+var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 24));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var ListItem = function ListItem() {return __webpack_require__.e(/*! import() | components/ListItem/ListItem */ "components/ListItem/ListItem").then(__webpack_require__.bind(null, /*! ../../../components/ListItem/ListItem.vue */ 235));};
 var postModel = new _job.default();
 var userModel = new _user.default();var _default =
 {
@@ -159,14 +162,16 @@ var userModel = new _user.default();var _default =
       autoplay: true,
       interval: 2000,
       duration: 500,
-      jobList: [] };
+      jobList: [],
+      pageNum: 1,
+      pageSize: 10,
+      label: '',
+      loading: false,
+      hasEnd: false };
 
   },
   onReady: function onReady() {
     this.getPublishJobList();
-  },
-  onPullDownRefresh: function onPullDownRefresh() {
-    console.log(11111);
   },
   components: {
     ListItem: ListItem },
@@ -187,10 +192,19 @@ var userModel = new _user.default();var _default =
 
     },
     getPublishJobList: function getPublishJobList() {var _this = this;
-      postModel.publishJobList(this.pageNum, this.pageSize, this.status).then(function (res) {var _res$data =
+      postModel.publishJobList(this.pageNum, this.pageSize, this.status).then(function (res) {
+        uni.hideLoading();
+        uni.stopPullDownRefresh();var _res$data =
         res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
         if (code === '0') {
-          _this.jobList = data;
+          if (_this.pageNum === 1) {
+            that.jobList = data;
+          } else {
+            that.jobList = [].concat(_toConsumableArray(that.jobList), _toConsumableArray(data));
+          }
+          if (data.length < that.pageSize) {
+            that.hasEnd = true;
+          }
         } else {
           uni.showToast({
             icon: 'none',
@@ -198,11 +212,31 @@ var userModel = new _user.default();var _default =
 
         }
       }).catch(function (err) {
+        uni.hideLoading();
+        uni.stopPullDownRefresh();
         uni.showToast({
           icon: 'none',
           title: '获取项目信息失败' });
 
       });
+    },
+    refresh: function refresh() {
+      this.pageNum = 1;
+      this.hasEnd = false;
+      this.label = '';
+      this.getPublishJobList();
+    },
+    getNext: function getNext() {
+      if (!this.hasEnd) {
+        this.pageNum += 1;
+        this.getPublishJobList();
+      }
+    },
+    switchLabel: function switchLabel(label) {
+      this.label = label;
+      this.pageNum = 1;
+      this.hasEnd = false;
+      this.getJobList();
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

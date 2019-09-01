@@ -123,14 +123,7 @@
 	export default {
 		data() {
 			return {
-				resumeList: [
-					{
-						type: 'started'
-					},
-					{
-						type: 'notStart'
-					}
-				],
+				resumeList: [],
 				type: 'all',
 				pageNum: 1,
 				pageSize: 10,
@@ -168,17 +161,25 @@
 			},
 			getResumeList(){
 				const type = this.type
+				const that = this
 				let status = ''
 				if(type === 'started'){
 					status = 1
 				}else if(type === 'notStart'){
 					status = 0
 				}
+				if(this.pageNum === 1){
+					uni.showLoading({
+						mask: true
+					})
+				}
 				resumeModel.resumeList(this.pageNum,this.pageSize,status,this.keyWord).then(res=>{
 					//数据绑定
+					uni.hideLoading()
+					uni.stopPullDownRefresh()
 					const { code, message, data } = res.data
 					if(code === '0'){
-						if(this.pageNum === 1){
+						if(that.pageNum === 1){
 							that.resumeList = data
 						}else {
 							that.resumeList = [...that.resumeList, ...data]
@@ -193,6 +194,8 @@
 						})
 					}
 				}).catch(err=>{
+					uni.hideLoading()
+					uni.stopPullDownRefresh()
 					uni.showToast({
 						icon: 'none',
 						title:'获取简历信息失败'

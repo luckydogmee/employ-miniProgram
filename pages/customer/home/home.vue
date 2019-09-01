@@ -28,11 +28,14 @@
 				<image src="../../../static/img/urgent.png" mode=""></image>
 			</view>
 		</view>
-		<view class="list-container">
-			<ListItem v-for="item in postList" :key="item.id" :postData="item" @showDetail="showDetail" :btnText="userType===0?'接单':'查看'" />
+		<view class="list-container" v-if="postList.length>0">
+			<ListItem v-for="item in postList" :key="item.id" :postData="item" @showDetail="showDetail" btnText="接单" />
 			<view v-if="hasEnd" class="hasend">
 				已经拉到底了哦
 			</view>
+		</view>
+		<view class="list-empty" v-else>
+			该条目下暂时没有岗位哦
 		</view>
 	</view>
 </template>
@@ -58,21 +61,26 @@
 				hasEnd: false, // 是否已加载完成
 				keyword: '',
 				label:'',
-				userType: 0
 			}
 		}, 
 		components:{
 			ListItem
 		},
 		mounted() {
-			this.userType = uni.getStorageSync('userType') || 0
 			this.getJobList()
 		},
 		methods:{
 			getJobList(){
 				const that = this
+				if(this.pageNum === 1){
+					uni.showLoading({
+						mask: true
+					})
+				}
 				postModel.jobList(this.pageNum, this.pageSize, this.keyword, this.label).then(res=>{
 					const { code, message, data } = res.data
+					uni.hideLoading()
+					uni.stopPullDownRefresh()
 					if(code === '0'){
 						if(this.pageNum === 1){
 							that.postList = data
@@ -89,6 +97,8 @@
 						})
 					}
 				}).catch(err=>{
+					uni.hideLoading()
+					uni.stopPullDownRefresh()
 					uni.showToast({
 						icon: 'none',
 						title:'获取岗位列表信息失败'

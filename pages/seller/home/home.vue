@@ -19,20 +19,23 @@
 		</view>
 		<view class="tab-container">
 			<view class="tab">
-				<button type="default">审核中</button>
+				<button type="default" @click="switchLabel(0)">审核中</button>
 			</view>
 			<view class="tab">
-				<button type="default">已发布</button>
+				<button type="default" @click="switchLabel(1)">已发布</button>
 			</view>
 			<view class="tab">
-				<button type="default">已下架</button>
+				<button type="default" @click="switchLabel(2)">已下架</button>
 			</view>
 		</view>
-		<view class="list-container">
-			<ListItem @showDetail="showDetail" />
-			<ListItem />
-			<ListItem />
-			<ListItem />
+		<view class="list-container" v-if="jobList.length>0">
+			<ListItem v-for="item in jobList" :key="item.id" :postData="item" @showDetail="showDetail" btnText="查看" />
+			<view v-if="hasEnd" class="hasend">
+				已经拉到底了哦
+			</view>
+		</view>
+		<view class="list-empty" v-else>
+			暂无相关项目
 		</view>
 	</view>
 </template>
@@ -52,15 +55,17 @@
 				autoplay: true,
 				interval: 2000,
 				duration: 500,
-				jobList: []
+				jobList: [],
+				pageNum: 1,
+				pageSize: 10,
+				label: '',
+				loading: false, 
+				hasEnd: false,
 			}
 		},
 		onReady() {
 			this.getPublishJobList()
 		}, 
-		onPullDownRefresh() {
-			console.log(11111)
-		},
 		components:{
 			ListItem
 		},
@@ -81,9 +86,18 @@
 			},
 			getPublishJobList(){
 				postModel.publishJobList(this.pageNum, this.pageSize, this.status).then(res=>{
+					uni.hideLoading()
+					uni.stopPullDownRefresh()
 					const { code, message, data } = res.data
 					if(code === '0'){
-						this.jobList = data
+						if(this.pageNum === 1){
+							that.jobList = data
+						}else {
+							that.jobList = [...that.jobList, ...data]
+						}
+						if(data.length < that.pageSize){
+							that.hasEnd = true
+						}
 					}else {
 						uni.showToast({
 							icon: 'none',
@@ -91,11 +105,31 @@
 						})
 					}
 				}).catch(err=>{
+					uni.hideLoading()
+					uni.stopPullDownRefresh()
 					uni.showToast({
 						icon: 'none',
 						title:'获取项目信息失败'
 					})
 				})
+			},
+			refresh(){
+				this.pageNum = 1
+				this.hasEnd = false
+				this.label = ''
+				this.getPublishJobList()
+			},
+			getNext(){
+				if(!this.hasEnd){
+					this.pageNum += 1
+					this.getPublishJobList()
+				}
+			},
+			switchLabel(label){
+				this.label = label
+				this.pageNum = 1
+				this.hasEnd = false
+				this.getJobList()
 			}
 		}
 	}

@@ -154,6 +154,13 @@
 			border: none;
 		}
 	}
+	.list-empty{
+		text-align: center;
+		min-height: 200upx;
+		font-size: 24upx;
+		color: #8F8F94;
+	}
+	
 	
 	// 以下独特样式
 	

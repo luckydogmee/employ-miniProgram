@@ -127,6 +127,12 @@ button.swiper-button {
 button.swiper-button:after {
     border: none;
 }
+.list-empty {
+  text-align: center;
+  min-height: 200rpx;
+  font-size: 24rpx;
+  color: #8F8F94;
+}
 /* ************ 表单相关 start ************** */
 .form-item {
   width: 100%;
