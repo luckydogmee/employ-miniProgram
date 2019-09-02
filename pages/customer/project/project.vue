@@ -131,7 +131,7 @@
 					const { code, message, data } = res.data
 					if(code === '0'){
 						if(that.pageNum === 1){
-							that.projectList = data
+							that.projectList = data.list
 						}else {
 							that.projectList = [...that.projectList, ...data]
 						}
