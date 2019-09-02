@@ -83,7 +83,7 @@
 					uni.stopPullDownRefresh()
 					if(code === '0'){
 						if(this.pageNum === 1){
-							that.postList = data
+							that.postList = data.list
 						}else {
 							that.postList = [...that.postList, ...data]
 						}
