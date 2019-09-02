@@ -175,6 +175,7 @@ __webpack_require__.r(__webpack_exports__);
       logoChanged: false,
       pictureIndex: 0,
       verifyText: '发送验证码',
+      verifyCode: '',
       cityCodeText: '', // 区域文字
       citySelected: [], // 已选中的城市
       readySendCode: true,
@@ -291,11 +292,26 @@ __webpack_require__.r(__webpack_exports__);
       });
     } },
 
+  verifyCode: function verifyCode() {
+    var that = this;
+    userModel.login(this.resume.phone, this.verifyCode, 'B').then(function (res) {var _res$data2 =
+      res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
+      if (code === '0') {
+        that.savaStore();
+      } else {
+        uni.showToast({
+          icon: 'none',
+          title: message });
+
+      }
+    });
+  },
   savaStore: function savaStore() {var _userModel;
     var that = this;
     var array = Object.values(this.resume);
-    (_userModel = userModel).savaStore.apply(_userModel, _toConsumableArray(array)).then(function (res) {var _res$data2 =
-      res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
+
+    (_userModel = userModel).savaStore.apply(_userModel, _toConsumableArray(array)).then(function (res) {var _res$data3 =
+      res.data,code = _res$data3.code,message = _res$data3.message,data = _res$data3.data;
       if (code === '0') {
         that.resume.id = data.id;
         // 循环上传三张图片

@@ -35,13 +35,13 @@
 					></image>
 				</view>
 			</view> -->
-			<inputCell label="验证码" :required="isEdit" :isSell="true" placeholder="请输入验证码" floatleft="left" :hasSlot="true">
+			<inputCell label="验证码" :required="isEdit" :isSell="true" placeholder="请输入验证码" floatleft="left" :hasSlot="true" :content="verifyCode">
 				<button class="default-btn verifyBtn verify-code-btn" :class="{'disabled':!readySendCode} "
 					@click="sendVerifyCode">{{readySendCode ? '发送验证码' : surplusSecond + ' 秒后重新发送' }}</button>
 			</inputCell>	
 		</view>
 		
-		<button class="default-btn submit" @click="savaStore">提交审核</button>
+		<button class="default-btn submit" @click="verifyCode">提交审核</button>
 	</view>
 </template>
 
@@ -68,6 +68,7 @@
 				logoChanged: false,
 				pictureIndex: 0,
 				verifyText: '发送验证码',
+				verifyCode: '',
 				cityCodeText: '', // 区域文字
 				citySelected: [], // 已选中的城市
 				readySendCode: true,
@@ -184,9 +185,24 @@
 				})
 			}
 		},
+		verifyCode(){
+			const that = this
+			userModel.login(this.resume.phone, this.verifyCode, 'B').then(res=>{
+				const { code, message, data } = res.data
+				if(code === '0'){
+					that.savaStore()
+				}else {
+					uni.showToast({
+						icon:'none',
+						title: message
+					})
+				}
+			})
+		},
 		savaStore(){
 			const that = this
 			const array = Object.values(this.resume)
+			
 			userModel.savaStore(...array).then(res=>{
 				const { code, message, data } = res.data
 				if(code === '0'){
