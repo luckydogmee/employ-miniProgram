@@ -178,9 +178,10 @@
 					uni.hideLoading()
 					uni.stopPullDownRefresh()
 					const { code, message, data } = res.data
+					console.log(data)
 					if(code === '0'){
 						if(that.pageNum === 1){
-							that.resumeList = data
+							that.resumeList = data.list
 						}else {
 							that.resumeList = [...that.resumeList, ...data]
 						}
