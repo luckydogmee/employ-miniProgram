@@ -114,6 +114,7 @@
 									// 将返回的token存入本地
 									uni.setStorageSync('token', data.token)
 									uni.setStorageSync('isLogin',data.isLogin)
+									uni.setStorageSync('isRegister',data.isRegister)
 									uni.hideLoading()
 									that.hasToken = true
 								}else{
