@@ -17,9 +17,9 @@
 			<InputCell label="招聘联系人" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="resume.contactName" placeholder="请输入联系人"></InputCell>
 			
 			<view class="upload-wrapper">
-				<UploadItem title="上传营业执照" :imageUrl="resume.businessImg" @on-select-image="uploadImage" />
-				<UploadItem title="上传公司logo" :imageUrl="resume.logo" />
-				<UploadItem title="上传工作场景照" :imageUrl="resume.companyImg" />
+				<UploadItem title="上传营业执照" :imageUrl="resume.businessImg" @on-select-image="uploadBusinessImg" />
+				<UploadItem title="上传公司logo" :imageUrl="resume.logo" @on-select-image="uploadLogo" />
+				<UploadItem title="上传工作场景照" :imageUrl="resume.companyImg" @on-select-image="uploadCompanyImg" />
 			</view>	
 		</view>
 		<view class="add-bottom">
@@ -36,11 +36,12 @@
 				</view>
 			</view> -->
 			<inputCell label="验证码" :required="isEdit" :isSell="true" placeholder="请输入验证码" floatleft="left" :hasSlot="true">
-				<button class="default-btn verifyBtn">{{verifyText}}</button>
+				<button class="default-btn verifyBtn verify-code-btn" :class="{'disabled':!readySendCode} "
+					@click="sendVerifyCode">{{readySendCode ? '发送验证码' : surplusSecond + ' 秒后重新发送' }}</button>
 			</inputCell>	
 		</view>
 		
-		<button class="default-btn submit">提交审核</button>
+		<button class="default-btn submit" @click="savaStore">提交审核</button>
 	</view>
 </template>
 
@@ -62,10 +63,16 @@
 					logo: '', // 公司logo
 					phone: '', // 电话号码
 				},
+				bussinessImgChanged: false,
+				companyImgChanged: false,
+				logoChanged: false,
 				pictureIndex: 0,
 				verifyText: '发送验证码',
 				cityCodeText: '', // 区域文字
 				citySelected: [], // 已选中的城市
+				readySendCode: true,
+				surplusSecond: 0,
+				verifyCodeTimer: null
 			}
 		},
 		components: {
@@ -97,16 +104,185 @@
 				this.resume.cityCode = code
 				this.cityCodeText = Array.from( new Set(value)).join('')
 			},
-			uploadImage(){
+			uploadBusinessImg(){
+				const that = this
 				uni.chooseImage({
 					count:1,
 					sizeType: 'compressed',
 					sourceType: ['album', 'camera'],
 					success: (res) => {
-						this.avatar = res.tempFilePaths[0]
+						that.bussinessImgChanged = true
+						that.resume.businessImg = res.tempFilePaths[0]
 					}
 				})
+			},
+			uploadLogo(){
+				const that = this
+				uni.chooseImage({
+					count:1,
+					sizeType: 'compressed',
+					sourceType: ['album', 'camera'],
+					success: (res) => {
+						that.logoChanged = true
+						that.resume.logo = res.tempFilePaths[0]
+					}
+				})
+			},
+			uploadCompanyImg(){
+				const that = this
+				uni.chooseImage({
+					count:1,
+					sizeType: 'compressed',
+					sourceType: ['album', 'camera'],
+					success: (res) => {
+						that.companyImgChanged = true
+						that.resume.companyImg = res.tempFilePaths[0]
+					}
+				})
+			},
+			sendVerifyCode(){
+				if(!this.readySendCode){
+					return 
+				}
+				if(!this.resume.phone){
+					uni.showToast({
+						icon:'none',
+						title:'请输入电话号码'
+					})
+					return
+				}
+				userModel.getVerifyCode(this.phone, 'B').then(res=>{
+					// 请求成功,并判断code是否正确
+					const { code, message, data } = res.data 
+					if(code === '0'){
+						uni.showToast({
+							title: '验证码已发送，请注意查收'
+						})
+						this.surplusSecond = 120
+						// this.focusIndex = 3
+						this.verifyCodeTimer = setInterval(()=>{
+							if(this.surplusSecond > 0){
+								this.surplusSecond -= 1
+							}else{
+								this.surplusSecond = 0
+								clearInterval(this.verifyCodeTimer)
+							}
+						}, 1000)
+						// this.focusIndex = 3	
+					}else{
+						uni.showToast({
+							icon:'none',
+							title: message
+						})
+					}
+					
+				}).catch(err=>{
+					uni.showToast({
+						icon:'none',
+						title:'获取验证码失败'
+					})
+				})
 			}
+		},
+		savaStore(){
+			const that = this
+			const array = Object.values(this.resume)
+			userModel.savaStore(...array).then(res=>{
+				const { code, message, data } = res.data
+				if(code === '0'){
+					that.resume.id = data.id
+					// 循环上传三张图片
+					Promise.all(that.uploadBusinessImg, that.uploadLogo, that.uploadCompanyImg).then(res=>{
+						uni.showToast({
+							title: '注册成功'
+						})
+						setTimeout(()=>{
+							uni.redirectTo({
+								url: '../../seller/home/home'
+							})	
+						},2000)
+					}).catch(err=>{
+						setTimeout(()=>{
+							uni.redirectTo({
+								url: '../../seller/home/home'
+							})	
+						},2000)
+						uni.showToast({
+							icon:'none',
+							title: '部分图片上传失败，请稍候完善'
+						})
+					})
+					
+				}else{
+					// 错误处理
+					uni.showToast({
+						icon:'none',
+						title: message
+					})
+				}
+			}).catch(err=>{
+				uni.showToast({
+					icon:'none',
+					title: '提交失败，请稍候再试'
+				})
+			})
+		},
+		uploadBusinessImg(){
+			return new Promise((resolve, reject)=>{
+				if(that.bussinessImgChanged){
+					uni.uploadFile({
+						url: 'http://wzkjsyp.natapp1.cc/resume/bindingAvatar',
+						filePath: that.resume.bussinessImg,
+						name: 'file',
+						formData: {
+							id: that.resume.id
+						},
+						success(response) {
+							resolve()
+						}
+					})	
+				}else{
+					resolve()
+				}
+			})
+		},
+		uploadLogoImg(){
+			return new Promise((resolve, reject)=>{
+				if(that.logoChanged){
+					uni.uploadFile({
+						url: 'http://wzkjsyp.natapp1.cc/resume/bindingAvatar',
+						filePath: that.resume.logo,
+						name: 'file',
+						formData: {
+							id: that.resume.id
+						},
+						success(response) {
+							resolve()
+						}
+					})	
+				}else{
+					resolve()
+				}
+			})
+		},
+		uploadCompanyImg(){
+			return new Promise((resolve, reject)=>{
+				if(that.companyImgChanged){
+					uni.uploadFile({
+						url: 'http://wzkjsyp.natapp1.cc/resume/bindingAvatar',
+						filePath: that.resume.companyImg,
+						name: 'file',
+						formData: {
+							id: that.resume.id
+						},
+						success(response) {
+							resolve()
+						}
+					})	
+				}else{
+					resolve()
+				}
+			})
 		}
 	}
 </script>

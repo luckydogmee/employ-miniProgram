@@ -184,13 +184,13 @@ var postModel = new _job.default();var _default =
           mask: true });
 
       }
-      postModel.jobList(this.pageNum, this.pageSize, this.keyword, this.label).then(function (res) {var _res$data =
-        res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
+      postModel.jobList(this.pageNum, this.pageSize, this.keyword, this.label).then(function (res) {
         uni.hideLoading();
-        uni.stopPullDownRefresh();
+        uni.stopPullDownRefresh();var _res$data =
+        res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
         if (code === '0') {
           if (_this.pageNum === 1) {
-            that.postList = data;
+            that.postList = data.list;
           } else {
             that.postList = [].concat(_toConsumableArray(that.postList), _toConsumableArray(data));
           }
@@ -250,10 +250,42 @@ var postModel = new _job.default();var _default =
     },
     switchToSeller: function switchToSeller() {
       // 判断该用户是否存在b
+      uni.showLoading({
+        mask: true });
 
+      userModel.loginForB().then(function (res) {
+        uni.hideLoading();var _res$data2 =
+        res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
+        console.log(code);
+        if (code === '0') {
+          uni.reLaunch({
+            url: '../../seller/main/main' });
+
+        } else {
+          uni.showModal({
+            title: '',
+            content: '当前账号尚未注册企业号!\r\n是否注册？',
+            confirmText: '立即注册',
+            cancelText: '算了吧',
+            confirmColor: '#ff9058',
+            cancelColor: '#ff9058',
+            success: function success(response) {
+              if (response.confirm) {
+                uni.navigateTo({
+                  url: '../../user/register-seller/register-seller' });
+
+              }
+            } });
+
+        }
+      }).catch(function (err) {
+        uni.hideLoading();
+        uni.showToast({
+          icon: 'none',
+          title: '获取企业信息失败' });
+
+      });
       // 存在B端用户信息时
-      uni.reLaunch({
-        url: '../../seller/main/main' });
 
     },
     switchLabel: function switchLabel(label) {

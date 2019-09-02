@@ -230,6 +230,7 @@ var userModel = new _user2.default();var _default =
                 // 将返回的token存入本地
                 uni.setStorageSync('token', data.token);
                 uni.setStorageSync('isLogin', data.isLogin);
+                uni.setStorageSync('isRegister', data.isRegister);
                 uni.hideLoading();
                 that.hasToken = true;
               } else {
@@ -579,7 +580,7 @@ var jobModel = new _job.default();var _default =
         var _res$data = res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
         if (code === '0') {
           if (that.pageNum === 1) {
-            that.projectList = data;
+            that.projectList = data.list;
           } else {
             that.projectList = [].concat(_toConsumableArray(that.projectList), _toConsumableArray(data));
           }
@@ -973,7 +974,6 @@ var resumeModel = new _resume.default();var _default =
   (0, _vuex.mapMutations)(['switchTab']), {
     search: function search(keyWord) {
       // 做搜索动作
-      console.log(keyWord);
       this.keyWord = keyWord;
       this.getResumeList();
     },
@@ -998,7 +998,7 @@ var resumeModel = new _resume.default();var _default =
         res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
         if (code === '0') {
           if (that.pageNum === 1) {
-            that.resumeList = data;
+            that.resumeList = data.list;
           } else {
             that.resumeList = [].concat(_toConsumableArray(that.resumeList), _toConsumableArray(data));
           }

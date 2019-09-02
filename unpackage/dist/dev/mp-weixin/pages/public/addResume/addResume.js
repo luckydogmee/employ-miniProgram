@@ -165,8 +165,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var _vuex = __webpack_require__(/*! vuex */ 8);
 
-var _resume = _interopRequireDefault(__webpack_require__(/*! @/models/resume.js */ 27));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var InputCell = function InputCell() {return __webpack_require__.e(/*! import() | components/InputCell/InputCell */ "components/InputCell/InputCell").then(__webpack_require__.bind(null, /*! @/components/InputCell/InputCell.vue */ 221));};
+var _resume = _interopRequireDefault(__webpack_require__(/*! @/models/resume.js */ 27));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var InputCell = function InputCell() {return __webpack_require__.e(/*! import() | components/InputCell/InputCell */ "components/InputCell/InputCell").then(__webpack_require__.bind(null, /*! @/components/InputCell/InputCell.vue */ 221));};
 var resumeModel = new _resume.default();var _default =
 {
   data: function data() {
@@ -222,7 +223,8 @@ var resumeModel = new _resume.default();var _default =
       this.getResumeDetail();
     }
   },
-  methods: {
+  methods: _objectSpread({},
+  (0, _vuex.mapMutations)(['switchTab']), {
     getResumeDetail: function getResumeDetail() {var _this = this;
       uni.showLoading({
         mask: true });
@@ -360,7 +362,7 @@ var resumeModel = new _resume.default();var _default =
               } });
 
           } else {
-            showResponse();
+            that.showResponse();
           }
         } else {
           // 错误处理
@@ -377,6 +379,7 @@ var resumeModel = new _resume.default();var _default =
       });
     },
     showResponse: function showResponse() {
+      var that = this;
       if (this.resume.id) {
         uni.showToast({
           title: '更新简历成功!' });
@@ -413,7 +416,7 @@ var resumeModel = new _resume.default();var _default =
       var reg = /^1(3|4|5|7|8)[0-9]{9}$/; //验证规则
       var flag = reg.test(phone);
       return flag;
-    } } };exports.default = _default;
+    } }) };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

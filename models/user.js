@@ -110,21 +110,28 @@ class UserModel  extends HTTP {
 	}
 	// 申请提现
 	cashout(){
-		this.request({
+		return this.request({
 			url: '/user/cashout',
 		})
 	}
 	// 获取用户详情 （B）
 	getStoreInfo(){
-		this.request({
+		return this.request({
 			url: '/user/getStoreInfo',
 		})
 	}
 	
 	// 获取用户花费详情 （B）
 	getCashoutDetail(){
-		this.request({
+		return this.request({
 			url: '/user/getCashoutDetail'
+		})
+	}
+	
+	// 判断是否登录B端
+	loginForB(){
+		return this.request({
+			url: '/login/loginForB'
 		})
 	}
 }

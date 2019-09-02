@@ -238,7 +238,7 @@ var jobModel = new _job.default();var _default =
         var _res$data = res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
         if (code === '0') {
           if (that.pageNum === 1) {
-            that.projectList = data;
+            that.projectList = data.list;
           } else {
             that.projectList = [].concat(_toConsumableArray(that.projectList), _toConsumableArray(data));
           }

@@ -155,7 +155,6 @@
 			...mapMutations(['switchTab']),
 			search(keyWord){
 				// 做搜索动作
-				console.log(keyWord)
 				this.keyWord = keyWord
 				this.getResumeList()
 			},
@@ -178,7 +177,6 @@
 					uni.hideLoading()
 					uni.stopPullDownRefresh()
 					const { code, message, data } = res.data
-					console.log(data)
 					if(code === '0'){
 						if(that.pageNum === 1){
 							that.resumeList = data.list

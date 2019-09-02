@@ -25,7 +25,7 @@
 							v-model="verifyCode" maxlength="6" placeholder="短信验证码" placeholder-class="input-placeholder" 
 							@blur="handleBlur(3)" />
 					<button class="default-btn verify-code-btn" :class="{'disabled':!readySendCode} " 
-						@click="getVerifyCode">{{readySendCode ? '发送验证码' : surplusSecond + ' 秒后重新发送' }}</button>
+						@click="sendVerifyCode">{{readySendCode ? '发送验证码' : surplusSecond + ' 秒后重新发送' }}</button>
 				</view>
 				<view class="agreement">
 					<checkbox-group @change="agreementChange">
@@ -97,7 +97,7 @@
 				}
 				this.focusIndex = null	
 			},
-			getVerifyCode(){
+			sendVerifyCode(){
 				if(!this.readySendCode){
 					return 
 				}
@@ -126,7 +126,6 @@
 						uni.showToast({
 							title: '验证码已发送，请注意查收'
 						})
-						this.verifyCodeStatus = 1
 						this.surplusSecond = 120
 						this.focusIndex = 3
 						this.verifyCodeTimer = setInterval(()=>{
@@ -134,7 +133,6 @@
 								this.surplusSecond -= 1
 							}else{
 								this.surplusSecond = 0
-								this.verifyCodeStatus = 0
 								clearInterval(this.verifyCodeTimer)
 							}
 						}, 1000)

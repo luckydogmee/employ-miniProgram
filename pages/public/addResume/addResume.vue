@@ -58,6 +58,7 @@
 </template>
 
 <script>
+	import { mapState, mapMutations } from 'vuex'
 	import InputCell from '@/components/InputCell/InputCell.vue'
 	import ResumeModel from '@/models/resume.js'
 	const resumeModel = new ResumeModel()
@@ -116,6 +117,7 @@
 			}
 		},
 		methods:{
+			...mapMutations(['switchTab']),
 			getResumeDetail(){
 				uni.showLoading({
 					mask: true
@@ -253,7 +255,7 @@
 								}
 							})	
 						}else{
-							showResponse()
+							that.showResponse()
 						}
 					}else{
 						// 错误处理
@@ -270,6 +272,7 @@
 				})
 			},
 			showResponse(){
+				const that = this
 				if(this.resume.id){
 					uni.showToast({
 						title: '更新简历成功!'

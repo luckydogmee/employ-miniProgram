@@ -78,9 +78,9 @@
 					})
 				}
 				postModel.jobList(this.pageNum, this.pageSize, this.keyword, this.label).then(res=>{
-					const { code, message, data } = res.data
 					uni.hideLoading()
 					uni.stopPullDownRefresh()
+					const { code, message, data } = res.data
 					if(code === '0'){
 						if(this.pageNum === 1){
 							that.postList = data.list
@@ -143,11 +143,43 @@
 			},
 			switchToSeller(){
 				// 判断该用户是否存在b
-				
-				// 存在B端用户信息时
-				uni.reLaunch({
-					url: '../../seller/main/main'
+				uni.showLoading({
+					mask: true
 				})
+				userModel.loginForB().then(res=>{
+					uni.hideLoading()
+					const { code, message, data } = res.data
+					console.log(code)
+					if(code === '0'){
+						uni.reLaunch({
+							url: '../../seller/main/main'
+						})
+					}else{
+						uni.showModal({
+							title: '',
+							content: '当前账号尚未注册企业号!\r\n是否注册？',
+							confirmText: '立即注册',
+							cancelText: '算了吧',
+							confirmColor: '#ff9058',
+							cancelColor: '#ff9058',
+							success: (response)=>{
+								if(response.confirm){
+									uni.navigateTo({
+										url: '../../user/register-seller/register-seller'
+									})
+								}
+							},
+						})
+					}
+				}).catch(err=>{
+					uni.hideLoading()
+					uni.showToast({
+						icon: 'none',
+						title:'获取企业信息失败'
+					})
+				})
+				// 存在B端用户信息时
+				
 			},
 			switchLabel(label){
 				this.label = label

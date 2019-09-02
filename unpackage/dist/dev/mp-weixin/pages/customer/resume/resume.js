@@ -262,7 +262,6 @@ var resumeModel = new _resume.default();var _default =
   (0, _vuex.mapMutations)(['switchTab']), {
     search: function search(keyWord) {
       // 做搜索动作
-      console.log(keyWord);
       this.keyWord = keyWord;
       this.getResumeList();
     },
@@ -287,7 +286,7 @@ var resumeModel = new _resume.default();var _default =
         res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
         if (code === '0') {
           if (that.pageNum === 1) {
-            that.resumeList = data;
+            that.resumeList = data.list;
           } else {
             that.resumeList = [].concat(_toConsumableArray(that.resumeList), _toConsumableArray(data));
           }

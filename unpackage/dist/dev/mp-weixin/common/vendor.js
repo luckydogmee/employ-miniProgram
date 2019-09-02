@@ -8291,21 +8291,28 @@ UserModel = /*#__PURE__*/function (_HTTP) {_inherits(UserModel, _HTTP);
     }
     // 申请提现
   }, { key: "cashout", value: function cashout() {
-      this.request({
+      return this.request({
         url: '/user/cashout' });
 
     }
     // 获取用户详情 （B）
   }, { key: "getStoreInfo", value: function getStoreInfo() {
-      this.request({
+      return this.request({
         url: '/user/getStoreInfo' });
 
     }
 
     // 获取用户花费详情 （B）
   }, { key: "getCashoutDetail", value: function getCashoutDetail() {
-      this.request({
+      return this.request({
         url: '/user/getCashoutDetail' });
+
+    }
+
+    // 判断是否登录B端
+  }, { key: "loginForB", value: function loginForB() {
+      return this.request({
+        url: '/login/loginForB' });
 
     } }]);return UserModel;}(_http.HTTP);var _default =
 

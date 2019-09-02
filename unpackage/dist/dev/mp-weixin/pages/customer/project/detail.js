@@ -191,7 +191,7 @@ var resumeModel = new _resume.default();var _default =
         //数据绑定
         var _res$data = res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
         if (code === '0') {
-          _this.receviedList = data;
+          _this.receviedList = data.list;
         } else {
           uni.showToast({
             icon: 'none',

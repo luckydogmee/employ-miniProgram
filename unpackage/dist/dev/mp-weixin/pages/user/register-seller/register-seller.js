@@ -105,7 +105,8 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var InputCell = function InputCell() {return __webpack_require__.e(/*! import() | components/InputCell/InputCell */ "components/InputCell/InputCell").then(__webpack_require__.bind(null, /*! @/components/InputCell/InputCell.vue */ 221));};var UploadItem = function UploadItem() {return __webpack_require__.e(/*! import() | components/UploadItem/UploadItem */ "components/UploadItem/UploadItem").then(__webpack_require__.bind(null, /*! @/components/UploadItem/UploadItem.vue */ 228));};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var InputCell = function InputCell() {return __webpack_require__.e(/*! import() | components/InputCell/InputCell */ "components/InputCell/InputCell").then(__webpack_require__.bind(null, /*! @/components/InputCell/InputCell.vue */ 221));};var UploadItem = function UploadItem() {return __webpack_require__.e(/*! import() | components/UploadItem/UploadItem */ "components/UploadItem/UploadItem").then(__webpack_require__.bind(null, /*! @/components/UploadItem/UploadItem.vue */ 228));};var _default =
+
 
 
 
@@ -169,11 +170,17 @@ __webpack_require__.r(__webpack_exports__);
         logo: '', // 公司logo
         phone: '' // 电话号码
       },
+      bussinessImgChanged: false,
+      companyImgChanged: false,
+      logoChanged: false,
       pictureIndex: 0,
       verifyText: '发送验证码',
       cityCodeText: '', // 区域文字
-      citySelected: [] // 已选中的城市
-    };
+      citySelected: [], // 已选中的城市
+      readySendCode: true,
+      surplusSecond: 0,
+      verifyCodeTimer: null };
+
   },
   components: {
     InputCell: InputCell,
@@ -204,16 +211,186 @@ __webpack_require__.r(__webpack_exports__);
       this.resume.cityCode = code;
       this.cityCodeText = Array.from(new Set(value)).join('');
     },
-    uploadImage: function uploadImage() {var _this2 = this;
+    uploadBusinessImg: function uploadBusinessImg() {
+      var that = this;
       uni.chooseImage({
         count: 1,
         sizeType: 'compressed',
         sourceType: ['album', 'camera'],
         success: function success(res) {
-          _this2.avatar = res.tempFilePaths[0];
+          that.bussinessImgChanged = true;
+          that.resume.businessImg = res.tempFilePaths[0];
         } });
 
-    } } };exports.default = _default;
+    },
+    uploadLogo: function uploadLogo() {
+      var that = this;
+      uni.chooseImage({
+        count: 1,
+        sizeType: 'compressed',
+        sourceType: ['album', 'camera'],
+        success: function success(res) {
+          that.logoChanged = true;
+          that.resume.logo = res.tempFilePaths[0];
+        } });
+
+    },
+    uploadCompanyImg: function uploadCompanyImg() {
+      var that = this;
+      uni.chooseImage({
+        count: 1,
+        sizeType: 'compressed',
+        sourceType: ['album', 'camera'],
+        success: function success(res) {
+          that.companyImgChanged = true;
+          that.resume.companyImg = res.tempFilePaths[0];
+        } });
+
+    },
+    sendVerifyCode: function sendVerifyCode() {var _this2 = this;
+      if (!this.readySendCode) {
+        return;
+      }
+      if (!this.resume.phone) {
+        uni.showToast({
+          icon: 'none',
+          title: '请输入电话号码' });
+
+        return;
+      }
+      userModel.getVerifyCode(this.phone, 'B').then(function (res) {
+        // 请求成功,并判断code是否正确
+        var _res$data = res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
+        if (code === '0') {
+          uni.showToast({
+            title: '验证码已发送，请注意查收' });
+
+          _this2.surplusSecond = 120;
+          // this.focusIndex = 3
+          _this2.verifyCodeTimer = setInterval(function () {
+            if (_this2.surplusSecond > 0) {
+              _this2.surplusSecond -= 1;
+            } else {
+              _this2.surplusSecond = 0;
+              clearInterval(_this2.verifyCodeTimer);
+            }
+          }, 1000);
+          // this.focusIndex = 3	
+        } else {
+          uni.showToast({
+            icon: 'none',
+            title: message });
+
+        }
+
+      }).catch(function (err) {
+        uni.showToast({
+          icon: 'none',
+          title: '获取验证码失败' });
+
+      });
+    } },
+
+  savaStore: function savaStore() {var _userModel;
+    var that = this;
+    var array = Object.values(this.resume);
+    (_userModel = userModel).savaStore.apply(_userModel, _toConsumableArray(array)).then(function (res) {var _res$data2 =
+      res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
+      if (code === '0') {
+        that.resume.id = data.id;
+        // 循环上传三张图片
+        Promise.all(that.uploadBusinessImg, that.uploadLogo, that.uploadCompanyImg).then(function (res) {
+          uni.showToast({
+            title: '注册成功' });
+
+          setTimeout(function () {
+            uni.redirectTo({
+              url: '../../seller/home/home' });
+
+          }, 2000);
+        }).catch(function (err) {
+          setTimeout(function () {
+            uni.redirectTo({
+              url: '../../seller/home/home' });
+
+          }, 2000);
+          uni.showToast({
+            icon: 'none',
+            title: '部分图片上传失败，请稍候完善' });
+
+        });
+
+      } else {
+        // 错误处理
+        uni.showToast({
+          icon: 'none',
+          title: message });
+
+      }
+    }).catch(function (err) {
+      uni.showToast({
+        icon: 'none',
+        title: '提交失败，请稍候再试' });
+
+    });
+  },
+  uploadBusinessImg: function uploadBusinessImg() {
+    return new Promise(function (resolve, reject) {
+      if (that.bussinessImgChanged) {
+        uni.uploadFile({
+          url: 'http://wzkjsyp.natapp1.cc/resume/bindingAvatar',
+          filePath: that.resume.bussinessImg,
+          name: 'file',
+          formData: {
+            id: that.resume.id },
+
+          success: function success(response) {
+            resolve();
+          } });
+
+      } else {
+        resolve();
+      }
+    });
+  },
+  uploadLogoImg: function uploadLogoImg() {
+    return new Promise(function (resolve, reject) {
+      if (that.logoChanged) {
+        uni.uploadFile({
+          url: 'http://wzkjsyp.natapp1.cc/resume/bindingAvatar',
+          filePath: that.resume.logo,
+          name: 'file',
+          formData: {
+            id: that.resume.id },
+
+          success: function success(response) {
+            resolve();
+          } });
+
+      } else {
+        resolve();
+      }
+    });
+  },
+  uploadCompanyImg: function uploadCompanyImg() {
+    return new Promise(function (resolve, reject) {
+      if (that.companyImgChanged) {
+        uni.uploadFile({
+          url: 'http://wzkjsyp.natapp1.cc/resume/bindingAvatar',
+          filePath: that.resume.companyImg,
+          name: 'file',
+          formData: {
+            id: that.resume.id },
+
+          success: function success(response) {
+            resolve();
+          } });
+
+      } else {
+        resolve();
+      }
+    });
+  } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
