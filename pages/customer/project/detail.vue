@@ -84,7 +84,7 @@
 					//数据绑定
 					const { code, message, data } = res.data
 					if(code === '0'){
-						this.receviedList = data
+						this.receviedList = data.list
 					}else{
 						uni.showToast({
 							icon: 'none',
