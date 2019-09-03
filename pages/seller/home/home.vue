@@ -80,22 +80,62 @@
 				console.log(e)
 			},
 			switchToCustomer(){
-				uni.reLaunch({
-					url: '../../customer/main/main'
+				const that = this
+				uni.showLoading({
+					mask: true
+				})
+				uni.login({
+					provider: 'weixin',
+					success(res){
+						if(res.errMsg === 'login:ok'){
+							// 执行后台登录
+							userModel.wxLogin(res.code).then(res=>{
+								uni.hideLoading()
+								const { code, message, data } = res.data
+								if(code === '0'){
+									// 将返回的token存入本地
+									uni.setStorageSync('token', data.token)
+									
+									that.hasToken = true
+								}else{
+									uni.showToast({
+										icon: 'none',
+										title: message
+									})
+								}
+							}).catch(err=>{
+								uni.hideLoading()
+								uni.showToast({
+									icon: 'none',
+									title: '切换失败，请稍后再试'
+								})
+							})
+						}else{
+							uni.hideLoading()
+							uni.showToast({
+								icon: 'none',
+								title: res.errMeg
+							})
+						}
+					},
+					fail(err) {
+						console.log(err)
+					}
 				})
 			},
 			getPublishJobList(){
-				postModel.publishJobList(this.pageNum, this.pageSize, this.status).then(res=>{
+				const that = this
+				postModel.publishJobList(this.pageNum, this.pageSize, this.label).then(res=>{
 					uni.hideLoading()
 					uni.stopPullDownRefresh()
 					const { code, message, data } = res.data
 					if(code === '0'){
 						if(this.pageNum === 1){
-							that.jobList = data
+							that.jobList = data.list
 						}else {
-							that.jobList = [...that.jobList, ...data]
+							that.jobList = [...that.jobList, ...data.list]
 						}
-						if(data.length < that.pageSize){
+						if(that.jobList.length === data.total){
 							that.hasEnd = true
 						}
 					}else {
@@ -127,10 +167,11 @@
 			},
 			switchLabel(label){
 				this.label = label
+				console.log(this.label)
 				this.pageNum = 1
 				this.hasEnd = false
-				this.getJobList()
-			}
+				this.getPublishJobList()
+			},
 		}
 	}
 </script>

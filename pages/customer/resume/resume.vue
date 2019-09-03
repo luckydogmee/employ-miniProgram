@@ -181,9 +181,9 @@
 						if(that.pageNum === 1){
 							that.resumeList = data.list
 						}else {
-							that.resumeList = [...that.resumeList, ...data]
+							that.resumeList = [...that.resumeList, ...data.list]
 						}
-						if(data.length < that.pageSize){
+						if(that.resumeList.length === data.total){
 							that.hasEnd = true
 						}
 					}else{

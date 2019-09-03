@@ -240,9 +240,9 @@ var jobModel = new _job.default();var _default =
           if (that.pageNum === 1) {
             that.projectList = data.list;
           } else {
-            that.projectList = [].concat(_toConsumableArray(that.projectList), _toConsumableArray(data));
+            that.projectList = [].concat(_toConsumableArray(that.projectList), _toConsumableArray(data.list));
           }
-          if (data.length < that.pageSize) {
+          if (that.projectList.length === data.total) {
             that.hasEnd = true;
           }
         } else {

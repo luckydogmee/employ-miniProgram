@@ -1,8 +1,23 @@
 <template>
 	<view class="add-container">
 		<view class="add-top">
-			<InputCell label="公司名称" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="resume.name" placeholder="请输入名称"></InputCell>
-			<InputCell label="所在区域" :required="isEdit" :disabled="true" :isSell="true" :withPlugin="true" :hasSlot="true" :content="cityCodeText" placeholder="请选择区域>">
+			<InputCell label="公司名称" 
+				:required="isEdit" 
+				:disabled="!isEdit" 
+				:isSell="true" 
+				:content="resume.name" 
+				placeholder="请输入名称"
+				@on-input="nameChanged"
+			></InputCell>
+			<InputCell label="所在区域" 
+				:required="isEdit" 
+				:disabled="true" 
+				:isSell="true" 
+				:withPlugin="true" 
+				:hasSlot="true" 
+				:content="cityCodeText" 
+				@on-input="cityChanged"
+				placeholder="请选择区域>">
 				<picker
 					@change="cityPickerChange"
 					mode="region"
@@ -12,18 +27,18 @@
 					<view class="select"></view>
 				</picker>
 			</InputCell>
-			<InputCell label="公司地址" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="resume.address" placeholder="请输入详细地址"></InputCell>
-			<InputCell label="所在行业" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="resume.industryCode" placeholder="请输入行业"></InputCell>
-			<InputCell label="招聘联系人" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="resume.contactName" placeholder="请输入联系人"></InputCell>
+			<InputCell label="公司地址" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="resume.address" placeholder="请输入详细地址" @on-input="addressChanged"></InputCell>
+			<InputCell label="所在行业" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="resume.industryCode" placeholder="请输入行业" @on-input="industryChanged"></InputCell>
+			<InputCell label="招聘联系人" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="resume.contactName" placeholder="请输入联系人" @on-input="contactNameChanged"></InputCell>
 			
 			<view class="upload-wrapper">
-				<UploadItem title="上传营业执照" :imageUrl="resume.businessImg" @on-select-image="uploadBusinessImg" />
-				<UploadItem title="上传公司logo" :imageUrl="resume.logo" @on-select-image="uploadLogo" />
-				<UploadItem title="上传工作场景照" :imageUrl="resume.companyImg" @on-select-image="uploadCompanyImg" />
+				<UploadItem title="上传营业执照" :imageUrl="resume.businessImg" @on-select-image="chooseBusinessImg" />
+				<UploadItem title="上传公司logo" :imageUrl="resume.logo" @on-select-image="chooseLogo" />
+				<UploadItem title="上传工作场景照" :imageUrl="resume.companyImg" @on-select-image="chooseCompanyImg" />
 			</view>	
 		</view>
 		<view class="add-bottom">
-			<InputCell label="联系电话" :required="isEdit" :disabled="!isEdit" :isSell="true" placeholder="请输入联系电话" :content="resume.phone"></InputCell>
+			<InputCell label="联系电话" :required="isEdit" :disabled="!isEdit" :isSell="true" placeholder="请输入联系电话" :content="resume.phone" @on-input="phoneChanged"></InputCell>
 			
 			<!-- <view class="add-avatar">
 				<view v-if="isEdit" class="avatar new-avatar">
@@ -35,19 +50,21 @@
 					></image>
 				</view>
 			</view> -->
-			<inputCell label="验证码" :required="isEdit" :isSell="true" placeholder="请输入验证码" floatleft="left" :hasSlot="true" :content="verifyCode">
+			<inputCell label="验证码" :required="isEdit" :isSell="true" placeholder="请输入验证码" floatleft="left" :hasSlot="true" :content="verifyCode" @on-input="verifyCodeChanged">
 				<button class="default-btn verifyBtn verify-code-btn" :class="{'disabled':!readySendCode} "
 					@click="sendVerifyCode">{{readySendCode ? '发送验证码' : surplusSecond + ' 秒后重新发送' }}</button>
 			</inputCell>	
 		</view>
 		
-		<button class="default-btn submit" @click="verifyCode">提交审核</button>
+		<button class="default-btn submit" @click="postVerifyCode">提交审核</button>
 	</view>
 </template>
 
 <script>
 	import InputCell from '@/components/InputCell/InputCell.vue'
 	import UploadItem from '@/components/UploadItem/UploadItem.vue'
+	import UserModel from '@/models/user.js'
+	const userModel = new UserModel()
 	export default {
 		data() {
 			return {
@@ -105,7 +122,7 @@
 				this.resume.cityCode = code
 				this.cityCodeText = Array.from( new Set(value)).join('')
 			},
-			uploadBusinessImg(){
+			chooseBusinessImg(){
 				const that = this
 				uni.chooseImage({
 					count:1,
@@ -117,7 +134,7 @@
 					}
 				})
 			},
-			uploadLogo(){
+			chooseLogo(){
 				const that = this
 				uni.chooseImage({
 					count:1,
@@ -129,7 +146,7 @@
 					}
 				})
 			},
-			uploadCompanyImg(){
+			chooseCompanyImg(){
 				const that = this
 				uni.chooseImage({
 					count:1,
@@ -152,7 +169,7 @@
 					})
 					return
 				}
-				userModel.getVerifyCode(this.phone, 'B').then(res=>{
+				userModel.getVerifyCode(this.resume.phone, 'B').then(res=>{
 					// 请求成功,并判断code是否正确
 					const { code, message, data } = res.data 
 					if(code === '0'){
@@ -183,123 +200,144 @@
 						title:'获取验证码失败'
 					})
 				})
-			}
-		},
-		verifyCode(){
-			const that = this
-			userModel.login(this.resume.phone, this.verifyCode, 'B').then(res=>{
-				const { code, message, data } = res.data
-				if(code === '0'){
-					that.savaStore()
-				}else {
-					uni.showToast({
-						icon:'none',
-						title: message
-					})
-				}
-			})
-		},
-		savaStore(){
-			const that = this
-			const array = Object.values(this.resume)
-			
-			userModel.savaStore(...array).then(res=>{
-				const { code, message, data } = res.data
-				if(code === '0'){
-					that.resume.id = data.id
-					// 循环上传三张图片
-					Promise.all(that.uploadBusinessImg, that.uploadLogo, that.uploadCompanyImg).then(res=>{
-						uni.showToast({
-							title: '注册成功'
-						})
-						setTimeout(()=>{
-							uni.redirectTo({
-								url: '../../seller/home/home'
-							})	
-						},2000)
-					}).catch(err=>{
-						setTimeout(()=>{
-							uni.redirectTo({
-								url: '../../seller/home/home'
-							})	
-						},2000)
+			},
+			postVerifyCode(){
+				const that = this
+				userModel.login(this.resume.phone, this.verifyCode, 'B').then(res=>{
+					const { code, message, data } = res.data
+					if(code === '0'){
+						that.savaStore()
+					}else {
 						uni.showToast({
 							icon:'none',
-							title: '部分图片上传失败，请稍候完善'
+							title: message
 						})
-					})
-					
-				}else{
-					// 错误处理
+					}
+				})
+			},
+			savaStore(){
+				const that = this
+				const array = Object.values(this.resume)
+				
+				userModel.savaStore(...array).then(res=>{
+					const { code, message, data } = res.data
+					if(code === '0'){
+						that.resume.id = data.id
+						// 循环上传三张图片
+						Promise.all(that.uploadBusinessImg, that.uploadLogo, that.uploadCompanyImg).then(res=>{
+							uni.showToast({
+								title: '注册成功'
+							})
+							setTimeout(()=>{
+								uni.redirectTo({
+									url: '../../seller/main/main'
+								})	
+							},2000)
+						}).catch(err=>{
+							setTimeout(()=>{
+								uni.redirectTo({
+									url: '../../seller/main/main'
+								})	
+							},2000)
+							uni.showToast({
+								icon:'none',
+								title: '部分图片上传失败，请稍候完善'
+							})
+						})
+						
+					}else{
+						// 错误处理
+						uni.showToast({
+							icon:'none',
+							title: message
+						})
+					}
+				}).catch(err=>{
 					uni.showToast({
 						icon:'none',
-						title: message
+						title: '提交失败，请稍候再试'
 					})
-				}
-			}).catch(err=>{
-				uni.showToast({
-					icon:'none',
-					title: '提交失败，请稍候再试'
 				})
-			})
-		},
-		uploadBusinessImg(){
-			return new Promise((resolve, reject)=>{
-				if(that.bussinessImgChanged){
-					uni.uploadFile({
-						url: 'http://wzkjsyp.natapp1.cc/resume/bindingAvatar',
-						filePath: that.resume.bussinessImg,
-						name: 'file',
-						formData: {
-							id: that.resume.id
-						},
-						success(response) {
-							resolve()
-						}
-					})	
-				}else{
-					resolve()
-				}
-			})
-		},
-		uploadLogoImg(){
-			return new Promise((resolve, reject)=>{
-				if(that.logoChanged){
-					uni.uploadFile({
-						url: 'http://wzkjsyp.natapp1.cc/resume/bindingAvatar',
-						filePath: that.resume.logo,
-						name: 'file',
-						formData: {
-							id: that.resume.id
-						},
-						success(response) {
-							resolve()
-						}
-					})	
-				}else{
-					resolve()
-				}
-			})
-		},
-		uploadCompanyImg(){
-			return new Promise((resolve, reject)=>{
-				if(that.companyImgChanged){
-					uni.uploadFile({
-						url: 'http://wzkjsyp.natapp1.cc/resume/bindingAvatar',
-						filePath: that.resume.companyImg,
-						name: 'file',
-						formData: {
-							id: that.resume.id
-						},
-						success(response) {
-							resolve()
-						}
-					})	
-				}else{
-					resolve()
-				}
-			})
-		}
+			},
+			uploadBusinessImg(){
+				return new Promise((resolve, reject)=>{
+					if(that.bussinessImgChanged){
+						uni.uploadFile({
+							url: 'http://wzkjsyp.natapp1.cc/resume/bindingAvatar',
+							filePath: that.resume.bussinessImg,
+							name: 'file',
+							formData: {
+								id: that.resume.id
+							},
+							success(response) {
+								resolve()
+							}
+						})	
+					}else{
+						resolve()
+					}
+				})
+			},
+			uploadLogoImg(){
+				return new Promise((resolve, reject)=>{
+					if(that.logoChanged){
+						uni.uploadFile({
+							url: 'http://wzkjsyp.natapp1.cc/resume/bindingAvatar',
+							filePath: that.resume.logo,
+							name: 'file',
+							formData: {
+								id: that.resume.id
+							},
+							success(response) {
+								resolve()
+							}
+						})	
+					}else{
+						resolve()
+					}
+				})
+			},
+			uploadCompanyImg(){
+				return new Promise((resolve, reject)=>{
+					if(that.companyImgChanged){
+						uni.uploadFile({
+							url: 'http://wzkjsyp.natapp1.cc/resume/bindingAvatar',
+							filePath: that.resume.companyImg,
+							name: 'file',
+							formData: {
+								id: that.resume.id
+							},
+							success(response) {
+								resolve()
+							}
+						})	
+					}else{
+						resolve()
+					}
+				})
+			},
+			nameChanged(value){
+				this.resume.name = value
+			},
+			cityChanged(value){
+				this.resume.cityCode = value
+			},
+			addressChanged(value){
+				this.resume.address = value
+			},
+			industryChanged(value){
+				this.resume.industryCode = value
+			},
+			contactNameChanged(value){
+				this.resume.contactName = value
+			},
+			phoneChanged(value){
+				this.resume.phone = value
+			},	
+			verifyCodeChanged(value){
+				this.verifyCode = value
+			}
+		},	
 	}
 </script>
 

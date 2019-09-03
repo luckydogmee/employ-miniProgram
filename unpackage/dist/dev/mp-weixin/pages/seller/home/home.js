@@ -187,22 +187,62 @@ var userModel = new _user.default();var _default =
       console.log(e);
     },
     switchToCustomer: function switchToCustomer() {
-      uni.reLaunch({
-        url: '../../customer/main/main' });
+      var that = this;
+      uni.showLoading({
+        mask: true });
+
+      uni.login({
+        provider: 'weixin',
+        success: function success(res) {
+          if (res.errMsg === 'login:ok') {
+            // 执行后台登录
+            userModel.wxLogin(res.code).then(function (res) {
+              uni.hideLoading();var _res$data =
+              res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
+              if (code === '0') {
+                // 将返回的token存入本地
+                uni.setStorageSync('token', data.token);
+
+                that.hasToken = true;
+              } else {
+                uni.showToast({
+                  icon: 'none',
+                  title: message });
+
+              }
+            }).catch(function (err) {
+              uni.hideLoading();
+              uni.showToast({
+                icon: 'none',
+                title: '切换失败，请稍后再试' });
+
+            });
+          } else {
+            uni.hideLoading();
+            uni.showToast({
+              icon: 'none',
+              title: res.errMeg });
+
+          }
+        },
+        fail: function fail(err) {
+          console.log(err);
+        } });
 
     },
     getPublishJobList: function getPublishJobList() {var _this = this;
-      postModel.publishJobList(this.pageNum, this.pageSize, this.status).then(function (res) {
+      var that = this;
+      postModel.publishJobList(this.pageNum, this.pageSize, this.label).then(function (res) {
         uni.hideLoading();
-        uni.stopPullDownRefresh();var _res$data =
-        res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
+        uni.stopPullDownRefresh();var _res$data2 =
+        res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
         if (code === '0') {
           if (_this.pageNum === 1) {
-            that.jobList = data;
+            that.jobList = data.list;
           } else {
-            that.jobList = [].concat(_toConsumableArray(that.jobList), _toConsumableArray(data));
+            that.jobList = [].concat(_toConsumableArray(that.jobList), _toConsumableArray(data.list));
           }
-          if (data.length < that.pageSize) {
+          if (that.jobList.length === data.total) {
             that.hasEnd = true;
           }
         } else {
@@ -234,9 +274,10 @@ var userModel = new _user.default();var _default =
     },
     switchLabel: function switchLabel(label) {
       this.label = label;
+      console.log(this.label);
       this.pageNum = 1;
       this.hasEnd = false;
-      this.getJobList();
+      this.getPublishJobList();
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

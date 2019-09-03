@@ -164,22 +164,22 @@ var userModel = new _user2.default();var _default =
     // 第一次进入的时候
     var that = this;
     var token = uni.getStorageSync('token');
-    uni.checkSession({
-      success: function success(res) {
-        console.log(res);
-        if (token) {
-          // 当前用户登录未过期，用原来的token即可
-          that.hasToken = true;
-        } else {
-          that.login();
-        }
-      },
-      fail: function fail(err) {
-        that.login();
-      } });
-
+    // uni.checkSession({
+    // 	success(res) {
+    // 		console.log(res)
+    // 		if(token){
+    // 			// 当前用户登录未过期，用原来的token即可
+    // 			that.hasToken = true
+    // 		}else{
+    // 			that.login()
+    // 		}
+    // 	},
+    // 	fail(err) {
+    // 		that.login()
+    // 	}
+    // })	
     // 直接login，避免麻烦
-    // this.login()
+    this.login();
   },
   onPullDownRefresh: function onPullDownRefresh() {
     if (this.tabIndex === 0) {
@@ -582,9 +582,9 @@ var jobModel = new _job.default();var _default =
           if (that.pageNum === 1) {
             that.projectList = data.list;
           } else {
-            that.projectList = [].concat(_toConsumableArray(that.projectList), _toConsumableArray(data));
+            that.projectList = [].concat(_toConsumableArray(that.projectList), _toConsumableArray(data.list));
           }
-          if (data.length < that.pageSize) {
+          if (that.projectList.length === data.total) {
             that.hasEnd = true;
           }
         } else {
@@ -1000,9 +1000,9 @@ var resumeModel = new _resume.default();var _default =
           if (that.pageNum === 1) {
             that.resumeList = data.list;
           } else {
-            that.resumeList = [].concat(_toConsumableArray(that.resumeList), _toConsumableArray(data));
+            that.resumeList = [].concat(_toConsumableArray(that.resumeList), _toConsumableArray(data.list));
           }
-          if (data.length < that.pageSize) {
+          if (that.resumeList.length === data.total) {
             that.hasEnd = true;
           }
         } else {

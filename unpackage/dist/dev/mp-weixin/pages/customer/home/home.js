@@ -192,9 +192,9 @@ var postModel = new _job.default();var _default =
           if (_this.pageNum === 1) {
             that.postList = data.list;
           } else {
-            that.postList = [].concat(_toConsumableArray(that.postList), _toConsumableArray(data));
+            that.postList = [].concat(_toConsumableArray(that.postList), _toConsumableArray(data.list));
           }
-          if (data.length < that.pageSize) {
+          if (that.postList.length === data.total) {
             that.hasEnd = true;
           }
         } else {
@@ -253,40 +253,45 @@ var postModel = new _job.default();var _default =
       uni.showLoading({
         mask: true });
 
-      userModel.loginForB().then(function (res) {
-        uni.hideLoading();var _res$data2 =
-        res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
-        console.log(code);
-        if (code === '0') {
-          uni.reLaunch({
-            url: '../../seller/main/main' });
-
-        } else {
-          uni.showModal({
-            title: '',
-            content: '当前账号尚未注册企业号!\r\n是否注册？',
-            confirmText: '立即注册',
-            cancelText: '算了吧',
-            confirmColor: '#ff9058',
-            cancelColor: '#ff9058',
-            success: function success(response) {
-              if (response.confirm) {
-                uni.navigateTo({
-                  url: '../../user/register-seller/register-seller' });
-
-              }
-            } });
-
-        }
-      }).catch(function (err) {
+      if (uni.getStorageSync('tokenB')) {
         uni.hideLoading();
-        uni.showToast({
-          icon: 'none',
-          title: '获取企业信息失败' });
+        uni.redirectTo({
+          url: '../../seller/main/main' });
 
-      });
-      // 存在B端用户信息时
+      } else {
+        userModel.loginForB().then(function (res) {
+          uni.hideLoading();var _res$data2 =
+          res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
+          if (code === '0') {
+            uni.setStorageSync('token', data.token);
+            uni.reLaunch({
+              url: '../../seller/main/main' });
 
+          } else {
+            uni.showModal({
+              title: '',
+              content: '当前账号尚未注册企业号!\r\n是否注册？',
+              confirmText: '立即注册',
+              cancelText: '算了吧',
+              confirmColor: '#ff9058',
+              cancelColor: '#ff9058',
+              success: function success(response) {
+                if (response.confirm) {
+                  uni.navigateTo({
+                    url: '../../user/register-seller/register-seller' });
+
+                }
+              } });
+
+          }
+        }).catch(function (err) {
+          uni.hideLoading();
+          uni.showToast({
+            icon: 'none',
+            title: '获取企业信息失败' });
+
+        });
+      }
     },
     switchLabel: function switchLabel(label) {
       this.label = label;

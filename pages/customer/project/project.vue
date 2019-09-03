@@ -133,9 +133,9 @@
 						if(that.pageNum === 1){
 							that.projectList = data.list
 						}else {
-							that.projectList = [...that.projectList, ...data]
+							that.projectList = [...that.projectList, ...data.list]
 						}
-						if(data.length < that.pageSize){
+						if(that.projectList.length === data.total){
 							that.hasEnd = true
 						}
 					}else{

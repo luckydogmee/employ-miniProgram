@@ -288,9 +288,9 @@ var resumeModel = new _resume.default();var _default =
           if (that.pageNum === 1) {
             that.resumeList = data.list;
           } else {
-            that.resumeList = [].concat(_toConsumableArray(that.resumeList), _toConsumableArray(data));
+            that.resumeList = [].concat(_toConsumableArray(that.resumeList), _toConsumableArray(data.list));
           }
-          if (data.length < that.pageSize) {
+          if (that.resumeList.length === data.total) {
             that.hasEnd = true;
           }
         } else {

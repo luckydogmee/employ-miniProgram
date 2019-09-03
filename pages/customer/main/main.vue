@@ -48,22 +48,22 @@
 			// 第一次进入的时候
 			const that = this
 			const token = uni.getStorageSync('token')
-			uni.checkSession({
-				success(res) {
-					console.log(res)
-					if(token){
-						// 当前用户登录未过期，用原来的token即可
-						that.hasToken = true
-					}else{
-						that.login()
-					}
-				},
-				fail(err) {
-					that.login()
-				}
-			})	
+			// uni.checkSession({
+			// 	success(res) {
+			// 		console.log(res)
+			// 		if(token){
+			// 			// 当前用户登录未过期，用原来的token即可
+			// 			that.hasToken = true
+			// 		}else{
+			// 			that.login()
+			// 		}
+			// 	},
+			// 	fail(err) {
+			// 		that.login()
+			// 	}
+			// })	
 			// 直接login，避免麻烦
-			// this.login()
+			this.login()
 		},
 		onPullDownRefresh(){
 			if(this.tabIndex === 0){
