@@ -61,6 +61,7 @@
 	import { mapState, mapMutations } from 'vuex'
 	import InputCell from '@/components/InputCell/InputCell.vue'
 	import ResumeModel from '@/models/resume.js'
+	const _ = require('@/utils/lodash.js')
 	const resumeModel = new ResumeModel()
 	export default {
 		data() {
@@ -126,7 +127,7 @@
 					uni.hideLoading()
 					const { code, data, message } = res.data
 					if(code === '0'){
-						this.resume = data
+						this.resume = _.pick(data,['id', 'name', 'phone', 'gender', 'age', 'educationDegree', 'workExperience', 'university', 'nativePlace', 'intentionalWork'])
 						if(data.avatar){
 							this.avatar = data.avatar
 						}else{
@@ -192,43 +193,42 @@
 			submit(){
 				const that = this
 				// 做表单验证
-				console.log(that.changedAvatar)
-				if(!that.changedAvatar){
+				if(that.avatar === ''){
 					that.showMessage("头像不能为空！")
 					return
 				}
-				if(that.isNull(that.resume.name)){
+				if(that.resume.name === ''){
 					that.showMessage("姓名不能为空！")
 					return
 				}
-				if(that.isNull(that.resume.gender)){
+				if(that.resume.gender === ''){
 					that.showMessage("性别不能为空！")
 					return
 				}
-				if(that.isNull(that.resume.educationDegree)){
+				if(that.resume.educationDegree === ''){
 					that.showMessage("学历不能为空！")
 					return
 				}
-				if(that.isNull(that.resume.phone)){
+				if(that.resume.phone === ''){
 					that.showMessage("电话不能为空！")
 					return
 				}else if(!that.checkPhone(that.resume.phone)){
 					that.showMessage("电话输入有误请重新输入！")
 					return
 				}
-				if(that.isNull(that.resume.workExperience)){
+				if(that.resume.workExperience === ''){
 					that.showMessage("工作经验不能为空")
 					return
 				}
-				if(that.isNull(that.resume.university)){
+				if(that.resume.university === ''){
 					that.showMessage("毕业院校不能为空")
 					return
 				}
-				if(that.isNull(that.resume.nativePlace)){
+				if(that.resume.nativePlace === ''){
 					that.showMessage("籍贯不能为空")
 					return
 				}
-				if(that.isNull(that.resume.intentionalWork)){
+				if(that.resume.intentionalWork === ''){
 					that.showMessage("期望工作不能为空")
 					return
 				}
@@ -251,14 +251,17 @@
 									id: data.id
 								},
 								success(response) {
+									uni.hideLoading()
 									that.showResponse()
 								}
 							})	
 						}else{
+							uni.hideLoading()
 							that.showResponse()
 						}
 					}else{
 						// 错误处理
+						uni.hideLoading()
 						uni.showToast({
 							icon:'none',
 							title: message
@@ -283,9 +286,6 @@
 					})
 				}
 				setTimeout(()=>{
-					// uni.navigateBack({
-					// 	delta:1
-					// })
 						that.switchTab({index: 2})
 						uni.redirectTo({
 							url: '../../customer/main/main'

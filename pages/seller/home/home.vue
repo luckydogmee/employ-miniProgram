@@ -95,8 +95,10 @@
 								if(code === '0'){
 									// 将返回的token存入本地
 									uni.setStorageSync('token', data.token)
-									
 									that.hasToken = true
+									uni.redirectTo({
+										url: '../../customer/main/main'
+									})
 								}else{
 									uni.showToast({
 										icon: 'none',

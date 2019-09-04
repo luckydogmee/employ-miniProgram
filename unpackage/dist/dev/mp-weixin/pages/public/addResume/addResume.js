@@ -168,6 +168,7 @@ __webpack_require__.r(__webpack_exports__);
 var _vuex = __webpack_require__(/*! vuex */ 8);
 
 var _resume = _interopRequireDefault(__webpack_require__(/*! @/models/resume.js */ 27));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var InputCell = function InputCell() {return __webpack_require__.e(/*! import() | components/InputCell/InputCell */ "components/InputCell/InputCell").then(__webpack_require__.bind(null, /*! @/components/InputCell/InputCell.vue */ 221));};
+var _ = __webpack_require__(/*! @/utils/lodash.js */ 277);
 var resumeModel = new _resume.default();var _default =
 {
   data: function data() {
@@ -233,7 +234,7 @@ var resumeModel = new _resume.default();var _default =
         uni.hideLoading();var _res$data =
         res.data,code = _res$data.code,data = _res$data.data,message = _res$data.message;
         if (code === '0') {
-          _this.resume = data;
+          _this.resume = _.pick(data, ['id', 'name', 'phone', 'gender', 'age', 'educationDegree', 'workExperience', 'university', 'nativePlace', 'intentionalWork']);
           if (data.avatar) {
             _this.avatar = data.avatar;
           } else {
@@ -299,43 +300,42 @@ var resumeModel = new _resume.default();var _default =
     submit: function submit() {
       var that = this;
       // 做表单验证
-      console.log(that.changedAvatar);
-      if (!that.changedAvatar) {
+      if (that.avatar === '') {
         that.showMessage("头像不能为空！");
         return;
       }
-      if (that.isNull(that.resume.name)) {
+      if (that.resume.name === '') {
         that.showMessage("姓名不能为空！");
         return;
       }
-      if (that.isNull(that.resume.gender)) {
+      if (that.resume.gender === '') {
         that.showMessage("性别不能为空！");
         return;
       }
-      if (that.isNull(that.resume.educationDegree)) {
+      if (that.resume.educationDegree === '') {
         that.showMessage("学历不能为空！");
         return;
       }
-      if (that.isNull(that.resume.phone)) {
+      if (that.resume.phone === '') {
         that.showMessage("电话不能为空！");
         return;
       } else if (!that.checkPhone(that.resume.phone)) {
         that.showMessage("电话输入有误请重新输入！");
         return;
       }
-      if (that.isNull(that.resume.workExperience)) {
+      if (that.resume.workExperience === '') {
         that.showMessage("工作经验不能为空");
         return;
       }
-      if (that.isNull(that.resume.university)) {
+      if (that.resume.university === '') {
         that.showMessage("毕业院校不能为空");
         return;
       }
-      if (that.isNull(that.resume.nativePlace)) {
+      if (that.resume.nativePlace === '') {
         that.showMessage("籍贯不能为空");
         return;
       }
-      if (that.isNull(that.resume.intentionalWork)) {
+      if (that.resume.intentionalWork === '') {
         that.showMessage("期望工作不能为空");
         return;
       }
@@ -358,14 +358,17 @@ var resumeModel = new _resume.default();var _default =
                 id: data.id },
 
               success: function success(response) {
+                uni.hideLoading();
                 that.showResponse();
               } });
 
           } else {
+            uni.hideLoading();
             that.showResponse();
           }
         } else {
           // 错误处理
+          uni.hideLoading();
           uni.showToast({
             icon: 'none',
             title: message });
@@ -390,9 +393,6 @@ var resumeModel = new _resume.default();var _default =
 
       }
       setTimeout(function () {
-        // uni.navigateBack({
-        // 	delta:1
-        // })
         that.switchTab({ index: 2 });
         uni.redirectTo({
           url: '../../customer/main/main' });

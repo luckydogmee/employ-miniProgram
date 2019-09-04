@@ -133,6 +133,16 @@ button.swiper-button:after {
   font-size: 24rpx;
   color: #8F8F94;
 }
+.hasend {
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  width: 750rpx;
+  font-size: 20rpx;
+  color: #666;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+}
 /* ************ 表单相关 start ************** */
 .form-item {
   width: 100%;

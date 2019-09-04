@@ -76,7 +76,7 @@ class UserModel  extends HTTP {
 		})
 	}
 	// 登录
-	login(phone, verifyCode, type){
+	login(phone, code, type){
 		let url = null
 		if(type === 'A'){
 			url = '/login/loginByCode'
@@ -88,7 +88,7 @@ class UserModel  extends HTTP {
 			methods: 'POST',
 			data: {
 				phone,
-				verifyCode
+				code
 			}
 		})	
 	}

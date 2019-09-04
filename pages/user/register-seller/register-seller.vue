@@ -64,12 +64,15 @@
 	import InputCell from '@/components/InputCell/InputCell.vue'
 	import UploadItem from '@/components/UploadItem/UploadItem.vue'
 	import UserModel from '@/models/user.js'
+	import StoreModel from '@/models/store.js'
 	const userModel = new UserModel()
+	const storeModel = new StoreModel()
 	export default {
 		data() {
 			return {
 				isEdit: true, // 是否编辑状态
 				resume: {
+					id:　'',
 					name: '', // 公司名称
 					cityCode: '', // 城市码
 					address: '', // 地址
@@ -119,7 +122,7 @@
 			},
 			cityPickerChange(e){
 				const { code, value } = e.detail
-				this.resume.cityCode = code
+				this.resume.cityCode = code.join(',')
 				this.cityCodeText = Array.from( new Set(value)).join('')
 			},
 			chooseBusinessImg(){
@@ -176,13 +179,15 @@
 						uni.showToast({
 							title: '验证码已发送，请注意查收'
 						})
-						this.surplusSecond = 120
+						this.readySendCode = false
+						this.surplusSecond = 60
 						// this.focusIndex = 3
 						this.verifyCodeTimer = setInterval(()=>{
 							if(this.surplusSecond > 0){
 								this.surplusSecond -= 1
 							}else{
 								this.surplusSecond = 0
+								this.readySendCode = true
 								clearInterval(this.verifyCodeTimer)
 							}
 						}, 1000)
@@ -206,7 +211,8 @@
 				userModel.login(this.resume.phone, this.verifyCode, 'B').then(res=>{
 					const { code, message, data } = res.data
 					if(code === '0'){
-						that.savaStore()
+						uni.setStorageSync('token',data.token)
+						that.saveStore()
 					}else {
 						uni.showToast({
 							icon:'none',
@@ -215,19 +221,72 @@
 					}
 				})
 			},
-			savaStore(){
+			saveStore(){
 				const that = this
 				const array = Object.values(this.resume)
-				
-				userModel.savaStore(...array).then(res=>{
+				const uploadBusinessImg = new Promise((resolve, reject)=>{
+					if(that.bussinessImgChanged){
+						uni.uploadFile({
+							url: 'http://wzkjsyp.natapp1.cc/store/uploadImage',
+							filePath: that.resume.bussinessImg,
+							name: 'file',
+							formData: {
+								id: that.resume.id
+							},
+							success(response) {
+								resolve('success')
+							}
+						})	
+					}else{
+						resolve()
+					}
+				})
+				const uploadLogo = new Promise((resolve, reject)=>{
+					if(that.logoChanged){
+						uni.uploadFile({
+							url: 'http://wzkjsyp.natapp1.cc/store/uploadImage',
+							filePath: that.resume.logo,
+							name: 'file',
+							formData: {
+								id: that.resume.id
+							},
+							success(response) {
+								resolve('success')
+							}
+						})	
+					}else{
+						resolve()
+					}
+				})
+				const uploadCompanyImg = new Promise((resolve, reject)=>{
+					if(that.companyImgChanged){
+						uni.uploadFile({
+							url: 'http://wzkjsyp.natapp1.cc/store/uploadImage',
+							filePath: that.resume.companyImg,
+							name: 'file',
+							formData: {
+								id: that.resume.id
+							},
+							success(response) {
+								resolve('success')
+							}
+						})	
+					}else{
+						resolve()
+					}
+				})
+				storeModel.saveStore(...array).then(res=>{
 					const { code, message, data } = res.data
 					if(code === '0'){
 						that.resume.id = data.id
 						// 循环上传三张图片
-						Promise.all(that.uploadBusinessImg, that.uploadLogo, that.uploadCompanyImg).then(res=>{
+						Promise.all([uploadBusinessImg, uploadLogo, uploadCompanyImg]).then(res=>{
 							uni.showToast({
 								title: '注册成功'
 							})
+							const {code, data, message} = res.data
+							uni.setStorageSync('token', data.token)
+							that.hasToken = true
 							setTimeout(()=>{
 								uni.redirectTo({
 									url: '../../seller/main/main'
@@ -257,63 +316,6 @@
 						icon:'none',
 						title: '提交失败，请稍候再试'
 					})
-				})
-			},
-			uploadBusinessImg(){
-				return new Promise((resolve, reject)=>{
-					if(that.bussinessImgChanged){
-						uni.uploadFile({
-							url: 'http://wzkjsyp.natapp1.cc/resume/bindingAvatar',
-							filePath: that.resume.bussinessImg,
-							name: 'file',
-							formData: {
-								id: that.resume.id
-							},
-							success(response) {
-								resolve()
-							}
-						})	
-					}else{
-						resolve()
-					}
-				})
-			},
-			uploadLogoImg(){
-				return new Promise((resolve, reject)=>{
-					if(that.logoChanged){
-						uni.uploadFile({
-							url: 'http://wzkjsyp.natapp1.cc/resume/bindingAvatar',
-							filePath: that.resume.logo,
-							name: 'file',
-							formData: {
-								id: that.resume.id
-							},
-							success(response) {
-								resolve()
-							}
-						})	
-					}else{
-						resolve()
-					}
-				})
-			},
-			uploadCompanyImg(){
-				return new Promise((resolve, reject)=>{
-					if(that.companyImgChanged){
-						uni.uploadFile({
-							url: 'http://wzkjsyp.natapp1.cc/resume/bindingAvatar',
-							filePath: that.resume.companyImg,
-							name: 'file',
-							formData: {
-								id: that.resume.id
-							},
-							success(response) {
-								resolve()
-							}
-						})	
-					}else{
-						resolve()
-					}
 				})
 			},
 			nameChanged(value){

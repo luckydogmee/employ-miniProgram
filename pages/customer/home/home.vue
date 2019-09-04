@@ -146,45 +146,38 @@
 				uni.showLoading({
 					mask: true
 				})
-				if(uni.getStorageSync('tokenB')){
+				userModel.loginForB().then(res=>{
 					uni.hideLoading()
-					uni.redirectTo({
-						url: '../../seller/main/main'
-					})
-				}else{
-					userModel.loginForB().then(res=>{
-						uni.hideLoading()
-						const { code, message, data } = res.data
-						if(code === '0'){
-							uni.setStorageSync('token', data.token)
-							uni.reLaunch({
-								url: '../../seller/main/main'
-							})
-						}else{
-							uni.showModal({
-								title: '',
-								content: '当前账号尚未注册企业号!\r\n是否注册？',
-								confirmText: '立即注册',
-								cancelText: '算了吧',
-								confirmColor: '#ff9058',
-								cancelColor: '#ff9058',
-								success: (response)=>{
-									if(response.confirm){
-										uni.navigateTo({
-											url: '../../user/register-seller/register-seller'
-										})
-									}
-								},
-							})
-						}
-					}).catch(err=>{
-						uni.hideLoading()
-						uni.showToast({
-							icon: 'none',
-							title:'获取企业信息失败'
+					const { code, message, data } = res.data
+					if(code === '0'){
+						uni.setStorageSync('token', data.token)
+						uni.reLaunch({
+							url: '../../seller/main/main'
 						})
-					})	
-				}
+					}else{
+						uni.showModal({
+							title: '',
+							content: '当前账号尚未注册企业号!\r\n是否注册？',
+							confirmText: '立即注册',
+							cancelText: '算了吧',
+							confirmColor: '#ff9058',
+							cancelColor: '#ff9058',
+							success: (response)=>{
+								if(response.confirm){
+									uni.navigateTo({
+										url: '../../user/register-seller/register-seller'
+									})
+								}
+							},
+						})
+					}
+				}).catch(err=>{
+					uni.hideLoading()
+					uni.showToast({
+						icon: 'none',
+						title:'获取企业信息失败'
+					})
+				})	
 			},
 			switchLabel(label){
 				this.label = label

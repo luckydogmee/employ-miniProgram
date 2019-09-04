@@ -170,13 +170,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _user = _interopRequireDefault(__webpack_require__(/*! @/models/user.js */ 42));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var InputCell = function InputCell() {return __webpack_require__.e(/*! import() | components/InputCell/InputCell */ "components/InputCell/InputCell").then(__webpack_require__.bind(null, /*! @/components/InputCell/InputCell.vue */ 221));};var UploadItem = function UploadItem() {return __webpack_require__.e(/*! import() | components/UploadItem/UploadItem */ "components/UploadItem/UploadItem").then(__webpack_require__.bind(null, /*! @/components/UploadItem/UploadItem.vue */ 228));};
-var userModel = new _user.default();var _default =
+var _user = _interopRequireDefault(__webpack_require__(/*! @/models/user.js */ 42));
+var _store = _interopRequireDefault(__webpack_require__(/*! @/models/store.js */ 279));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var InputCell = function InputCell() {return __webpack_require__.e(/*! import() | components/InputCell/InputCell */ "components/InputCell/InputCell").then(__webpack_require__.bind(null, /*! @/components/InputCell/InputCell.vue */ 221));};var UploadItem = function UploadItem() {return __webpack_require__.e(/*! import() | components/UploadItem/UploadItem */ "components/UploadItem/UploadItem").then(__webpack_require__.bind(null, /*! @/components/UploadItem/UploadItem.vue */ 228));};
+var userModel = new _user.default();
+var storeModel = new _store.default();var _default =
 {
   data: function data() {
     return {
       isEdit: true, // 是否编辑状态
       resume: {
+        id: '',
         name: '', // 公司名称
         cityCode: '', // 城市码
         address: '', // 地址
@@ -226,7 +229,7 @@ var userModel = new _user.default();var _default =
     },
     cityPickerChange: function cityPickerChange(e) {var _e$detail =
       e.detail,code = _e$detail.code,value = _e$detail.value;
-      this.resume.cityCode = code;
+      this.resume.cityCode = code.join(',');
       this.cityCodeText = Array.from(new Set(value)).join('');
     },
     chooseBusinessImg: function chooseBusinessImg() {
@@ -283,13 +286,15 @@ var userModel = new _user.default();var _default =
           uni.showToast({
             title: '验证码已发送，请注意查收' });
 
-          _this2.surplusSecond = 120;
+          _this2.readySendCode = false;
+          _this2.surplusSecond = 60;
           // this.focusIndex = 3
           _this2.verifyCodeTimer = setInterval(function () {
             if (_this2.surplusSecond > 0) {
               _this2.surplusSecond -= 1;
             } else {
               _this2.surplusSecond = 0;
+              _this2.readySendCode = true;
               clearInterval(_this2.verifyCodeTimer);
             }
           }, 1000);
@@ -313,7 +318,8 @@ var userModel = new _user.default();var _default =
       userModel.login(this.resume.phone, this.verifyCode, 'B').then(function (res) {var _res$data2 =
         res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
         if (code === '0') {
-          that.savaStore();
+          uni.setStorageSync('token', data.token);
+          that.saveStore();
         } else {
           uni.showToast({
             icon: 'none',
@@ -322,19 +328,72 @@ var userModel = new _user.default();var _default =
         }
       });
     },
-    savaStore: function savaStore() {
+    saveStore: function saveStore() {
       var that = this;
       var array = Object.values(this.resume);
+      var uploadBusinessImg = new Promise(function (resolve, reject) {
+        if (that.bussinessImgChanged) {
+          uni.uploadFile({
+            url: 'http://wzkjsyp.natapp1.cc/store/uploadImage',
+            filePath: that.resume.bussinessImg,
+            name: 'file',
+            formData: {
+              id: that.resume.id },
 
-      userModel.savaStore.apply(userModel, _toConsumableArray(array)).then(function (res) {var _res$data3 =
+            success: function success(response) {
+              resolve('success');
+            } });
+
+        } else {
+          resolve();
+        }
+      });
+      var uploadLogo = new Promise(function (resolve, reject) {
+        if (that.logoChanged) {
+          uni.uploadFile({
+            url: 'http://wzkjsyp.natapp1.cc/store/uploadImage',
+            filePath: that.resume.logo,
+            name: 'file',
+            formData: {
+              id: that.resume.id },
+
+            success: function success(response) {
+              resolve('success');
+            } });
+
+        } else {
+          resolve();
+        }
+      });
+      var uploadCompanyImg = new Promise(function (resolve, reject) {
+        if (that.companyImgChanged) {
+          uni.uploadFile({
+            url: 'http://wzkjsyp.natapp1.cc/store/uploadImage',
+            filePath: that.resume.companyImg,
+            name: 'file',
+            formData: {
+              id: that.resume.id },
+
+            success: function success(response) {
+              resolve('success');
+            } });
+
+        } else {
+          resolve();
+        }
+      });
+      storeModel.saveStore.apply(storeModel, _toConsumableArray(array)).then(function (res) {var _res$data3 =
         res.data,code = _res$data3.code,message = _res$data3.message,data = _res$data3.data;
         if (code === '0') {
           that.resume.id = data.id;
           // 循环上传三张图片
-          Promise.all(that.uploadBusinessImg, that.uploadLogo, that.uploadCompanyImg).then(function (res) {
+          Promise.all([uploadBusinessImg, uploadLogo, uploadCompanyImg]).then(function (res) {
             uni.showToast({
-              title: '注册成功' });
+              title: '注册成功' });var _res$data4 =
 
+            res.data,code = _res$data4.code,data = _res$data4.data,message = _res$data4.message;
+            uni.setStorageSync('token', data.token);
+            that.hasToken = true;
             setTimeout(function () {
               uni.redirectTo({
                 url: '../../seller/main/main' });
@@ -364,63 +423,6 @@ var userModel = new _user.default();var _default =
           icon: 'none',
           title: '提交失败，请稍候再试' });
 
-      });
-    },
-    uploadBusinessImg: function uploadBusinessImg() {
-      return new Promise(function (resolve, reject) {
-        if (that.bussinessImgChanged) {
-          uni.uploadFile({
-            url: 'http://wzkjsyp.natapp1.cc/resume/bindingAvatar',
-            filePath: that.resume.bussinessImg,
-            name: 'file',
-            formData: {
-              id: that.resume.id },
-
-            success: function success(response) {
-              resolve();
-            } });
-
-        } else {
-          resolve();
-        }
-      });
-    },
-    uploadLogoImg: function uploadLogoImg() {
-      return new Promise(function (resolve, reject) {
-        if (that.logoChanged) {
-          uni.uploadFile({
-            url: 'http://wzkjsyp.natapp1.cc/resume/bindingAvatar',
-            filePath: that.resume.logo,
-            name: 'file',
-            formData: {
-              id: that.resume.id },
-
-            success: function success(response) {
-              resolve();
-            } });
-
-        } else {
-          resolve();
-        }
-      });
-    },
-    uploadCompanyImg: function uploadCompanyImg() {
-      return new Promise(function (resolve, reject) {
-        if (that.companyImgChanged) {
-          uni.uploadFile({
-            url: 'http://wzkjsyp.natapp1.cc/resume/bindingAvatar',
-            filePath: that.resume.companyImg,
-            name: 'file',
-            formData: {
-              id: that.resume.id },
-
-            success: function success(response) {
-              resolve();
-            } });
-
-        } else {
-          resolve();
-        }
       });
     },
     nameChanged: function nameChanged(value) {

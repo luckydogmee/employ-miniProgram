@@ -49,7 +49,7 @@ class PostModel extends HTTP {
 	/********** 以下B端接口 *************/
 	
 	// 查看 发布的项目 （B）
-	publishJobList(pageNum=1, pageSize=10, status=0, jobName){
+	publishJobList(pageNum=1, pageSize=10, status=0, jobName=''){
 		return this.request({
 			url: '/job/publishJobList',
 			data: {

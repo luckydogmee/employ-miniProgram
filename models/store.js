@@ -1,4 +1,4 @@
-import { HTTP } from '/utils/http.js'
+import { HTTP } from '../utils/http.js'
  
  class StoreModel extends HTTP {
 	 constructor(args){
@@ -30,15 +30,6 @@ import { HTTP } from '/utils/http.js'
 				 companyImg,
 				 logo,
 				 phone
-			 }
-		 })
-	 }
-	 // 上传图片
-	 uploadImage(file){
-		 return this.request({
-			 url: '/store/uploadImage',
-			 data: {
-				 file
 			 }
 		 })
 	 }

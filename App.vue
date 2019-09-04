@@ -160,7 +160,16 @@
 		font-size: 24upx;
 		color: #8F8F94;
 	}
-	
+	.hasend{
+		height: 40upx;
+		line-height: 40upx;
+		text-align: center;
+		width: 750upx;
+		font-size: 20upx;
+		color: #666;
+		margin-top: 10upx;
+		margin-bottom: 10upx;
+	}
 	
 	// 以下独特样式
 	
