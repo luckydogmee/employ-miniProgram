@@ -19,6 +19,7 @@
 				:resumeData="item"
 				@on-click-record="showRecord"
 				@on-click-recommend="recommendHim"
+				@on-click-call="callHim(item)"
 				@on-click-detail="showDetail(item.id)"
 				@show="show(status,id)" 
 				@showDetail="showDetail(item.id)" 
@@ -265,6 +266,12 @@
 					this.switchTab({index:1,resumeId: this.resumeId})
 				}
 			},	
+			callHim(item){
+				const phoneNumber = item.phone
+				uni.makePhoneCall({
+				    phoneNumber
+				})
+			},
 			pushResume(){
 				const that = this
 				const jobId = this.jobId

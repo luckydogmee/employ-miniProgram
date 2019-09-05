@@ -61,6 +61,7 @@
 	import { mapState, mapMutations } from 'vuex'
 	import InputCell from '@/components/InputCell/InputCell.vue'
 	import ResumeModel from '@/models/resume.js'
+	import { config } from '../../../config.js'
 	const _ = require('@/utils/lodash.js')
 	const resumeModel = new ResumeModel()
 	export default {
@@ -244,7 +245,7 @@
 						// 执行上传头像
 						if(that.changedAvatar){
 							uni.uploadFile({
-								url: 'http://wzkjsyp.natapp1.cc/resume/bindingAvatar',
+								url: config.base_url +　'/resume/bindingAvatar',
 								filePath: that.avatar,
 								name: 'file',
 								formData: {

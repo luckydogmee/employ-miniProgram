@@ -11,7 +11,7 @@
 			<view class="user-info-balance">{{type === 'seller' ? '履约金余额' : '累计佣金收入' }}: <text class="balance">{{userData.totalMoney}}元</text></view>
 		</view>
 		<view class="user-setting">
-			<image src="../../static/icon/setting.png" mode=""></image>
+			<image src="../../static/icon/setting.png" mode="" @click.stop="settingHandle"></image>
 		</view>
 	</view>
 </template>
@@ -31,6 +31,11 @@
 			userData: {
 				type: Object,
 				default: ()=>({})
+			}
+		},
+		methods: {
+			settingHandle(){
+				this.$emit('on-click-setting')
 			}
 		}
 	}

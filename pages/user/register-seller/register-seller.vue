@@ -65,6 +65,7 @@
 	import UploadItem from '@/components/UploadItem/UploadItem.vue'
 	import UserModel from '@/models/user.js'
 	import StoreModel from '@/models/store.js'
+	import { config } from '../../../config.js'
 	const userModel = new UserModel()
 	const storeModel = new StoreModel()
 	export default {
@@ -83,9 +84,10 @@
 					logo: '', // 公司logo
 					phone: '', // 电话号码
 				},
-				bussinessImgChanged: false,
+				businessImgChanged: false,
 				companyImgChanged: false,
 				logoChanged: false,
+				imageChanged: false,
 				pictureIndex: 0,
 				verifyText: '发送验证码',
 				verifyCode: '',
@@ -132,8 +134,8 @@
 					sizeType: 'compressed',
 					sourceType: ['album', 'camera'],
 					success: (res) => {
-						that.bussinessImgChanged = true
 						that.resume.businessImg = res.tempFilePaths[0]
+						that.getImageWebUrl(res.tempFilePaths[0], 'businessImg')
 					}
 				})
 			},
@@ -144,8 +146,8 @@
 					sizeType: 'compressed',
 					sourceType: ['album', 'camera'],
 					success: (res) => {
-						that.logoChanged = true
 						that.resume.logo = res.tempFilePaths[0]
+						that.getImageWebUrl(res.tempFilePaths[0], 'logo')
 					}
 				})
 			},
@@ -156,8 +158,8 @@
 					sizeType: 'compressed',
 					sourceType: ['album', 'camera'],
 					success: (res) => {
-						that.companyImgChanged = true
 						that.resume.companyImg = res.tempFilePaths[0]
+						that.getImageWebUrl(res.tempFilePaths[0], 'companyImg')
 					}
 				})
 			},
@@ -227,34 +229,27 @@
 				storeModel.saveStore(...array).then(res=>{
 					const { code, message, data } = res.data
 					if(code === '0'){
-						console.log(data)
-						console.log(data.id)
-						this.resume.id = data.id
-						// 循环上传三张图片
-						Promise.all([uploadBusinessImg, uploadLogo, uploadCompanyImg]).then(res=>{
+						if(this.resume.id){
 							uni.showToast({
 								title: '注册成功'
 							})
-							const {code, data, message} = res.data
 							uni.setStorageSync('token', data.token)
 							that.hasToken = true
 							setTimeout(()=>{
-								uni.redirectTo({
+								uni.reLaunch({
 									url: '../../seller/main/main'
 								})	
-							},2000)
-						}).catch(err=>{
-							setTimeout(()=>{
-								uni.redirectTo({
-									url: '../../seller/main/main'
-								})	
-							},2000)
+							},2000)	
+						}else{
 							uni.showToast({
-								icon:'none',
-								title: '部分图片上传失败，请稍候完善'
+								title: '修改成功'
 							})
-						})
-						
+							setTimeout(()=>{
+								uni.navigateBack({
+									delta: 1
+								})	
+							},2000)
+						}
 					}else{
 						// 错误处理
 						uni.showToast({
@@ -268,57 +263,7 @@
 						title: '提交失败，请稍候再试'
 					})
 				})
-				const uploadBusinessImg = new Promise((resolve, reject)=>{
-					if(that.bussinessImgChanged){
-						uni.uploadFile({
-							url: 'http://wzkjsyp.natapp1.cc/store/bindStoreBusinessImg',
-							filePath: that.resume.bussinessImg,
-							name: 'file',
-							formData: {
-								id: that.resume.id
-							},
-							success(response) {
-								resolve('success')
-							}
-						})	
-					}else{
-						resolve()
-					}
-				})
-				const uploadLogo = new Promise((resolve, reject)=>{
-					if(that.logoChanged){
-						uni.uploadFile({
-							url: 'http://wzkjsyp.natapp1.cc/store/bindStoreLogo',
-							filePath: that.resume.logo,
-							name: 'file',
-							formData: {
-								id: that.resume.id
-							},
-							success(response) {
-								resolve('success')
-							}
-						})	
-					}else{
-						resolve()
-					}
-				})
-				const uploadCompanyImg = new Promise((resolve, reject)=>{
-					if(that.companyImgChanged){
-						uni.uploadFile({
-							url: 'http://wzkjsyp.natapp1.cc/store/bindStoreCompanyImg',
-							filePath: that.resume.companyImg,
-							name: 'file',
-							formData: {
-								id: that.resume.id
-							},
-							success(response) {
-								resolve('success')
-							}
-						})	
-					}else{
-						resolve()
-					}
-				})
+				
 			},
 			nameChanged(value){
 				this.resume.name = value
@@ -341,17 +286,44 @@
 			verifyCodeChanged(value){
 				this.verifyCode = value
 			},
-			getImageWebUrl(path){
+			getImageWebUrl(path, name){
+				const that = this
+				uni.showLoading({
+					title: '上传中，请稍候...'
+				})
 				uni.uploadFile({
-					url: 'http://wzkjsyp.natapp1.cc/store/getImageWebUrl',
+					url: config.base_url + '/store/getImageWebUrl',
 					filePath: path,
 					name: 'file',
-					formData: {
+					success(res){
+						// 这里返回图片的url地址 response.data.url
+						uni.hideLoading()
+						let response = res.data
+						if(typeof response === 'string'){
+							response = JSON.parse(response)
+						}
+						console.log(response)
+						const { code, message, data } = response
+						if(code === '0'){
+							uni.showToast({
+								title: '上传成功'
+							})
+							that.imageChanged = true
+							console.log(name, data.url)
+							that[name] = data.url
+						}else{
+							uni.showToast({
+								icon:'none',
+								title: message
+							})
+						}
 						
 					},
-					success(response) {
-						// 这里返回图片的url地址 response.data.url
-						
+					fail: res=>{
+						uni.showToast({
+							icon:'none',
+							title: '上传失败，请稍候再试'
+						})
 					}
 				})
 			}

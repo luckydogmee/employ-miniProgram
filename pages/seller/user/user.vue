@@ -1,6 +1,6 @@
 <template>
 	<view class="user-container">
-		<UserItem />
+		<UserItem @on-click-setting="setUser" />
 		<view class="flex-container">
 			<view class="flex-item">
 				<view class="flex-title">共发布岗位</view>
@@ -66,6 +66,11 @@
 					})
 				})
 			},
+			setUser(){
+				uni.navigateTo({
+					url: '../../user/register-seller/register-seller'
+				})
+			}
 		}
 	}
 </script>
