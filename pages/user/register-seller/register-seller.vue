@@ -224,61 +224,12 @@
 			saveStore(){
 				const that = this
 				const array = Object.values(this.resume)
-				const uploadBusinessImg = new Promise((resolve, reject)=>{
-					if(that.bussinessImgChanged){
-						uni.uploadFile({
-							url: 'http://wzkjsyp.natapp1.cc/store/uploadImage',
-							filePath: that.resume.bussinessImg,
-							name: 'file',
-							formData: {
-								id: that.resume.id
-							},
-							success(response) {
-								resolve('success')
-							}
-						})	
-					}else{
-						resolve()
-					}
-				})
-				const uploadLogo = new Promise((resolve, reject)=>{
-					if(that.logoChanged){
-						uni.uploadFile({
-							url: 'http://wzkjsyp.natapp1.cc/store/uploadImage',
-							filePath: that.resume.logo,
-							name: 'file',
-							formData: {
-								id: that.resume.id
-							},
-							success(response) {
-								resolve('success')
-							}
-						})	
-					}else{
-						resolve()
-					}
-				})
-				const uploadCompanyImg = new Promise((resolve, reject)=>{
-					if(that.companyImgChanged){
-						uni.uploadFile({
-							url: 'http://wzkjsyp.natapp1.cc/store/uploadImage',
-							filePath: that.resume.companyImg,
-							name: 'file',
-							formData: {
-								id: that.resume.id
-							},
-							success(response) {
-								resolve('success')
-							}
-						})	
-					}else{
-						resolve()
-					}
-				})
 				storeModel.saveStore(...array).then(res=>{
 					const { code, message, data } = res.data
 					if(code === '0'){
-						that.resume.id = data.id
+						console.log(data)
+						console.log(data.id)
+						this.resume.id = data.id
 						// 循环上传三张图片
 						Promise.all([uploadBusinessImg, uploadLogo, uploadCompanyImg]).then(res=>{
 							uni.showToast({
@@ -317,6 +268,57 @@
 						title: '提交失败，请稍候再试'
 					})
 				})
+				const uploadBusinessImg = new Promise((resolve, reject)=>{
+					if(that.bussinessImgChanged){
+						uni.uploadFile({
+							url: 'http://wzkjsyp.natapp1.cc/store/bindStoreBusinessImg',
+							filePath: that.resume.bussinessImg,
+							name: 'file',
+							formData: {
+								id: that.resume.id
+							},
+							success(response) {
+								resolve('success')
+							}
+						})	
+					}else{
+						resolve()
+					}
+				})
+				const uploadLogo = new Promise((resolve, reject)=>{
+					if(that.logoChanged){
+						uni.uploadFile({
+							url: 'http://wzkjsyp.natapp1.cc/store/bindStoreLogo',
+							filePath: that.resume.logo,
+							name: 'file',
+							formData: {
+								id: that.resume.id
+							},
+							success(response) {
+								resolve('success')
+							}
+						})	
+					}else{
+						resolve()
+					}
+				})
+				const uploadCompanyImg = new Promise((resolve, reject)=>{
+					if(that.companyImgChanged){
+						uni.uploadFile({
+							url: 'http://wzkjsyp.natapp1.cc/store/bindStoreCompanyImg',
+							filePath: that.resume.companyImg,
+							name: 'file',
+							formData: {
+								id: that.resume.id
+							},
+							success(response) {
+								resolve('success')
+							}
+						})	
+					}else{
+						resolve()
+					}
+				})
 			},
 			nameChanged(value){
 				this.resume.name = value
@@ -338,6 +340,20 @@
 			},	
 			verifyCodeChanged(value){
 				this.verifyCode = value
+			},
+			getImageWebUrl(path){
+				uni.uploadFile({
+					url: 'http://wzkjsyp.natapp1.cc/store/getImageWebUrl',
+					filePath: path,
+					name: 'file',
+					formData: {
+						
+					},
+					success(response) {
+						// 这里返回图片的url地址 response.data.url
+						
+					}
+				})
 			}
 		},	
 	}
