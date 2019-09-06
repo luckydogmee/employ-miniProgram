@@ -229,7 +229,7 @@
 				storeModel.saveStore(...array).then(res=>{
 					const { code, message, data } = res.data
 					if(code === '0'){
-						if(this.resume.id){
+						if(!this.resume.id){
 							uni.showToast({
 								title: '注册成功'
 							})
@@ -302,15 +302,13 @@
 						if(typeof response === 'string'){
 							response = JSON.parse(response)
 						}
-						console.log(response)
 						const { code, message, data } = response
 						if(code === '0'){
 							uni.showToast({
 								title: '上传成功'
 							})
 							that.imageChanged = true
-							console.log(name, data.url)
-							that[name] = data.url
+							that.resume[name] = data.url
 						}else{
 							uni.showToast({
 								icon:'none',
