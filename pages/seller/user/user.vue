@@ -1,6 +1,6 @@
 <template>
 	<view class="user-container">
-		<UserItem @on-click-setting="setUser" />
+		<UserItem type="seller" :userData="userData" @on-click-setting="setUser" />
 		<view class="flex-container">
 			<view class="flex-item">
 				<view class="flex-title">共发布岗位</view>
@@ -53,6 +53,7 @@
 					if(code === '0'){
 						this.user = data
 						this.userData = data
+						console.log(this.userData)
 					}else{
 						uni.showToast({
 							icon: 'none',
