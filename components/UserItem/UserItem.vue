@@ -5,8 +5,8 @@
 		</view>
 		<view class="user-info">
 			<view class="user-info-name">
-				<text>{{userData.name}}</text>
-				<text class="tag" v-if="type === 'customer'">金牌猎手</text>
+				<text >{{ type ==='seller' ? userData.storeName : userData.name}}</text>
+				<text class="tag" v-if="type === 'customer'">{{getLevel(userData.totalMoney)}}</text>
 			</view>
 			<view class="user-info-balance">{{type === 'seller' ? '履约金余额' : '累计佣金收入' }}: <text class="balance">{{userData.totalMoney}}元</text></view>
 		</view>
@@ -36,6 +36,17 @@
 		methods: {
 			settingHandle(){
 				this.$emit('on-click-setting')
+			},
+			getLevel(num){
+				if(num <= 2000){
+					return "大众猎手"
+				}else if(5000 >= num >2000 ){
+					return "铜牌猎手"
+				}else if(10000 >= num > 5000){
+					return "银牌猎手"
+				}else if(num > 10000){
+					return "金牌猎手"
+				}
 			}
 		}
 	}
