@@ -62,7 +62,7 @@ class PostModel extends HTTP {
 	}
 	// 保存/修改岗位信息
 	saveJob(
-		id, 
+		/* id, 
 		industryCode, // 行业代码
 		jobName, // 岗位名称
 		description, // 岗位描述
@@ -75,24 +75,44 @@ class PostModel extends HTTP {
 		officialSalary, // 正式薪资
 		avgSalary, // 平均薪资
 		reward, // 岗位赏金
-		overtime // 过保时间
+		overtime // 过保时间 */
+		
+		id,
+		jobName,
+		num,
+		minAge,
+		maxAge,
+		educationDegree,
+		workExperience,
+		probation,
+		trialTime,
+		trialSalary,
+		officialSalary,
+		interviewTime,
+		avgSalary,
+		reward,
+		overtime,
+		totalAmount, // 履约金
 	){
 		return this.request({
 			url: '/job/saveJob',
 			data: {
-				id, 
-				industryCode,
+				id,
 				jobName,
-				description,
 				num,
+				minAge,
+				maxAge,
 				educationDegree,
 				workExperience,
 				probation,
 				trialTime,
 				trialSalary,
+				officialSalary,
+				interviewTime,
 				avgSalary,
 				reward,
-				overtime
+				overtime,
+				totalAmount,
 			}
 		})
 	}

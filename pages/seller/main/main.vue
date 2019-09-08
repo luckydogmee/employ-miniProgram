@@ -37,10 +37,16 @@
 			if(this.tabIndex === 0){
 				this.$refs.home.refresh()
 			}	
+			if(this.tabIndex === 0){
+				this.$refs.choose.refresh()
+			}
 		},
 		onReachBottom() {
 			if(this.tabIndex === 0){
 				this.$refs.home.getNext()
+			}
+			if(this.tabIndex === 1){
+				this.$refs.choose.getNext()
 			}
 		},
 		methods:{

@@ -37,6 +37,9 @@
 		<view class="list-empty" v-else>
 			暂无相关项目
 		</view>
+		<view class="resume-add" @click="addJob">
+			<image src="../../../static/icon/add.png" mode=""></image>
+		</view>
 	</view>
 </template>
 
@@ -174,6 +177,11 @@
 				this.hasEnd = false
 				this.getPublishJobList()
 			},
+			addJob(){
+				uni.navigateTo({
+					url: '../../public/addJob/addJob'
+				})
+			}
 		}
 	}
 </script>
@@ -221,5 +229,16 @@
 				}
 			}
 		} 
+	}
+	.resume-add{
+		position: fixed;
+		height: 87upx;
+		width: 87upx;
+		right: 32upx;
+		bottom: 142upx;
+		image{
+			height: 100%;
+			width: 100%;
+		}
 	}
 </style>

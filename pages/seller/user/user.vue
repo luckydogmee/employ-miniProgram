@@ -69,7 +69,12 @@
 			},
 			setUser(){
 				uni.navigateTo({
-					url: '../../user/register-seller/register-seller'
+					url: '../../user/register-seller/register-seller',
+					success() {
+						uni.setNavigationBarTitle({
+							title: '企业信息'
+						})
+					}
 				})
 			}
 		}

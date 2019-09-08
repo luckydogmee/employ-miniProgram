@@ -48,4 +48,15 @@
 .tab-container .tab button:after {
       border: none;
 }
+.resume-add {
+  position: fixed;
+  height: 87rpx;
+  width: 87rpx;
+  right: 32rpx;
+  bottom: 142rpx;
+}
+.resume-add image {
+    height: 100%;
+    width: 100%;
+}
 

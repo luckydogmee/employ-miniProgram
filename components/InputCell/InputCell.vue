@@ -2,6 +2,7 @@
 	<view class="cell-container" :class="[isSell?'sell':'']">
 		<view class="cell-title">{{label}}<text class="required">{{required? '*' : '' }}</text></view>
 		<input 
+			v-if="type === 'input'"
 			class="cell-content" 
 			:class="{'scale': scaleInput,'floatleft':inputFloat === 'left'}" 
 			:placeholder="placeholder" 
@@ -11,6 +12,12 @@
 			@click="handleClick"
 			placeholder-class="placeholder"
 		/>
+		<view class="radio" v-if="type === 'radio'">
+			<radio-group @change="radioChange">
+				<label class="radio"><radio value="1" :checked="currentRadio === 1" color="#ff8352" style="transform:scale(0.7)" />有</label>
+				<label class="radio"><radio value="0" :checked="currentRadio === 0" color="#ff8352" style="transform:scale(0.7)" />无</label>
+			</radio-group>	
+		</view>
 		<view v-if="hasSlot" class="slot" :class="{plugin: withPlugin}">
 				<slot></slot>
 		</view>
@@ -20,6 +27,10 @@
 <script>
 	export default {
 		props: {
+			type:{
+				type: String,
+				default: 'input'
+			},
 			label: {
 				type: String,
 				default: ''
@@ -60,6 +71,10 @@
 			withPlugin: {
 				type: Boolean,
 				default: false
+			},
+			radioValue: {
+				type: Number,
+				default: 1
 			}
 		},
 		data(){
@@ -70,6 +85,9 @@
 		computed: {
 			value(){
 				return this.content
+			},
+			currentRadio(){
+				return this.radioValue
 			}
 		},
 		methods: {
@@ -78,6 +96,9 @@
 			},
 			handleClick(e){
 				this.$emit('on-click')
+			},
+			radioChange(e){
+				this.$emit('on-radio-change',Number(e.detail.value))
 			}
 		}
 	}

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "添加项目",
+  "usingComponents": {
+    "input-cell": "/components/InputCell/InputCell"
+  }
+}

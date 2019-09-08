@@ -103,6 +103,17 @@ class ResumeModel extends HTTP {
 		})
 	}
 	/*** 以下B端 ***/
+	myCandidate(pageNum=1, pageSize=10, status, keyWord){
+		return this.request({
+			url: '/resume/myCandidate',
+			data: {
+				pageNum,
+				pageSize,
+				status, 
+				keyWord
+			}
+		})
+	}
 }
 
 export default ResumeModel

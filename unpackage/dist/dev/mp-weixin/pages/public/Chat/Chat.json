@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "流程沟通",
+  "usingComponents": {
+    "list-choose": "/components/ListChoose/ListChoose"
+  }
+}
