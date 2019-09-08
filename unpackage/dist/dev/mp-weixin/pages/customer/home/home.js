@@ -249,7 +249,6 @@ var postModel = new _job.default();var _default =
 
     },
     switchToSeller: function switchToSeller() {
-      // 判断该用户是否存在b
       uni.showLoading({
         mask: true });
 
@@ -258,6 +257,7 @@ var postModel = new _job.default();var _default =
         res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
         if (code === '0') {
           uni.setStorageSync('token', data.token);
+          uni.setStorageSync('loginType', 'B');
           uni.reLaunch({
             url: '../../seller/main/main' });
 

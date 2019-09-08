@@ -79,6 +79,7 @@ class PostModel extends HTTP {
 		
 		id,
 		jobName,
+		description,
 		num,
 		minAge,
 		maxAge,
@@ -99,6 +100,7 @@ class PostModel extends HTTP {
 			data: {
 				id,
 				jobName,
+				description,
 				num,
 				minAge,
 				maxAge,

@@ -37,8 +37,16 @@
 				<Cell title="过保时间" :subTitle="jobInfo.overtime+'天'" />
 			</view>	
 		</view>
-		<view class="detail-footer">
-			<button class="default-btn" @click="recceiveOrder">接单</button>
+		<view class="detail-footer" v-if="loginType === 'B'">
+			<button v-if="jobInfo.status == 1" class="default-btn" @click="modifyJob">修改</button>
+			<button v-if="jobInfo.status == 1" class="default-btn" @click="unShelveJob">下架</button>
+			<button v-if="jobInfo.status == 1" class="default-btn" open-type="share">分享</button>
+			<button v-if="jobInfo.status == 2" class="default-btn" @click="shelveJob">上架</button>
+			<button v-if="jobInfo.status == 0" class="default-btn" >审核中</button>
+		</view>
+		<view class="detail-footer" v-else>
+			<button v-if="jobInfo.collectionJobStatus === 0" class="default-btn" @click="recommend">推荐</button>
+			<button v-else class="default-btn" @click="recceiveOrder">接单</button>
 			<button class="default-btn">复制链接</button>
 			<button class="default-btn" open-type="share">分享</button>
 		</view>
@@ -77,6 +85,7 @@
 		onLoad(option){
 			this.id = option.id
 			this.getJobDetail()
+			this.loginType = uni.getStorageSync('loginType')
 		},
 		components: {
 			Cell
@@ -185,6 +194,43 @@
 				    	console.log("fail:" + JSON.stringify(err));
 				    }
 				});
+			},
+			recommend(){
+				this.switchTab({index: 2,jobId:id})
+				uni.reLaunch({
+					url: '../../customer/main/main'
+				})
+			},
+			unShelveJob(){
+				this.updatsStatus(2)
+			},
+			shelveJob(){
+				this.updatsStatus(1)
+			},
+			updatsStatus(status){
+				const that = this
+				const { id } = this.jobInfo
+				jobModel.updateStatus(id, status).then(res=>{
+					const {code, message, data } = res.data
+					if(code === '0'){
+						that.jobInfo.status = status
+					}else{
+						uni.showToast({
+							icon: 'none',
+							title: message
+						})
+					}
+				}).catch(err=>{
+					uni.showToast({
+						icon: 'none',
+						title: '操作失败，请稍后再试'
+					})
+				})
+			},
+			modifyJob(){
+				uni.navigateTo({
+					url: '../addJob/addJob'
+				})
 			}
 		}
 	}

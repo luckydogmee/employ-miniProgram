@@ -142,7 +142,6 @@
 				})
 			},
 			switchToSeller(){
-				// 判断该用户是否存在b
 				uni.showLoading({
 					mask: true
 				})
@@ -151,6 +150,7 @@
 					const { code, message, data } = res.data
 					if(code === '0'){
 						uni.setStorageSync('token', data.token)
+						uni.setStorageSync('loginType', 'B')
 						uni.reLaunch({
 							url: '../../seller/main/main'
 						})

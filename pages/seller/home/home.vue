@@ -98,6 +98,7 @@
 								if(code === '0'){
 									// 将返回的token存入本地
 									uni.setStorageSync('token', data.token)
+									uni.removeStorageSync('loginType')
 									that.hasToken = true
 									uni.redirectTo({
 										url: '../../customer/main/main'

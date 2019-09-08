@@ -94,4 +94,23 @@
     width: 40rpx;
     text-align: center;
 }
+.description {
+  margin-top: 30rpx;
+}
+.description .cell-title {
+    font-size: 24rpx;
+    color: #272626;
+}
+.description .cell-title .required {
+      color: #ff8352;
+}
+.description textarea {
+    width: 658rpx;
+    border: 1rpx solid #cccccc;
+    padding: 10rpx;
+    color: #595959;
+    font-size: 24rpx;
+    margin-top: 8rpx;
+    min-height: 160rpx;
+}
 

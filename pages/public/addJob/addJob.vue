@@ -9,6 +9,10 @@
 				placeholder="请输入岗位"
 				@on-input="jobNameChanged"
 			></InputCell>
+			<view class="description">
+				<view class="cell-title">岗位描述<text class="required">*</text></view>
+				<textarea v-model="job.description" :auto-height="true" placeholder-style="color:#595959;font-size: 24upx;" placeholder="请输入描述" />
+			</view>
 			<InputCell label="需求人数" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="job.num" placeholder="请输入人数" @on-input="numChanged"></InputCell>
 			<InputCell label="教育程度" 
 				:required="isEdit" 
@@ -82,6 +86,7 @@
 				job: {
 					id: '',
 					jobName: '',
+					description: '',
 					num: '',
 					minAge: '',
 					maxAge: '',
@@ -272,6 +277,25 @@
 		.input-line{
 			width: 40upx;
 			text-align: center;
+		}
+	}
+	.description{
+		margin-top: 30upx;
+		.cell-title{
+			font-size: 24upx;
+			color: #272626;
+			.required{
+				color: #ff8352;
+			}
+		}
+		textarea{
+			width: 658upx;
+			border: 1upx solid #cccccc;
+			padding: 10upx;
+			color: #595959;
+			font-size: 24upx;
+			margin-top: 8upx;
+			min-height: 160upx;
 		}
 	}
 </style>

@@ -12020,6 +12020,7 @@ PostModel = /*#__PURE__*/function (_HTTP) {_inherits(PostModel, _HTTP);
 
     id,
     jobName,
+    description,
     num,
     minAge,
     maxAge,
@@ -12040,6 +12041,7 @@ PostModel = /*#__PURE__*/function (_HTTP) {_inherits(PostModel, _HTTP);
         data: {
           id: id,
           jobName: jobName,
+          description: description,
           num: num,
           minAge: minAge,
           maxAge: maxAge,
