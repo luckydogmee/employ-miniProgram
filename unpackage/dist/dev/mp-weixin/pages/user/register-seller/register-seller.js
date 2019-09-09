@@ -317,17 +317,27 @@ var storeModel = new _store.default();var _default =
     },
     postVerifyCode: function postVerifyCode() {
       var that = this;
+      uni.showLoading({
+        title: '提交中...' });
+
       userModel.login(this.resume.phone, this.verifyCode, 'B').then(function (res) {var _res$data2 =
         res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
         if (code === '0') {
           uni.setStorageSync('token', data.token);
           that.saveStore();
         } else {
+          uni.hideLoading();
           uni.showToast({
             icon: 'none',
             title: message });
 
         }
+      }).catch(function (res) {
+        uni.hideLoading();
+        uni.showToast({
+          icon: 'none',
+          title: '验证失败，请稍后再试' });
+
       });
     },
     saveStore: function saveStore() {var _this3 = this;
@@ -336,11 +346,13 @@ var storeModel = new _store.default();var _default =
       storeModel.saveStore.apply(storeModel, _toConsumableArray(array)).then(function (res) {var _res$data3 =
         res.data,code = _res$data3.code,message = _res$data3.message,data = _res$data3.data;
         if (code === '0') {
+          uni.hideLoading();
           if (!_this3.resume.id) {
             uni.showToast({
               title: '注册成功' });
 
             uni.setStorageSync('token', data.token);
+            uni.setStorageSync('loginType', 'B');
             that.hasToken = true;
             setTimeout(function () {
               uni.reLaunch({
@@ -358,6 +370,7 @@ var storeModel = new _store.default();var _default =
             }, 2000);
           }
         } else {
+          uni.hideLoading();
           // 错误处理
           uni.showToast({
             icon: 'none',

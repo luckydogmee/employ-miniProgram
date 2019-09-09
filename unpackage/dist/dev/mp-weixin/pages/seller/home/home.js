@@ -182,7 +182,7 @@ var userModel = new _user.default();var _default =
   methods: {
     showDetail: function showDetail(id) {
       uni.navigateTo({
-        url: '../../PostDetail/PostDetail?id=' + id });
+        url: '../../public/PostDetail/PostDetail?id=' + id });
 
     },
 
@@ -238,6 +238,9 @@ var userModel = new _user.default();var _default =
     },
     getPublishJobList: function getPublishJobList() {var _this = this;
       var that = this;
+      uni.showLoading({
+        mask: true });
+
       postModel.publishJobList(this.pageNum, this.pageSize, this.label).then(function (res) {
         uni.hideLoading();
         uni.stopPullDownRefresh();var _res$data2 =

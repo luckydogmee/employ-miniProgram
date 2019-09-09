@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "添加项目",
   "usingComponents": {
-    "input-cell": "/components/InputCell/InputCell"
+    "input-cell": "/components/InputCell/InputCell",
+    "q-spicker": "/components/QuShe-picker/QuShe-picker"
   }
 }

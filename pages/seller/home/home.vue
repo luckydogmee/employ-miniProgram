@@ -75,7 +75,7 @@
 		methods:{
 			showDetail(id){
 				uni.navigateTo({
-					url: '../../PostDetail/PostDetail?id='+id
+					url: '../../public/PostDetail/PostDetail?id='+id
 				})
 			},
 
@@ -131,6 +131,9 @@
 			},
 			getPublishJobList(){
 				const that = this
+				uni.showLoading({
+					mask: true
+				})
 				postModel.publishJobList(this.pageNum, this.pageSize, this.label).then(res=>{
 					uni.hideLoading()
 					uni.stopPullDownRefresh()

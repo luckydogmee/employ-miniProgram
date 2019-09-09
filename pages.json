@@ -82,6 +82,12 @@
         		"navigationBarTitleText": "流程沟通"
         	}
         },
+		{
+		    "path" : "pages/public/addJobSuccess/addJobSuccess",
+		    "style" : {
+				"navigationBarTitleText": "提交成功"
+			}
+		},
         {
             "path" : "pages/public/addJob/addJob",
             "style" : {

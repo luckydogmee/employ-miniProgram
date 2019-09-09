@@ -13,6 +13,7 @@
     "pages/user/register-seller/register-seller",
     "pages/user/inputInfo/inputInfo",
     "pages/public/Chat/Chat",
+    "pages/public/addJobSuccess/addJobSuccess",
     "pages/public/addJob/addJob"
   ],
   "subPackages": [],

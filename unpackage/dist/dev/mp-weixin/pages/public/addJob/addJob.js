@@ -184,7 +184,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 47));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var InputCell = function InputCell() {return __webpack_require__.e(/*! import() | components/InputCell/InputCell */ "components/InputCell/InputCell").then(__webpack_require__.bind(null, /*! @/components/InputCell/InputCell.vue */ 221));};
+
+
+
+
+
+var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 47));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var InputCell = function InputCell() {return __webpack_require__.e(/*! import() | components/InputCell/InputCell */ "components/InputCell/InputCell").then(__webpack_require__.bind(null, /*! @/components/InputCell/InputCell.vue */ 221));};var QSpicker = function QSpicker() {return Promise.all(/*! import() | components/QuShe-picker/QuShe-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/QuShe-picker/QuShe-picker")]).then(__webpack_require__.bind(null, /*! @/components/QuShe-picker/QuShe-picker.vue */ 280));};
 var jobModel = new _job.default();var _default =
 {
   data: function data() {
@@ -209,13 +214,14 @@ var jobModel = new _job.default();var _default =
         overtime: '',
         totalAmount: 0 // 履约金
       },
-
       educationDegreeArray: ['高中以下', '高中', '大专', '本科及以上'],
-      workExperienceArray: ['一年以下', '一年至三年', '三年至五年', '五年以上'] };
+      workExperienceArray: ['一年以下', '一年至三年', '三年至五年', '五年以上'],
+      ageData: {} };
 
   },
   components: {
-    InputCell: InputCell },
+    InputCell: InputCell,
+    QSpicker: QSpicker },
 
   onLoad: function onLoad(options) {
     if (options.isEdit === 'false') {
@@ -224,6 +230,20 @@ var jobModel = new _job.default();var _default =
     if (options.isEdit === 'true') {
       this.isEdit = true;
     }
+    var ageArray = this.renderAge();
+    this.ageData = {
+      itemObject: {
+        step_1: ageArray,
+        step_2: ageArray },
+
+      steps: {
+        step_1_value: "minAge", //第一级显示的属性名
+        step_2_value: "maxAge" //第二级显示的属性名
+      },
+      defaultValue: [1, 0],
+      linkageNum: 2, //3 表示为3级联动
+      linkage: true //true 表示开启联动
+    };
   },
   computed: {
     educationDegreeText: function educationDegreeText() {
@@ -277,6 +297,7 @@ var jobModel = new _job.default();var _default =
       this.job.overtime = value;
     },
     saveJob: function saveJob() {
+      var that = this;
       //做表单验证
       uni.showLoading({
         title: '提交中...' });
@@ -291,7 +312,7 @@ var jobModel = new _job.default();var _default =
 
           setTimeout(function () {
             uni.redirectTo({
-              url: '../../seller/main/main' });
+              url: '../addJobSuccess/addJobSuccess?amount=' + that.job.totalAmount });
 
           }, 2000);
         } else {
@@ -308,6 +329,16 @@ var jobModel = new _job.default();var _default =
           title: '提交失败，请稍候再试' });
 
       });
+    },
+    renderAge: function renderAge() {
+      var array = [];
+      for (var i = 1; i < 10; i++) {
+        array.push({ name: i, value: i });
+      }
+      return array;
+    },
+    changeShow: function changeShow(name) {
+      this.$refs[name].show();
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

@@ -195,8 +195,9 @@ var jobModel = new _job.default();var _default =
         avgSalary: ' ',
         reward: ' ',
         interviewTime: ' ',
-        overtime: ' ' } };
+        overtime: ' ' },
 
+      loginType: '' };
 
   },
   onLoad: function onLoad(option) {
@@ -327,7 +328,14 @@ var jobModel = new _job.default();var _default =
     updatsStatus: function updatsStatus(status) {
       var that = this;var
       id = this.jobInfo.id;
-      jobModel.updateStatus(id, status).then(function (res) {var _res$data3 =
+      uni.showLoading({
+        mask: true });
+
+      jobModel.updateStatus(id, status).then(function (res) {
+        uni.hideLoading();
+        uni.showToast({
+          title: '操作成功' });var _res$data3 =
+
         res.data,code = _res$data3.code,message = _res$data3.message,data = _res$data3.data;
         if (code === '0') {
           that.jobInfo.status = status;
@@ -338,6 +346,7 @@ var jobModel = new _job.default();var _default =
 
         }
       }).catch(function (err) {
+        uni.hideLoading();
         uni.showToast({
           icon: 'none',
           title: '操作失败，请稍后再试' });
@@ -346,7 +355,7 @@ var jobModel = new _job.default();var _default =
     },
     modifyJob: function modifyJob() {
       uni.navigateTo({
-        url: '../addJob/addJob' });
+        url: '../addJob/addJob?id=' + this.jobInfo.iid });
 
     } }) };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

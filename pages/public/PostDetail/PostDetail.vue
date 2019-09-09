@@ -79,7 +79,8 @@
 					reward: ' ',
 					interviewTime: ' ',
 					overtime: ' '
-				}
+				},
+				loginType: ''
 			}
 		},
 		onLoad(option){
@@ -210,7 +211,14 @@
 			updatsStatus(status){
 				const that = this
 				const { id } = this.jobInfo
+				uni.showLoading({
+					mask: true
+				})
 				jobModel.updateStatus(id, status).then(res=>{
+					uni.hideLoading()
+					uni.showToast({
+						title: '操作成功'
+					})
 					const {code, message, data } = res.data
 					if(code === '0'){
 						that.jobInfo.status = status
@@ -221,6 +229,7 @@
 						})
 					}
 				}).catch(err=>{
+					uni.hideLoading()
 					uni.showToast({
 						icon: 'none',
 						title: '操作失败，请稍后再试'
@@ -229,7 +238,7 @@
 			},
 			modifyJob(){
 				uni.navigateTo({
-					url: '../addJob/addJob'
+					url: '../addJob/addJob?id='+ this.jobInfo.iid
 				})
 			}
 		}

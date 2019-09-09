@@ -11,7 +11,7 @@
 			></InputCell>
 			<view class="description">
 				<view class="cell-title">岗位描述<text class="required">*</text></view>
-				<textarea v-model="job.description" :auto-height="true" placeholder-style="color:#595959;font-size: 24upx;" placeholder="请输入描述" />
+				<textarea v-model="job.description" :auto-height="true" placeholder-style="color:#595959;font-size: 24upx;" placeholder="请输入岗位详情及福利待遇等" />
 			</view>
 			<InputCell label="需求人数" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="job.num" placeholder="请输入人数" @on-input="numChanged"></InputCell>
 			<InputCell label="教育程度" 
@@ -50,6 +50,9 @@
 					<view class="input-line"> - </view>
 					<input class="input-min" type="text" v-model="job.maxAge" placeholder="最大年龄" placeholder-style="font-size: 20upx;" />	
 				</view>
+				<!-- <view class="input-wrapper" @tap="changeShow('pickAge')">
+					{{job.minAge}}-{{job.maxAge}}
+				</view> -->
 			</InputCell>
 			<InputCell label="试用期" type="radio" :required="isEdit" :disabled="true" :isSell="true" :radioValue="job.probation" @on-radio-change="probationChanged" ></InputCell>
 			<InputCell v-if="job.probation === 1" label="试用期时间" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="resume.trialTime" placeholder="请输入试用期时间" @on-input="trialTimeChanged"></InputCell>
@@ -71,12 +74,14 @@
 			<InputCell label="过保时间" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="job.overtime" placeholder="请输入时间" @on-input="overtimeChanged"></InputCell>
 			<InputCell label="履约金" :required="isEdit" :disabled="true" :isSell="true" :content="job.totalAmount" placeholder="0"></InputCell>
 		</view>
+		<QSpicker type="custom2" ref="pickAge" pickerId="pickAge" :dataSet="ageData" showReset/>
 		<button class="default-btn submit" @click="saveJob">提交审核</button>
 	</view>
 </template>
 
 <script>
 	import InputCell from '@/components/InputCell/InputCell.vue'
+	import QSpicker from '@/components/QuShe-picker/QuShe-picker.vue'
 	import JobModel from '@/models/job.js'
 	const jobModel = new JobModel()
 	export default {
@@ -102,13 +107,14 @@
 					overtime: '',
 					totalAmount: 0, // 履约金
 				},
-				
 				educationDegreeArray: ['高中以下','高中','大专','本科及以上'],
-				workExperienceArray: ['一年以下', '一年至三年','三年至五年','五年以上']
+				workExperienceArray: ['一年以下', '一年至三年','三年至五年','五年以上'],
+				ageData:{}
 			}
 		},
 		components: {
-			InputCell
+			InputCell,
+			QSpicker
 		},
 		onLoad(options){
 			if(options.isEdit === 'false'){
@@ -116,6 +122,20 @@
 			}
 			if(options.isEdit === 'true'){
 				this.isEdit = true
+			}
+			const ageArray = this.renderAge() 
+			this.ageData = {
+				itemObject: {
+					step_1: ageArray,
+					step_2: ageArray
+				},
+				steps: {
+					step_1_value: "minAge", //第一级显示的属性名
+					step_2_value: "maxAge", //第二级显示的属性名
+				},
+				defaultValue: [1, 0],
+				linkageNum: 2, //3 表示为3级联动
+				linkage: true //true 表示开启联动
 			}
 		},
 		computed: {
@@ -170,6 +190,7 @@
 				this.job.overtime = value
 			},
 			saveJob(){
+				const that = this
 				//做表单验证
 				uni.showLoading({
 					title: '提交中...'
@@ -184,7 +205,7 @@
 						})
 						setTimeout(()=>{
 							uni.redirectTo({
-								url: '../../seller/main/main'
+								url: '../addJobSuccess/addJobSuccess?amount='+ that.job.totalAmount
 							})
 						},2000)
 					}else{
@@ -201,7 +222,18 @@
 						title: '提交失败，请稍候再试'
 					})
 				})
-			}
+			},
+			renderAge(){
+				const array = []
+				for(let i=1; i <10; i++){
+					array.push({name: i,value: i})
+				}
+				return array
+			},
+			changeShow(name) {
+				this.$refs[name].show();
+			},
+			
 		},	
 	}
 </script>
@@ -259,6 +291,10 @@
 			height: 52upx;	
 		}
 	}
+	// .input-wrapper{
+	// 	height: 62upx;
+	// 	width: 300upx;
+	// }
 	.input-wrapper{
 		height: 100%;
 		display: flex;

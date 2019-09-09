@@ -210,17 +210,27 @@
 			},
 			postVerifyCode(){
 				const that = this
+				uni.showLoading({
+					title: '提交中...'
+				})
 				userModel.login(this.resume.phone, this.verifyCode, 'B').then(res=>{
 					const { code, message, data } = res.data
 					if(code === '0'){
 						uni.setStorageSync('token',data.token)
 						that.saveStore()
 					}else {
+						uni.hideLoading()
 						uni.showToast({
 							icon:'none',
 							title: message
 						})
 					}
+				}).catch(res=>{
+					uni.hideLoading()
+					uni.showToast({
+						icon:'none',
+						title: '验证失败，请稍后再试'
+					})
 				})
 			},
 			saveStore(){
@@ -229,11 +239,13 @@
 				storeModel.saveStore(...array).then(res=>{
 					const { code, message, data } = res.data
 					if(code === '0'){
+						uni.hideLoading()
 						if(!this.resume.id){
 							uni.showToast({
 								title: '注册成功'
 							})
 							uni.setStorageSync('token', data.token)
+							uni.setStorageSync('loginType','B')
 							that.hasToken = true
 							setTimeout(()=>{
 								uni.reLaunch({
@@ -251,6 +263,7 @@
 							},2000)
 						}
 					}else{
+						uni.hideLoading()
 						// 错误处理
 						uni.showToast({
 							icon:'none',
