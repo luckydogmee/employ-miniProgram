@@ -131,6 +131,10 @@
 			},
 			getPublishJobList(){
 				const that = this
+				//默认显示已发布内容
+				if(this.label === ''){
+					this.label = 1
+				}
 				uni.showLoading({
 					mask: true
 				})
