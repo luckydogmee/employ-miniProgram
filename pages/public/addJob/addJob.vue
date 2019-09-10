@@ -192,6 +192,71 @@
 			saveJob(){
 				const that = this
 				//做表单验证
+				if(that.job.jobName === ''){
+					that.showMessage("岗位名称不能为空！")
+					return
+				}
+				if(that.job.description === ''){
+					that.showMessage("岗位描述不能为空！")
+					return
+				}
+				if(that.job.num === ''){
+					that.showMessage("招聘人数不能为空！")
+					return
+				}
+				if(that.job.educationDegree === ''){
+					that.showMessage("教育程度不能为空！")
+					return
+				}
+				if(that.job.workExperience === ''){
+					that.showMessage("工作经验不能为空！")
+					return
+				}
+				if(that.job.minAge === ''){
+					that.showMessage("最小年龄不能为空！")
+					return
+				}
+				if(that.job.maxAge === ''){
+					that.showMessage("最大年龄不能为空！")
+					return
+				}
+				if(that.job.probation === ''){
+					that.showMessage("试用期不能为空！")
+					return
+				}
+				if(that.job.trialTime === ''){
+					that.showMessage("试用时间不能为空！")
+					return
+				}
+				if(that.job.trialSalary === ''){
+					that.showMessage("试用薪资不能为空！")
+					return
+				}
+				if(that.job.officialSalary === ''){
+					that.showMessage("转正薪资不能为空！")
+					return
+				}
+				if(that.job.avgSalary === ''){
+					that.showMessage("平均薪资不能为空！")
+					return
+				}
+				if(that.job.interviewTime === ''){
+					that.showMessage("可面试时间不能为空！")
+					return
+				}
+				if(that.job.reward === ''){
+					that.showMessage("岗位赏金不能为空！")
+					return
+				}
+				if(that.job.overtime === ''){
+					that.showMessage("过保时间不能为空！")
+					return
+				}
+				if(that.job.totalAmount === ''){
+					that.showMessage("履约金不能为空！")
+					return
+				}
+				
 				uni.showLoading({
 					title: '提交中...'
 				})
@@ -232,6 +297,12 @@
 			},
 			changeShow(name) {
 				this.$refs[name].show();
+			},
+			showMessage(message){
+				uni.showToast({
+					title: message,
+					icon:"none"
+				})
 			},
 			
 		},	
