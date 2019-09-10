@@ -13,7 +13,7 @@
 		</view>
 		<Search @on-search="search" />
 		<view class="list-container">			
-			<ListChoose v-for="item in resumeList" :key="item.receviedId" :resumeData="item" @on-show="showDetail" />
+			<ListChoose v-for="item in resumeList" :key="item.receviedId" :resumeData="item" @on-show="showDetail(item)" />
 		</view>
 	</view>	
 </template>
@@ -112,8 +112,11 @@
 				this.hasEnd = false
 				this.getResumeList()
 			},
-			showDetail(){
-				
+			showDetail(item){
+				const {jobId, receviedId, jobName, name, latestFeedback,avatar,resumeId} = item
+				uni.navigateTo({
+					url: '../../public/Chat/Chat?jobId='+ jobId +'&receviedId='+receviedId+'&jobName='+jobName+'&name='+name+'&latestFeedback='+latestFeedback+'&avatar='+avatar+'&resumeId='+resumeId
+				})
 			}
 		}
 	}

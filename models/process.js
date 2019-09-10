@@ -1,15 +1,15 @@
-import { HTTP } from '/utils/http.js'
+import { HTTP } from '../utils/http.js'
 
 class ProcessModel extends HTTP {
 	constructor(arg) {
 		super()
 	}
 	// 查看简历流程列表
-	processList(receivedId){
+	processList(receviedId){
 		return this.request({
 			url: '/process/processList',
 			data: {
-				receivedId
+				receviedId
 			}
 		})
 	}

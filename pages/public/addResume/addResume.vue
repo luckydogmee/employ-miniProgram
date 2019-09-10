@@ -53,7 +53,7 @@
 		<InputCell label="毕业院校" @on-input="universityChange" :disabled="!isEdit" :content="resume.university"></InputCell>
 		<InputCell label="籍贯" @on-input="nativePlaceChange" :disabled="!isEdit" :content="resume.nativePlace"></InputCell>
 		<InputCell label="期望工作" @on-input="intentionalWorkChange" :disabled="!isEdit" :content="resume.intentionalWork"></InputCell>
-		<button class="default-btn" @click="submit">提 交</button>
+		<button v-if="!isEdit" class="default-btn" @click="submit">提 交</button>
 	</view>
 </template>
 
@@ -106,10 +106,10 @@
 			}
 		},
 		onLoad(options){
-			if(options.isEdit === 'false'){
+			if(options.isEdit == 'false'){
 				this.isEdit = false
 			}
-			if(options.isEdit === 'true'){
+			if(options.isEdit == 'true'){
 				this.isEdit = true
 			}
 			// 这里去请求获取简历详情并更新 resume
@@ -332,6 +332,7 @@
 		image{
 			height: 84upx;
 			width: 84upx;
+			border-radius: 50%;
 		}
 		.text{
 			font-size: 20upx;

@@ -1,7 +1,7 @@
 <template>
 	<view class="chat-container">
 		<view class="chat-fixed">
-			<ListChoose btnText="查看简历" />
+			<ListChoose btnText="查看简历" :resumeData="resumeData" @on-show="showResumeDetail" />
 		</view>
 		<view class="chat-scroll">
 			<view class="message message-a">
@@ -88,14 +88,46 @@
 
 <script>
 	import ListChoose from '@/components/ListChoose/ListChoose.vue'
+	import ProcessModel from '@/models/process.js'
+	const processModel = new ProcessModel()
 	export default {
 		data() {
 			return {
-				hasBtn: true
+				hasBtn: true,
+				resumeData: null
 			};
 		},
 		components:{
 			ListChoose
+		},
+		onLoad(option){
+			this.resumeData = option
+			this.processList()
+		},
+		methods: {
+			showResumeDetail(){
+				uni.navigateTo({
+					url: '../addResume/addResume?id='+this.resumeData.resumeId+'&isEdit=false'
+				})
+			},
+			processList(){
+				uni.showLoading({
+					mask: true
+				})
+				processModel.processList(this.resumeData.receviedId).then(res=>{
+					uni.hideLoading()
+					const { code, message, data } = res.data
+					if(code === '0'){
+						
+					}
+				}).catch(err=>{
+					uni.hideLoading()
+					uni.showToast({
+						icon: 'none',
+						title: '获取流程信息失败'
+					})
+				})
+			}
 		}
 	}
 </script>

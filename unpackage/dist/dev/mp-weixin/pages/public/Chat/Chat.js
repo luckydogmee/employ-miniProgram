@@ -105,7 +105,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var ListChoose = function ListChoose() {return __webpack_require__.e(/*! import() | components/ListChoose/ListChoose */ "components/ListChoose/ListChoose").then(__webpack_require__.bind(null, /*! @/components/ListChoose/ListChoose.vue */ 160));};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -195,14 +195,47 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+var _process = _interopRequireDefault(__webpack_require__(/*! @/models/process.js */ 293));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var ListChoose = function ListChoose() {return __webpack_require__.e(/*! import() | components/ListChoose/ListChoose */ "components/ListChoose/ListChoose").then(__webpack_require__.bind(null, /*! @/components/ListChoose/ListChoose.vue */ 168));};
+var processModel = new _process.default();var _default =
 {
   data: function data() {
     return {
-      hasBtn: true };
+      hasBtn: true,
+      resumeData: null };
 
   },
   components: {
-    ListChoose: ListChoose } };exports.default = _default;
+    ListChoose: ListChoose },
+
+  onLoad: function onLoad(option) {
+    this.resumeData = option;
+    this.processList();
+  },
+  methods: {
+    showResumeDetail: function showResumeDetail() {
+      uni.navigateTo({
+        url: '../addResume/addResume?id=' + this.resumeData.resumeId + '&isEdit=false' });
+
+    },
+    processList: function processList() {
+      uni.showLoading({
+        mask: true });
+
+      processModel.processList(this.resumeData.receviedId).then(function (res) {
+        uni.hideLoading();var _res$data =
+        res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
+        if (code === '0') {
+
+        }
+      }).catch(function (err) {
+        uni.hideLoading();
+        uni.showToast({
+          icon: 'none',
+          title: '获取流程信息失败' });
+
+      });
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

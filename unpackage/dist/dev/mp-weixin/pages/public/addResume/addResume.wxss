@@ -22,6 +22,7 @@
 .avatar image {
     height: 84rpx;
     width: 84rpx;
+    border-radius: 50%;
 }
 .avatar .text {
     font-size: 20rpx;

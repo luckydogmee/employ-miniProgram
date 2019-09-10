@@ -38,13 +38,12 @@
 			}
 		},
 		methods:{
-			show(){
-				const { id, collectionJobStatus } = this.projectData
-				this.$emit('on-show',collectionJobStatus,id)
-			},
+			// show(){
+			// 	const { id, collectionJobStatus } = this.projectData
+			// 	this.$emit('on-show',collectionJobStatus,id)
+			// },
 			showDetail(){
-				const id = this.projectData.id
-				this.$emit('on-show',id)
+				this.$emit('on-show')
 			}
 		}
 	}
