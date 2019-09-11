@@ -6,6 +6,7 @@
 				:disabled="!isEdit" 
 				:isSell="true" 
 				:content="job.jobName" 
+				maxLength="20"
 				placeholder="请输入岗位"
 				@on-input="jobNameChanged"
 			></InputCell>
@@ -13,7 +14,7 @@
 				<view class="cell-title">岗位描述<text class="required">*</text></view>
 				<textarea v-model="job.description" :auto-height="true" placeholder-style="color:#595959;font-size: 24upx;" placeholder="请输入岗位详情及福利待遇等" />
 			</view>
-			<InputCell label="需求人数" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="job.num" placeholder="请输入人数" @on-input="numChanged"></InputCell>
+			<InputCell label="需求人数" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="job.num" inputType="number" placeholder="请输入人数" @on-input="numChanged"></InputCell>
 			<InputCell label="教育程度" 
 				:required="isEdit" 
 				:disabled="true" 
@@ -45,36 +46,51 @@
 				</picker>
 			</InputCell>
 			<InputCell type="doubleInput" label="年龄" :required="isEdit" :disabled="true" :withPlugin="true" :hasSlot="true" :isSell="true" :content="resume.address" placeholder="请输入年龄区间">
-				<view class="input-wrapper">
-					<input class="input-min" type="text" v-model="job.minAge" placeholder="最小年龄" placeholder-style="font-size: 20upx;" />
-					<view class="input-line"> - </view>
-					<input class="input-min" type="text" v-model="job.maxAge" placeholder="最大年龄" placeholder-style="font-size: 20upx;" />	
+				<view class="input-wrapper" @tap="changeShow('pickAge')">
+					{{job.minAge && job.maxAge ? job.minAge+'岁 - '+job.maxAge+ '岁' : '请选择年龄范围>'}}
 				</view>
-				<!-- <view class="input-wrapper" @tap="changeShow('pickAge')">
-					{{job.minAge}}-{{job.maxAge}}
-				</view> -->
 			</InputCell>
 			<InputCell label="试用期" type="radio" :required="isEdit" :disabled="true" :isSell="true" :radioValue="job.probation" @on-radio-change="probationChanged" ></InputCell>
-			<InputCell v-if="job.probation === 1" label="试用期时间" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="resume.trialTime" placeholder="请输入试用期时间" @on-input="trialTimeChanged"></InputCell>
-			<InputCell v-if="job.probation === 1" label="底薪" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="job.trialSalary" placeholder="请输入底薪" @on-input="trialSalaryChanged"></InputCell>			
+			<InputCell v-if="job.probation === 1" label="试用期时间" :required="isEdit" :disabled="true" :isSell="true" :withPlugin="true" :hasSlot="true" :content="job.trialTime" placeholder="点击选择>">
+				<picker
+					@change="trialTimeChanged"
+					class="picker"
+					:range="trialTimeArray"
+					:disabled="!isEdit"
+					:value="job.trialTime"
+				>
+					<view class="select"></view>
+				</picker>
+			</InputCell>
+			<InputCell v-if="job.probation === 1" label="底薪" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="job.trialSalary" inputType="number" placeholder="请输入底薪" @on-input="trialSalaryChanged"></InputCell>			
 		</view>
 		<view class="add-bottom">
 			<view class="input-title">
 				转正后
 			</view>
-			<InputCell label="底薪" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="job.officialSalary" placeholder="请输入底薪" @on-input="officialSalaryChanged"></InputCell>
-			<InputCell label="平均收入" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="job.avgSalary" placeholder="请输入平均收入" @on-input="avgSalaryChanged"></InputCell>
+			<InputCell label="底薪" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="job.officialSalary" inputType="number" placeholder="请输入底薪" @on-input="officialSalaryChanged"></InputCell>
+			<InputCell label="平均收入" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="job.avgSalary" inputType="number" placeholder="请输入平均收入" @on-input="avgSalaryChanged"></InputCell>
 		</view>
 		<view class="add-bottom">
 			<view class="input-title">
 				悬赏信息
 			</view>
-			<InputCell label="可面试时间" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="job.interviewTime" placeholder="请输入时间" @on-input="interviewTimeChanged"></InputCell>
-			<InputCell label="拟悬赏金额" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="job.reward" placeholder="请输入金额" @on-input="rewardChanged"></InputCell>
-			<InputCell label="过保时间" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="job.overtime" placeholder="请输入时间" @on-input="overtimeChanged"></InputCell>
+			<InputCell label="可面试时间" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="job.interviewTime" maxLength="20" placeholder="请输入时间" @on-input="interviewTimeChanged"></InputCell>
+			<InputCell label="拟悬赏金额" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="job.reward" placeholder="请输入金额(建议300元以上)" @on-input="rewardChanged" @on-blur="showNotice"></InputCell>
+			<InputCell label="过保时间" :required="isEdit" :disabled="true" :isSell="true" :withPlugin="true" :hasSlot="true" :content="job.overtime" placeholder="点击选择>">
+				<picker
+					@change="overtimeChange"
+					class="picker"
+					:range="overtimeArray"
+					:disabled="!isEdit"
+					:value="job.overtime"
+				>
+					<view class="select"></view>
+				</picker>
+			</InputCell>
 			<InputCell label="履约金" :required="isEdit" :disabled="true" :isSell="true" :content="job.totalAmount" placeholder="0"></InputCell>
 		</view>
-		<QSpicker type="custom2" ref="pickAge" pickerId="pickAge" :dataSet="ageData" showReset/>
+		<QSpicker type="custom2" ref="pickAge" pickerId="pickAge" :dataSet="ageData" showReset @hideQSPicker="hidePickAge" @showQSPicker="showPickAge" @confirm="confirmAge" />
 		<button class="default-btn submit" @click="saveJob">提交审核</button>
 	</view>
 </template>
@@ -97,7 +113,7 @@
 					maxAge: '',
 					educationDegree: '',
 					workExperience: '',
-					probation: 0,
+					probation: 1,
 					trialTime: '',
 					trialSalary: '',
 					officialSalary: '',
@@ -109,6 +125,8 @@
 				},
 				educationDegreeArray: ['高中以下','高中','大专','本科及以上'],
 				workExperienceArray: ['一年以下', '一年至三年','三年至五年','五年以上'],
+				overtimeArray: ['7天', '15天','30天'],
+				trialTimeArray:['一个月', '两个月','三个月'],
 				ageData:{}
 			}
 		},
@@ -124,16 +142,17 @@
 				this.isEdit = true
 			}
 			const ageArray = this.renderAge() 
+			const ageArray2 = this.renderAge2()
 			this.ageData = {
 				itemObject: {
 					step_1: ageArray,
-					step_2: ageArray
+					step_2: ageArray2
 				},
 				steps: {
-					step_1_value: "minAge", //第一级显示的属性名
-					step_2_value: "maxAge", //第二级显示的属性名
+					step_1_value: "name", //第一级显示的属性名
+					step_2_value: "name", //第二级显示的属性名
 				},
-				defaultValue: [1, 0],
+				defaultValue: [0, 0],
 				linkageNum: 2, //3 表示为3级联动
 				linkage: true //true 表示开启联动
 			}
@@ -162,11 +181,14 @@
 			workExperienceChange(e){
 				this.job.workExperience = e.target.value
 			},
+			overtimeChanged(e){
+				this.job.overtime = e.target.value
+			},
 			probationChanged(value){
 				this.job.probation = value
 			},
-			trialTimeChanged(value){
-				this.job.trialTime = value
+			trialTimeChanged(e){
+				this.job.trialTime = e.target.value
 			},
 			trialSalaryChanged(value){
 				this.job.trialSalary = value
@@ -186,8 +208,14 @@
 					this.job.totalAmount = Number(this.job.num)*Number(this.job.reward)
 				}
 			},
-			overtimeChanged(value){
-				this.job.overtime = value
+			showNotice(){
+				if(this.job.reward < 300){
+					uni.showToast({
+						icon: 'none',
+						duration: '5000',
+						title: '金额低于300无法保证招聘效率哦'
+					})
+				}
 			},
 			saveJob(){
 				const that = this
@@ -224,11 +252,11 @@
 					that.showMessage("试用期不能为空！")
 					return
 				}
-				if(that.job.trialTime === ''){
+				if(that.job.probation && that.job.trialTime === ''){
 					that.showMessage("试用时间不能为空！")
 					return
 				}
-				if(that.job.trialSalary === ''){
+				if(that.job.probation && that.job.trialSalary === ''){
 					that.showMessage("试用薪资不能为空！")
 					return
 				}
@@ -290,8 +318,19 @@
 			},
 			renderAge(){
 				const array = []
-				for(let i=1; i <10; i++){
+				for(let i=18; i <100; i++){
 					array.push({name: i,value: i})
+				}
+				return array
+			},
+			renderAge2(){
+				const array = []
+				for(let i=18; i <100; i++){
+					let tempArray = []
+					for(let j= i+1; j <100; j++){
+						tempArray.push({name: j,value: j})
+					}
+					array.push(tempArray)
 				}
 				return array
 			},
@@ -304,7 +343,16 @@
 					icon:"none"
 				})
 			},
-			
+			hidePickAge(){
+				
+			},
+			showPickAge(){
+				
+			},
+			confirmAge(e){
+				this.job.minAge = this.ageData.itemObject.step_1[e.value[0]].name
+				this.job.maxAge = this.ageData.itemObject.step_2[e.value[1]][e.value[0]].name
+			}
 		},	
 	}
 </script>
@@ -362,30 +410,32 @@
 			height: 52upx;	
 		}
 	}
-	// .input-wrapper{
-	// 	height: 62upx;
-	// 	width: 300upx;
-	// }
 	.input-wrapper{
-		height: 100%;
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		.input-min{
-			width: 140upx;
-			color: #595959;
-			font-size: 24upx;
-			border: 1upx solid #eee;
-			.placeholder{
-				color: #595959;
-				font-size: 24upx;
-			}
-		}
-		.input-line{
-			width: 40upx;
-			text-align: center;
-		}
+		height: 62upx;
+		width: 300upx;
+		text-align: right;
+		color: #595959;
 	}
+	// .input-wrapper{
+	// 	height: 100%;
+	// 	display: flex;
+	// 	flex-direction: row;
+	// 	align-items: center;
+	// 	.input-min{
+	// 		width: 140upx;
+	// 		color: #595959;
+	// 		font-size: 24upx;
+	// 		border: 1upx solid #eee;
+	// 		.placeholder{
+	// 			color: #595959;
+	// 			font-size: 24upx;
+	// 		}
+	// 	}
+	// 	.input-line{
+	// 		width: 40upx;
+	// 		text-align: center;
+	// 	}
+	// }
 	.description{
 		margin-top: 30upx;
 		.cell-title{

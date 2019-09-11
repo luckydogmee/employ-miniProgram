@@ -172,13 +172,16 @@ __webpack_require__.r(__webpack_exports__);
 
 var _user = _interopRequireDefault(__webpack_require__(/*! @/models/user.js */ 62));
 var _store = _interopRequireDefault(__webpack_require__(/*! @/models/store.js */ 112));
-var _config = __webpack_require__(/*! ../../../config.js */ 33);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var InputCell = function InputCell() {return __webpack_require__.e(/*! import() | components/InputCell/InputCell */ "components/InputCell/InputCell").then(__webpack_require__.bind(null, /*! @/components/InputCell/InputCell.vue */ 229));};var UploadItem = function UploadItem() {return __webpack_require__.e(/*! import() | components/UploadItem/UploadItem */ "components/UploadItem/UploadItem").then(__webpack_require__.bind(null, /*! @/components/UploadItem/UploadItem.vue */ 236));};
+var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 47));
+var _config = __webpack_require__(/*! ../../../config.js */ 33);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var InputCell = function InputCell() {return __webpack_require__.e(/*! import() | components/InputCell/InputCell */ "components/InputCell/InputCell").then(__webpack_require__.bind(null, /*! @/components/InputCell/InputCell.vue */ 230));};var UploadItem = function UploadItem() {return __webpack_require__.e(/*! import() | components/UploadItem/UploadItem */ "components/UploadItem/UploadItem").then(__webpack_require__.bind(null, /*! @/components/UploadItem/UploadItem.vue */ 237));};
 var userModel = new _user.default();
-var storeModel = new _store.default();var _default =
+var storeModel = new _store.default();
+var jobModel = new _job.default();var _default =
 {
   data: function data() {
     return {
       isEdit: true, // 是否编辑状态
+      isModify: false,
       resume: {
         id: '',
         name: '', // 公司名称
@@ -216,8 +219,21 @@ var storeModel = new _store.default();var _default =
     if (options.isEdit === 'true') {
       this.isEdit = true;
     }
+    if (options.isModify == 1) {
+      this.isModify = true;
+      this.btnText = '提交修改';
+      this.getUserInfo();
+    }
   },
   methods: {
+    getUserInfo: function getUserInfo() {
+      jobModel.getIndustry().then(function (res) {var _res$data =
+        res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
+        if (code === '0') {
+
+        }
+      });
+    },
     chooseImage: function chooseImage() {var _this = this;
       // 让用户选择相册或者拍照
       uni.chooseImage({
@@ -283,7 +299,7 @@ var storeModel = new _store.default();var _default =
       }
       userModel.getVerifyCode(this.resume.phone, 'B').then(function (res) {
         // 请求成功,并判断code是否正确
-        var _res$data = res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
+        var _res$data2 = res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
         if (code === '0') {
           uni.showToast({
             title: '验证码已发送，请注意查收' });
@@ -320,8 +336,8 @@ var storeModel = new _store.default();var _default =
       uni.showLoading({
         title: '提交中...' });
 
-      userModel.login(this.resume.phone, this.verifyCode, 'B').then(function (res) {var _res$data2 =
-        res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
+      userModel.login(this.resume.phone, this.verifyCode, 'B').then(function (res) {var _res$data3 =
+        res.data,code = _res$data3.code,message = _res$data3.message,data = _res$data3.data;
         if (code === '0') {
           uni.setStorageSync('token', data.token);
           that.saveStore();
@@ -343,8 +359,8 @@ var storeModel = new _store.default();var _default =
     saveStore: function saveStore() {var _this3 = this;
       var that = this;
       var array = Object.values(this.resume);
-      storeModel.saveStore.apply(storeModel, _toConsumableArray(array)).then(function (res) {var _res$data3 =
-        res.data,code = _res$data3.code,message = _res$data3.message,data = _res$data3.data;
+      storeModel.saveStore.apply(storeModel, _toConsumableArray(array)).then(function (res) {var _res$data4 =
+        res.data,code = _res$data4.code,message = _res$data4.message,data = _res$data4.data;
         if (code === '0') {
           uni.hideLoading();
           if (!_this3.resume.id) {

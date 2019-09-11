@@ -24,14 +24,13 @@ class ProcessModel extends HTTP {
 	}
 	
 	// 面试反馈 (B)
-	interviedFeedBack(processInfoId, feedbackStatus, entryTime, interviedTime){
+	interviewFeedback(processInfoId, feedbackStatus, time){
 		return this.request({
-			url : '/process/interviedFeedback',
+			url : '/process/interviewFeedback',
 			data: {
 				processInfoId, 
 				feedbackStatus, 
-				entryTime, 
-				interviedTime
+				time
 			}
 		})
 	}

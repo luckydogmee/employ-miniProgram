@@ -4,12 +4,12 @@
 			<swiper class="swiper" :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration">
 				<swiper-item>
 					<view class="swiper-item uni-bg-red">
-						<image src="../../../static/swiper/banner1.png" mode=""></image>
+						<image src="../../../static/img/banner1.png" mode=""></image>
 					</view>
 				</swiper-item>
 				<swiper-item>
 					<view class="swiper-item uni-bg-green">
-						<image src="../../../static/swiper/banner2.png" mode=""></image>
+						<image src="../../../static/img/banner2.png" mode=""></image>
 					</view>
 				</swiper-item>
 			</swiper>	

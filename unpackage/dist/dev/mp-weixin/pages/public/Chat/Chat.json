@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "流程沟通",
   "usingComponents": {
-    "list-choose": "/components/ListChoose/ListChoose"
+    "list-choose": "/components/ListChoose/ListChoose",
+    "uni-popup": "/components/uni-popup/uni-popup"
   }
 }

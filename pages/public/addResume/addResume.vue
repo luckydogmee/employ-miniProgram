@@ -53,7 +53,7 @@
 		<InputCell label="毕业院校" @on-input="universityChange" :disabled="!isEdit" :content="resume.university"></InputCell>
 		<InputCell label="籍贯" @on-input="nativePlaceChange" :disabled="!isEdit" :content="resume.nativePlace"></InputCell>
 		<InputCell label="期望工作" @on-input="intentionalWorkChange" :disabled="!isEdit" :content="resume.intentionalWork"></InputCell>
-		<button v-if="!isEdit" class="default-btn" @click="submit">提 交</button>
+		<button v-if="isEdit && loginType !== 'B'" class="default-btn" @click="submit">提 交</button>
 	</view>
 </template>
 
@@ -68,6 +68,7 @@
 		data() {
 			return {
 				isEdit: true, // 是否编辑状态
+				loginType: '',
 				avatar: '../../../static/icon/add-avatar.png', //头像地址
 				avatarWomen: '../../../static/img/avatar-women.png',
 				avatarMen: '../../../static/img/avatar-men.png',
@@ -112,6 +113,7 @@
 			if(options.isEdit == 'true'){
 				this.isEdit = true
 			}
+			this.loginType = uni.getStorageSync('loginType')
 			// 这里去请求获取简历详情并更新 resume
 			if(options.id){
 				this.resume.id = options.id
@@ -152,6 +154,9 @@
 				})
 			},
 			chooseImage(){
+				if(this.loginType === 'B' || !isEdit){
+					return 
+				}
 				const that = this
 				// 让用户选择相册或者拍照
 				uni.chooseImage({

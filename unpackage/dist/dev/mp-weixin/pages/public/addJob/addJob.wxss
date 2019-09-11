@@ -65,34 +65,10 @@
   height: 52rpx;
 }
 .input-wrapper {
-  height: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-.input-wrapper .input-min {
-    width: 140rpx;
-    color: #595959;
-    font-size: 24rpx;
-    border: 1rpx solid #eee;
-}
-.input-wrapper .input-min .placeholder {
-      color: #595959;
-      font-size: 24rpx;
-}
-.input-wrapper .input-line {
-    width: 40rpx;
-    text-align: center;
+  height: 62rpx;
+  width: 300rpx;
+  text-align: right;
+  color: #595959;
 }
 .description {
   margin-top: 30rpx;

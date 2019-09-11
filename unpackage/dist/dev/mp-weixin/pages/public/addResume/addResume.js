@@ -87,13 +87,14 @@ __webpack_require__.r(__webpack_exports__);
 var _vuex = __webpack_require__(/*! vuex */ 8);
 
 var _resume = _interopRequireDefault(__webpack_require__(/*! @/models/resume.js */ 31));
-var _config = __webpack_require__(/*! ../../../config.js */ 33);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var InputCell = function InputCell() {return __webpack_require__.e(/*! import() | components/InputCell/InputCell */ "components/InputCell/InputCell").then(__webpack_require__.bind(null, /*! @/components/InputCell/InputCell.vue */ 229));};
+var _config = __webpack_require__(/*! ../../../config.js */ 33);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var InputCell = function InputCell() {return __webpack_require__.e(/*! import() | components/InputCell/InputCell */ "components/InputCell/InputCell").then(__webpack_require__.bind(null, /*! @/components/InputCell/InputCell.vue */ 230));};
 var _ = __webpack_require__(/*! @/utils/lodash.js */ 102);
 var resumeModel = new _resume.default();var _default =
 {
   data: function data() {
     return {
       isEdit: true, // 是否编辑状态
+      loginType: '',
       avatar: '../../../static/icon/add-avatar.png', //头像地址
       avatarWomen: '../../../static/img/avatar-women.png',
       avatarMen: '../../../static/img/avatar-men.png',
@@ -138,6 +139,7 @@ var resumeModel = new _resume.default();var _default =
     if (options.isEdit == 'true') {
       this.isEdit = true;
     }
+    this.loginType = uni.getStorageSync('loginType');
     // 这里去请求获取简历详情并更新 resume
     if (options.id) {
       this.resume.id = options.id;
@@ -178,6 +180,9 @@ var resumeModel = new _resume.default();var _default =
       });
     },
     chooseImage: function chooseImage() {
+      if (this.loginType === 'B' || !isEdit) {
+        return;
+      }
       var that = this;
       // 让用户选择相册或者拍照
       uni.chooseImage({

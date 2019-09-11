@@ -37,7 +37,7 @@
 				<UploadItem title="上传工作场景照" :imageUrl="resume.companyImg" @on-select-image="chooseCompanyImg" />
 			</view>	
 		</view>
-		<view class="add-bottom">
+		<view class="add-bottom" v-if="">
 			<InputCell label="联系电话" :required="isEdit" :disabled="!isEdit" :isSell="true" placeholder="请输入联系电话" :content="resume.phone" @on-input="phoneChanged"></InputCell>
 			
 			<!-- <view class="add-avatar">
@@ -50,13 +50,13 @@
 					></image>
 				</view>
 			</view> -->
-			<inputCell label="验证码" :required="isEdit" :isSell="true" placeholder="请输入验证码" floatleft="left" :hasSlot="true" :content="verifyCode" @on-input="verifyCodeChanged">
+			<inputCell v-if="!isEdit&&!isModify" label="验证码" :required="isEdit" :isSell="true" placeholder="请输入验证码" floatleft="left" :hasSlot="true" :content="verifyCode" @on-input="verifyCodeChanged">
 				<button class="default-btn verifyBtn verify-code-btn" :class="{'disabled':!readySendCode} "
 					@click="sendVerifyCode">{{readySendCode ? '发送验证码' : surplusSecond + ' 秒后重新发送' }}</button>
 			</inputCell>	
 		</view>
 		
-		<button class="default-btn submit" @click="postVerifyCode">提交审核</button>
+		<button v-if="isEdit" class="default-btn submit" @click="postVerifyCode">{{isModify ? '提交修改': '提交审核'}}</button>
 	</view>
 </template>
 
@@ -65,13 +65,16 @@
 	import UploadItem from '@/components/UploadItem/UploadItem.vue'
 	import UserModel from '@/models/user.js'
 	import StoreModel from '@/models/store.js'
+	import JobModel from '@/models/job.js'
 	import { config } from '../../../config.js'
 	const userModel = new UserModel()
 	const storeModel = new StoreModel()
+	const jobModel = new JobModel()
 	export default {
 		data() {
 			return {
 				isEdit: true, // 是否编辑状态
+				isModify: false,
 				resume: {
 					id:　'',
 					name: '', // 公司名称
@@ -109,8 +112,21 @@
 			if(options.isEdit === 'true'){
 				this.isEdit = true
 			}
+			if(options.isModify == 1){
+				this.isModify = true
+				this.btnText = '提交修改'
+				this.getUserInfo()
+			}
 		},
 		methods:{
+			getUserInfo(){
+				jobModel.getIndustry().then(res=>{
+					const { code, message, data } = res.data
+					if(code === '0'){
+						
+					}
+				})
+			},
 			chooseImage(){
 				// 让用户选择相册或者拍照
 				uni.chooseImage({

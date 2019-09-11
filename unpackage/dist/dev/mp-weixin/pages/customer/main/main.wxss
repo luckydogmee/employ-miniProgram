@@ -34,6 +34,140 @@
 .project-list {
   width: 750px;
 }
+.selectDateDialog {
+  height: 360rpx;
+  width: 461rpx;
+}
+.selectDate-footer {
+  height: 86rpx;
+  width: 462rpx;
+  padding-top: 1rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background: #e7e7e7;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.selectDate-footer .selectDate-btn {
+    width: 230rpx;
+    height: 100%;
+    line-height: 84rpx;
+    background: #FFFFFF;
+    text-align: center;
+    font-size: 30rpx;
+    color: #ff8353;
+}
+.selectDate-title {
+  color: #ff9760;
+  font-size: 22rpx;
+  line-height: 60rpx;
+  background: #FFFFFF;
+  font-weight: blod;
+  padding-left: 30rpx;
+}
+.selectDate-content {
+  background: #FFFFFF;
+  height: 210rpx;
+  width: 462rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.selectDate-content .selectDate-picker {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    height: 46rpx;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 256rpx;
+    -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+}
+.selectDate-content .selectDate-picker .selectDate-label {
+      width: 72rpx;
+      height: 30rpx;
+      font-size: 22rpx;
+      color: #565656;
+}
+.selectDate-content .selectDate-picker .selectDate-content {
+      width: 184rpx;
+      height: 30rpx;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: row;
+          -ms-flex-direction: row;
+              flex-direction: row;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+}
+.selectDate-content .selectDate-picker .date-view {
+      width: 184rpx;
+      height: 30rpx;
+      font-size: 20rpx;
+      color: #666;
+      text-align: center;
+      border: 1rpx solid #fe9661;
+}
+.selectDate-content .selectDate-picker .time-view {
+      width: 80rpx;
+      height: 30rpx;
+      font-size: 20rpx;
+      color: #666;
+      text-align: center;
+      border: 1rpx solid #fe9661;
+}
+.selectDate-content .selectDate-picker .view-line {
+      width: 20rpx;
+}
+.selectDate-content .text {
+    color: #8F8F94;
+    text-align: center;
+    line-height: 40rpx;
+    font-size: 20rpx;
+}
 
 .resume-container {
   width: 750rpx;

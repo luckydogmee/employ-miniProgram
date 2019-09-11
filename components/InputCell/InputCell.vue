@@ -9,7 +9,10 @@
 			:disabled="disabled" 
 			@input="handleInput" 
 			:value="value" 
+			:type="inputType"
+			:maxlength="maxlength"
 			@click="handleClick"
+			@blur="handleBlur"
 			placeholder-class="placeholder"
 		/>
 		<view class="radio" v-if="type === 'radio'">
@@ -27,9 +30,13 @@
 <script>
 	export default {
 		props: {
-			type:{
+			type:{ // 是否是input类型
 				type: String,
 				default: 'input'
+			},
+			inputType:{ // input的类型
+				type: String,
+				default: 'text'
 			},
 			label: {
 				type: String,
@@ -62,6 +69,10 @@
 			inputFloat:{
 				type: String,
 				default: 'right'
+			},
+			maxLength:{
+				type: Number || String,
+				default: 140
 			},
 			hasSlot: {
 				type: Boolean,
@@ -96,6 +107,9 @@
 			},
 			handleClick(e){
 				this.$emit('on-click')
+			},
+			handleBlur(){
+				this.$emit('on-blur')
 			},
 			radioChange(e){
 				this.$emit('on-radio-change',Number(e.detail.value))
