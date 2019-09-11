@@ -240,7 +240,7 @@
 				this.$refs.selectDate.close()
 			},
 			bindDateChange(e){
-				this.date = e.target.value.replace(/-/g,'/')
+				this.date = e.target.value
 			},
 			bindTimeStartChange(e){
 				this.timeStart = e.target.value

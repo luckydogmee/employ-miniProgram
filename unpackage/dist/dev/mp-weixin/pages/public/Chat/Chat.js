@@ -367,7 +367,7 @@ var processModel = new _process.default();var _default =
       this.$refs.selectDate.close();
     },
     bindDateChange: function bindDateChange(e) {
-      this.date = e.target.value.replace(/-/g, '/');
+      this.date = e.target.value;
     },
     bindTimeStartChange: function bindTimeStartChange(e) {
       this.timeStart = e.target.value;
