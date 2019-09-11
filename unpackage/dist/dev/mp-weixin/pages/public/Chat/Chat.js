@@ -336,6 +336,7 @@ var processModel = new _process.default();var _default =
         this.interviewFeedback.apply(this, _toConsumableArray(array));
       }
     },
+    // 提交面试反馈
     interviewFeedback: function interviewFeedback(id, status, time) {
       uni.showLoading({
         mask: true });
@@ -366,7 +367,7 @@ var processModel = new _process.default();var _default =
       this.$refs.selectDate.close();
     },
     bindDateChange: function bindDateChange(e) {
-      this.date = e.target.value;
+      this.date = e.target.value.replace(/-/g, '/');
     },
     bindTimeStartChange: function bindTimeStartChange(e) {
       this.timeStart = e.target.value;

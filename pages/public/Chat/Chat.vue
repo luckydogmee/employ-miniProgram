@@ -209,6 +209,7 @@
 					this.interviewFeedback(...array)
 				}
 			},
+			// 提交面试反馈
 			interviewFeedback(id,status,time){
 				uni.showLoading({
 					mask: true
@@ -239,7 +240,7 @@
 				this.$refs.selectDate.close()
 			},
 			bindDateChange(e){
-				this.date = e.target.value
+				this.date = e.target.value.replace(/-/g,'/')
 			},
 			bindTimeStartChange(e){
 				this.timeStart = e.target.value
