@@ -16,7 +16,7 @@
 			</view>
 		</view>
 		<view class="button-group">
-			<view class="button-item navigate">
+			<view class="button-item navigate" @click="cashoutList">
 				申请提现
 			</view>
 			<view class="button-item switch-account">
@@ -69,6 +69,11 @@
 					})
 				})
 			},
+			cashoutList(){
+				userModel.cashout().then(res=>{
+					console.log(res)
+				})
+			}
 		}
 	}
 </script>
