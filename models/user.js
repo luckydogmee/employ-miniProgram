@@ -108,6 +108,12 @@ class UserModel  extends HTTP {
 			}
 		})
 	}
+	//获取提现列表
+	getCashoutList(){
+		return this.request({
+			url: '/user/getCashoutList',
+		})
+	}
 	// 申请提现
 	cashout(){
 		return this.request({
