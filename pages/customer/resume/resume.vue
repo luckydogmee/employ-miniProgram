@@ -252,9 +252,11 @@
 			showDetail(id){
 				uni.navigateTo({
 					url: '../../public/addResume/addResume?isEdit=true&id='+id,
-					success: res => {},
-					fail: () => {},
-					complete: () => {}
+					success: () => {
+						uni.setNavigationBarTitle({
+							title: '简历详情'
+						})
+					},
 				});
 			},
 			recommendHim(id){

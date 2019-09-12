@@ -14,7 +14,7 @@
 				></image>
 			</view> -->
 		</view>
-		<InputCell label="姓名" @on-input="nameChange" :required="isEdit" :disabled="!isEdit" :content="resume.name"></InputCell>
+		<InputCell label="姓名" @on-input="nameChange" :required="isEdit" :disabled="!isEdit" maxLength="20" :content="resume.name"></InputCell>
 		<InputCell label="性别" :required="isEdit" :disabled="true" :withPlugin="true" :hasSlot="true" :content="genderText" placeholder="点击选择">
 			<picker
 				@change="genderChange"
@@ -26,7 +26,7 @@
 				<view class="select"></view>
 			</picker>
 		</InputCell>
-		<InputCell label="年龄" @on-input="ageChange" :required="isEdit" :disabled="!isEdit" :content="resume.age"></InputCell>
+		<InputCell label="年龄" @on-input="ageChange" :required="isEdit" :disabled="!isEdit" :content="resume.age" maxLength="3" inputType="number"></InputCell>
 		<InputCell label="学历" :required="isEdit" :disabled="true" :withPlugin="true" :hasSlot="true" :content="educationDegreeText" placeholder="点击选择">
 			<picker
 				@change="educationDegreeChange"
@@ -38,7 +38,7 @@
 				<view class="select"></view>
 			</picker>
 		</InputCell>
-		<InputCell label="电话(不会对企业公开)" @on-input="phoneChange" :scaleInput="true" :required="isEdit" :disabled="!isEdit" :content="resume.phone"></InputCell>
+		<InputCell label="电话(不会对企业公开)" @on-input="phoneChange" :scaleInput="true" :required="isEdit" :disabled="!isEdit" maxLength="11" inputType="number" :content="resume.phone"></InputCell>
 		<InputCell label="工作经验" :required="isEdit" :disabled="true" :withPlugin="true" :hasSlot="true" :content="workExperienceText" placeholder="点击选择">
 			<picker
 				@change="workExperienceChange"
@@ -50,8 +50,8 @@
 				<view class="select"></view>
 			</picker>
 		</InputCell>
-		<InputCell label="毕业院校" @on-input="universityChange" :disabled="!isEdit" :content="resume.university"></InputCell>
-		<InputCell label="籍贯" @on-input="nativePlaceChange" :disabled="!isEdit" :content="resume.nativePlace"></InputCell>
+		<InputCell label="毕业院校" @on-input="universityChange" :disabled="!isEdit" maxLength="40" :content="resume.university"></InputCell>
+		<InputCell label="籍贯" @on-input="nativePlaceChange" :disabled="!isEdit" maxLength="40" :content="resume.nativePlace"></InputCell>
 		<InputCell label="期望工作" @on-input="intentionalWorkChange" :disabled="!isEdit" :content="resume.intentionalWork"></InputCell>
 		<button v-if="isEdit && loginType !== 'B'" class="default-btn" @click="submit">提 交</button>
 	</view>
@@ -154,7 +154,7 @@
 				})
 			},
 			chooseImage(){
-				if(this.loginType === 'B' || !isEdit){
+				if(this.loginType === 'B' || !this.isEdit){
 					return 
 				}
 				const that = this
@@ -293,7 +293,7 @@
 				}
 				setTimeout(()=>{
 						that.switchTab({index: 2})
-						uni.redirectTo({
+						uni.reLaunch({
 							url: '../../customer/main/main'
 						})
 				},1500)

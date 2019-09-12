@@ -10,7 +10,7 @@
 			@input="handleInput" 
 			:value="value" 
 			:type="inputType"
-			:maxlength="maxlength"
+			:maxlength="maxLength"
 			@click="handleClick"
 			@blur="handleBlur"
 			placeholder-class="placeholder"
@@ -43,7 +43,7 @@
 				default: ''
 			},
 			content: {
-				type: String,
+				type: String || Number,
 				default: ''
 			},
 			required: {
