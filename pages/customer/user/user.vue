@@ -41,7 +41,7 @@
 						<view class="th t1"><text>岗位</text><image src="../../../static/icon/dialog-post.png" mode=""></image></view>
 						<view class="th t2"><text>姓名</text><image src="../../../static/icon/dialog-name.png" mode=""></image></view>
 						<view class="th t3"><text>赏金</text><image src="../../../static/icon/dialog-reward.png" mode=""></image></view>
-						<view class="th t4"><text>过保时间</text><image src="../../../static/icon/dialog-time.png" mode=""></image></view>
+						<view class="th t4"><text>{{dialogActive == 0 ? '过保时间': '提现时间'}}</text><image src="../../../static/icon/dialog-time.png" mode=""></image></view>
 					</view>
 					<view class="scroll">
 						<view class="tr " v-for="item in cashoutList" :key="item.id">
