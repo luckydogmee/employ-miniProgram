@@ -11,7 +11,7 @@
 				未开始
 			</view>
 		</view>
-		<view class="project-list">
+		<view class="project-list" v-if="projectList.length>0">
 			<ListProject 
 				v-for="item in projectList"
 				:key="item.id"
@@ -21,6 +21,9 @@
 				@on-showDeliveryDetail="showDeliveryDetail" 
 				@on-recommend="recommend" 
 			/>
+		</view>
+		<view class="empty" v-else>
+			暂无相关项目
 		</view>
 		<!-- 选择面试时间dialog -->
 		<uni-popup ref="selectDate" custom="true" :showMask="false" :maskClick="false">

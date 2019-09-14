@@ -147,7 +147,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _utils = __webpack_require__(/*! ../../../utils/utils.js */ 73);
-var _user = _interopRequireDefault(__webpack_require__(/*! @/models/user.js */ 42));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+var _user = _interopRequireDefault(__webpack_require__(/*! @/models/user.js */ 62));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
 //
 //
@@ -187,7 +187,7 @@ var _user = _interopRequireDefault(__webpack_require__(/*! @/models/user.js */ 4
 //
 //
 //
-var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 58));};var userModel = new _user.default();var _default = { data: function data() {return { surplusSecond: 0, // 还剩多少秒可以重发
+var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 24));};var userModel = new _user.default();var _default = { data: function data() {return { surplusSecond: 0, // 还剩多少秒可以重发
       readySendCode: true, // 是否准备好发送验证码
       verifyCodeTimer: null, //定时器对象
       focusArray: ['name', 'age'], focusIndex: null, //焦点位置

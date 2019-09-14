@@ -12,7 +12,7 @@
 			</view>
 		</view>
 		<Search @on-search="search" />
-		<view class="list-container">			
+		<view class="list-container" v-if="resumeList.length>0">			
 			<ListResume
 				v-for="item in resumeList"
 				:key="item.id"
@@ -26,6 +26,9 @@
 				@showDeliveryDetail="showDeliveryDetail(id)" 
 				@recommend="recommend(id)" 
 			/>
+		</view>
+		<view class="empty" v-else>
+			暂无相关项目
 		</view>
 		<view class="resume-add" @click="showAddResume">
 			<image src="../../../static/icon/add.png" mode=""></image>

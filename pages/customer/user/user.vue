@@ -44,7 +44,7 @@
 						<view class="th t4"><text>过保时间</text><image src="../../../static/icon/dialog-time.png" mode=""></image></view>
 					</view>
 					<view class="scroll">
-						<view class="tr " v-for="item in recommendRecord" :key="item.id">
+						<view class="tr " v-for="item in cashoutList" :key="item.id">
 							<view class="td t1">{{item.time}}</view>
 							<view class="td t2">{{item.jobName}}</view>
 							<view class="td t3">{{item.storeName}}</view>
@@ -52,7 +52,15 @@
 						</view>	
 					</view>
 				</view>
-				<image class="close-icon" src="../../../static/icon/close.png" @click="closeRecommendDialog" />
+				<view class="recommend-footer" v-if="dialogActive == 0">
+					<view class="dialog-btn" @click="cashOut">
+						立即提现
+					</view>
+					<view class="dialog-btn" @click="cancelCashOut">
+						再等等吧
+					</view>
+				</view>
+				<image class="close-icon" src="../../../static/icon/close.png" @click="closeCashoutDialog" />
 			</view>
 		</uni-popup>
 	</view>
@@ -70,7 +78,8 @@
 					// name: '张三'
 				},
 				user:{},
-				dialogActive: 0
+				dialogActive: 0,
+				cashoutList:[]
 			}
 		},
 		components: {
@@ -116,7 +125,13 @@
 					uni.hideLoading()
 					const {code, message, data } = res.data
 					if(code === '0'){
+						this.cashoutList = data.list
 						this.$refs.recommendRecord.open()
+					}else{
+						uni.showToast({
+							icon: 'none',
+							title: message
+						})
 					}
 				}).catch(err=>{
 					uni.hideLoading()
@@ -126,9 +141,49 @@
 					})
 				})
 			},
-			closeRecommendDialog(){
+			closeCashoutDialog(){
 				this.$refs.recommendRecord.close()
 			},
+			cancelCashOut(){
+				this.closeCashoutDialog()
+			},
+			cashOut(){
+				if(this.cashoutList.length>0){
+					uni.showLoading({
+						title: '请稍等...'
+					})
+					userModel.cashout().then(res=>{
+						uni.hideLoading()
+						const {code, message, data } = res.data
+						if(code === '0'){
+							this.closeCashoutDialog()
+							uni.showModal({
+								title: '',
+								content: '提现申请提交成功!\r\n我们将在三个工作日内与您联系，并汇款到您的账户。',
+								showCancel: false,
+								confirmText: '好的',
+								success: res => {},
+							})
+						}else{
+							uni.showToast({
+								icon: 'none',
+								title: message
+							})
+						}
+					}).catch(err=>{
+						uni.hideLoading()
+						uni.showToast({
+							icon: 'none',
+							title: '提现失败，请稍后再试'
+						})
+					})	
+				}else{
+					uni.showToast({
+						icon: 'none',
+						title: '当前没有可提现'
+					})
+				}
+			}
 		}
 	}
 </script>
@@ -171,6 +226,9 @@
 			margin-bottom: 26upx;
 		}
 	}
+	.recommendDialog{
+		height: 610upx;
+	}
 	.recommend-title{
 		font-size: 36upx;
 		width: 100%;
@@ -182,7 +240,7 @@
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		height: 80upx;
+		height: 60upx;
 		padding-left: 40upx;
 		font-size: 28upx;
 		.item{
@@ -194,7 +252,8 @@
 	}
 	.recommend-table{
 		width: 668upx;
-		margin: 30upx auto;
+		height: 350upx;
+		margin: 20upx auto;
 		border-top: 1upx solid #FFFFFF;
 		border-left: 1upx solid #FFFFFF;
 		.tr{
@@ -239,6 +298,22 @@
 			&.t3{
 				padding: 20upx 16upx;
 			}
+		}
+	}
+	.recommend-footer{
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-around;
+		.dialog-btn{
+			width: 200upx;
+			height: 50upx;
+			line-height: 50upx;
+			color: #FFFFFF;
+			background: #f2a184;
+			text-align: center;
+			font-size: 24upx;
+			border-radius: 6upx;
 		}
 	}
 </style>

@@ -86,6 +86,11 @@
 				this.$refs.resume.getNext()
 			}
 		},
+		onShow(){
+			if(this.tabIndex === 2){
+				this.$refs.resume.refresh()
+			}
+		},
 		computed:{
 			...mapState(['tabIndex']),
 			currentTab(){

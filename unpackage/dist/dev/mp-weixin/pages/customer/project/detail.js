@@ -132,7 +132,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _resume = _interopRequireDefault(__webpack_require__(/*! @/models/resume.js */ 27));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var ListChoose = function ListChoose() {return __webpack_require__.e(/*! import() | components/ListChoose/ListChoose */ "components/ListChoose/ListChoose").then(__webpack_require__.bind(null, /*! @/components/ListChoose/ListChoose.vue */ 209));};var Search = function Search() {return __webpack_require__.e(/*! import() | components/Search/Search */ "components/Search/Search").then(__webpack_require__.bind(null, /*! @/components/Search/Search.vue */ 176));};
+var _resume = _interopRequireDefault(__webpack_require__(/*! @/models/resume.js */ 31));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var ListChoose = function ListChoose() {return __webpack_require__.e(/*! import() | components/ListChoose/ListChoose */ "components/ListChoose/ListChoose").then(__webpack_require__.bind(null, /*! @/components/ListChoose/ListChoose.vue */ 169));};var Search = function Search() {return __webpack_require__.e(/*! import() | components/Search/Search */ "components/Search/Search").then(__webpack_require__.bind(null, /*! @/components/Search/Search.vue */ 176));};
 var resumeModel = new _resume.default();var _default =
 {
   data: function data() {

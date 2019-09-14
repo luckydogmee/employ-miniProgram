@@ -48,6 +48,9 @@
 .button-group .navigate {
     margin-bottom: 26rpx;
 }
+.recommendDialog {
+  height: 610rpx;
+}
 .recommend-title {
   font-size: 36rpx;
   width: 100%;
@@ -69,7 +72,7 @@
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 80rpx;
+  height: 60rpx;
   padding-left: 40rpx;
   font-size: 28rpx;
 }
@@ -81,7 +84,8 @@
 }
 .recommend-table {
   width: 668rpx;
-  margin: 30rpx auto;
+  height: 350rpx;
+  margin: 20rpx auto;
   border-top: 1rpx solid #FFFFFF;
   border-left: 1rpx solid #FFFFFF;
 }
@@ -140,5 +144,33 @@
 }
 .recommend-table .td.t3 {
       padding: 20rpx 16rpx;
+}
+.recommend-footer {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+}
+.recommend-footer .dialog-btn {
+    width: 200rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    color: #FFFFFF;
+    background: #f2a184;
+    text-align: center;
+    font-size: 24rpx;
+    border-radius: 6rpx;
 }
 
