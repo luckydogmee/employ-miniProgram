@@ -290,6 +290,7 @@
 					uni.hideLoading()
 					if(code === '0'){
 						// 推荐成功
+						that.$refs.selectDate.close()
 						uni.showModal({
 							title: '',
 							content: '推荐成功!\r\n您可在“我的项目”栏目查看该人员的面试、入职流程',

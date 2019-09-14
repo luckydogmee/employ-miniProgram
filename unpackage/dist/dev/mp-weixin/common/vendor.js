@@ -1883,6 +1883,34 @@ ProcessModel = /*#__PURE__*/function (_HTTP) {_inherits(ProcessModel, _HTTP);
           entryTime: entryTime } });
 
 
+    }
+    // 已知晓
+  }, { key: "isKnow", value: function isKnow(processInfoId) {
+      return this.request({
+        url: '/process/isKnow',
+        data: {
+          processInfoId: processInfoId } });
+
+
+    }
+    // 申诉
+  }, { key: "appeal", value: function appeal(processInfoId, content) {
+      return this.request({
+        url: '/process/appeal',
+        data: {
+          processInfoId: processInfoId,
+          content: content } });
+
+
+    }
+    // 认可
+  }, { key: "approval", value: function approval(processInfoId) {
+      return this.request({
+        url: '/process/approval',
+        data: {
+          processInfoId: processInfoId } });
+
+
     } }]);return ProcessModel;}(_http.HTTP);var _default =
 
 

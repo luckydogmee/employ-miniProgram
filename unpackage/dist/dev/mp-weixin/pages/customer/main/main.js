@@ -653,6 +653,7 @@ var jobModel = new _job.default();var _default =
       }
     },
     pushResume: function pushResume() {
+      var that = this;
       var jobId = this.jobId;
       var resumeId = this.resumeId;
       var interviewDate = this.date;
@@ -660,6 +661,7 @@ var jobModel = new _job.default();var _default =
       resumeModel.pushResume(jobId, resumeId, interviewDate, interviewTime).then(function (res) {var _res$data2 =
         res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
         if (code === '0') {
+          that.$refs.selectDate.close();
           // 推荐成功
           uni.showModal({
             title: '',
@@ -1113,6 +1115,7 @@ var resumeModel = new _resume.default();var _default =
         uni.hideLoading();
         if (code === '0') {
           // 推荐成功
+          that.$refs.selectDate.close();
           uni.showModal({
             title: '',
             content: '推荐成功!\r\n您可在“我的项目”栏目查看该人员的面试、入职流程',
@@ -1341,6 +1344,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
 var _user = _interopRequireDefault(__webpack_require__(/*! @/models/user.js */ 42));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var UserItem = function UserItem() {return __webpack_require__.e(/*! import() | components/UserItem/UserItem */ "components/UserItem/UserItem").then(__webpack_require__.bind(null, /*! ../../../components/UserItem/UserItem.vue */ 188));};var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 58));};
 
 var userModel = new _user.default();var _default =
@@ -1350,7 +1361,8 @@ var userModel = new _user.default();var _default =
       userData: {
         // name: '张三'
       },
-      user: {} };
+      user: {},
+      dialogActive: 0 };
 
   },
   components: {
@@ -1384,7 +1396,11 @@ var userModel = new _user.default();var _default =
 
       });
     },
+    switchItem: function switchItem(index) {
+      this.dialogActive = index;
+    },
     cashoutList: function cashoutList() {var _this2 = this;
+      this.$refs.recommendRecord.open();
       uni.showLoading({
         title: '加载中...' });
 
@@ -1401,6 +1417,9 @@ var userModel = new _user.default();var _default =
           title: '获取提现信息失败' });
 
       });
+    },
+    closeRecommendDialog: function closeRecommendDialog() {
+      this.$refs.recommendRecord.close();
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

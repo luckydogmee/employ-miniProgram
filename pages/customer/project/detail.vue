@@ -12,23 +12,18 @@
 			</view>
 		</view>
 		<Search @on-search="search" />
-		<view class="project-list">
-<!-- 			<ListProjectDetail :type="type" 
-				@showDetail="showDetail(id)" 
-			/> -->
-			
-			<ListProjectDetail :type="type"
-				v-for="item in receviedList"
-				:key="item.id"
-				:receviedInfo="item"
-				@showDetail="showDetail(id)" 
-			/>
+		<view class="project-list" v-if="receviedList.length>0">
+			<ListChoose v-for="item in receviedList" :key="item.receviedId" :resumeData="item" @on-show="showDetail(item)" />
+		</view>
+		<view class="empty" v-else>
+			暂无相关项目
 		</view>
 	</view>
 </template>
 
 <script>
-	import ListProjectDetail from '@/components/ListProjectDetail/ListProjectDetail.vue'
+	// import ListProjectDetail from '@/components/ListProjectDetail/ListProjectDetail.vue'
+	import ListChoose from '@/components/ListChoose/ListChoose.vue'
 	import Search from '@/components/Search/Search.vue'
 	import ResumeModel from '@/models/resume.js'
 	const resumeModel = new ResumeModel()
@@ -49,7 +44,7 @@
 			}
 		},
 		components: {
-			ListProjectDetail,
+			ListChoose,
 			Search
 		},
 		onLoad(option){
@@ -57,8 +52,9 @@
 			this.jobId = jobId
 			this.getPushResumeList()
 		},
-		mounted(){
-			this.getPushResumeList()
+		onShow() {
+			this.pageNum = 1
+			this.getPushResumeList()	
 		},
 		methods: {
 			switchTab(type){
@@ -98,8 +94,12 @@
 					})
 				})
 			},
-			showDetail(id){
+			showDetail(item){
 				// 跳转到聊天页面
+				const {jobId, receviedId, jobName, name, latestFeedback,avatar,resumeId} = item
+				uni.navigateTo({
+					url: '../../public/Chat/Chat?jobId='+ jobId +'&receviedId='+receviedId+'&jobName='+jobName+'&name='+name+'&latestFeedback='+latestFeedback+'&avatar='+avatar+'&resumeId='+resumeId
+				})
 			},
 			search(keyWord){
 				// 搜索动作

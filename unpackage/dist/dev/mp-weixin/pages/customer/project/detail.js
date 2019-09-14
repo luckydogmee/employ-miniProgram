@@ -132,12 +132,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-var _resume = _interopRequireDefault(__webpack_require__(/*! @/models/resume.js */ 27));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var ListProjectDetail = function ListProjectDetail() {return __webpack_require__.e(/*! import() | components/ListProjectDetail/ListProjectDetail */ "components/ListProjectDetail/ListProjectDetail").then(__webpack_require__.bind(null, /*! @/components/ListProjectDetail/ListProjectDetail.vue */ 223));};var Search = function Search() {return __webpack_require__.e(/*! import() | components/Search/Search */ "components/Search/Search").then(__webpack_require__.bind(null, /*! @/components/Search/Search.vue */ 176));};
+var _resume = _interopRequireDefault(__webpack_require__(/*! @/models/resume.js */ 27));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var ListChoose = function ListChoose() {return __webpack_require__.e(/*! import() | components/ListChoose/ListChoose */ "components/ListChoose/ListChoose").then(__webpack_require__.bind(null, /*! @/components/ListChoose/ListChoose.vue */ 209));};var Search = function Search() {return __webpack_require__.e(/*! import() | components/Search/Search */ "components/Search/Search").then(__webpack_require__.bind(null, /*! @/components/Search/Search.vue */ 176));};
 var resumeModel = new _resume.default();var _default =
 {
   data: function data() {
@@ -156,7 +151,7 @@ var resumeModel = new _resume.default();var _default =
 
   },
   components: {
-    ListProjectDetail: ListProjectDetail,
+    ListChoose: ListChoose,
     Search: Search },
 
   onLoad: function onLoad(option) {
@@ -164,7 +159,8 @@ var resumeModel = new _resume.default();var _default =
     this.jobId = jobId;
     this.getPushResumeList();
   },
-  mounted: function mounted() {
+  onShow: function onShow() {
+    this.pageNum = 1;
     this.getPushResumeList();
   },
   methods: {
@@ -205,8 +201,12 @@ var resumeModel = new _resume.default();var _default =
 
       });
     },
-    showDetail: function showDetail(id) {
+    showDetail: function showDetail(item) {
       // 跳转到聊天页面
+      var jobId = item.jobId,receviedId = item.receviedId,jobName = item.jobName,name = item.name,latestFeedback = item.latestFeedback,avatar = item.avatar,resumeId = item.resumeId;
+      uni.navigateTo({
+        url: '../../public/Chat/Chat?jobId=' + jobId + '&receviedId=' + receviedId + '&jobName=' + jobName + '&name=' + name + '&latestFeedback=' + latestFeedback + '&avatar=' + avatar + '&resumeId=' + resumeId });
+
     },
     search: function search(keyWord) {
       // 搜索动作

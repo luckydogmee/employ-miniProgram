@@ -49,6 +49,11 @@
 				this.$refs.choose.getNext()
 			}
 		},
+		onShow() {
+			if(this.tabIndex === 1){
+				this.$refs.choose.refresh()
+			}
+		},
 		methods:{
 			...mapMutations(['switchTab']),
 			switchTabBar(type){

@@ -89,6 +89,25 @@
 				</view>
 			</view>
 		</uni-popup>
+		<!-- 输入申诉内容dialog -->
+		<uni-popup ref="inputDialog" custom="true" :showMask="false" :maskClick="false">
+			<view class="selectDateDialog">
+				<view class="selectDate-title" style="text-align: center;font-size: 26upx;">
+					申诉
+				</view>
+				<view class="selectDate-content" style="height: 140upx;padding-bottom:24upx;">
+					<textarea class="content-textarea" v-model="inputContent" placeholder="请输入申诉内容" placeholder-class="textarea-place" />
+				</view>
+				<view class="selectDate-footer">
+					<view class="selectDate-btn confirm" @click="appealSubmit">
+						确认
+					</view>
+					<view class="selectDate-btn cancel" @click="appealCancel">
+						取消
+					</view>
+				</view>
+			</view>
+		</uni-popup>
 	</view>
 </template>
 
@@ -106,7 +125,9 @@
 				loginType: '',
 				date: '',
 				entryTime: '',
-				timeText: '面试'
+				timeText: '面试',
+				inputContent: '', // 申诉内容
+				tempItem: ''
 			};
 		},
 		components:{
@@ -201,6 +222,18 @@
 					this.timeText = '面试'
 					this.$refs.selectDate.open()
 				}
+				if(btn.text === '取消简历'){
+					this.cancelResume(id)
+				}
+				if(btn.text === '已知晓'){
+					this.hasKnown(item)
+				}
+				if(btn.text === '申诉'){
+					this.appeal(item)
+				}
+				if(btn.text === '认可'){
+					this.approval(item)
+				}
 			},
 			push(){
 				if(this.tempInfo.method === 'interviewFeedback'){
@@ -235,6 +268,7 @@
 					})
 				})
 			},
+			// 取消选择
 			cancelPush(){
 				this.tempInfo = {}
 				this.$refs.selectDate.close()
@@ -248,6 +282,136 @@
 			bindTimeEndChange(e){
 				this.timeEnd = e.target.value
 			},
+			// A端取消简历
+			cancelResume(id){
+				uni.showLoading({
+					title: '取消中'
+				})
+				processModel.cancelResume(id).then(res=>{
+					uni.hideLoading()
+					const { code, message, data } = res.data
+					if(code === '0'){
+						uni.showToast({
+							title: '取消简历成功'
+						})
+						setTimeout(()=>{
+							uni.navigateBack({
+								delta:1
+							})	
+						},2000)
+					}else{
+						uni.showToast({
+							icon: 'none',
+							title: message
+						})
+					}
+				}).catch(err=>{
+					uni.hideLoading()
+					uni.showToast({
+						icon: 'none',
+						title: '取消失败'
+					})
+				})
+			},
+			hasKnown(item){
+				uni.showLoading({
+					title: '请稍等...'
+				})
+				processModel.isKnow(item.id).then(res=>{
+					uni.hideLoading()
+					const { code, message, data } = res.data
+					if(code === '0'){
+						this.processData.total += 1
+						this.processData.list.push({
+							create_time: new Date(),
+							process_content: '已知晓, 谢谢',
+							sort_number: item.sort_number + 1,
+							owner: item.owner == 1? 0:1
+						})
+					}else{
+						uni.showToast({
+							icon: 'none',
+							title: message
+						})
+					}
+				}).catch(err=>{
+					uni.hideLoading()
+					uni.showToast({
+						icon: 'none',
+						title: '取消失败'
+					})
+				})
+			},
+			appeal(item){
+				this.tempItem = item
+				this.$refs.inputDialog.open()
+			},
+			appealSubmit(){
+				uni.showLoading({
+					title: '请稍等...'
+				})
+				const item = this.tempItem
+				const that = this
+				processModel.appeal(item.id,this.inputContent).then(res=>{
+					uni.hideLoading()
+					that.$refs.inputDialog.close()
+					const { code, message, data } = res.data
+					if(code === '0'){
+						this.processData.total += 1
+						this.processData.list.push({
+							create_time: new Date(),
+							process_content: that.inputContent,
+							sort_number: item.sort_number + 1,
+							owner: item.owner == 1? 0:1
+						})
+					}else{
+						uni.showToast({
+							icon: 'none',
+							title: message
+						})
+					}
+				}).catch(err=>{
+					uni.hideLoading()
+					uni.showToast({
+						icon: 'none',
+						title: '提交失败'
+					})
+				})
+			},
+			appealCancel(){
+				this.$refs.inputDialog.close()
+			},
+			// B 认可
+			approval(item){
+				uni.showLoading({
+					title: '请稍等...'
+				})
+				const that = this
+				processModel.approval(item.id,this.inputContent).then(res=>{
+					uni.hideLoading()
+					const { code, message, data } = res.data
+					if(code === '0'){
+						this.processData.total += 1
+						this.processData.list.push({
+							create_time: new Date(),
+							process_content: '认可',
+							sort_number: item.sort_number + 1,
+							owner: item.owner == 1? 0:1
+						})
+					}else{
+						uni.showToast({
+							icon: 'none',
+							title: message
+						})
+					}
+				}).catch(err=>{
+					uni.hideLoading()
+					uni.showToast({
+						icon: 'none',
+						title: '提交失败'
+					})
+				})
+			}
 		}
 	}
 </script>
@@ -456,6 +620,18 @@
 			text-align: center;
 			line-height: 40upx;
 			font-size: 20upx;
+			min-height: 88rpx;
 		}
+	}
+	.content-textarea{
+		width: 440upx;
+		border: 1upx solid #DDDDDD;
+		font-size: 24upx;
+		color: #595959;
+		padding: 6upx;
+	}
+	.textarea-place{
+		font-size: 22upx;
+		color:#ccc;
 	}
 </style>

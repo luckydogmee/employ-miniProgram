@@ -143,6 +143,14 @@ button.swiper-button:after {
   margin-top: 10rpx;
   margin-bottom: 10rpx;
 }
+.empty {
+  text-align: center;
+  width: 750rpx;
+  min-height: 120rpx;
+  padding-top: 40rpx;
+  color: #8F8F94;
+  font-size: 28rpx;
+}
 /* ************ 表单相关 start ************** */
 .form-item {
   width: 100%;

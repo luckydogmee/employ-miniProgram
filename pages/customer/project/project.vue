@@ -199,6 +199,7 @@
 				}
 			},
 			pushResume(){
+				const that = this
 				const jobId = this.jobId
 				const resumeId = this.resumeId
 				const interviewDate = this.date
@@ -206,6 +207,7 @@
 				resumeModel.pushResume(jobId, resumeId, interviewDate, interviewTime).then(res=>{
 					const { code, message, data } = res.data
 					if(code === '0'){
+						that.$refs.selectDate.close()
 						// 推荐成功
 						uni.showModal({
 							title: '',

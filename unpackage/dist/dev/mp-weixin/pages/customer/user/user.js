@@ -159,6 +159,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
 var _user = _interopRequireDefault(__webpack_require__(/*! @/models/user.js */ 42));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var UserItem = function UserItem() {return __webpack_require__.e(/*! import() | components/UserItem/UserItem */ "components/UserItem/UserItem").then(__webpack_require__.bind(null, /*! ../../../components/UserItem/UserItem.vue */ 188));};var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 58));};
 
 var userModel = new _user.default();var _default =
@@ -168,7 +176,8 @@ var userModel = new _user.default();var _default =
       userData: {
         // name: '张三'
       },
-      user: {} };
+      user: {},
+      dialogActive: 0 };
 
   },
   components: {
@@ -202,7 +211,11 @@ var userModel = new _user.default();var _default =
 
       });
     },
+    switchItem: function switchItem(index) {
+      this.dialogActive = index;
+    },
     cashoutList: function cashoutList() {var _this2 = this;
+      this.$refs.recommendRecord.open();
       uni.showLoading({
         title: '加载中...' });
 
@@ -219,6 +232,9 @@ var userModel = new _user.default();var _default =
           title: '获取提现信息失败' });
 
       });
+    },
+    closeRecommendDialog: function closeRecommendDialog() {
+      this.$refs.recommendRecord.close();
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

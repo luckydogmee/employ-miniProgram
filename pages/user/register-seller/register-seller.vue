@@ -37,7 +37,7 @@
 				<UploadItem title="上传工作场景照" :imageUrl="resume.companyImg" @on-select-image="chooseCompanyImg" />
 			</view>	
 		</view>
-		<view class="add-bottom" v-if="">
+		<view class="add-bottom">
 			<InputCell label="联系电话" :required="isEdit" :disabled="!isEdit" :isSell="true" placeholder="请输入联系电话" :content="resume.phone" @on-input="phoneChanged"></InputCell>
 			
 			<!-- <view class="add-avatar">
@@ -50,7 +50,7 @@
 					></image>
 				</view>
 			</view> -->
-			<inputCell v-if="!isEdit&&!isModify" label="验证码" :required="isEdit" :isSell="true" placeholder="请输入验证码" floatleft="left" :hasSlot="true" :content="verifyCode" @on-input="verifyCodeChanged">
+			<inputCell v-if="isEdit&&!isModify" label="验证码" :required="isEdit" :isSell="true" placeholder="请输入验证码" floatleft="left" :hasSlot="true" :content="verifyCode" @on-input="verifyCodeChanged">
 				<button class="default-btn verifyBtn verify-code-btn" :class="{'disabled':!readySendCode} "
 					@click="sendVerifyCode">{{readySendCode ? '发送验证码' : surplusSecond + ' 秒后重新发送' }}</button>
 			</inputCell>	

@@ -275,5 +275,17 @@
     text-align: center;
     line-height: 40rpx;
     font-size: 20rpx;
+    min-height: 88rpx;
+}
+.content-textarea {
+  width: 440rpx;
+  border: 1rpx solid #DDDDDD;
+  font-size: 24rpx;
+  color: #595959;
+  padding: 6rpx;
+}
+.textarea-place {
+  font-size: 22rpx;
+  color: #ccc;
 }
 

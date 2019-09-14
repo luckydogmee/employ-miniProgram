@@ -56,6 +56,34 @@ class ProcessModel extends HTTP {
 			}
 		})
 	}
+	// 已知晓
+	isKnow(processInfoId){
+		return this.request({
+			url : '/process/isKnow',
+			data: {
+				processInfoId
+			}
+		})
+	}
+	// 申诉
+	appeal(processInfoId, content){
+		return this.request({
+			url : '/process/appeal',
+			data: {
+				processInfoId,
+				content
+			}
+		})
+	}
+	// 认可
+	approval(processInfoId){
+		return this.request({
+			url : '/process/approval',
+			data: {
+				processInfoId
+			}
+		})
+	}
 } 
 
 export default ProcessModel

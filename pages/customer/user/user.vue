@@ -26,7 +26,15 @@
 		<uni-popup ref="recommendRecord" custom="true" :showMask="false" :maskClick="false">
 			<view class="recommendDialog">
 				<view class="recommend-title">
-					推荐记录
+					提现信息
+				</view>
+				<view class="recommend-title-sub">
+					<view class="item" @click="switchItem(0)" :class="{'active':dialogActive === 0}" >
+						提现列表
+					</view>
+					<view class="item" @click="switchItem(1)" :class="{'active':dialogActive === 1}">
+						提现记录
+					</view>
 				</view>
 				<view class="recommend-table">
 					<view class="tr">
@@ -61,7 +69,8 @@
 				userData: {
 					// name: '张三'
 				},
-				user:{}
+				user:{},
+				dialogActive: 0
 			}
 		},
 		components: {
@@ -95,7 +104,11 @@
 					})
 				})
 			},
+			switchItem(index){
+				this.dialogActive = index
+			},
 			cashoutList(){
+				this.$refs.recommendRecord.open()
 				uni.showLoading({
 					title: '加载中...'
 				})
@@ -112,7 +125,10 @@
 						title: '获取提现信息失败'
 					})
 				})
-			}
+			},
+			closeRecommendDialog(){
+				this.$refs.recommendRecord.close()
+			},
 		}
 	}
 </script>
@@ -161,6 +177,20 @@
 		text-align: center;
 		color: #ff9058;
 		margin-top: 30upx;
+	}
+	.recommend-title-sub{
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		height: 80upx;
+		padding-left: 40upx;
+		font-size: 28upx;
+		.item{
+			margin-right: 20upx;
+			&.active{
+				color: #ff9058;
+			}
+		}
 	}
 	.recommend-table{
 		width: 668upx;

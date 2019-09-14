@@ -306,6 +306,7 @@ var jobModel = new _job.default();var _default =
       }
     },
     pushResume: function pushResume() {
+      var that = this;
       var jobId = this.jobId;
       var resumeId = this.resumeId;
       var interviewDate = this.date;
@@ -313,6 +314,7 @@ var jobModel = new _job.default();var _default =
       resumeModel.pushResume(jobId, resumeId, interviewDate, interviewTime).then(function (res) {var _res$data2 =
         res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
         if (code === '0') {
+          that.$refs.selectDate.close();
           // 推荐成功
           uni.showModal({
             title: '',

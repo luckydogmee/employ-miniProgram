@@ -145,8 +145,7 @@ var _default2 =
   methods: {
     showDetail: function showDetail() {
       //此处根据类别判断查看动作或者根本不做判断
-      var id = this.data.id || 1;
-      this.$emit('showDetail', id);
+      this.$emit('showDetail');
     } } };exports.default = _default2;
 
 /***/ }),

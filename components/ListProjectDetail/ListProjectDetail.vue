@@ -38,8 +38,7 @@
 		methods:{
 			showDetail(){
 				//此处根据类别判断查看动作或者根本不做判断
-				const id = this.data.id || 1
-				this.$emit('showDetail',id)
+				this.$emit('showDetail')
 			},
 		}
 	}

@@ -79,7 +79,7 @@
 			<InputCell label="拟悬赏金额" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="job.reward" placeholder="请输入金额(建议300元以上)" @on-input="rewardChanged" @on-blur="showNotice"></InputCell>
 			<InputCell label="过保时间" :required="isEdit" :disabled="true" :isSell="true" :withPlugin="true" :hasSlot="true" :content="job.overtime" placeholder="点击选择>">
 				<picker
-					@change="overtimeChange"
+					@change="overtimeChanged"
 					class="picker"
 					:range="overtimeArray"
 					:disabled="!isEdit"

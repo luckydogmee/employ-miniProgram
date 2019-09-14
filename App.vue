@@ -170,7 +170,14 @@
 		margin-top: 10upx;
 		margin-bottom: 10upx;
 	}
-	
+	.empty{
+		text-align: center;
+		width: 750upx;
+		min-height: 120upx;
+		padding-top: 40upx;
+		color: #8F8F94;
+		font-size: 28upx;
+	}
 	// 以下独特样式
 	
 	/* ************ 表单相关 start ************** */
