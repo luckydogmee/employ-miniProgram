@@ -52,7 +52,7 @@ class ProcessModel extends HTTP {
 			url : '/process/quitFeedback',
 			data: {
 				processInfoId, 
-				entryTime
+				quitTime
 			}
 		})
 	}

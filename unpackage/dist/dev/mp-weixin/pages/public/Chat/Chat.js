@@ -320,6 +320,7 @@ var processModel = new _process.default();var _default =
     },
     handleBtnClick: function handleBtnClick(btn, item) {
       var id = item.id;
+      // 面试反馈
       if (btn.text === '面试通过') {
         this.tempInfo = {
           method: 'interviewFeedback',
@@ -349,6 +350,7 @@ var processModel = new _process.default();var _default =
         this.timeText = '面试';
         this.$refs.selectDate.open();
       }
+      // A取消简历
       if (btn.text === '取消简历') {
         this.cancelResume(id);
       }
@@ -361,12 +363,56 @@ var processModel = new _process.default();var _default =
       if (btn.text === '认可') {
         this.approval(item);
       }
+      // 入职反馈
+      if (btn.text === '修改入职时间') {
+        this.tempInfo = {
+          method: 'entryFeedback',
+          options: {
+            id: id,
+            status: '2' } };
+
+
+        this.timeText = '入职';
+        this.$refs.selectDate.open();
+      }
+      if (btn.text === '已入职') {
+        this.tempInfo = {
+          method: 'entryFeedback',
+          options: {
+            id: id,
+            status: '0' } };
+
+
+        this.timeText = '入职';
+        this.$refs.selectDate.open();
+      }
+      if (btn.text === '未入职') {
+        this.entryFeedback(id, 1);
+      }
+      if (btn.text === '已离职') {
+        this.tempInfo = {
+          method: 'quitFeedBack',
+          options: {
+            id: id } };
+
+
+        this.timeText = '离职';
+        this.$refs.selectDate.open();
+      }
     },
     push: function push() {
       if (this.tempInfo.method === 'interviewFeedback') {
         var array = Object.values(this.tempInfo.options);
         array.push(this.date);
         this.interviewFeedback.apply(this, _toConsumableArray(array));
+      } else if (this.tempInfo.method === 'entryFeedback') {
+        var _array = Object.values(this.tempInfo.options);
+        _array.push(this.date);
+        this.entryFeedback.apply(this, _toConsumableArray(_array));
+      } else if (this.tempInfo.method === 'quitFeedBack') {
+        var _array2 = Object.values(this.tempInfo.options);
+        _array2.push(this.date);
+        this.quitFeedBack.apply(this, _toConsumableArray(_array2));
       }
     },
     // 提交面试反馈
@@ -376,8 +422,62 @@ var processModel = new _process.default();var _default =
 
       var that = this;
       processModel.interviewFeedback(id, status, time).then(function (res) {
-        uni.hideLoading();var _res$data2 =
+        uni.hideLoading();
+        that.$refs.selectDate.close();var _res$data2 =
         res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
+        if (code === '0') {
+          // 这里做后续处理
+          that.getProcessList();
+        } else {
+          uni.showToast({
+            icon: 'none',
+            title: message });
+
+        }
+      }).catch(function (err) {
+        uni.hideLoading();
+        uni.showToast({
+          icon: 'none',
+          title: '提交失败' });
+
+      });
+    },
+    // 提交入职反馈
+    entryFeedback: function entryFeedback(id, status, time) {
+      uni.showLoading({
+        mask: true });
+
+      var that = this;
+      processModel.entryFeedBack(id, status, time).then(function (res) {
+        uni.hideLoading();
+        that.$refs.selectDate.close();var _res$data3 =
+        res.data,code = _res$data3.code,message = _res$data3.message,data = _res$data3.data;
+        if (code === '0') {
+          // 这里做后续处理
+          that.getProcessList();
+        } else {
+          uni.showToast({
+            icon: 'none',
+            title: message });
+
+        }
+      }).catch(function (err) {
+        uni.hideLoading();
+        uni.showToast({
+          icon: 'none',
+          title: '提交失败' });
+
+      });
+    },
+    quitFeedBack: function quitFeedBack(id, time) {
+      uni.showLoading({
+        mask: true });
+
+      var that = this;
+      processModel.quitFeedBack(id, time).then(function (res) {
+        uni.hideLoading();
+        that.$refs.selectDate.close();var _res$data4 =
+        res.data,code = _res$data4.code,message = _res$data4.message,data = _res$data4.data;
         if (code === '0') {
           // 这里做后续处理
           that.getProcessList();
@@ -415,8 +515,8 @@ var processModel = new _process.default();var _default =
         title: '取消中' });
 
       processModel.cancelResume(id).then(function (res) {
-        uni.hideLoading();var _res$data3 =
-        res.data,code = _res$data3.code,message = _res$data3.message,data = _res$data3.data;
+        uni.hideLoading();var _res$data5 =
+        res.data,code = _res$data5.code,message = _res$data5.message,data = _res$data5.data;
         if (code === '0') {
           uni.showToast({
             title: '取消简历成功' });
@@ -440,21 +540,16 @@ var processModel = new _process.default();var _default =
 
       });
     },
-    hasKnown: function hasKnown(item) {var _this = this;
+    hasKnown: function hasKnown(item) {
       uni.showLoading({
         title: '请稍等...' });
 
+      var that = this;
       processModel.isKnow(item.id).then(function (res) {
-        uni.hideLoading();var _res$data4 =
-        res.data,code = _res$data4.code,message = _res$data4.message,data = _res$data4.data;
+        uni.hideLoading();var _res$data6 =
+        res.data,code = _res$data6.code,message = _res$data6.message,data = _res$data6.data;
         if (code === '0') {
-          _this.processData.total += 1;
-          _this.processData.list.push({
-            create_time: new Date(),
-            process_content: '已知晓, 谢谢',
-            sort_number: item.sort_number + 1,
-            owner: item.owner == 1 ? 0 : 1 });
-
+          that.getProcessList();
         } else {
           uni.showToast({
             icon: 'none',
@@ -473,7 +568,7 @@ var processModel = new _process.default();var _default =
       this.tempItem = item;
       this.$refs.inputDialog.open();
     },
-    appealSubmit: function appealSubmit() {var _this2 = this;
+    appealSubmit: function appealSubmit() {
       uni.showLoading({
         title: '请稍等...' });
 
@@ -481,16 +576,10 @@ var processModel = new _process.default();var _default =
       var that = this;
       processModel.appeal(item.id, this.inputContent).then(function (res) {
         uni.hideLoading();
-        that.$refs.inputDialog.close();var _res$data5 =
-        res.data,code = _res$data5.code,message = _res$data5.message,data = _res$data5.data;
+        that.$refs.inputDialog.close();var _res$data7 =
+        res.data,code = _res$data7.code,message = _res$data7.message,data = _res$data7.data;
         if (code === '0') {
-          _this2.processData.total += 1;
-          _this2.processData.list.push({
-            create_time: new Date(),
-            process_content: that.inputContent,
-            sort_number: item.sort_number + 1,
-            owner: item.owner == 1 ? 0 : 1 });
-
+          that.getProcessList();
         } else {
           uni.showToast({
             icon: 'none',
@@ -509,17 +598,17 @@ var processModel = new _process.default();var _default =
       this.$refs.inputDialog.close();
     },
     // B 认可
-    approval: function approval(item) {var _this3 = this;
+    approval: function approval(item) {var _this = this;
       uni.showLoading({
         title: '请稍等...' });
 
       var that = this;
       processModel.approval(item.id, this.inputContent).then(function (res) {
-        uni.hideLoading();var _res$data6 =
-        res.data,code = _res$data6.code,message = _res$data6.message,data = _res$data6.data;
+        uni.hideLoading();var _res$data8 =
+        res.data,code = _res$data8.code,message = _res$data8.message,data = _res$data8.data;
         if (code === '0') {
-          _this3.processData.total += 1;
-          _this3.processData.list.push({
+          _this.processData.total += 1;
+          _this.processData.list.push({
             create_time: new Date(),
             process_content: '认可',
             sort_number: item.sort_number + 1,

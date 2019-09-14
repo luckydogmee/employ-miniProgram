@@ -1880,7 +1880,7 @@ ProcessModel = /*#__PURE__*/function (_HTTP) {_inherits(ProcessModel, _HTTP);
         url: '/process/quitFeedback',
         data: {
           processInfoId: processInfoId,
-          entryTime: entryTime } });
+          quitTime: quitTime } });
 
 
     }

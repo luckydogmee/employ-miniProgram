@@ -38,7 +38,7 @@
 				<view class="select"></view>
 			</picker>
 		</InputCell>
-		<InputCell label="电话(不会对企业公开)" @on-input="phoneChange" :scaleInput="true" :required="isEdit" :disabled="!isEdit" maxLength="11" inputType="number" :content="resume.phone"></InputCell>
+		<InputCell v-if="loginType !== 'B'" label="电话(不会对企业公开)" @on-input="phoneChange" :scaleInput="true" :required="isEdit" :disabled="!isEdit" maxLength="11" inputType="number" :content="resume.phone"></InputCell>
 		<InputCell label="工作经验" :required="isEdit" :disabled="true" :withPlugin="true" :hasSlot="true" :content="workExperienceText" placeholder="点击选择">
 			<picker
 				@change="workExperienceChange"

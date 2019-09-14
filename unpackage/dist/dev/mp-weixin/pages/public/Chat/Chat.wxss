@@ -95,6 +95,7 @@
             box-sizing: border-box;
     padding: 24rpx 30rpx;
     font-size: 20rpx;
+    min-height: 88rpx;
 }
 .message-content-withbtn {
   min-width: 480rpx;

@@ -193,6 +193,7 @@
 			},
 			handleBtnClick(btn, item){
 				const id = item.id
+				// 面试反馈
 				if(btn.text === '面试通过'){
 					this.tempInfo = {
 						method: 'interviewFeedback',
@@ -222,6 +223,7 @@
 					this.timeText = '面试'
 					this.$refs.selectDate.open()
 				}
+				// A取消简历
 				if(btn.text === '取消简历'){
 					this.cancelResume(id)
 				}
@@ -234,12 +236,56 @@
 				if(btn.text === '认可'){
 					this.approval(item)
 				}
+				// 入职反馈
+				if(btn.text === '修改入职时间'){
+					this.tempInfo = {
+						method: 'entryFeedback',
+						options:{
+							id,
+							status:'2'
+						}
+					}
+					this.timeText = '入职'
+					this.$refs.selectDate.open()
+				}
+				if(btn.text === '已入职'){
+					this.tempInfo = {
+						method: 'entryFeedback',
+						options:{
+							id,
+							status:'0'
+						}
+					}
+					this.timeText = '入职'
+					this.$refs.selectDate.open()
+				}
+				if(btn.text === '未入职'){
+					this.entryFeedback(id,1)
+				}
+				if(btn.text === '已离职'){
+					this.tempInfo = {
+						method: 'quitFeedBack',
+						options:{
+							id
+						}
+					}
+					this.timeText = '离职'
+					this.$refs.selectDate.open()
+				}
 			},
 			push(){
 				if(this.tempInfo.method === 'interviewFeedback'){
 					const array = Object.values(this.tempInfo.options)
 					array.push(this.date)
 					this.interviewFeedback(...array)
+				}else if(this.tempInfo.method === 'entryFeedback'){
+					const array = Object.values(this.tempInfo.options)
+					array.push(this.date)
+					this.entryFeedback(...array)
+				}else if(this.tempInfo.method === 'quitFeedBack'){
+					const array = Object.values(this.tempInfo.options)
+					array.push(this.date)
+					this.quitFeedBack(...array)
 				}
 			},
 			// 提交面试反馈
@@ -250,6 +296,60 @@
 				const that = this
 				processModel.interviewFeedback(id,status,time).then(res=>{
 					uni.hideLoading()
+					that.$refs.selectDate.close()
+					const { code, message, data } = res.data
+					if(code === '0'){
+						// 这里做后续处理
+						that.getProcessList()
+					}else{
+						uni.showToast({
+							icon: 'none',
+							title: message
+						})
+					}
+				}).catch(err=>{
+					uni.hideLoading()
+					uni.showToast({
+						icon: 'none',
+						title: '提交失败'
+					})
+				})
+			},
+			// 提交入职反馈
+			entryFeedback(id,status,time){
+				uni.showLoading({
+					mask: true
+				})
+				const that = this
+				processModel.entryFeedBack(id,status,time).then(res=>{
+					uni.hideLoading()
+					that.$refs.selectDate.close()
+					const { code, message, data } = res.data
+					if(code === '0'){
+						// 这里做后续处理
+						that.getProcessList()
+					}else{
+						uni.showToast({
+							icon: 'none',
+							title: message
+						})
+					}
+				}).catch(err=>{
+					uni.hideLoading()
+					uni.showToast({
+						icon: 'none',
+						title: '提交失败'
+					})
+				})
+			},
+			quitFeedBack(id,time){
+				uni.showLoading({
+					mask: true
+				})
+				const that = this
+				processModel.quitFeedBack(id,time).then(res=>{
+					uni.hideLoading()
+					that.$refs.selectDate.close()
 					const { code, message, data } = res.data
 					if(code === '0'){
 						// 这里做后续处理
@@ -317,17 +417,12 @@
 				uni.showLoading({
 					title: '请稍等...'
 				})
+				const that = this
 				processModel.isKnow(item.id).then(res=>{
 					uni.hideLoading()
 					const { code, message, data } = res.data
 					if(code === '0'){
-						this.processData.total += 1
-						this.processData.list.push({
-							create_time: new Date(),
-							process_content: '已知晓, 谢谢',
-							sort_number: item.sort_number + 1,
-							owner: item.owner == 1? 0:1
-						})
+						that.getProcessList()
 					}else{
 						uni.showToast({
 							icon: 'none',
@@ -357,13 +452,7 @@
 					that.$refs.inputDialog.close()
 					const { code, message, data } = res.data
 					if(code === '0'){
-						this.processData.total += 1
-						this.processData.list.push({
-							create_time: new Date(),
-							process_content: that.inputContent,
-							sort_number: item.sort_number + 1,
-							owner: item.owner == 1? 0:1
-						})
+						that.getProcessList()
 					}else{
 						uni.showToast({
 							icon: 'none',
@@ -498,7 +587,8 @@
 		.text{
 			box-sizing: border-box;
 			padding: 24upx 30upx;
-			font-size: 20upx;	
+			font-size: 20upx;
+				min-height: 88upx;
 		}
 		
 	}

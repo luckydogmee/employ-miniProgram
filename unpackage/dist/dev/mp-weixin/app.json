@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/customer/main/main",
     "pages/seller/main/main",
+    "pages/customer/main/main",
     "pages/public/PostDetail/PostDetail",
     "pages/user/login/login",
     "pages/customer/project/project",
@@ -22,6 +22,5 @@
     "navigationBarBackgroundColor": "#e28f64",
     "backgroundColor": "#fbf9fe"
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap10.json"
+  "usingComponents": {}
 }

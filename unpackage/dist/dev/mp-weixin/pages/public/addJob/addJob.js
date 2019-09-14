@@ -270,6 +270,9 @@ var jobModel = new _job.default();var _default =
     },
     workExperienceText: function workExperienceText() {
       return this.workExperienceArray[this.job.workExperience] || '';
+    },
+    overtimeText: function overtimeText() {
+      return this.overtimeArray[this.job.overtime] || '';
     } },
 
   methods: {
@@ -295,7 +298,7 @@ var jobModel = new _job.default();var _default =
       this.job.probation = value;
     },
     trialTimeChanged: function trialTimeChanged(e) {
-      this.job.trialTime = e.target.value;
+      this.job.trialTime = this.trialTimeArray[e.target.value];
     },
     trialSalaryChanged: function trialSalaryChanged(value) {
       this.job.trialSalary = value;

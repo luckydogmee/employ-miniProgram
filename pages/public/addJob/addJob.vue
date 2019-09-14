@@ -77,7 +77,7 @@
 			</view>
 			<InputCell label="可面试时间" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="job.interviewTime" maxLength="20" placeholder="请输入时间" @on-input="interviewTimeChanged"></InputCell>
 			<InputCell label="拟悬赏金额" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="job.reward" placeholder="请输入金额(建议300元以上)" @on-input="rewardChanged" @on-blur="showNotice"></InputCell>
-			<InputCell label="过保时间" :required="isEdit" :disabled="true" :isSell="true" :withPlugin="true" :hasSlot="true" :content="job.overtime" placeholder="点击选择>">
+			<InputCell label="过保时间" :required="isEdit" :disabled="true" :isSell="true" :withPlugin="true" :hasSlot="true" :content="overtimeText" placeholder="点击选择>">
 				<picker
 					@change="overtimeChanged"
 					class="picker"
@@ -163,6 +163,9 @@
 			},
 			workExperienceText(){
 				return this.workExperienceArray[this.job.workExperience] || ''
+			},
+			overtimeText(){
+				return this.overtimeArray[this.job.overtime] || ''
 			}
 		},
 		methods:{
@@ -188,7 +191,7 @@
 				this.job.probation = value
 			},
 			trialTimeChanged(e){
-				this.job.trialTime = e.target.value
+				this.job.trialTime = this.trialTimeArray[e.target.value] 
 			},
 			trialSalaryChanged(value){
 				this.job.trialSalary = value
