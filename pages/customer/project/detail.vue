@@ -30,14 +30,7 @@
 	export default {
 		data() {
 			return {
-				receviedList: [
-					{
-						type: 'finish'
-					},
-					{
-						type: 'fail'
-					}
-				],
+				receviedList: [],
 				type: 'continue',
 				jobId:'',
 				keyWord:''

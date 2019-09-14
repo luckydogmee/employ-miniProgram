@@ -34,7 +34,7 @@
 				</Cell>
 				<Cell title="悬赏信息" :subTitle="jobInfo.reward+'元/人'" />
 				<Cell title="面试时间" :content="jobInfo.interviewTime" />
-				<Cell title="过保时间" :subTitle="jobInfo.overtime+'天'" />
+				<Cell title="过保时间" :subTitle="jobInfo.overtime|filterOverTime" />
 			</view>	
 		</view>
 		<view class="detail-footer" v-if="loginType === 'B'">
@@ -96,7 +96,12 @@
 				if(data.probation === 0){
 					return '无试用期'
 				}
-				return `时间：${data.trialTime|| ' '} | 薪资: ${data.trialSalary|| ' '}`
+				const trialTime = data.trialTime == 0 ? '一个月' : data.trialTime == 1 ? '两个月' : '三个月'
+				return `时间：${trialTime} | 薪资: ${data.trialSalary|| ' '}`
+			},
+			filterOverTime(time){
+				const overtime = time == 0 ? '7天' : time == 1 ? '15天' : '30天'
+				return `${overtime}`
 			}
 		},
 		computed: {

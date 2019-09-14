@@ -75,11 +75,14 @@ var render = function() {
   var _c = _vm._self._c || _h
   var f0 = _vm._f("filterProbation")(_vm.jobInfo)
 
+  var f1 = _vm._f("filterOverTime")(_vm.jobInfo.overtime)
+
   _vm.$mp.data = Object.assign(
     {},
     {
       $root: {
-        f0: f0
+        f0: f0,
+        f1: f1
       }
     }
   )
@@ -213,7 +216,12 @@ var jobModel = new _job.default();var _default =
       if (data.probation === 0) {
         return '无试用期';
       }
-      return "\u65F6\u95F4\uFF1A".concat(data.trialTime || ' ', " | \u85AA\u8D44: ").concat(data.trialSalary || ' ');
+      var trialTime = data.trialTime == 0 ? '一个月' : data.trialTime == 1 ? '两个月' : '三个月';
+      return "\u65F6\u95F4\uFF1A".concat(trialTime, " | \u85AA\u8D44: ").concat(data.trialSalary || ' ');
+    },
+    filterOverTime: function filterOverTime(time) {
+      var overtime = time == 0 ? '7天' : time == 1 ? '15天' : '30天';
+      return "".concat(overtime);
     } },
 
   computed: {

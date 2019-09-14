@@ -16,7 +16,7 @@
 			</view>
 		</view>
 		<view class="button-group">
-			<view class="button-item navigate" @click="cashoutList">
+			<view class="button-item navigate" @click="getCashoutList">
 				申请提现
 			</view>
 			<view class="button-item switch-account">
@@ -115,8 +115,13 @@
 			},
 			switchItem(index){
 				this.dialogActive = index
+				if(this.dialogActive == 0){
+					this.getCashoutList()
+				}else{
+					this.getCashoutRecord()
+				}
 			},
-			cashoutList(){
+			getCashoutList(){
 				this.$refs.recommendRecord.open()
 				uni.showLoading({
 					title: '加载中...'
@@ -183,6 +188,32 @@
 						title: '当前没有可提现'
 					})
 				}
+			},
+			// 这是提现记录，需要改地址
+			getCashoutRecord(){
+				uni.showLoading({
+					title: '正在获取...'
+				})
+				this.cashoutList = []
+				userModel.getCashoutList().then(res=>{
+					uni.hideLoading()
+					const {code, message, data } = res.data
+					if(code === '0'){
+						this.cashoutList = data.list
+						this.$refs.recommendRecord.open()
+					}else{
+						uni.showToast({
+							icon: 'none',
+							title: message
+						})
+					}
+				}).catch(err=>{
+					uni.hideLoading()
+					uni.showToast({
+						icon: 'none',
+						title: '获取提现记录失败'
+					})
+				})
 			}
 		}
 	}

@@ -137,14 +137,7 @@ var resumeModel = new _resume.default();var _default =
 {
   data: function data() {
     return {
-      receviedList: [
-      {
-        type: 'finish' },
-
-      {
-        type: 'fail' }],
-
-
+      receviedList: [],
       type: 'continue',
       jobId: '',
       keyWord: '' };

@@ -21,7 +21,7 @@
 						{{postData.reward}}元/人
 					</view>
 					<view class="operation-pay-time">
-						{{postData.trialTime}}返费
+						{{postData.overtime|filterOverTime}}返费
 					</view>
 				</view>				
 			</view>
@@ -50,6 +50,12 @@
 			btnText: {
 				type: String,
 				default: '接单'
+			}
+		},
+		filters:{
+			filterOverTime(time){
+				const overtime = time == 0 ? '7天' : time == 1 ? '15天' : '30天'
+				return `${overtime}`
 			}
 		},
 		methods:{

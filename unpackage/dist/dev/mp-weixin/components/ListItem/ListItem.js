@@ -73,6 +73,16 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var f0 = _vm._f("filterOverTime")(_vm.postData.overtime)
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        f0: f0
+      }
+    }
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -158,6 +168,12 @@ var _default2 =
       type: String,
       default: '接单' } },
 
+
+  filters: {
+    filterOverTime: function filterOverTime(time) {
+      var overtime = time == 0 ? '7天' : time == 1 ? '15天' : '30天';
+      return "".concat(overtime);
+    } },
 
   methods: {
     showDetail: function showDetail() {

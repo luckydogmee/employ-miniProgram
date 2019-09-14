@@ -222,8 +222,13 @@ var userModel = new _user.default();var _default =
     },
     switchItem: function switchItem(index) {
       this.dialogActive = index;
+      if (this.dialogActive == 0) {
+        this.getCashoutList();
+      } else {
+        this.getCashoutRecord();
+      }
     },
-    cashoutList: function cashoutList() {var _this2 = this;
+    getCashoutList: function getCashoutList() {var _this2 = this;
       this.$refs.recommendRecord.open();
       uni.showLoading({
         title: '加载中...' });
@@ -290,6 +295,32 @@ var userModel = new _user.default();var _default =
           title: '当前没有可提现' });
 
       }
+    },
+    // 这是提现记录，需要改地址
+    getCashoutRecord: function getCashoutRecord() {var _this4 = this;
+      uni.showLoading({
+        title: '正在获取...' });
+
+      this.cashoutList = [];
+      userModel.getCashoutList().then(function (res) {
+        uni.hideLoading();var _res$data4 =
+        res.data,code = _res$data4.code,message = _res$data4.message,data = _res$data4.data;
+        if (code === '0') {
+          _this4.cashoutList = data.list;
+          _this4.$refs.recommendRecord.open();
+        } else {
+          uni.showToast({
+            icon: 'none',
+            title: message });
+
+        }
+      }).catch(function (err) {
+        uni.hideLoading();
+        uni.showToast({
+          icon: 'none',
+          title: '获取提现记录失败' });
+
+      });
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

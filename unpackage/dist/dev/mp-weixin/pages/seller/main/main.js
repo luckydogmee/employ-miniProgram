@@ -151,7 +151,7 @@ var _choose = _interopRequireDefault(__webpack_require__(/*! ../choose/choose.vu
     if (this.tabIndex === 0) {
       this.$refs.home.refresh();
     }
-    if (this.tabIndex === 0) {
+    if (this.tabIndex === 1) {
       this.$refs.choose.refresh();
     }
   },

@@ -3,7 +3,7 @@
 		<view class="customer-wrapper">
 			<Home v-if="currentTab === 'Home'" ref="home" />
 			<Choose v-if="currentTab === 'Choose'" ref="choose" />
-			<User v-if="currentTab === 'User'" res="user" />	
+			<User v-if="currentTab === 'User'" ref="user" />	
 		</view>
 		<TabBar type="seller" @switchTab="switchTabBar" :index="tabIndex" />
 	</view>
@@ -37,7 +37,7 @@
 			if(this.tabIndex === 0){
 				this.$refs.home.refresh()
 			}	
-			if(this.tabIndex === 0){
+			if(this.tabIndex === 1){
 				this.$refs.choose.refresh()
 			}
 		},

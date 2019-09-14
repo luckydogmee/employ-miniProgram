@@ -1,7 +1,7 @@
 <template>
 	<view class="user-item">
 		<view class="user-avatar">
-			<image src="../../static/img/avatar.png" mode=""></image>
+			<image src="../../static/img/avatar-man.png" mode=""></image>
 		</view>
 		<view class="user-info">
 			<view class="user-info-name">
