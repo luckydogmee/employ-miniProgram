@@ -5,7 +5,7 @@
 			<Project v-if="currentTab === 'Project'" ref="project" @showLogin="showLogin" @hideLogin="hideLogin" />
 			<Resume v-if="currentTab === 'Resume'" ref="resume" @showLogin="showLogin" @hideLogin="hideLogin" />
 			<User v-if="currentTab === 'User'" @showLogin="showLogin" @hideLogin="hideLogin" />
-			<TabBar @switchTab="switchTabBar" :index="tabIndex" @showLogin="showLogin" @hideLogin="hideLogin"  />
+			<TabBar @switchTab="switchTabBar" :index="tabIndex" @showLogin="showLogin" @completeInfo="completeInfo" @hideLogin="hideLogin"  />
 			<uni-popup ref="noticeLogin" custom="true">
 				<view class="notice-login-dialog">
 					<view class="notice-title">
@@ -48,22 +48,21 @@
 			// 第一次进入的时候
 			const that = this
 			const token = uni.getStorageSync('token')
-			// uni.checkSession({
-			// 	success(res) {
-			// 		console.log(res)
-			// 		if(token){
-			// 			// 当前用户登录未过期，用原来的token即可
-			// 			that.hasToken = true
-			// 		}else{
-			// 			that.login()
-			// 		}
-			// 	},
-			// 	fail(err) {
-			// 		that.login()
-			// 	}
-			// })	
+			uni.checkSession({
+				success(res) {
+					if(token){
+						// 当前用户登录未过期，用原来的token即可
+						that.hasToken = true
+					}else{
+						that.login()
+					}
+				},
+				fail(err) {
+					that.login()
+				}
+			})	
 			// 直接login，避免麻烦
-			this.login()
+			// this.login()
 		},
 		onPullDownRefresh(){
 			if(this.tabIndex === 0){
@@ -115,6 +114,7 @@
 									uni.setStorageSync('token', data.token)
 									uni.setStorageSync('isLogin',data.isLogin)
 									uni.setStorageSync('isRegister',data.isRegister)
+									uni.setStorageSync('loginType','')
 									uni.hideLoading()
 									that.hasToken = true
 								}else{
@@ -142,6 +142,11 @@
 			},
 			hideLogin(){
 				this.$refs.noticeLogin.close()
+			},
+			completeInfo(){
+				uni.navigateTo({
+					url: '../../user/inputInfo/inputInfo'
+				});
 			},
 			getPhoneNumber(e){
 				const { iv, encryptedData, errMsg } = e.detail

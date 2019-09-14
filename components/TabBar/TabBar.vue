@@ -68,9 +68,16 @@
 			switchTab(index){
 				const token = uni.getStorageSync('token')
 				const isLogin = uni.getStorageSync('isLogin')
+				const isRegister = uni.getStorageSync('isRegister')
 				if(index !== 0){
 					if(!token || isLogin !== 0 ){
 						this.$emit('showLogin')
+						return 
+					}
+				}
+				if(index === 3){
+					if(isRegister !== 0 ){
+						this.$emit('completeInfo')
 						return 
 					}
 				}

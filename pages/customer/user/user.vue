@@ -23,12 +23,37 @@
 				切换帐号
 			</view>
 		</view>
+		<uni-popup ref="recommendRecord" custom="true" :showMask="false" :maskClick="false">
+			<view class="recommendDialog">
+				<view class="recommend-title">
+					推荐记录
+				</view>
+				<view class="recommend-table">
+					<view class="tr">
+						<view class="th t1"><text>岗位</text><image src="../../../static/icon/dialog-post.png" mode=""></image></view>
+						<view class="th t2"><text>姓名</text><image src="../../../static/icon/dialog-name.png" mode=""></image></view>
+						<view class="th t3"><text>赏金</text><image src="../../../static/icon/dialog-reward.png" mode=""></image></view>
+						<view class="th t4"><text>过保时间</text><image src="../../../static/icon/dialog-time.png" mode=""></image></view>
+					</view>
+					<view class="scroll">
+						<view class="tr " v-for="item in recommendRecord" :key="item.id">
+							<view class="td t1">{{item.time}}</view>
+							<view class="td t2">{{item.jobName}}</view>
+							<view class="td t3">{{item.storeName}}</view>
+							<view class="td t4">{{item.statusContent}}</view>
+						</view>	
+					</view>
+				</view>
+				<image class="close-icon" src="../../../static/icon/close.png" @click="closeRecommendDialog" />
+			</view>
+		</uni-popup>
 	</view>
 </template>
 
 <script>
 	import UserItem from '../../../components/UserItem/UserItem.vue'
 	import UserModel from '@/models/user.js'
+	import uniPopup from "@/components/uni-popup/uni-popup.vue"
 	const userModel = new UserModel()
 	export default {
 		data() {
@@ -41,6 +66,7 @@
 		},
 		components: {
 			UserItem,
+			uniPopup
 		},
 		// onLoad(){
 		// 	this.getUserInfo()
@@ -70,8 +96,21 @@
 				})
 			},
 			cashoutList(){
-				userModel.cashout().then(res=>{
-					console.log(res)
+				uni.showLoading({
+					title: '加载中...'
+				})
+				userModel.getCashoutList().then(res=>{
+					uni.hideLoading()
+					const {code, message, data } = res.data
+					if(code === '0'){
+						this.$refs.recommendRecord.open()
+					}
+				}).catch(err=>{
+					uni.hideLoading()
+					uni.showToast({
+						icon: 'none',
+						title: '获取提现信息失败'
+					})
 				})
 			}
 		}
@@ -114,6 +153,62 @@
 		}
 		.navigate{
 			margin-bottom: 26upx;
+		}
+	}
+	.recommend-title{
+		font-size: 36upx;
+		width: 100%;
+		text-align: center;
+		color: #ff9058;
+		margin-top: 30upx;
+	}
+	.recommend-table{
+		width: 668upx;
+		margin: 30upx auto;
+		border-top: 1upx solid #FFFFFF;
+		border-left: 1upx solid #FFFFFF;
+		.tr{
+			border-bottom: 1upx solid #FFFFFF;
+			display: flex;
+			align-items: center;
+		}
+		.scroll{
+			overflow: auto;
+			max-height: 350upx;
+		}
+		.th,.td{
+			box-sizing: border-box;
+			border-right: 1upx solid #FFFFFF;
+			text-align: center;
+			color: #FFFFFF;
+			width: 167upx;
+		}
+		.th{
+			height: 60upx;
+			line-height: 60upx;
+			font-size: 24upx;	
+			font-weight: 600;
+			background: #f2a184;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text{
+				
+			}
+			image{
+				height: 28upx;
+				width: 28upx;
+				margin-left: 10upx;
+			}
+		}
+		.td{
+			height: 76upx;
+			font-size: 18upx;
+			padding-top: 20upx;
+			background: #bb836d;
+			&.t3{
+				padding: 20upx 16upx;
+			}
 		}
 	}
 </style>
