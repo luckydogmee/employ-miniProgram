@@ -57,6 +57,7 @@
 		methods:{
 			...mapMutations(['switchTab']),
 			switchTabBar(type){
+				console.log(type)
 				this.switchTab({index:type})
 			},
 		}

@@ -154,7 +154,7 @@
 					}else {
 						uni.showToast({
 							icon: 'none',
-							title: res.message
+							title: message
 						})
 					}
 				}).catch(err=>{

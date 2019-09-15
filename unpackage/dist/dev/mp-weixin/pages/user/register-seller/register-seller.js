@@ -170,10 +170,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _user = _interopRequireDefault(__webpack_require__(/*! @/models/user.js */ 62));
+var _user = _interopRequireDefault(__webpack_require__(/*! @/models/user.js */ 42));
 var _store = _interopRequireDefault(__webpack_require__(/*! @/models/store.js */ 112));
-var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 47));
-var _config = __webpack_require__(/*! ../../../config.js */ 33);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var InputCell = function InputCell() {return __webpack_require__.e(/*! import() | components/InputCell/InputCell */ "components/InputCell/InputCell").then(__webpack_require__.bind(null, /*! @/components/InputCell/InputCell.vue */ 223));};var UploadItem = function UploadItem() {return __webpack_require__.e(/*! import() | components/UploadItem/UploadItem */ "components/UploadItem/UploadItem").then(__webpack_require__.bind(null, /*! @/components/UploadItem/UploadItem.vue */ 230));};
+var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 24));
+var _config = __webpack_require__(/*! ../../../config.js */ 26);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var InputCell = function InputCell() {return __webpack_require__.e(/*! import() | components/InputCell/InputCell */ "components/InputCell/InputCell").then(__webpack_require__.bind(null, /*! @/components/InputCell/InputCell.vue */ 223));};var UploadItem = function UploadItem() {return __webpack_require__.e(/*! import() | components/UploadItem/UploadItem */ "components/UploadItem/UploadItem").then(__webpack_require__.bind(null, /*! @/components/UploadItem/UploadItem.vue */ 230));};
 var userModel = new _user.default();
 var storeModel = new _store.default();
 var jobModel = new _job.default();var _default =
@@ -340,6 +340,8 @@ var jobModel = new _job.default();var _default =
         res.data,code = _res$data3.code,message = _res$data3.message,data = _res$data3.data;
         if (code === '0') {
           uni.setStorageSync('token', data.token);
+          uni.setStorageSync('loginType', 'B');
+          uni.setStorageSync('isLogin', 0);
           that.saveStore();
         } else {
           uni.hideLoading();
@@ -364,17 +366,18 @@ var jobModel = new _job.default();var _default =
         if (code === '0') {
           uni.hideLoading();
           if (!_this3.resume.id) {
-            uni.showToast({
-              title: '注册成功' });
-
-            uni.setStorageSync('token', data.token);
-            uni.setStorageSync('loginType', 'B');
             that.hasToken = true;
-            setTimeout(function () {
-              uni.reLaunch({
-                url: '../../seller/main/main' });
+            uni.showModal({
+              title: '',
+              content: '注册成功!',
+              showCancel: false,
+              confirmText: '去企业端',
+              success: function success(res) {
+                uni.reLaunch({
+                  url: '../../seller/main/main' });
 
-            }, 2000);
+              } });
+
           } else {
             uni.showToast({
               title: '修改成功' });

@@ -233,6 +233,8 @@
 					const { code, message, data } = res.data
 					if(code === '0'){
 						uni.setStorageSync('token',data.token)
+						uni.setStorageSync('loginType','B')
+						uni.setStorageSync('isLogin',0)
 						that.saveStore()
 					}else {
 						uni.hideLoading()
@@ -257,17 +259,18 @@
 					if(code === '0'){
 						uni.hideLoading()
 						if(!this.resume.id){
-							uni.showToast({
-								title: '注册成功'
-							})
-							uni.setStorageSync('token', data.token)
-							uni.setStorageSync('loginType','B')
 							that.hasToken = true
-							setTimeout(()=>{
-								uni.reLaunch({
-									url: '../../seller/main/main'
-								})	
-							},2000)	
+							uni.showModal({
+								title: '',
+								content: '注册成功!',
+								showCancel: false,
+								confirmText: '去企业端',
+								success: res => {
+									uni.reLaunch({
+										url: '../../seller/main/main',
+									})		
+								},
+							})
 						}else{
 							uni.showToast({
 								title: '修改成功'

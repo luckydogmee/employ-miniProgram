@@ -177,13 +177,13 @@ var _default =
       var isLogin = uni.getStorageSync('isLogin');
       var isRegister = uni.getStorageSync('isRegister');
       if (index !== 0) {
-        if (!token || isLogin !== 0) {
+        if (!token || isLogin != 0) {
           this.$emit('showLogin');
           return;
         }
       }
       if (index === 3) {
-        if (isRegister !== 0) {
+        if (isRegister != 0) {
           this.$emit('completeInfo');
           return;
         }

@@ -45,10 +45,10 @@
 					</view>
 					<view class="scroll">
 						<view class="tr " v-for="item in cashoutList" :key="item.id">
-							<view class="td t1">{{item.time}}</view>
-							<view class="td t2">{{item.jobName}}</view>
-							<view class="td t3">{{item.storeName}}</view>
-							<view class="td t4">{{item.statusContent}}</view>
+							<view class="td t1">{{item.jobName}}</view>
+							<view class="td t2">{{item.name}}</view>
+							<view class="td t3">{{item.reward}}</view>
+							<view class="td t4">{{item.cashoutTime}}</view>
 						</view>	
 					</view>
 				</view>
@@ -122,7 +122,6 @@
 				}
 			},
 			getCashoutList(){
-				this.$refs.recommendRecord.open()
 				uni.showLoading({
 					title: '加载中...'
 				})
