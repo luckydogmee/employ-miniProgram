@@ -7,20 +7,19 @@
 		// 	}
 		// },
 		{
-		    "path": "pages/seller/main/main",
-		    "style": {
-		        "navigationBarTitleText": "街聘",
-				"enablePullDownRefresh": true
-		    }
-		},
-		{
 		    "path": "pages/customer/main/main",
 		    "style": {
 		        "navigationBarTitleText": "街聘",
 				"enablePullDownRefresh": true
 		    }
 		},
-		
+		{
+		    "path": "pages/seller/main/main",
+		    "style": {
+		        "navigationBarTitleText": "街聘",
+				"enablePullDownRefresh": true
+		    }
+		},
 		{
 			"path" : "pages/public/PostDetail/PostDetail",
 			"style" : {
