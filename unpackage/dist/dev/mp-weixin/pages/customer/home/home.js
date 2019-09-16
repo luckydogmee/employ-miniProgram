@@ -235,10 +235,6 @@ var postModel = new _job.default();var _default =
             uni.navigateTo({
               url: '../../public/PostDetail/PostDetail?id=' + id });
 
-          } else if (token && isLogin === 0) {
-            uni.navigateTo({
-              url: '../../user/inputInfo/inputInfo' });
-
           } else {
             that.selectLoginType();
           }

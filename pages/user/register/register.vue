@@ -5,27 +5,60 @@
 				<image src="../../../static/img/logo.png" mode=""></image>
 			</view>
 			<view class="form">
-				<view class="form-item">
+				<view class="add-avatar">
+					<view class="avatar old-avatar">
+						<image :src="avatar" mode="" @click="chooseImage"></image>
+					</view>
+				</view>
+				<view class="form-item form-input">
+					<view class="sy-label">
+						您的姓名
+					</view>
 					<input class="sy-input" :focus="focusArray[focusIndex] === 'name'" 
-							v-model="name" maxlength="6" placeholder="您的姓名" placeholder-class="input-placeholder"
+							v-model="name" maxlength="6"
 							@blur="handleBlur(0)" />	
 				</view>
-				<view class="form-item">
+				<view class="form-item form-input">
+					<view class="sy-label">
+						您的年龄
+					</view>
 					<input class="sy-input" :focus="focusArray[focusIndex]==='age'" 
-							v-model="age" maxlength="3" placeholder="您的年龄" placeholder-class="input-placeholder" 
+							v-model="age" maxlength="3"
 							@blur="handleBlur(1)" />
 				</view>
-				<view class="form-item">
-					<input class="sy-input" :focus="focusArray[focusIndex] === 'phone'" 
-							v-model="phone" maxlength="15" placeholder="您的电话号码" placeholder-class="input-placeholder" 
-							@blur="handleBlur(2)" />
+				<view class="form-item form-input">
+					<view class="sy-label">
+						您的性别
+					</view>
+					<view class="gender">
+						<radio-group @change="radioChange">
+							<label class="radio"><radio value="0" checked="checked" color="#ff8352" style="transform:scale(0.7)" />男</label>
+							<label class="radio"><radio value="1" color="#ff8352" style="transform:scale(0.7)" />女</label>
+						</radio-group>	
+					</view>
+					<!-- <picker
+						@change="genderChange"
+						class="picker"
+						:range="genderArray"
+						:value="gender"
+					>
+						<view class="select">nan</view>
+					</picker> -->
 				</view>
-				<view class="form-item verfiy-item">
+				<view class="form-item form-input">
+					<view class="sy-label">
+						手机号
+					</view>
+					<input class="sy-input" :focus="focusArray[focusIndex] === 'phone'" 
+							v-model="phone" maxlength="15"
+							@blur="handleBlur(3)" />
+				</view>
+				<view class="form-item form-input verfiy-item">
 					<input class="sy-input"  :focus="focusArray[focusIndex] === 'verify'" 
 							v-model="verifyCode" maxlength="6" placeholder="短信验证码" placeholder-class="input-placeholder" 
-							@blur="handleBlur(3)" />
+							@blur="handleBlur(4)" />
 					<button class="default-btn verify-code-btn" :class="{'disabled':!readySendCode} " 
-						@click="sendVerifyCode">{{readySendCode ? '发送验证码' : surplusSecond + ' 秒后重新发送' }}</button>
+						@click="sendVerifyCode">{{readySendCode ? '发送验证码' : surplusSecond + ' 秒' }}</button>
 				</view>
 				<view class="agreement">
 					<checkbox-group @change="agreementChange">
@@ -64,13 +97,17 @@
 				surplusSecond: 0, // 还剩多少秒可以重发
 				readySendCode: true,  // 是否准备好发送验证码
 				verifyCodeTimer: null, //定时器对象
-				focusArray: ['name', 'age', 'phone', 'verify'],
+				focusArray: ['name', 'age', 'gender', 'phone', 'verify'],
 				focusIndex: null,  //焦点位置
 				agreement:false, // 是否同意用户协议
+				uploadedAvatar: '',
+				avatarChanged: false,
 				name: '',
 				age: '',
+				gender: 0,
 				phone: '',
 				verifyCode: '',
+				genderArray:['男', '女'],
 			};
 		},
 		beforeDestroy() {
@@ -80,6 +117,22 @@
 		components:{
 			uniPopup
 		},
+		computed:{
+			genderText(){
+				return this.genderArray[this.gender]
+			},
+			avatar(){
+				if(this.avatarChanged){
+					return this.uploadedAvatar
+				}else{
+					if(this.gender == 0){
+						return '../../../static/img/avatar-man.png'
+					}else{
+						return '../../static/img/avatar-women.png'
+					}
+				}
+			}
+		},
 		methods:{
 			agreementChange(){
 				this.agreement = !this.agreement
@@ -87,15 +140,65 @@
 			},
 			handleBlur(index){
 				let focusArray = this.focusArray
-				if(index != focusArray.length - 1 ){
-					if(!this[focusArray[index + 1]]){
-						this.focusIndex = index + 1
-						return
+				// if(index != focusArray.length - 1 ){
+				// 	if(!this[focusArray[index + 1]]){
+				// 		this.focusIndex = index + 1
+				// 		return
+				// 	}
+				// 	this.focusIndex = null
+				// 	return
+				// }
+				// this.focusIndex = null	
+			},
+			chooseImage(){
+				const that = this
+				uni.chooseImage({
+					count:1,
+					sizeType: 'compressed',
+					sourceType: ['album', 'camera'],
+					success: (res) => {
+						that.avatar = res.tempFilePaths[0]
+						that.getImageWebUrl(res.tempFilePaths[0])
 					}
-					this.focusIndex = null
-					return
-				}
-				this.focusIndex = null	
+				})
+			},
+			getImageWebUrl(path){
+				const that = this
+				uni.showLoading({
+					title: '上传中，请稍候...'
+				})
+				uni.uploadFile({
+					// 这里修改上传地址
+					url: config.base_url + '/store/getImageWebUrl',
+					filePath: path,
+					name: 'file',
+					success(res){
+						uni.hideLoading()
+						let response = res.data
+						if(typeof response === 'string'){
+							response = JSON.parse(response)
+						}
+						const { code, message, data } = response
+						if(code === '0'){
+							uni.showToast({
+								title: '上传成功'
+							})
+							that.avatarChanged = true
+							that.uploadedAvatar = data.url
+						}else{
+							uni.showToast({
+								icon:'none',
+								title: message
+							})
+						}
+					},
+					fail: res=>{
+						uni.showToast({
+							icon:'none',
+							title: '上传失败，请稍候再试'
+						})
+					}
+				})
 			},
 			sendVerifyCode(){
 				if(!this.readySendCode){
@@ -106,7 +209,7 @@
 						icon:'none',
 						title:'请输入电话号码'
 					})
-					this.focusIndex = 2
+					// this.focusIndex = 3
 					return
 				}
 				
@@ -116,27 +219,33 @@
 						icon:'none',
 						title:'手机号码错误，请确认'
 					})
-					this.focusIndex = 2
+					// this.focusIndex = 3
 					return
 				} 
+				uni.showLoading({
+					mask: true
+				})
 				userModel.getVerifyCode(this.phone, 'A').then(res=>{
 					// 请求成功,并判断code是否正确
+					uni.hideLoading()
 					const { code, message, data } = res.data 
 					if(code === '0'){
 						uni.showToast({
-							title: '验证码已发送，请注意查收'
+							title: '已发送'
 						})
-						this.surplusSecond = 120
-						this.focusIndex = 3
+						this.surplusSecond = 60
+						// this.focusIndex = 4
 						this.verifyCodeTimer = setInterval(()=>{
 							if(this.surplusSecond > 0){
 								this.surplusSecond -= 1
+								this.readySendCode = false
 							}else{
 								this.surplusSecond = 0
+								this.readySendCode = true
 								clearInterval(this.verifyCodeTimer)
 							}
 						}, 1000)
-						this.focusIndex = 3	
+						// this.focusIndex = 4	
 					}else{
 						uni.showToast({
 							icon:'none',
@@ -158,7 +267,7 @@
 						title:'请输入姓名'
 					})
 					this.$nextTick(()=>{
-						this.focusIndex = 0
+						// this.focusIndex = 0
 					})
 					return
 				}
@@ -168,7 +277,7 @@
 						title:'请输入年龄'
 					})
 					this.$nextTick(()=>{
-						this.focusIndex = 1
+						// this.focusIndex = 1
 					})
 					return
 				}
@@ -178,7 +287,7 @@
 						title:'请输入电话号码'
 					})
 					this.$nextTick(()=>{
-						this.focusIndex = 2
+						// this.focusIndex = 3
 					})
 					return
 				}
@@ -188,7 +297,7 @@
 						title:'请输入验证码'
 					})
 					this.$nextTick(()=>{
-						this.focusIndex = 3
+						// this.focusIndex = 4
 					})
 					return
 				}
@@ -199,28 +308,47 @@
 					})
 					return
 				}
-				
+				uni.showLoading({
+					mask: true
+				})
 				// 再去验证验证码是否正确
 				userModel.verifyCode(this.phone, this.verifyCode).then(res=>{
 					// 执行真正的登录
-					return userModel.register(this.name, this.age, this.phone)
+					const avatar = this.avatarChanged ? this.avatar : ''
+					return userModel.register(this.name, this.age, this.phone,this.gender, avatar)
 					
 				}).then(res=>{
 					// 注册成功
 					if(res.code === '0'){
+						uni.hideLoading()
 						this.$refs.registerSuccess.open()
 						setTimeout(()=>{
 							uni.reLaunch({
 								url: '../../customer/main/main'
 							})
 						},2000)	
+					}else{
+						uni.hideLoading()
+						uni.showToast({
+							icon: 'none',
+							title: '注册失败'
+						})
 					}
+				}).catch(err=>{
+					uni.hideLoading()
+					uni.showToast({
+						icon: 'none',
+						title: '注册失败'
+					})
 				})
 			},
 			toLogin(){
 				uni.reLaunch({
 					url: '../login/login'
 				})
+			},
+			radioChange(e){
+				this.gender = e.detail.value
 			}
 		}
 	}
@@ -254,8 +382,20 @@
 			margin-top: 64upx;
 			width: 100%;
 			.form-item{
-				margin-top: 38upx;
+				margin-top: 28upx;
 				position: relative;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				align-items: center;
+				.sy-label{
+					font-size: 28upx;
+					font-weight: 600;
+					color: #989696;
+					height: 60upx;
+					line-height: 60upx;
+					vertical-align: bottom;
+				}
 			}
 			.to-login{
 				color: #feae86;
@@ -323,6 +463,29 @@
 			margin-bottom: 24upx;
 			width: 100%;
 			display: block;
+		}
+	}
+	.picker{
+		width: 372upx;
+		height: 60upx;
+		
+	}
+	.radio{
+		font-size: 28upx;
+		color: #8F8F94;
+		margin: 0 30upx;
+	}
+	.avatar{
+		width: 164upx;
+		text-align: center;
+		margin: 0 auto;
+		image{
+			height: 84upx;
+			width: 84upx;
+			border-radius: 50%;
+		}
+		.text{
+			font-size: 20upx;
 		}
 	}
 </style>

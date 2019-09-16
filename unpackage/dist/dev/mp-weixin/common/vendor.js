@@ -1701,7 +1701,8 @@ StoreModel = /*#__PURE__*/function (_HTTP) {_inherits(StoreModel, _HTTP);
     businessImg,
     companyImg,
     logo,
-    phone)
+    phone,
+    avatar)
     {
       return this.request({
         url: '/store/saveStore',
@@ -1715,7 +1716,8 @@ StoreModel = /*#__PURE__*/function (_HTTP) {_inherits(StoreModel, _HTTP);
           businessImg: businessImg,
           companyImg: companyImg,
           logo: logo,
-          phone: phone } });
+          phone: phone,
+          avatar: avatar } });
 
 
     } }]);return StoreModel;}(_http.HTTP);var _default =
@@ -22480,6 +22482,23 @@ HTTP = /*#__PURE__*/function () {function HTTP() {_classCallCheck(this, HTTP);}_
 
 /***/ }),
 
+/***/ 257:
+/*!*********************************************************************************************!*\
+  !*** E:/workspace/employ-miniProgram/main.js?{"page":"pages%2Fuser%2Fregister%2Fregister"} ***!
+  \*********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+var _register = _interopRequireDefault(__webpack_require__(/*! ./pages/user/register/register.vue */ 258));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_register.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
+
+/***/ }),
+
 /***/ 26:
 /*!*************************************************!*\
   !*** E:/workspace/employ-miniProgram/config.js ***!
@@ -22742,13 +22761,16 @@ UserModel = /*#__PURE__*/function (_HTTP) {_inherits(UserModel, _HTTP);
 
     }
     // 注册
-  }, { key: "register", value: function register(name, age) {
+  }, { key: "register", value: function register(name, age, phone, gender, avatar) {
       return this.request({
         url: '/login/register',
         methods: 'POST',
         data: {
           name: name,
-          age: age } });
+          age: age,
+          phone: phone,
+          gender: gender,
+          avatar: avatar } });
 
 
     }

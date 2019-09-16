@@ -47,11 +47,11 @@
 							时间：
 						</view>
 						<view class="selectDate-content">
-							<picker mode="time" :value="timeStart" @change="bindTimeStartChange">
+							<picker mode="time" :value="timeStart" :start="startTime1" :end="endTime1" @change="bindTimeStartChange">
 								<view class="view time-view">{{timeStart}}</view>
 							</picker>
 							<view class="view-line">-</view>
-							<picker mode="time" :value="timeEnd" @change="bindTimeEndChange">
+							<picker mode="time" :value="timeEnd" :start="startTime2" :end="endTime2" @change="bindTimeEndChange">
 								<view class="view time-view">{{timeEnd}}</view>
 							</picker>
 						</view>
@@ -81,6 +81,7 @@
 	import { mapState, mapMutations } from 'vuex'
 	import uniPopup from "@/components/uni-popup/uni-popup.vue"
 	import ListProject from '@/components/ListProject/ListProject.vue'
+	import { formatDate } from '@/utils/utils.js'
 	import JobModel from '@/models/job.js'
 	import ResumeModel from '@/models/resume.js'
 	const resumeModel = new ResumeModel()
@@ -95,6 +96,11 @@
 				pageSize: 10,
 				hasEnd: false,
 				jobId: '',
+				startDate: '', // 选择日期的开始
+				startTime1: '09:00',
+				startTime2: '09:00',
+				endTime1: '18:00',
+				endTime2: '18:00',
 				date: '',
 				timeStart: '',
 				timeEnd: ''
@@ -197,6 +203,11 @@
 				this.jobId = id
 				if(this.resumeId){
 					this.$refs.selectDate.open()
+					if(Number(formatDate(new Date(),'hh'))>=18){
+						this.startDate = formatDate(new Date(new Date().getTime() + 24*60*60*1000),'yyyy-MM-dd')
+					}else{
+						this.startDate = formatDate(new Date(),'yyyy-MM-dd')
+					}
 				}else{
 					this.switchTab({index:2,jobId:id})
 				}
@@ -232,12 +243,22 @@
 			},
 			bindDateChange(e){
 				this.date = e.target.value
+				if(this.date == formatDate(new Date(),'yyyy-MM-dd')){
+					this.startTime1 = formatDate(new Date(), 'hh:mm')
+				}
 			},
 			bindTimeStartChange(e){
 				this.timeStart = e.target.value
+				this.startTime2 = this.timeStart
+				if( this.timeEnd && this.timeStart && Number(this.timeEnd.split(':')[0]) <  Number(this.timeStart.split(':')[0])){
+					this.timeEnd = this.timeStart
+				}
 			},
 			bindTimeEndChange(e){
 				this.timeEnd = e.target.value
+				if( this.timeEnd && this.timeStart && Number(this.timeEnd.split(':')[0]) <  Number(this.timeStart.split(':')[0])){
+					this.timeEnd = this.timeStart
+				}
 			},
 		}
 	}

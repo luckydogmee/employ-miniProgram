@@ -170,6 +170,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
 var _user = _interopRequireDefault(__webpack_require__(/*! @/models/user.js */ 42));
 var _store = _interopRequireDefault(__webpack_require__(/*! @/models/store.js */ 112));
 var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 24));
@@ -194,6 +199,8 @@ var jobModel = new _job.default();var _default =
         logo: '', // 公司logo
         phone: '' // 电话号码
       },
+      avatarChanged: false,
+      uploadedAvatar: '',
       businessImgChanged: false,
       companyImgChanged: false,
       logoChanged: false,
@@ -202,7 +209,7 @@ var jobModel = new _job.default();var _default =
       verifyText: '发送验证码',
       verifyCode: '',
       cityCodeText: '', // 区域文字
-      citySelected: [], // 已选中的城市
+      citySelected: ['510000', '', ''], // 已选中的城市
       readySendCode: true,
       surplusSecond: 0,
       verifyCodeTimer: null };
@@ -211,6 +218,21 @@ var jobModel = new _job.default();var _default =
   components: {
     InputCell: InputCell,
     UploadItem: UploadItem },
+
+  computed: {
+    avatar: function avatar() {
+      if (this.avatarChanged) {
+        return this.uploadedAvatar;
+      } else {
+        // 并未设置男女
+        return '../../../static/img/avatar-man.png';
+        // if(this.gender == 0){
+        // 	return '../../../static/img/avatar-man.png'
+        // }else{
+        // 	return '../../static/img/avatar-women.png'
+        // }
+      }
+    } },
 
   onLoad: function onLoad(options) {
     if (options.isEdit === 'false') {
@@ -249,6 +271,19 @@ var jobModel = new _job.default();var _default =
       e.detail,code = _e$detail.code,value = _e$detail.value;
       this.resume.cityCode = code.join(',');
       this.cityCodeText = Array.from(new Set(value)).join('');
+    },
+    chooseAvatar: function chooseAvatar() {
+      var that = this;
+      uni.chooseImage({
+        count: 1,
+        sizeType: 'compressed',
+        sourceType: ['album', 'camera'],
+        success: function success(res) {
+          that.resume.avatar = res.tempFilePaths[0];
+          // 这里考虑到可能上传头像地址不同
+          that.uploadAvatar(res.tempFilePaths[0]);
+        } });
+
     },
     chooseBusinessImg: function chooseBusinessImg() {
       var that = this;
@@ -361,6 +396,7 @@ var jobModel = new _job.default();var _default =
     saveStore: function saveStore() {var _this3 = this;
       var that = this;
       var array = Object.values(this.resume);
+      array.push(this.avatar);
       storeModel.saveStore.apply(storeModel, _toConsumableArray(array)).then(function (res) {var _res$data4 =
         res.data,code = _res$data4.code,message = _res$data4.message,data = _res$data4.data;
         if (code === '0') {
@@ -455,6 +491,44 @@ var jobModel = new _job.default();var _default =
 
           }
 
+        },
+        fail: function fail(res) {
+          uni.showToast({
+            icon: 'none',
+            title: '上传失败，请稍候再试' });
+
+        } });
+
+    },
+    uploadAvatar: function uploadAvatar(path) {
+      var that = this;
+      uni.showLoading({
+        title: '上传中，请稍候...' });
+
+      uni.uploadFile({
+        // 这里修改上传地址
+        url: _config.config.base_url + '/store/getImageWebUrl',
+        filePath: path,
+        name: 'file',
+        success: function success(res) {
+          uni.hideLoading();
+          var response = res.data;
+          if (typeof response === 'string') {
+            response = JSON.parse(response);
+          }var _response2 =
+          response,code = _response2.code,message = _response2.message,data = _response2.data;
+          if (code === '0') {
+            uni.showToast({
+              title: '上传成功' });
+
+            that.avatarChanged = true;
+            that.uploadedAvatar = data.url;
+          } else {
+            uni.showToast({
+              icon: 'none',
+              title: message });
+
+          }
         },
         fail: function fail(res) {
           uni.showToast({

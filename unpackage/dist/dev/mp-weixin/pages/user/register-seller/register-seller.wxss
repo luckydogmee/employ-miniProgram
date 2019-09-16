@@ -64,4 +64,17 @@
   width: 260rpx;
   height: 52rpx;
 }
+.avatar {
+  width: 164rpx;
+  text-align: center;
+  margin: 0 auto;
+}
+.avatar image {
+    height: 84rpx;
+    width: 84rpx;
+    border-radius: 50%;
+}
+.avatar .text {
+    font-size: 20rpx;
+}
 

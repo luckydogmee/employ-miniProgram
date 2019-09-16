@@ -40,7 +40,7 @@
     width: 100%;
 }
 .content .form .form-item.data-v-1a7b8e91 {
-      margin-top: 38rpx;
+      margin-top: 28rpx;
       position: relative;
       display: -webkit-box;
       display: -webkit-flex;
@@ -146,5 +146,18 @@
   font-size: 28rpx;
   color: #8F8F94;
   margin: 0 30rpx;
+}
+.avatar.data-v-1a7b8e91 {
+  width: 164rpx;
+  text-align: center;
+  margin: 0 auto;
+}
+.avatar image.data-v-1a7b8e91 {
+    height: 84rpx;
+    width: 84rpx;
+    border-radius: 50%;
+}
+.avatar .text.data-v-1a7b8e91 {
+    font-size: 20rpx;
 }
 

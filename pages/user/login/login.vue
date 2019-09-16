@@ -5,12 +5,12 @@
 				<image src="../../../static/img/logo.png" mode=""></image>
 			</view>
 			<view class="form">
-				<view class="form-item">
+				<view class="form-item form-input">
 					<input class="sy-input" :focus="focusArray[focusIndex] === 'phone'" 
 							v-model="phone" maxlength="15" placeholder="您的电话号码" placeholder-class="input-placeholder" 
 							@blur="handleBlur(0)" />
 				</view>
-				<view class="form-item verfiy-item">
+				<view class="form-item verfiy-item  form-input">
 					<input class="sy-input"  :focus="focusArray[focusIndex] === 'verify'" 
 							v-model="verifyCode" maxlength="6" placeholder="短信验证码" placeholder-class="input-placeholder" 
 							@blur="handleBlur(1)" />

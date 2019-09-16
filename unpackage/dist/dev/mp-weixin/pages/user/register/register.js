@@ -189,8 +189,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
 var _utils = __webpack_require__(/*! ../../../utils/utils.js */ 73);
 var _user = _interopRequireDefault(__webpack_require__(/*! @/models/user.js */ 42));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
 //
 //
 //
@@ -278,8 +288,72 @@ var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | 
       verifyCodeTimer: null, //定时器对象
       focusArray: ['name', 'age', 'gender', 'phone', 'verify'], focusIndex: null, //焦点位置
       agreement: false, // 是否同意用户协议
-      name: '', age: '', gender: 0, phone: '', verifyCode: '', genderArray: ['男', '女'] };}, beforeDestroy: function beforeDestroy() {clearInterval(this.verifyCodeTimer);this.verifyCodeTimer = null;}, components: { uniPopup: uniPopup }, computed: { genderText: function genderText() {return this.genderArray[this.gender];} }, methods: { agreementChange: function agreementChange() {this.agreement = !this.agreement;}, handleBlur: function handleBlur(index) {var focusArray = this.focusArray;if (index != focusArray.length - 1) {if (!this[focusArray[index + 1]]) {this.focusIndex = index + 1;return;}this.focusIndex = null;return;}this.focusIndex = null;}, sendVerifyCode: function sendVerifyCode() {var _this = this;if (!this.readySendCode) {return;}if (!this.phone) {uni.showToast({ icon: 'none', title: '请输入电话号码' });this.focusIndex = 3;return;}var correctPhone = (0, _utils.verifyPhone)(this.phone);if (!correctPhone) {uni.showToast({ icon: 'none', title: '手机号码错误，请确认' });this.focusIndex = 3;return;}userModel.getVerifyCode(this.phone, 'A').then(function (res) {// 请求成功,并判断code是否正确
-        var _res$data = res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;if (code === '0') {uni.showToast({ title: '验证码已发送，请注意查收' });_this.surplusSecond = 120;_this.focusIndex = 4;_this.verifyCodeTimer = setInterval(function () {if (_this.surplusSecond > 0) {_this.surplusSecond -= 1;} else {_this.surplusSecond = 0;clearInterval(_this.verifyCodeTimer);}}, 1000);_this.focusIndex = 4;} else {
+      uploadedAvatar: '', avatarChanged: false, name: '', age: '', gender: 0, phone: '', verifyCode: '', genderArray: ['男', '女'] };}, beforeDestroy: function beforeDestroy() {clearInterval(this.verifyCodeTimer);this.verifyCodeTimer = null;}, components: { uniPopup: uniPopup }, computed: { genderText: function genderText() {return this.genderArray[this.gender];}, avatar: function avatar() {if (this.avatarChanged) {return this.uploadedAvatar;} else {if (this.gender == 0) {return '../../../static/img/avatar-man.png';} else {return '../../static/img/avatar-women.png';}}} }, methods: { agreementChange: function agreementChange() {this.agreement = !this.agreement;}, handleBlur: function handleBlur(index) {var focusArray = this.focusArray; // if(index != focusArray.length - 1 ){
+      // 	if(!this[focusArray[index + 1]]){
+      // 		this.focusIndex = index + 1
+      // 		return
+      // 	}
+      // 	this.focusIndex = null
+      // 	return
+      // }
+      // this.focusIndex = null	
+    }, chooseImage: function chooseImage() {var that = this;uni.chooseImage({ count: 1, sizeType: 'compressed', sourceType: ['album', 'camera'], success: function success(res) {that.avatar = res.tempFilePaths[0];that.getImageWebUrl(res.tempFilePaths[0]);} });}, getImageWebUrl: function getImageWebUrl(path) {var that = this;uni.showLoading({ title: '上传中，请稍候...' });uni.uploadFile({ // 这里修改上传地址
+        url: config.base_url + '/store/getImageWebUrl', filePath: path, name: 'file', success: function success(res) {uni.hideLoading();var response = res.data;if (typeof response === 'string') {response = JSON.parse(response);}var _response = response,code = _response.code,message = _response.message,data = _response.data;if (code === '0') {uni.showToast({ title: '上传成功' });that.avatarChanged = true;that.uploadedAvatar = data.url;} else {uni.showToast({ icon: 'none', title: message });}},
+        fail: function fail(res) {
+          uni.showToast({
+            icon: 'none',
+            title: '上传失败，请稍候再试' });
+
+        } });
+
+    },
+    sendVerifyCode: function sendVerifyCode() {var _this = this;
+      if (!this.readySendCode) {
+        return;
+      }
+      if (!this.phone) {
+        uni.showToast({
+          icon: 'none',
+          title: '请输入电话号码' });
+
+        // this.focusIndex = 3
+        return;
+      }
+
+      var correctPhone = (0, _utils.verifyPhone)(this.phone);
+      if (!correctPhone) {
+        uni.showToast({
+          icon: 'none',
+          title: '手机号码错误，请确认' });
+
+        // this.focusIndex = 3
+        return;
+      }
+      uni.showLoading({
+        mask: true });
+
+      userModel.getVerifyCode(this.phone, 'A').then(function (res) {
+        // 请求成功,并判断code是否正确
+        uni.hideLoading();var _res$data =
+        res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
+        if (code === '0') {
+          uni.showToast({
+            title: '已发送' });
+
+          _this.surplusSecond = 60;
+          // this.focusIndex = 4
+          _this.verifyCodeTimer = setInterval(function () {
+            if (_this.surplusSecond > 0) {
+              _this.surplusSecond -= 1;
+              _this.readySendCode = false;
+            } else {
+              _this.surplusSecond = 0;
+              _this.readySendCode = true;
+              clearInterval(_this.verifyCodeTimer);
+            }
+          }, 1000);
+          // this.focusIndex = 4	
+        } else {
           uni.showToast({
             icon: 'none',
             title: message });
@@ -300,7 +374,7 @@ var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | 
           title: '请输入姓名' });
 
         this.$nextTick(function () {
-          _this2.focusIndex = 0;
+          // this.focusIndex = 0
         });
         return;
       }
@@ -310,7 +384,7 @@ var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | 
           title: '请输入年龄' });
 
         this.$nextTick(function () {
-          _this2.focusIndex = 1;
+          // this.focusIndex = 1
         });
         return;
       }
@@ -320,7 +394,7 @@ var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | 
           title: '请输入电话号码' });
 
         this.$nextTick(function () {
-          _this2.focusIndex = 3;
+          // this.focusIndex = 3
         });
         return;
       }
@@ -330,7 +404,7 @@ var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | 
           title: '请输入验证码' });
 
         this.$nextTick(function () {
-          _this2.focusIndex = 4;
+          // this.focusIndex = 4
         });
         return;
       }
@@ -347,7 +421,8 @@ var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | 
       // 再去验证验证码是否正确
       userModel.verifyCode(this.phone, this.verifyCode).then(function (res) {
         // 执行真正的登录
-        return userModel.register(_this2.name, _this2.age, _this2.phone, _this2.age);
+        var avatar = _this2.avatarChanged ? _this2.avatar : '';
+        return userModel.register(_this2.name, _this2.age, _this2.phone, _this2.gender, avatar);
 
       }).then(function (res) {
         // 注册成功

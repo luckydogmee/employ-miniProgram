@@ -65,13 +65,16 @@ class UserModel  extends HTTP {
 		})
 	}
 	// 注册
-	register(name, age){
+	register(name, age, phone, gender, avatar){
 		return this.request({
 			url: '/login/register',
 			methods: 'POST',
 			data: {
 				name,
-				age
+				age,
+				phone,
+				gender,
+				avatar
 			}
 		})
 	}

@@ -1,11 +1,5 @@
 {
     "pages": [ //pages数组中第一项表示应用启动页,
-		// {
-		// 	"path" : "pages/user/register/register",
-		// 	"style" : {
-		// 		"navigationBarTitleText": "注册"
-		// 	}
-		// },
 		{
 		    "path": "pages/customer/main/main",
 		    "style": {
@@ -19,6 +13,12 @@
 		        "navigationBarTitleText": "街聘",
 				"enablePullDownRefresh": true
 		    }
+		},
+		{
+			"path" : "pages/user/register/register",
+			"style" : {
+				"navigationBarTitleText": "注册"
+			}
 		},
 		{
 			"path" : "pages/public/PostDetail/PostDetail",

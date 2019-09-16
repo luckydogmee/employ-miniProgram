@@ -185,17 +185,20 @@
 		width: 100%;
 		height: 60upx;
 	}
-	.sy-input{
+	.form-item.form-input{
 		border-bottom: 1upx solid #ffd5a3;
+	}
+	.sy-input{
 		color: #989696;
 		font-size: 30upx;
 		height: 60upx;
 		line-height: 60upx;
 		letter-spacing: 4upx;
+		width: 340upx;
 	}
 	.input-placeholder{
 		color: #989696;
-		font-size: 30upx;
+		font-size: 28upx;
 	}
 	.default-btn{
 		height: 48upx;

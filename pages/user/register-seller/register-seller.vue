@@ -1,6 +1,11 @@
 <template>
 	<view class="add-container">
 		<view class="add-top">
+			<view class="add-avatar">
+				<view class="avatar old-avatar">
+					<image :src="avatar" mode="" @click="chooseAvatar"></image>
+				</view>
+			</view>
 			<InputCell label="公司名称" 
 				:required="isEdit" 
 				:disabled="!isEdit" 
@@ -87,6 +92,8 @@
 					logo: '', // 公司logo
 					phone: '', // 电话号码
 				},
+				avatarChanged: false,
+				uploadedAvatar:'',
 				businessImgChanged: false,
 				companyImgChanged: false,
 				logoChanged: false,
@@ -95,7 +102,7 @@
 				verifyText: '发送验证码',
 				verifyCode: '',
 				cityCodeText: '', // 区域文字
-				citySelected: [], // 已选中的城市
+				citySelected: ['510000','',''], // 已选中的城市
 				readySendCode: true,
 				surplusSecond: 0,
 				verifyCodeTimer: null
@@ -104,6 +111,21 @@
 		components: {
 			InputCell,
 			UploadItem
+		},
+		computed:{
+			avatar(){
+				if(this.avatarChanged){
+					return this.uploadedAvatar
+				}else{
+					// 并未设置男女
+					return '../../../static/img/avatar-man.png'
+					// if(this.gender == 0){
+					// 	return '../../../static/img/avatar-man.png'
+					// }else{
+					// 	return '../../static/img/avatar-women.png'
+					// }
+				}
+			}
 		},
 		onLoad(options){
 			if(options.isEdit === 'false'){
@@ -142,6 +164,19 @@
 				const { code, value } = e.detail
 				this.resume.cityCode = code.join(',')
 				this.cityCodeText = Array.from( new Set(value)).join('')
+			},
+			chooseAvatar(){
+				const that = this
+				uni.chooseImage({
+					count:1,
+					sizeType: 'compressed',
+					sourceType: ['album', 'camera'],
+					success: (res) => {
+						that.resume.avatar = res.tempFilePaths[0]
+						// 这里考虑到可能上传头像地址不同
+						that.uploadAvatar(res.tempFilePaths[0],)
+					}
+				})
 			},
 			chooseBusinessImg(){
 				const that = this
@@ -254,6 +289,7 @@
 			saveStore(){
 				const that = this
 				const array = Object.values(this.resume)
+				array.push(this.avatar)
 				storeModel.saveStore(...array).then(res=>{
 					const { code, message, data } = res.data
 					if(code === '0'){
@@ -356,6 +392,44 @@
 						})
 					}
 				})
+			},
+			uploadAvatar(path){
+				const that = this
+				uni.showLoading({
+					title: '上传中，请稍候...'
+				})
+				uni.uploadFile({
+					// 这里修改上传地址
+					url: config.base_url + '/store/getImageWebUrl',
+					filePath: path,
+					name: 'file',
+					success(res){
+						uni.hideLoading()
+						let response = res.data
+						if(typeof response === 'string'){
+							response = JSON.parse(response)
+						}
+						const { code, message, data } = response
+						if(code === '0'){
+							uni.showToast({
+								title: '上传成功'
+							})
+							that.avatarChanged = true
+							that.uploadedAvatar = data.url
+						}else{
+							uni.showToast({
+								icon:'none',
+								title: message
+							})
+						}
+					},
+					fail: res=>{
+						uni.showToast({
+							icon:'none',
+							title: '上传失败，请稍候再试'
+						})
+					}
+				})
 			}
 		},	
 	}
@@ -412,6 +486,19 @@
 		.select{
 			width: 260upx;
 			height: 52upx;	
+		}
+	}
+	.avatar{
+		width: 164upx;
+		text-align: center;
+		margin: 0 auto;
+		image{
+			height: 84upx;
+			width: 84upx;
+			border-radius: 50%;
+		}
+		.text{
+			font-size: 20upx;
 		}
 	}
 </style>

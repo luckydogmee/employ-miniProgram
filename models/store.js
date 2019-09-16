@@ -15,7 +15,8 @@ import { HTTP } from '../utils/http.js'
 		businessImg,
 		companyImg,
 		logo,
-		phone
+		phone,
+		avatar
 	 ){
 		 return this.request({
 			 url: '/store/saveStore',
@@ -29,7 +30,8 @@ import { HTTP } from '../utils/http.js'
 				 businessImg,
 				 companyImg,
 				 logo,
-				 phone
+				 phone,
+				 avatar
 			 }
 		 })
 	 }

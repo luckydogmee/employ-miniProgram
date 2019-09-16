@@ -239,6 +239,11 @@ var resumeModel = new _resume.default();var _default =
       pageNum: 1,
       pageSize: 10,
       hasEnd: false,
+      startDate: '', // 选择日期的开始
+      startTime1: '09:00',
+      startTime2: '09:00',
+      endTime1: '18:00',
+      endTime2: '18:00',
       showDialog: false,
       recommendRecord: [],
       resumeId: '',
@@ -374,6 +379,11 @@ var resumeModel = new _resume.default();var _default =
       this.resumeId = id;
       if (jobId) {
         this.$refs.selectDate.open();
+        if (Number(formatDate(new Date(), 'hh')) >= 18) {
+          this.startDate = formatDate(new Date(new Date().getTime() + 24 * 60 * 60 * 1000), 'yyyy-MM-dd');
+        } else {
+          this.startDate = formatDate(new Date(), 'yyyy-MM-dd');
+        }
       } else {
         this.switchTab({ index: 1, resumeId: this.resumeId });
       }
@@ -436,12 +446,22 @@ var resumeModel = new _resume.default();var _default =
     },
     bindDateChange: function bindDateChange(e) {
       this.date = e.target.value;
+      if (this.date == formatDate(new Date(), 'yyyy-MM-dd')) {
+        this.startTime1 = formatDate(new Date(), 'hh:mm');
+      }
     },
     bindTimeStartChange: function bindTimeStartChange(e) {
       this.timeStart = e.target.value;
+      this.startTime2 = this.timeStart;
+      if (this.timeEnd && this.timeStart && Number(this.timeEnd.split(':')[0]) < Number(this.timeStart.split(':')[0])) {
+        this.timeEnd = this.timeStart;
+      }
     },
     bindTimeEndChange: function bindTimeEndChange(e) {
       this.timeEnd = e.target.value;
+      if (this.timeEnd && this.timeStart && Number(this.timeEnd.split(':')[0]) < Number(this.timeStart.split(':')[0])) {
+        this.timeEnd = this.timeStart;
+      }
     },
     getFormId: function getFormId(e) {
       this.formId = e.detail.formId;
