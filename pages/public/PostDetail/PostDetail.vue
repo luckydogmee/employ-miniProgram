@@ -32,9 +32,9 @@
 						<text>月均收入：{{jobInfo.avgSalary}}元</text>
 					</view>
 				</Cell>
-				<Cell title="悬赏信息" :subTitle="jobInfo.reward+'元/人'" />
+				<Cell title="悬赏信息" :content="jobInfo.reward+'元/人'" />
 				<Cell title="面试时间" :content="jobInfo.interviewTime" />
-				<Cell title="过保时间" :subTitle="jobInfo.overtime|filterOverTime" />
+				<Cell title="过保时间" :content="jobInfo.overtime|filterOverTime" />
 			</view>	
 		</view>
 		<view class="detail-footer" v-if="loginType === 'B'">
