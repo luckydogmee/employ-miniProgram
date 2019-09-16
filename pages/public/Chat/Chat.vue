@@ -224,7 +224,7 @@
 					this.$refs.selectDate.open()
 				}
 				// A取消简历
-				if(btn.text === '取消简历'){
+				if(btn.text === '取消面试'){
 					this.cancelResume(id)
 				}
 				if(btn.text === '已知晓'){
