@@ -409,12 +409,16 @@ var userModel = new _user.default();var _default = { data: function data() {retu
         this.focusIndex = 0;
         return;
       }
+      uni.showLoading({
+        mask: true });
+
       userModel.getVerifyCode(this.phone, 'A').then(function (res) {
         // 请求成功,并判断code是否正确
-        var _res$data = res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
+        uni.hideLoading();var _res$data =
+        res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
         if (code === '0') {
           uni.showToast({
-            title: '验证码已发送，请注意查收' });
+            title: '验证码已发送' });
 
           _this.verifyCodeStatus = 1;
           _this.readySendCode = false;
@@ -432,6 +436,7 @@ var userModel = new _user.default();var _default = { data: function data() {retu
           }, 1000);
           _this.focusIndex = 1;
         } else {
+          uni.hideLoading();
           uni.showToast({
             icon: 'none',
             title: message });
@@ -441,7 +446,7 @@ var userModel = new _user.default();var _default = { data: function data() {retu
       }).catch(function (err) {
         uni.showToast({
           icon: 'none',
-          title: '获取验证码失败，请稍后重试' });
+          title: '发送失败' });
 
       });
     },

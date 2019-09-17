@@ -15,7 +15,7 @@
 							v-model="verifyCode" maxlength="6" placeholder="短信验证码" placeholder-class="input-placeholder" 
 							@blur="handleBlur(1)" />
 					<button class="default-btn verify-code-btn" :class="{'disabled':!readySendCode} " 
-						@click.stop="getVerifyCode">{{readySendCode ? '发送验证码' : surplusSecond + ' 秒后重新发送' }}</button>
+						@click.stop="getVerifyCode">{{readySendCode ? '发送验证码' : surplusSecond + ' 秒' }}</button>
 				</view>
 				<!-- <view class="special-item">
 					<text class="savePhone">保存此号码供以后授权使用</text>
@@ -92,12 +92,16 @@
 					this.focusIndex = 0
 					return
 				} 
+				uni.showLoading({
+					mask: true
+				})
 				userModel.getVerifyCode(this.phone, 'A').then(res=>{
 					// 请求成功,并判断code是否正确
+					uni.hideLoading()
 					const {code, message, data} = res.data
 					if(code === '0'){
 						uni.showToast({
-							title: '验证码已发送，请注意查收'
+							title: '验证码已发送'
 						})
 						this.verifyCodeStatus = 1
 						this.readySendCode = false
@@ -115,6 +119,7 @@
 						}, 1000)
 						this.focusIndex = 1	
 					}else{
+						uni.hideLoading()
 						uni.showToast({
 							icon:'none',
 							title:message
@@ -124,7 +129,7 @@
 				}).catch(err=>{
 					uni.showToast({
 						icon:'none',
-						title:'获取验证码失败，请稍后重试'
+						title:'发送失败'
 					})
 				})
 			},

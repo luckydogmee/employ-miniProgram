@@ -56,7 +56,7 @@ class UserModel  extends HTTP {
 	// 验证验证码是否正确
 	verifyCode(phone, code){
 		return this.request({
-			url: '/login/register',
+			url: '/login/loginByCode',
 			method: 'POST',
 			data:{
 				phone,

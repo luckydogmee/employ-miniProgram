@@ -324,9 +324,12 @@
 					
 				}).then(res=>{
 					// 注册成功
-					if(res.code === '0'){
+					const {data, message, code} = res.data
+					if(code === '0'){
 						uni.hideLoading()
 						this.$refs.registerSuccess.open()
+						uni.setStorageSync('isLogin',data.isLogin)
+						uni.setStorageSync('isRegister',data.isRegister)
 						setTimeout(()=>{
 							uni.reLaunch({
 								url: '../../customer/main/main'
@@ -336,7 +339,7 @@
 						uni.hideLoading()
 						uni.showToast({
 							icon: 'none',
-							title: '注册失败'
+							title: message
 						})
 					}
 				}).catch(err=>{

@@ -22877,7 +22877,7 @@ UserModel = /*#__PURE__*/function (_HTTP) {_inherits(UserModel, _HTTP);
     // 验证验证码是否正确
   }, { key: "verifyCode", value: function verifyCode(phone, code) {
       return this.request({
-        url: '/login/register',
+        url: '/login/loginByCode',
         method: 'POST',
         data: {
           phone: phone,

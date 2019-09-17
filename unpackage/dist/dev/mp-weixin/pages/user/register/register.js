@@ -431,9 +431,12 @@ var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | 
 
       }).then(function (res) {
         // 注册成功
-        if (res.code === '0') {
+        var _res$data2 = res.data,data = _res$data2.data,message = _res$data2.message,code = _res$data2.code;
+        if (code === '0') {
           uni.hideLoading();
           _this2.$refs.registerSuccess.open();
+          uni.setStorageSync('isLogin', data.isLogin);
+          uni.setStorageSync('isRegister', data.isRegister);
           setTimeout(function () {
             uni.reLaunch({
               url: '../../customer/main/main' });
@@ -443,7 +446,7 @@ var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | 
           uni.hideLoading();
           uni.showToast({
             icon: 'none',
-            title: '注册失败' });
+            title: message });
 
         }
       }).catch(function (err) {
