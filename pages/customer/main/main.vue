@@ -215,8 +215,11 @@
 								title:'登录成功'
 							})		
 						}else{
+							// uni.navigateTo({
+							// 	url: '../../user/inputInfo/inputInfo',
+							// })
 							uni.navigateTo({
-								url: '../../user/inputInfo/inputInfo',
+								url: '../../user/register/register?phone='+phoneNumber
 							})
 						}
 					}else{

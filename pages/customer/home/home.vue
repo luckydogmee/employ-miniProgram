@@ -180,6 +180,9 @@
 				this.pageNum = 1
 				this.hasEnd = false
 				this.getJobList()
+			},
+			selectLoginType(){
+				this.$emit('showLogin')
 			}
 		}
 	}

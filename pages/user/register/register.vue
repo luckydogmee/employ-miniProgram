@@ -114,6 +114,11 @@
 			clearInterval(this.verifyCodeTimer)
 			this.verifyCodeTimer = null
 		},
+		onLoad(option) {
+			if(option.phone){
+				this.phone = option.phone
+			}
+		},
 		components:{
 			uniPopup
 		},
