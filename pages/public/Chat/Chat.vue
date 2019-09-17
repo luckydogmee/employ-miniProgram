@@ -68,14 +68,13 @@
 					请选择{{timeText}}时间
 				</view>
 				<view class="selectDate-content">
-					<view class="selectDate-picker date-picker">
-						<view class="selectDate-label">
-							日期：
-						</view>
+					<view class="selectDate-picker time-picker">
 						<view class="selectDate-content">
-							<picker mode="date" :value="date" :start="startDate" :end="endDate" @change="bindDateChange">
-								<view class="view date-view">{{date}}</view>
-							</picker>
+							<hTimePicker sTime="9" cTime="18" interval="30" @changeTime="bindTimeChange">
+							  <view slot="pCon" class="date-view">
+							    {{date||'点击选择时间'}}
+							  </view>
+							</hTimePicker>
 						</view>
 					</view>
 				</view>
@@ -113,9 +112,10 @@
 
 <script>
 	import ListChoose from '@/components/ListChoose/ListChoose.vue'
+	import hTimePicker from "@/components/h-timePicker/h-timePicker.vue"
+	import uniPopup from "@/components/uni-popup/uni-popup.vue"
 	import ProcessModel from '@/models/process.js'
 	import { formatDate } from '@/utils/utils.js'
-	import uniPopup from "@/components/uni-popup/uni-popup.vue"
 	const processModel = new ProcessModel()
 	export default {
 		data() {
@@ -127,12 +127,13 @@
 				entryTime: '',
 				timeText: '面试',
 				inputContent: '', // 申诉内容
-				tempItem: ''
+				tempItem: '',
 			};
 		},
 		components:{
 			ListChoose,
-			uniPopup
+			uniPopup,
+			hTimePicker
 		},
 		onLoad(option){
 			this.resumeData = option
@@ -373,14 +374,8 @@
 				this.tempInfo = {}
 				this.$refs.selectDate.close()
 			},
-			bindDateChange(e){
-				this.date = e.target.value
-			},
-			bindTimeStartChange(e){
-				this.timeStart = e.target.value
-			},
-			bindTimeEndChange(e){
-				this.timeEnd = e.target.value
+			bindTimeChange(time){
+				this.date = time
 			},
 			// A端取消简历
 			cancelResume(id){
@@ -587,7 +582,7 @@
 		.text{
 			box-sizing: border-box;
 			padding: 24upx 30upx;
-			font-size: 20upx;
+			font-size: 22upx;
 				min-height: 88upx;
 		}
 		

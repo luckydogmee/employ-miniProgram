@@ -65,28 +65,13 @@
 					请选择面试时间
 				</view>
 				<view class="selectDate-content">
-					<view class="selectDate-picker date-picker">
-						<view class="selectDate-label">
-							日期：
-						</view>
-						<view class="selectDate-content">
-							<picker mode="date" :value="date" :start="startDate" :end="endDate" @change="bindDateChange">
-								<view class="view date-view">{{date}}</view>
-							</picker>
-						</view>
-					</view>
 					<view class="selectDate-picker time-picker">
-						<view class="selectDate-label">
-							时间：
-						</view>
 						<view class="selectDate-content">
-							<picker mode="time" :value="timeStart" @change="bindTimeStartChange">
-								<view class="view time-view">{{timeStart}}</view>
-							</picker>
-							<view class="view-line">-</view>
-							<picker mode="time" :value="timeEnd" @change="bindTimeEndChange">
-								<view class="view time-view">{{timeEnd}}</view>
-							</picker>
+							<hTimePicker sTime="9" cTime="18" interval="30" @changeTime="bindTimeChange">
+							  <view slot="pCon" class="date-view">
+							    {{date||'点击选择时间'}}
+							  </view>
+							</hTimePicker>
 						</view>
 					</view>
 					<view class="text">
@@ -119,10 +104,12 @@
 <script>
 	import { mapState, mapMutations } from 'vuex'
 	import ListResume from '@/components/ListResume/ListResume.vue'
+	import hTimePicker from "@/components/h-timePicker/h-timePicker.vue"
 	import Search from '@/components/Search/Search.vue' 
 	import uniPopup from "@/components/uni-popup/uni-popup.vue"
 	import Dialog from '@/components/Dialog/Dialog.vue'
 	import ResumeModel from '@/models/resume.js'
+	import { formatDate } from '@/utils/utils.js'
 	const resumeModel = new ResumeModel()
 	export default {
 		data() {
@@ -132,17 +119,10 @@
 				pageNum: 1,
 				pageSize: 10,
 				hasEnd: false,
-				startDate: '', // 选择日期的开始
-				startTime1: '09:00',
-				startTime2: '09:00',
-				endTime1: '18:00',
-				endTime2: '18:00',
 				showDialog: false,
 				recommendRecord: [],
 				resumeId: '',
 				date: '',
-				timeStart: '',
-				timeEnd: '',
 				formId: '' , // 推送相关
 				keyWord:''
 			}
@@ -151,7 +131,8 @@
 			ListResume,
 			Search,
 			uniPopup,
-			Dialog
+			Dialog,
+			hTimePicker
 		},
 		computed:{
 			...mapState(['currentResume', 'jobId']),
@@ -272,11 +253,6 @@
 				this.resumeId = id
 				if(jobId){
 					this.$refs.selectDate.open()
-					if(Number(formatDate(new Date(),'hh'))>=18){
-						this.startDate = formatDate(new Date(new Date().getTime() + 24*60*60*1000),'yyyy-MM-dd')
-					}else{
-						this.startDate = formatDate(new Date(),'yyyy-MM-dd')
-					}
 				}else{
 					this.switchTab({index:1,resumeId: this.resumeId})
 				}
@@ -293,11 +269,10 @@
 				const resumeId = this.resumeId
 				const interviewDate = this.date
 				const formId = this.formId
-				const interviewTime = this.timeStart + this.timeEnd
 				uni.showLoading({
 					title: '提交中...'
 				})
-				resumeModel.pushResume(jobId, resumeId, interviewDate, interviewTime, formId).then(res=>{
+				resumeModel.pushResume(jobId, resumeId, interviewDate, formId).then(res=>{
 					const { code, message, data } = res.data
 					that.formId = ''
 					uni.hideLoading()
@@ -337,24 +312,8 @@
 					complete: () => {}
 				});
 			},
-			bindDateChange(e){
-				this.date = e.target.value
-				if(this.date == formatDate(new Date(),'yyyy-MM-dd')){
-					this.startTime1 = formatDate(new Date(), 'hh:mm')
-				}
-			},
-			bindTimeStartChange(e){
-				this.timeStart = e.target.value
-				this.startTime2 = this.timeStart
-				if( this.timeEnd && this.timeStart && Number(this.timeEnd.split(':')[0]) <  Number(this.timeStart.split(':')[0])){
-					this.timeEnd = this.timeStart
-				}
-			},
-			bindTimeEndChange(e){
-				this.timeEnd = e.target.value
-				if( this.timeEnd && this.timeStart && Number(this.timeEnd.split(':')[0]) <  Number(this.timeStart.split(':')[0])){
-					this.timeEnd = this.timeStart
-				}
+			bindTimeChange(time){
+				this.date = time
 			},
 			getFormId(e){
 				this.formId = e.detail.formId
@@ -481,93 +440,6 @@
 		background: #fff;
 		border: 1upx solid red;
 		box-sizing: border-box;
-	}
-	.selectDateDialog{
-		height: 360upx;
-		width: 461upx;
-	}
-	.selectDate-footer{
-		height: 86upx;
-		width: 462upx;
-		padding-top: 1upx;
-		box-sizing: border-box;
-		display: flex;
-		justify-content:space-between;
-		background:#e7e7e7;
-		align-items: center;
-		.selectDate-btn{
-			width: 230upx;
-			height: 100%;
-			line-height: 84upx;
-			background: #FFFFFF;
-			text-align: center;
-			font-size: 30upx;
-			color: #ff8353;
-		}
-	}
-	.selectDate-title{
-		color: #ff9760;
-		font-size: 22upx;
-		line-height: 60upx;
-		background: #FFFFFF;
-		font-weight: blod;
-		padding-left: 30upx;
-	}
-	.selectDate-content{
-		background: #FFFFFF;
-		height: 210upx;
-		width: 462upx;
-		display: flex;
-		flex-direction: column;
-		justify-content: flex-start;
-		align-items: center;
-		.selectDate-picker{
-			display: flex;
-			justify-content: center;
-			height: 46upx;
-			align-items: center;
-			width: 256upx;
-			flex-wrap: wrap;
-			.selectDate-label{
-				width: 72upx;
-				height: 30upx;
-				font-size: 22upx;
-				color: #565656;
-			}
-			.selectDate-content{
-				width: 184upx;
-				height: 30upx;
-				display: flex;
-				flex-direction: row;
-				align-items: center;
-				justify-content: center;
-			}
-			.date-view{
-				width: 184upx;
-				height: 30upx;
-				font-size: 20upx;
-				color: #666;
-				text-align: center;
-				border: 1upx solid #fe9661;
-			}
-			.time-view{
-				width: 80upx;
-				height: 30upx;
-				font-size: 20upx;
-				color: #666;
-				text-align: center;
-				border: 1upx solid #fe9661;
-			}
-			.view-line{
-				width: 20upx;
-			}
-		}	
-		.text{
-			color: #8F8F94;
-			text-align: center;
-			line-height: 40upx;
-			font-size: 20upx;
-		}
 	}
 	
 </style>

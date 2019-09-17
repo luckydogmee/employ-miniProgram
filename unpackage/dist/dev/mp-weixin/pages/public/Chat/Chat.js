@@ -240,9 +240,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _process = _interopRequireDefault(__webpack_require__(/*! @/models/process.js */ 137));
-var _utils = __webpack_require__(/*! @/utils/utils.js */ 24);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var ListChoose = function ListChoose() {return __webpack_require__.e(/*! import() | components/ListChoose/ListChoose */ "components/ListChoose/ListChoose").then(__webpack_require__.bind(null, /*! @/components/ListChoose/ListChoose.vue */ 217));};var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 59));};
 
+var _process = _interopRequireDefault(__webpack_require__(/*! @/models/process.js */ 137));
+var _utils = __webpack_require__(/*! @/utils/utils.js */ 24);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var ListChoose = function ListChoose() {return __webpack_require__.e(/*! import() | components/ListChoose/ListChoose */ "components/ListChoose/ListChoose").then(__webpack_require__.bind(null, /*! @/components/ListChoose/ListChoose.vue */ 217));};var hTimePicker = function hTimePicker() {return __webpack_require__.e(/*! import() | components/h-timePicker/h-timePicker */ "components/h-timePicker/h-timePicker").then(__webpack_require__.bind(null, /*! @/components/h-timePicker/h-timePicker.vue */ 295));};var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 59));};
 var processModel = new _process.default();var _default =
 {
   data: function data() {
@@ -259,7 +259,8 @@ var processModel = new _process.default();var _default =
   },
   components: {
     ListChoose: ListChoose,
-    uniPopup: uniPopup },
+    uniPopup: uniPopup,
+    hTimePicker: hTimePicker },
 
   onLoad: function onLoad(option) {
     this.resumeData = option;
@@ -500,14 +501,8 @@ var processModel = new _process.default();var _default =
       this.tempInfo = {};
       this.$refs.selectDate.close();
     },
-    bindDateChange: function bindDateChange(e) {
-      this.date = e.target.value;
-    },
-    bindTimeStartChange: function bindTimeStartChange(e) {
-      this.timeStart = e.target.value;
-    },
-    bindTimeEndChange: function bindTimeEndChange(e) {
-      this.timeEnd = e.target.value;
+    bindTimeChange: function bindTimeChange(time) {
+      this.date = time;
     },
     // A端取消简历
     cancelResume: function cancelResume(id) {

@@ -22705,14 +22705,13 @@ ResumeModel = /*#__PURE__*/function (_HTTP) {_inherits(ResumeModel, _HTTP);
 
     }
     //推送简历
-  }, { key: "pushResume", value: function pushResume(jobId, resumeId, interviewDate, interviewTime, formId) {
+  }, { key: "pushResume", value: function pushResume(jobId, resumeId, interviewDate, formId) {
       return this.request({
         url: '/resume/pushResume',
         data: {
           jobId: jobId,
           resumeId: resumeId,
           interviewDate: interviewDate,
-          interviewTime: interviewTime,
           formId: formId } });
 
 

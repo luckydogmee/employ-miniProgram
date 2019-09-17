@@ -57,14 +57,13 @@ class ResumeModel extends HTTP {
 		})
 	}
 	//推送简历
-	pushResume(jobId, resumeId, interviewDate, interviewTime,formId){
+	pushResume(jobId, resumeId, interviewDate, formId){
 		return this.request({
 			url: '/resume/pushResume',
 			data: {
 				jobId, 
 				resumeId, 
 				interviewDate, 
-				interviewTime,
 				formId
 			}
 		})

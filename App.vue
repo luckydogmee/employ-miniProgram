@@ -178,6 +178,88 @@
 		color: #8F8F94;
 		font-size: 28upx;
 	}
+	.selectDateDialog{
+		height: 360upx;
+		width: 461upx;
+	}
+	.selectDate-footer{
+		height: 86upx;
+		width: 462upx;
+		padding-top: 1upx;
+		box-sizing: border-box;
+		display: flex;
+		justify-content:space-between;
+		background:#e7e7e7;
+		align-items: center;
+		.selectDate-btn{
+			width: 230upx;
+			height: 100%;
+			line-height: 84upx;
+			background: #FFFFFF;
+			text-align: center;
+			font-size: 30upx;
+			color: #ff8353;
+		}
+	}
+	.selectDate-title{
+		color: #ff9760;
+		font-size: 22upx;
+		line-height: 60upx;
+		background: #FFFFFF;
+		font-weight: blod;
+		padding-left: 30upx;
+	}
+	.selectDate-content{
+		background: #FFFFFF;
+		height: 210upx;
+		width: 462upx;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+		.selectDate-picker{
+			display: flex;
+			justify-content: center;
+			height: 46upx;
+			align-items: center;
+			width: 256upx;
+			flex-wrap: wrap;
+			padding-top: 40upx;
+			padding-bottom: 20upx;
+			.selectDate-content{
+				width: 340upx;
+				height: 50upx;
+				line-height: 50upx;
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				justify-content: center;
+			}
+			.date-view{
+				width: 340upx;
+				height: 50upx;
+				line-height: 50upx;
+				font-size: 20upx;
+				color: #666;
+				text-align: center;
+				border: 1upx solid #fe9661;
+			}
+		}	
+		.text{
+			color: #8F8F94;
+			text-align: center;
+			line-height: 40upx;
+			font-size: 20upx;
+		}
+	}
+	.changeTime{
+		width: 184upx;
+		height: 30upx;
+		font-size: 20upx;
+		color: #666;
+		text-align: center;
+		border: 1upx solid #fe9661;
+	}
 	// 以下独特样式
 	
 	/* ************ 表单相关 start ************** */

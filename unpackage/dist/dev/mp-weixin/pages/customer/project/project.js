@@ -170,27 +170,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 var _vuex = __webpack_require__(/*! vuex */ 8);
+
 
 
 var _utils = __webpack_require__(/*! @/utils/utils.js */ 24);
 var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 25));
-var _resume = _interopRequireDefault(__webpack_require__(/*! @/models/resume.js */ 28));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 59));};var ListProject = function ListProject() {return __webpack_require__.e(/*! import() | components/ListProject/ListProject */ "components/ListProject/ListProject").then(__webpack_require__.bind(null, /*! @/components/ListProject/ListProject.vue */ 170));};
+var _resume = _interopRequireDefault(__webpack_require__(/*! @/models/resume.js */ 28));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 59));};var hTimePicker = function hTimePicker() {return __webpack_require__.e(/*! import() | components/h-timePicker/h-timePicker */ "components/h-timePicker/h-timePicker").then(__webpack_require__.bind(null, /*! @/components/h-timePicker/h-timePicker.vue */ 295));};var ListProject = function ListProject() {return __webpack_require__.e(/*! import() | components/ListProject/ListProject */ "components/ListProject/ListProject").then(__webpack_require__.bind(null, /*! @/components/ListProject/ListProject.vue */ 170));};
 var resumeModel = new _resume.default();
 var jobModel = new _job.default();var _default =
 {
@@ -203,15 +189,9 @@ var jobModel = new _job.default();var _default =
       pageSize: 10,
       hasEnd: false,
       jobId: '',
-      startDate: '', // 选择日期的开始
-      startTime1: '09:00',
-      startTime2: '09:00',
-      endTime1: '18:00',
-      endTime2: '18:00',
       date: '',
-      timeStart: '',
-      timeEnd: '' };
-
+      formId: '' // 推送相关
+    };
   },
   computed: _objectSpread({},
   (0, _vuex.mapState)(['resumeId'])),
@@ -222,7 +202,8 @@ var jobModel = new _job.default();var _default =
   },
   components: {
     ListProject: ListProject,
-    uniPopup: uniPopup },
+    uniPopup: uniPopup,
+    hTimePicker: hTimePicker },
 
   methods: _objectSpread({},
   (0, _vuex.mapMutations)(['switchTab']), {
@@ -310,11 +291,6 @@ var jobModel = new _job.default();var _default =
       this.jobId = id;
       if (this.resumeId) {
         this.$refs.selectDate.open();
-        if (Number((0, _utils.formatDate)(new Date(), 'hh')) >= 18) {
-          this.startDate = (0, _utils.formatDate)(new Date(new Date().getTime() + 24 * 60 * 60 * 1000), 'yyyy-MM-dd');
-        } else {
-          this.startDate = (0, _utils.formatDate)(new Date(), 'yyyy-MM-dd');
-        }
       } else {
         this.switchTab({ index: 2, jobId: id });
       }
@@ -324,9 +300,14 @@ var jobModel = new _job.default();var _default =
       var jobId = this.jobId;
       var resumeId = this.resumeId;
       var interviewDate = this.date;
-      var interviewTime = this.timeStart + this.timeEnd;
-      resumeModel.pushResume(jobId, resumeId, interviewDate, interviewTime).then(function (res) {var _res$data2 =
+      var formId = this.formId;
+      uni.showLoading({
+        mask: true });
+
+      resumeModel.pushResume(jobId, resumeId, interviewDate, formId).then(function (res) {
+        uni.hideLoading();var _res$data2 =
         res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
+        that.formId = '';
         if (code === '0') {
           that.$refs.selectDate.close();
           // 推荐成功
@@ -343,29 +324,20 @@ var jobModel = new _job.default();var _default =
             title: message });
 
         }
+      }).catch(function (err) {
+        that.formId = '';
+        uni.hideLoading();
+        uni.showToast({
+          icon: 'none',
+          title: '推送失败' });
+
       });
     },
     cancelPush: function cancelPush() {
       this.$refs.selectDate.close();
     },
-    bindDateChange: function bindDateChange(e) {
-      this.date = e.target.value;
-      if (this.date == (0, _utils.formatDate)(new Date(), 'yyyy-MM-dd')) {
-        this.startTime1 = (0, _utils.formatDate)(new Date(), 'hh:mm');
-      }
-    },
-    bindTimeStartChange: function bindTimeStartChange(e) {
-      this.timeStart = e.target.value;
-      this.startTime2 = this.timeStart;
-      if (this.timeEnd && this.timeStart && Number(this.timeEnd.split(':')[0]) < Number(this.timeStart.split(':')[0])) {
-        this.timeEnd = this.timeStart;
-      }
-    },
-    bindTimeEndChange: function bindTimeEndChange(e) {
-      this.timeEnd = e.target.value;
-      if (this.timeEnd && this.timeStart && Number(this.timeEnd.split(':')[0]) < Number(this.timeStart.split(':')[0])) {
-        this.timeEnd = this.timeStart;
-      }
+    bindTimeChange: function bindTimeChange(time) {
+      this.date = time;
     } }) };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

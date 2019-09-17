@@ -332,9 +332,13 @@ var jobModel = new _job.default();var _default =
 
         return;
       }
+      uni.showLoading({
+        mask: true });
+
       userModel.getVerifyCode(this.resume.phone, 'B').then(function (res) {
         // 请求成功,并判断code是否正确
-        var _res$data2 = res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
+        uni.hideLoading();var _res$data2 =
+        res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
         if (code === '0') {
           uni.showToast({
             title: '验证码已发送，请注意查收' });
@@ -360,6 +364,7 @@ var jobModel = new _job.default();var _default =
         }
 
       }).catch(function (err) {
+        uni.hideLoading();
         uni.showToast({
           icon: 'none',
           title: '获取验证码失败' });

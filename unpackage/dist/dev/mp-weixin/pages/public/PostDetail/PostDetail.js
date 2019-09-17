@@ -259,7 +259,11 @@ var jobModel = new _job.default();var _default =
     },
     recceiveOrder: function recceiveOrder() {var _this2 = this;var
       id = this.jobInfo.id;
-      jobModel.collectionJob(id).then(function (res) {var _res$data2 =
+      uni.showLoading({
+        mask: true });
+
+      jobModel.collectionJob(id).then(function (res) {
+        uni.hideLoading();var _res$data2 =
         res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
         if (code === '0') {
           // 执行接单成功后续动作
@@ -298,6 +302,7 @@ var jobModel = new _job.default();var _default =
 
         }
       }).catch(function (err) {
+        uni.hideLoading();
         uni.showToast({
           icon: 'none',
           title: '操作失败，请稍后再试' });

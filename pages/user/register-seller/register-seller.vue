@@ -57,7 +57,7 @@
 			</view> -->
 			<inputCell v-if="isEdit&&!isModify" label="验证码" :required="isEdit" :isSell="true" placeholder="请输入验证码" floatleft="left" :hasSlot="true" :content="verifyCode" @on-input="verifyCodeChanged">
 				<button class="default-btn verifyBtn verify-code-btn" :class="{'disabled':!readySendCode} "
-					@click="sendVerifyCode">{{readySendCode ? '发送验证码' : surplusSecond + ' 秒后重新发送' }}</button>
+					@click="sendVerifyCode">{{readySendCode ? '发送验证码' : surplusSecond + ' 秒' }}</button>
 			</inputCell>	
 		</view>
 		
@@ -225,8 +225,12 @@
 					})
 					return
 				}
+				uni.showLoading({
+					mask: true
+				})
 				userModel.getVerifyCode(this.resume.phone, 'B').then(res=>{
 					// 请求成功,并判断code是否正确
+					uni.hideLoading()
 					const { code, message, data } = res.data 
 					if(code === '0'){
 						uni.showToast({
@@ -253,6 +257,7 @@
 					}
 					
 				}).catch(err=>{
+					uni.hideLoading()
 					uni.showToast({
 						icon:'none',
 						title:'获取验证码失败'

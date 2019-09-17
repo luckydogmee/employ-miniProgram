@@ -139,7 +139,11 @@
 			},
 			recceiveOrder(){
 				const { id } = this.jobInfo
+				uni.showLoading({
+					mask:true
+				})
 				jobModel.collectionJob(id).then(res=>{
+					uni.hideLoading()
 					const {code, message, data } = res.data
 					if(code === '0'){
 						// 执行接单成功后续动作
@@ -178,6 +182,7 @@
 						})
 					}
 				}).catch(err=>{
+					uni.hideLoading()
 					uni.showToast({
 						icon: 'none',
 						title: '操作失败，请稍后再试'
