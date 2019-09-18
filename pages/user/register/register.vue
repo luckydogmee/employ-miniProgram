@@ -91,6 +91,7 @@
 	import UserModel from '@/models/user.js'
 	import uniPopup from "@/components/uni-popup/uni-popup.vue"
 	const userModel = new UserModel() 
+	import { config } from '../../../config.js'
 	export default {
 		data() {
 			return {
@@ -108,6 +109,7 @@
 				phone: '',
 				verifyCode: '',
 				genderArray:['男', '女'],
+				avatar:''
 			};
 		},
 		beforeDestroy() {
