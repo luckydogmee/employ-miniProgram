@@ -260,6 +260,10 @@
 		text-align: center;
 		border: 1upx solid #fe9661;
 	}
+	.userAgreement{
+		background: #FFFFFF;
+		height: 1120upx;
+	}
 	// 以下独特样式
 	
 	/* ************ 表单相关 start ************** */

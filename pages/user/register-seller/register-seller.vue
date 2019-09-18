@@ -92,6 +92,7 @@
 					logo: '', // 公司logo
 					phone: '', // 电话号码
 				},
+				avatar: '../../../static/icon/add-avatar.png',
 				avatarChanged: false,
 				uploadedAvatar:'',
 				businessImgChanged: false,
@@ -113,19 +114,19 @@
 			UploadItem
 		},
 		computed:{
-			avatar(){
-				if(this.avatarChanged){
-					return this.uploadedAvatar
-				}else{
-					// 并未设置男女
-					return '../../../static/img/avatar-man.png'
-					// if(this.gender == 0){
-					// 	return '../../../static/img/avatar-man.png'
-					// }else{
-					// 	return '../../static/img/avatar-women.png'
-					// }
-				}
-			}
+			// avatar(){
+			// 	if(this.avatarChanged){
+			// 		return this.uploadedAvatar
+			// 	}else{
+			// 		// 并未设置男女
+			// 		return '../../../static/img/avatar-man.png'
+			// 		// if(this.gender == 0){
+			// 		// 	return '../../../static/img/avatar-man.png'
+			// 		// }else{
+			// 		// 	return '../../static/img/avatar-women.png'
+			// 		// }
+			// 	}
+			// }
 		},
 		onLoad(options){
 			if(options.isEdit === 'false'){
@@ -149,17 +150,6 @@
 					}
 				})
 			},
-			chooseImage(){
-				// 让用户选择相册或者拍照
-				uni.chooseImage({
-					count:1,
-					sizeType: 'compressed',
-					sourceType: ['album', 'camera'],
-					success: (res) => {
-						this.avatar = res.tempFilePaths[0]
-					}
-				})
-			},
 			cityPickerChange(e){
 				const { code, value } = e.detail
 				this.resume.cityCode = code.join(',')
@@ -172,7 +162,7 @@
 					sizeType: 'compressed',
 					sourceType: ['album', 'camera'],
 					success: (res) => {
-						that.resume.avatar = res.tempFilePaths[0]
+						that.avatar = res.tempFilePaths[0]
 						// 这里考虑到可能上传头像地址不同
 						that.uploadAvatar(res.tempFilePaths[0],)
 					}
@@ -209,7 +199,7 @@
 					sizeType: 'compressed',
 					sourceType: ['album', 'camera'],
 					success: (res) => {
-						that.resume.companyImg = res.tempFilePaths[0]
+						that.companyImg = res.tempFilePaths[0]
 						that.getImageWebUrl(res.tempFilePaths[0], 'companyImg')
 					}
 				})

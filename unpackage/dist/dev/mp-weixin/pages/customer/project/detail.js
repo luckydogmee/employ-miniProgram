@@ -143,7 +143,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _resume = _interopRequireDefault(__webpack_require__(/*! @/models/resume.js */ 28));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var ListChoose = function ListChoose() {return __webpack_require__.e(/*! import() | components/ListChoose/ListChoose */ "components/ListChoose/ListChoose").then(__webpack_require__.bind(null, /*! @/components/ListChoose/ListChoose.vue */ 217));};var Search = function Search() {return __webpack_require__.e(/*! import() | components/Search/Search */ "components/Search/Search").then(__webpack_require__.bind(null, /*! @/components/Search/Search.vue */ 184));};
+var _resume = _interopRequireDefault(__webpack_require__(/*! @/models/resume.js */ 28));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var ListChoose = function ListChoose() {return __webpack_require__.e(/*! import() | components/ListChoose/ListChoose */ "components/ListChoose/ListChoose").then(__webpack_require__.bind(null, /*! @/components/ListChoose/ListChoose.vue */ 222));};var Search = function Search() {return __webpack_require__.e(/*! import() | components/Search/Search */ "components/Search/Search").then(__webpack_require__.bind(null, /*! @/components/Search/Search.vue */ 189));};
 var resumeModel = new _resume.default();var _default =
 {
   data: function data() {
@@ -185,7 +185,7 @@ var resumeModel = new _resume.default();var _default =
       } else if (type === 'finish') {
         status = 1;
       } else if (type === 'fail') {
-        status = -1;
+        status = 2;
       }
       resumeModel.pushResumeList(this.pageNum, this.pageSize, this.jobId, status, this.keyWord).then(function (res) {
         //数据绑定

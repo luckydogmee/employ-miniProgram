@@ -175,7 +175,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _user = _interopRequireDefault(__webpack_require__(/*! @/models/user.js */ 43));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var UserItem = function UserItem() {return __webpack_require__.e(/*! import() | components/UserItem/UserItem */ "components/UserItem/UserItem").then(__webpack_require__.bind(null, /*! ../../../components/UserItem/UserItem.vue */ 196));};var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 59));};
+var _user = _interopRequireDefault(__webpack_require__(/*! @/models/user.js */ 43));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var UserItem = function UserItem() {return __webpack_require__.e(/*! import() | components/UserItem/UserItem */ "components/UserItem/UserItem").then(__webpack_require__.bind(null, /*! ../../../components/UserItem/UserItem.vue */ 201));};var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 59));};
 
 var userModel = new _user.default();var _default =
 {
@@ -201,9 +201,11 @@ var userModel = new _user.default();var _default =
   },
   methods: {
     getUserInfo: function getUserInfo() {var _this = this;
+      uni.showLoading();
       userModel.getUserInfo().then(function (res) {
         //数据绑定
-        var _res$data = res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
+        uni.hideLoading();var _res$data =
+        res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
         if (code === '0') {
           _this.user = data;
           _this.userData = data;
@@ -214,6 +216,7 @@ var userModel = new _user.default();var _default =
 
         }
       }).catch(function (err) {
+        uni.hideLoading();
         uni.showToast({
           icon: 'none',
           title: '获取用户信息失败' });

@@ -94,8 +94,10 @@
 		},
 		methods: {
 			getUserInfo(){
+				uni.showLoading()
 				userModel.getUserInfo().then(res=>{
 					//数据绑定
+					uni.hideLoading()
 					const { code, message, data } = res.data
 					if(code === '0'){
 						this.user = data
@@ -107,6 +109,7 @@
 						})
 					}
 				}).catch(err=>{
+					uni.hideLoading()
 					uni.showToast({
 						icon: 'none',
 						title:'获取用户信息失败'

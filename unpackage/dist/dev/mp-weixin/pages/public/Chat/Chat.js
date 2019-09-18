@@ -242,7 +242,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _process = _interopRequireDefault(__webpack_require__(/*! @/models/process.js */ 137));
-var _utils = __webpack_require__(/*! @/utils/utils.js */ 24);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var ListChoose = function ListChoose() {return __webpack_require__.e(/*! import() | components/ListChoose/ListChoose */ "components/ListChoose/ListChoose").then(__webpack_require__.bind(null, /*! @/components/ListChoose/ListChoose.vue */ 217));};var hTimePicker = function hTimePicker() {return __webpack_require__.e(/*! import() | components/h-timePicker/h-timePicker */ "components/h-timePicker/h-timePicker").then(__webpack_require__.bind(null, /*! @/components/h-timePicker/h-timePicker.vue */ 295));};var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 59));};
+var _utils = __webpack_require__(/*! @/utils/utils.js */ 24);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var ListChoose = function ListChoose() {return __webpack_require__.e(/*! import() | components/ListChoose/ListChoose */ "components/ListChoose/ListChoose").then(__webpack_require__.bind(null, /*! @/components/ListChoose/ListChoose.vue */ 222));};var hTimePicker = function hTimePicker() {return __webpack_require__.e(/*! import() | components/h-timePicker/h-timePicker */ "components/h-timePicker/h-timePicker").then(__webpack_require__.bind(null, /*! @/components/h-timePicker/h-timePicker.vue */ 170));};var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 59));};
 var processModel = new _process.default();var _default =
 {
   data: function data() {
@@ -340,16 +340,28 @@ var processModel = new _process.default();var _default =
       if (btn.text === '未通过') {
         this.interviewFeedback(id, '2');
       }
-      if (btn.text === '修改面试时间') {
-        this.tempInfo = {
-          method: 'interviewFeedback',
-          options: {
-            id: id,
-            status: '3' } };
+      if (btn.text === '修改时间') {
+        if (btn.method === 'interviewFeedback') {
+          this.tempInfo = {
+            method: 'interviewFeedback',
+            options: {
+              id: id,
+              status: '3' } };
 
 
-        this.timeText = '面试';
-        this.$refs.selectDate.open();
+          this.timeText = '面试';
+          this.$refs.selectDate.open();
+        } else if (btn.method === 'entryFeedback') {
+          this.tempInfo = {
+            method: 'entryFeedback',
+            options: {
+              id: id,
+              status: '2' } };
+
+
+          this.timeText = '入职';
+          this.$refs.selectDate.open();
+        }
       }
       // A取消简历
       if (btn.text === '取消面试') {
@@ -363,18 +375,6 @@ var processModel = new _process.default();var _default =
       }
       if (btn.text === '认可') {
         this.approval(item);
-      }
-      // 入职反馈
-      if (btn.text === '修改入职时间') {
-        this.tempInfo = {
-          method: 'entryFeedback',
-          options: {
-            id: id,
-            status: '2' } };
-
-
-        this.timeText = '入职';
-        this.$refs.selectDate.open();
       }
       if (btn.text === '已入职') {
         this.tempInfo = {

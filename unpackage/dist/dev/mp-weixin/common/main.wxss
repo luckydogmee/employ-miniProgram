@@ -280,6 +280,10 @@ button.swiper-button:after {
   text-align: center;
   border: 1rpx solid #fe9661;
 }
+.userAgreement {
+  background: #FFFFFF;
+  height: 1120rpx;
+}
 /* ************ 表单相关 start ************** */
 .form-item {
   width: 100%;

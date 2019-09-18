@@ -81,6 +81,7 @@
 		margin-bottom: 16upx;
 	}
 	.image{
+		width: 174upx;
 		image{
 			height: 170upx;
 			width: 174upx;
@@ -88,11 +89,15 @@
 		}
 	}
 	.info{
+		width: 230upx;
 		.info-title{
 			font-size: 32upx;
 			color: #595959;
 			margin-top: 10upx;
 			margin-bottom: 20upx;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
 		}
 		.info-price{
 			font-size: 26upx;
@@ -115,6 +120,7 @@
 		}	
 	}
 	.operation{
+		width: 238upx;
 		.operation-describe{
 			display: flex;
 			flex-direction: row;

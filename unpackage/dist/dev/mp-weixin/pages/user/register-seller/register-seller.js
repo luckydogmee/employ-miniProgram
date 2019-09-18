@@ -178,7 +178,7 @@ __webpack_require__.r(__webpack_exports__);
 var _user = _interopRequireDefault(__webpack_require__(/*! @/models/user.js */ 43));
 var _store = _interopRequireDefault(__webpack_require__(/*! @/models/store.js */ 120));
 var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 25));
-var _config = __webpack_require__(/*! ../../../config.js */ 27);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var InputCell = function InputCell() {return __webpack_require__.e(/*! import() | components/InputCell/InputCell */ "components/InputCell/InputCell").then(__webpack_require__.bind(null, /*! @/components/InputCell/InputCell.vue */ 231));};var UploadItem = function UploadItem() {return __webpack_require__.e(/*! import() | components/UploadItem/UploadItem */ "components/UploadItem/UploadItem").then(__webpack_require__.bind(null, /*! @/components/UploadItem/UploadItem.vue */ 238));};
+var _config = __webpack_require__(/*! ../../../config.js */ 27);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var InputCell = function InputCell() {return __webpack_require__.e(/*! import() | components/InputCell/InputCell */ "components/InputCell/InputCell").then(__webpack_require__.bind(null, /*! @/components/InputCell/InputCell.vue */ 236));};var UploadItem = function UploadItem() {return __webpack_require__.e(/*! import() | components/UploadItem/UploadItem */ "components/UploadItem/UploadItem").then(__webpack_require__.bind(null, /*! @/components/UploadItem/UploadItem.vue */ 243));};
 var userModel = new _user.default();
 var storeModel = new _store.default();
 var jobModel = new _job.default();var _default =
@@ -199,6 +199,7 @@ var jobModel = new _job.default();var _default =
         logo: '', // 公司logo
         phone: '' // 电话号码
       },
+      avatar: '../../../static/icon/add-avatar.png',
       avatarChanged: false,
       uploadedAvatar: '',
       businessImgChanged: false,
@@ -220,20 +221,20 @@ var jobModel = new _job.default();var _default =
     UploadItem: UploadItem },
 
   computed: {
-    avatar: function avatar() {
-      if (this.avatarChanged) {
-        return this.uploadedAvatar;
-      } else {
-        // 并未设置男女
-        return '../../../static/img/avatar-man.png';
-        // if(this.gender == 0){
-        // 	return '../../../static/img/avatar-man.png'
-        // }else{
-        // 	return '../../static/img/avatar-women.png'
-        // }
-      }
-    } },
-
+    // avatar(){
+    // 	if(this.avatarChanged){
+    // 		return this.uploadedAvatar
+    // 	}else{
+    // 		// 并未设置男女
+    // 		return '../../../static/img/avatar-man.png'
+    // 		// if(this.gender == 0){
+    // 		// 	return '../../../static/img/avatar-man.png'
+    // 		// }else{
+    // 		// 	return '../../static/img/avatar-women.png'
+    // 		// }
+    // 	}
+    // }
+  },
   onLoad: function onLoad(options) {
     if (options.isEdit === 'false') {
       this.isEdit = false;
@@ -256,17 +257,6 @@ var jobModel = new _job.default();var _default =
         }
       });
     },
-    chooseImage: function chooseImage() {var _this = this;
-      // 让用户选择相册或者拍照
-      uni.chooseImage({
-        count: 1,
-        sizeType: 'compressed',
-        sourceType: ['album', 'camera'],
-        success: function success(res) {
-          _this.avatar = res.tempFilePaths[0];
-        } });
-
-    },
     cityPickerChange: function cityPickerChange(e) {var _e$detail =
       e.detail,code = _e$detail.code,value = _e$detail.value;
       this.resume.cityCode = code.join(',');
@@ -279,7 +269,7 @@ var jobModel = new _job.default();var _default =
         sizeType: 'compressed',
         sourceType: ['album', 'camera'],
         success: function success(res) {
-          that.resume.avatar = res.tempFilePaths[0];
+          that.avatar = res.tempFilePaths[0];
           // 这里考虑到可能上传头像地址不同
           that.uploadAvatar(res.tempFilePaths[0]);
         } });
@@ -316,12 +306,12 @@ var jobModel = new _job.default();var _default =
         sizeType: 'compressed',
         sourceType: ['album', 'camera'],
         success: function success(res) {
-          that.resume.companyImg = res.tempFilePaths[0];
+          that.companyImg = res.tempFilePaths[0];
           that.getImageWebUrl(res.tempFilePaths[0], 'companyImg');
         } });
 
     },
-    sendVerifyCode: function sendVerifyCode() {var _this2 = this;
+    sendVerifyCode: function sendVerifyCode() {var _this = this;
       if (!this.readySendCode) {
         return;
       }
@@ -343,16 +333,16 @@ var jobModel = new _job.default();var _default =
           uni.showToast({
             title: '验证码已发送，请注意查收' });
 
-          _this2.readySendCode = false;
-          _this2.surplusSecond = 60;
+          _this.readySendCode = false;
+          _this.surplusSecond = 60;
           // this.focusIndex = 3
-          _this2.verifyCodeTimer = setInterval(function () {
-            if (_this2.surplusSecond > 0) {
-              _this2.surplusSecond -= 1;
+          _this.verifyCodeTimer = setInterval(function () {
+            if (_this.surplusSecond > 0) {
+              _this.surplusSecond -= 1;
             } else {
-              _this2.surplusSecond = 0;
-              _this2.readySendCode = true;
-              clearInterval(_this2.verifyCodeTimer);
+              _this.surplusSecond = 0;
+              _this.readySendCode = true;
+              clearInterval(_this.verifyCodeTimer);
             }
           }, 1000);
           // this.focusIndex = 3	
@@ -398,7 +388,7 @@ var jobModel = new _job.default();var _default =
 
       });
     },
-    saveStore: function saveStore() {var _this3 = this;
+    saveStore: function saveStore() {var _this2 = this;
       var that = this;
       var array = Object.values(this.resume);
       array.push(this.avatar);
@@ -406,7 +396,7 @@ var jobModel = new _job.default();var _default =
         res.data,code = _res$data4.code,message = _res$data4.message,data = _res$data4.data;
         if (code === '0') {
           uni.hideLoading();
-          if (!_this3.resume.id) {
+          if (!_this2.resume.id) {
             that.hasToken = true;
             uni.showModal({
               title: '',

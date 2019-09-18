@@ -114,6 +114,14 @@
     margin-top: 24rpx;
     font-size: 20rpx;
     color: #989696;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 .content .agreement checkbox.data-v-1a7b8e91 {
       -webkit-transform: scale(0.5);
@@ -159,5 +167,13 @@
 }
 .avatar .text.data-v-1a7b8e91 {
     font-size: 20rpx;
+}
+.userAgreement.data-v-1a7b8e91 {
+  width: 700rpx;
+  height: 1200rpx;
+  overflow-y: auto;
+}
+.user-agreement.data-v-1a7b8e91 {
+  color: #ffd5a3;
 }
 
