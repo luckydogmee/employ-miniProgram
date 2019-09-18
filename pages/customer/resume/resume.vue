@@ -162,6 +162,10 @@
 						mask: true
 					})
 				}
+				//这里解决返回后显示不全的问题
+				if(this.pageSize === 1){
+					this.pageSize = 10
+				}
 				resumeModel.resumeList(this.pageNum,this.pageSize,status,this.keyWord).then(res=>{
 					//数据绑定
 					uni.hideLoading()
