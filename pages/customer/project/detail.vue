@@ -67,7 +67,7 @@
 				}else if(type === 'finish'){
 					status = 1
 				}else if(type === 'fail'){
-					status = -1
+					status = 2
 				}
 				resumeModel.pushResumeList(this.pageNum, this.pageSize,this.jobId, status,this.keyWord).then(res=>{
 					//数据绑定
