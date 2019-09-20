@@ -24,9 +24,9 @@
 				<view class="form-item">
 					<button class="default-btn submit-btn" @click="submit" >登录</button>
 				</view>
-				<!-- <view class="form-item to-login">
-					<text>已有账号？点这里直接登录>></text>
-				</view> -->
+				<view class="form-item to-login">
+					<text @click="toRegister">还没有账号？点这里注册>></text>
+				</view>
 			</view>
 		</view>
 	</view>
@@ -186,6 +186,12 @@
 						icon: 'none',
 						title: '登录失败，请稍候再试'
 					})
+				})
+			},
+			// 去注册
+			toRegister(){
+				uni.navigateTo({
+					url: '../register/register'
 				})
 			}
 		}

@@ -175,7 +175,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _user = _interopRequireDefault(__webpack_require__(/*! @/models/user.js */ 43));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var UserItem = function UserItem() {return __webpack_require__.e(/*! import() | components/UserItem/UserItem */ "components/UserItem/UserItem").then(__webpack_require__.bind(null, /*! ../../../components/UserItem/UserItem.vue */ 201));};var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 59));};
+var _user = _interopRequireDefault(__webpack_require__(/*! @/models/user.js */ 43));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var UserItem = function UserItem() {return __webpack_require__.e(/*! import() | components/UserItem/UserItem */ "components/UserItem/UserItem").then(__webpack_require__.bind(null, /*! ../../../components/UserItem/UserItem.vue */ 207));};var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 59));};
 
 var userModel = new _user.default();var _default =
 {
@@ -223,6 +223,11 @@ var userModel = new _user.default();var _default =
 
       });
     },
+    setUser: function setUser() {
+      uni.navigateTo({
+        url: '../../customer/user/detail' });
+
+    },
     switchItem: function switchItem(index) {
       this.dialogActive = index;
       if (this.dialogActive == 0) {
@@ -232,6 +237,8 @@ var userModel = new _user.default();var _default =
       }
     },
     getCashoutList: function getCashoutList() {var _this2 = this;
+      this.$refs.recommendRecord.open();
+      return;
       uni.showLoading({
         title: '加载中...' });
 

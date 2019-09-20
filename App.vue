@@ -4,19 +4,6 @@
 	} from  'vuex'
 	export default {
 		computed: mapState(['userName']),
-		onLaunch(){
-			// setTimeout(()=>{
-			// 	uni.reLaunch({
-			// 		url:'../../../pages/seller/main/main'
-			// 	})	
-			// },100)
-		},
-		onShow: function() {
-			console.log('App Show');
-		},
-		onHide: function() {
-			console.log('App Hide');
-		}
 	}
 </script>
 <style lang="scss">
@@ -262,7 +249,23 @@
 	}
 	.userAgreement{
 		background: #FFFFFF;
-		height: 1120upx;
+		height: 1100upx;
+		position: relative;
+		padding: 40upx 20upx;
+		box-sizing: border-box;
+	}
+	.close-icon{
+		width: 24upx;
+		height: 24upx;
+		position: absolute;
+		top: 16upx;
+		right: 24upx;
+	}
+	.to-login{
+		color: #feae86;
+		font-size: 24upx;
+		margin-top: 18upx;
+		text-align: center;
 	}
 	// 以下独特样式
 	

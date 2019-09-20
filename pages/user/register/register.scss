@@ -4,6 +4,21 @@
 	background: url( ../../../static/img/register-bg.png ) no-repeat;
 	background-size: 100% 100%;
 }
+.detail-container{
+	height: 100vh;
+	width: 750upx;
+	background-size: 100% 100%;
+	.content{
+		width: 700upx;
+		margin-top: 20upx;
+		.form{
+			input{
+				text-align: right;
+				margin-right: 20upx;
+			}
+		}
+	}
+}
 .content{
 	width: 500upx;
 	margin: 0 auto;

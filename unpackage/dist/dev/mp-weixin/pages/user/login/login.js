@@ -504,6 +504,12 @@ var userModel = new _user.default();var _default = { data: function data() {retu
           title: '登录失败，请稍候再试' });
 
       });
+    },
+    // 去注册
+    toRegister: function toRegister() {
+      uni.navigateTo({
+        url: '../register/register' });
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

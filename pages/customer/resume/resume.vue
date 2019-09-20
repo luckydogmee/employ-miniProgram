@@ -352,13 +352,6 @@
 		position: relative;
 		border: 1upx solid #b5b5b5;
 	}
-	.close-icon{
-		width: 24upx;
-		height: 24upx;
-		position: absolute;
-		top: 16upx;
-		right: 24upx;
-	}
 	.recommend-title{
 		font-size: 36upx;
 		width: 100%;

@@ -248,7 +248,7 @@
 			},
 			modifyJob(){
 				uni.navigateTo({
-					url: '../addJob/addJob?id='+ this.jobInfo.iid
+					url: '../addJob/addJob?id='+ this.jobInfo.id
 				})
 			}
 		}

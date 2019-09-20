@@ -70,20 +70,7 @@ var _vuex = __webpack_require__(/*! vuex */ 8);var _default =
 
 
 {
-  computed: (0, _vuex.mapState)(['userName']),
-  onLaunch: function onLaunch() {
-    // setTimeout(()=>{
-    // 	uni.reLaunch({
-    // 		url:'../../../pages/seller/main/main'
-    // 	})	
-    // },100)
-  },
-  onShow: function onShow() {
-    console.log('App Show');
-  },
-  onHide: function onHide() {
-    console.log('App Hide');
-  } };exports.default = _default;
+  computed: (0, _vuex.mapState)(['userName']) };exports.default = _default;
 
 /***/ }),
 /* 8 */,

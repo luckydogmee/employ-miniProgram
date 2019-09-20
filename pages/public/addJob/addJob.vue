@@ -156,6 +156,10 @@
 				linkageNum: 2, //3 表示为3级联动
 				linkage: true //true 表示开启联动
 			}
+			if(option.id){
+				this.job.id = option.id
+				this.getJobInfo()
+			}
 		},
 		computed: {
 			educationDegreeText(){
@@ -169,6 +173,29 @@
 			}
 		},
 		methods:{
+			getJobInfo(){
+				uni.showLoading({
+					mask: true
+				})
+				jobModel.jobDetail(this.job.id).then(res=>{
+					uni.hideLoading()
+					const { code, data, message } = res.data
+					if(code === '0'){
+						this.job = data
+					}else{
+						uni.showToast({
+							icon: 'none',
+							title: message
+						})
+					}
+				}).catch(err=>{
+					uni.hideLoading()
+					uni.showToast({
+						icon: 'none',
+						title: '获取岗位详情失败'
+					})
+				})
+			},
 			jobNameChanged(value){
 				this.job.jobName = value
 			},

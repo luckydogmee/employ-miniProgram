@@ -282,7 +282,24 @@ button.swiper-button:after {
 }
 .userAgreement {
   background: #FFFFFF;
-  height: 1120rpx;
+  height: 1100rpx;
+  position: relative;
+  padding: 40rpx 20rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.close-icon {
+  width: 24rpx;
+  height: 24rpx;
+  position: absolute;
+  top: 16rpx;
+  right: 24rpx;
+}
+.to-login {
+  color: #feae86;
+  font-size: 24rpx;
+  margin-top: 18rpx;
+  text-align: center;
 }
 /* ************ 表单相关 start ************** */
 .form-item {

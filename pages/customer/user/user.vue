@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<UserItem type="customer" :userData="userData" />
+		<UserItem type="customer" :userData="userData" @on-click-setting="setUser" />
 		<view class="flex-container">
 			<view class="flex-item">
 				<view class="flex-title">共推荐求职者</view>
@@ -116,6 +116,11 @@
 					})
 				})
 			},
+			setUser(){
+				uni.navigateTo({
+					url: '../../customer/user/detail',
+				})
+			},
 			switchItem(index){
 				this.dialogActive = index
 				if(this.dialogActive == 0){
@@ -125,6 +130,8 @@
 				}
 			},
 			getCashoutList(){
+				this.$refs.recommendRecord.open()
+				return
 				uni.showLoading({
 					title: '加载中...'
 				})

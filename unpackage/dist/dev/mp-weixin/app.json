@@ -15,7 +15,8 @@
     "pages/user/inputInfo/inputInfo",
     "pages/public/Chat/Chat",
     "pages/public/addJobSuccess/addJobSuccess",
-    "pages/public/addJob/addJob"
+    "pages/public/addJob/addJob",
+    "pages/customer/user/detail"
   ],
   "subPackages": [],
   "window": {

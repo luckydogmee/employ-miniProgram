@@ -36,14 +36,6 @@
 							<label class="radio"><radio value="1" color="#ff8352" style="transform:scale(0.7)" />女</label>
 						</radio-group>	
 					</view>
-					<!-- <picker
-						@change="genderChange"
-						class="picker"
-						:range="genderArray"
-						:value="gender"
-					>
-						<view class="select">nan</view>
-					</picker> -->
 				</view>
 				<view class="form-item form-input">
 					<view class="sy-label">
@@ -86,6 +78,7 @@
 		</uniPopup>
 		<uniPopup ref="userAgreement" custom="true">
 			<view class="userAgreement">
+				<image class="close-icon" src="../../../static/icon/close.png" @click="closeDialog" />
 				<view class="u-title">赏易聘小程序用户协议及隐私政策</view>
 				<view class="u-p">用户您好：<view>
 				<view class="u-p-t">在使用本产品之前，请您认真阅读本用户协议及隐私政策，更好的了解我们所提供的服务以及您享有的权利义务。您开始使用赏易聘小程序服务，即表示您已经确认并接受了本文件中的全部条款。</view>
@@ -105,7 +98,7 @@
 				<view class="u-p-t u-p-t2">四、服务说明</view>
 				<view class="u-p-t">1.赏易聘小程序通过互联网为用户提供网络服务，包括在线及离线的相关业务。为使用网络服务，用户应自行配备进入互联网所必需的设备，包括计算机、数据机或其它存取装置，并自行支付登陆互联网所需要的费用。</view>
 				<view class="u-p-t">2.赏易聘小程序在提供网络服务时，可能会对部分网络服务收取一定的费用，在此情况下，会在相关页面上做明确的提示。如用户拒绝支付该等费用，则不能使用相关的网络服务。付费业务将在本注册条款的基础上另行规定服务条款，以规范付费业务的内容和双方的权利义务，用户应认真阅读，如用户购买付费业务，则视为接受付费业务的服务条款。</view>
-				<view class="u-p-t"><view class="u-p-t">3.无论是付费服务还是赏易聘小程序的免费服务均有有效期，有效期结束后服务将自动终止，且有效期不可中断或延期。除非本注册条款或其他相关服务条款另有规定，所有付费业务均不退费。</view>
+				<view class="u-p-t">3.无论是付费服务还是赏易聘小程序的免费服务均有有效期，有效期结束后服务将自动终止，且有效期不可中断或延期。除非本注册条款或其他相关服务条款另有规定，所有付费业务均不退费。</view>
 				<view class="u-p-t">4.对于利用赏易聘小程序进行非法活动，或其言行（无论线上或者线下的）背离赏易聘小程序严肃招聘目的的，赏易聘小程序将严肃处理，包括将其列入黑名单、将其被投诉的情形公之于众、删除用户帐号等处罚措施，给赏易聘小程序造成经济或者名誉损失的，赏易聘小程序将追究其法律责任。</view>
 				<view class="u-p-t">5.赏易聘小程序有权向其用户发送广告信，或为活动等目的，向其用户发送电子邮件、短信或电话通知。</view>
 				<view class="u-p-t">6.为提高赏易聘小程序用户招聘的成功率和效率的目的，赏易聘小程序有权将赏易聘小程序的用户的招聘/应聘信息在赏易聘小程序的合作商平台进行展示和推荐。</view>
@@ -188,7 +181,7 @@
 				<view class="u-p-t">赏易聘小程序非常重视用户的个人隐私，并致力于保护用户的个人信息，希望与用户之间建立真诚的信任关系，帮助商户和求职者更好地匹配。</view>
 				<view class="u-p-t">在您使用赏易聘小程序软件的服务时，赏易聘小程序可能会收集和使用您的相关信息。本《隐私政策》将详细解释，我们在提供服务的过程中如何收集、储存和使用这些相关信息，以及我们为您提供的控制和保护这些信息的方式。</view>
 				<view class="u-p-t">本《隐私政策》与您所使用的赏易聘小程序服务息息相关，希望您仔细阅读。当您使用或继续使用我们的服务，即表明同意我们按照本《隐私政策》收集、储存和使用您的相关信息。 如果您对本隐私政策有任何问题或建议，请通过service@jiepinhr.com与我们联系。</view>
-				<view class="u-p-t u-p-t2">二、我们可能收集到的信息</view></view>
+				<view class="u-p-t u-p-t2">二、我们可能收集到的信息</view>
 				<view class="u-p-t">在您使用赏易聘小程序产品的过程中，我们可能会收集部分使用信息并发往我们的服务器。我们的服务器收到的信息可划分为两类，一类是关于用户如何使用赏易聘小程序产品的信息，另外一类是用户所拥有或提交数据的汇总统计信息。我们收集信息是为了向所有用户提供更好的服务，其中既包括一些基本信息（例如您的使用频率），也包括一些较为复杂的信息（例如您对哪些行业或岗位更感兴趣）。</view>
 				<view class="u-p-t">我们有两种信息收集方式：</view>
 				<view class="u-p-t">1.您向我们提供的信息</view>
@@ -522,7 +515,7 @@
 				})
 			},
 			toLogin(){
-				uni.reLaunch({
+				uni.navigateTo({
 					url: '../login/login'
 				})
 			},
@@ -531,153 +524,12 @@
 			},
 			showUserAgreement(){
 				this.$refs.userAgreement.open()
+			},
+			closeDialog(){
+				this.$refs.userAgreement.close()
 			}
 		}
 	}
 </script>
 
-<style lang="scss" scoped >
-	.register-container{
-		height: 100vh;
-		width: 750upx;
-		background: url( ../../../static/img/register-bg.png ) no-repeat;
-		background-size: 100% 100%;
-	}
-	.content{
-		width: 500upx;
-		margin: 0 auto;
-		margin-top: 200upx;
-		background: rgba(0,0,0,0);
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		.logo{
-			width: 194upx;
-			height: 98upx;
-			image{
-				width: 100%;
-				height: 100%;
-			}
-		}
-		.form{
-			margin-top: 64upx;
-			width: 100%;
-			.form-item{
-				margin-top: 28upx;
-				position: relative;
-				display: flex;
-				flex-direction: row;
-				justify-content: space-between;
-				align-items: center;
-				.sy-label{
-					font-size: 28upx;
-					font-weight: 600;
-					color: #989696;
-					height: 60upx;
-					line-height: 60upx;
-					vertical-align: bottom;
-				}
-			}
-			.to-login{
-				color: #feae86;
-				font-size: 24upx;
-				margin-top: 18upx;
-				text-align: center;
-			}
-			input{
-				font-weight: 600;
-				letter-spacing: 4upx;
-			}
-		}
-		.verfiy-item {
-			border-bottom: 1upx solid #ffd5a3;
-			input{
-				width: 320upx;
-				border-bottom: none;	
-			}
-		}
-		.verify-code-btn{
-			width: 170upx;
-			height: 46upx;
-			line-height: 46upx;
-			position: absolute;
-			right: 0;
-			font-size: 24upx;
-			bottom: 10upx;
-			background: #feae86; 
-			&.disabled{
-				background: #ddd;
-			}
-		}
-		.submit-btn{
-			height: 56upx;
-			line-height: 56upx;
-			width: 210upx;
-			border-radius: 28upx;
-			font-size: 30upx;
-			letter-spacing: 4upx;
-			font-weight: 600;
-			background: linear-gradient(#fcb998, #fe9764);
-		}
-		.agreement{			
-			margin-top: 24upx;
-			font-size: 20upx;
-			color: #989696;
-			display:flex;
-			align-items:center;
-			checkbox{
-				transform: scale(0.5);
-			}
-		}
-	}
-	.registerSuccess{
-		width: 460upx;
-		height: 350upx;
-		background: url(../../../static/img/register-dialog.png) no-repeat ;
-		background-size: 100% 100%;
-		overflow: hidden;
-		.text-box{
-			margin-top: 220upx;
-			text-align: center;
-		}
-		text{
-			font-size: 24upx;
-			color: #333;
-			margin-bottom: 24upx;
-			width: 100%;
-			display: block;
-		}
-	}
-	.picker{
-		width: 372upx;
-		height: 60upx;
-		
-	}
-	.radio{
-		font-size: 28upx;
-		color: #8F8F94;
-		margin: 0 30upx;
-	}
-	.avatar{
-		width: 164upx;
-		text-align: center;
-		margin: 0 auto;
-		image{
-			height: 84upx;
-			width: 84upx;
-			border-radius: 50%;
-		}
-		.text{
-			font-size: 20upx;
-		}
-	}
-	.userAgreement{
-		width: 700upx;
-		height: 1200upx;
-		overflow-y: auto;
-	}
-	.user-agreement{
-		color: #ffd5a3;
-	}
-</style>
+<style src="./register.scss" lang="scss" scoped ></style>

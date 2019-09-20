@@ -205,7 +205,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 25));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var InputCell = function InputCell() {return __webpack_require__.e(/*! import() | components/InputCell/InputCell */ "components/InputCell/InputCell").then(__webpack_require__.bind(null, /*! @/components/InputCell/InputCell.vue */ 236));};var QSpicker = function QSpicker() {return Promise.all(/*! import() | components/QuShe-picker/QuShe-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/QuShe-picker/QuShe-picker")]).then(__webpack_require__.bind(null, /*! @/components/QuShe-picker/QuShe-picker.vue */ 250));};
+var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 25));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var InputCell = function InputCell() {return __webpack_require__.e(/*! import() | components/InputCell/InputCell */ "components/InputCell/InputCell").then(__webpack_require__.bind(null, /*! @/components/InputCell/InputCell.vue */ 242));};var QSpicker = function QSpicker() {return Promise.all(/*! import() | components/QuShe-picker/QuShe-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/QuShe-picker/QuShe-picker")]).then(__webpack_require__.bind(null, /*! @/components/QuShe-picker/QuShe-picker.vue */ 256));};
 var jobModel = new _job.default();var _default =
 {
   data: function data() {
@@ -263,6 +263,10 @@ var jobModel = new _job.default();var _default =
       linkageNum: 2, //3 表示为3级联动
       linkage: true //true 表示开启联动
     };
+    if (option.id) {
+      this.job.id = option.id;
+      this.getJobInfo();
+    }
   },
   computed: {
     educationDegreeText: function educationDegreeText() {
@@ -276,6 +280,29 @@ var jobModel = new _job.default();var _default =
     } },
 
   methods: {
+    getJobInfo: function getJobInfo() {var _this = this;
+      uni.showLoading({
+        mask: true });
+
+      jobModel.jobDetail(this.job.id).then(function (res) {
+        uni.hideLoading();var _res$data =
+        res.data,code = _res$data.code,data = _res$data.data,message = _res$data.message;
+        if (code === '0') {
+          _this.job = data;
+        } else {
+          uni.showToast({
+            icon: 'none',
+            title: message });
+
+        }
+      }).catch(function (err) {
+        uni.hideLoading();
+        uni.showToast({
+          icon: 'none',
+          title: '获取岗位详情失败' });
+
+      });
+    },
     jobNameChanged: function jobNameChanged(value) {
       this.job.jobName = value;
     },
@@ -400,8 +427,8 @@ var jobModel = new _job.default();var _default =
 
       var array = Object.values(this.job);
       jobModel.saveJob.apply(jobModel, _toConsumableArray(array)).then(function (res) {
-        uni.hideLoading();var _res$data =
-        res.data,code = _res$data.code,message = _res$data.message,data = _res$data.data;
+        uni.hideLoading();var _res$data2 =
+        res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
         if (code === '0') {
           uni.showToast({
             title: '创建成功' });
