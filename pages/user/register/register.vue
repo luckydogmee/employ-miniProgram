@@ -332,18 +332,18 @@
 					sourceType: ['album', 'camera'],
 					success: (res) => {
 						that.avatar = res.tempFilePaths[0]
-						that.getImageWebUrl(res.tempFilePaths[0])
+						that.getImageWebUrl(res.tempFilePaths[0],'avatar')
 					}
 				})
 			},
-			getImageWebUrl(path){
+			getImageWebUrl(path,name){
 				const that = this
 				uni.showLoading({
 					title: '上传中，请稍候...'
 				})
 				uni.uploadFile({
 					// 这里修改上传地址
-					url: config.base_url + '/store/getImageWebUrl',
+					url: config.base_url + '/user/uploadAvatar',
 					filePath: path,
 					name: 'file',
 					success(res){
@@ -359,6 +359,8 @@
 							})
 							that.avatarChanged = true
 							that.uploadedAvatar = data.url
+							that.avatar = data.url
+							console.log(that)
 						}else{
 							uni.showToast({
 								icon:'none',
