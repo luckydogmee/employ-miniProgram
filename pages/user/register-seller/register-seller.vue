@@ -91,6 +91,7 @@
 					companyImg: '', // 工作场景
 					logo: '', // 公司logo
 					phone: '', // 电话号码
+					avatar:''
 				},
 				avatar: '../../../static/icon/add-avatar.png',
 				avatarChanged: false,
@@ -164,7 +165,8 @@
 					success: (res) => {
 						that.avatar = res.tempFilePaths[0]
 						// 这里考虑到可能上传头像地址不同
-						that.uploadAvatar(res.tempFilePaths[0],)
+						// that.uploadAvatar(res.tempFilePaths[0],)
+						that.getImageWebUrl(res.tempFilePaths[0], 'avatar')
 					}
 				})
 			},
@@ -372,6 +374,7 @@
 							})
 							that.imageChanged = true
 							that.resume[name] = data.url
+							console.log()
 						}else{
 							uni.showToast({
 								icon:'none',
