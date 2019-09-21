@@ -33,7 +33,24 @@
 				</picker>
 			</InputCell>
 			<InputCell label="公司地址" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="resume.address" placeholder="请输入详细地址" @on-input="addressChanged"></InputCell>
-			<InputCell label="所在行业" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="resume.industryCode" placeholder="请输入行业" @on-input="industryChanged"></InputCell>
+			<InputCell label="所在行业"
+				:required="isEdit" 
+				:isSell="true"
+				:disabled="true"
+				:withPlugin="true"
+				:hasSlot="true" 
+				:content="industryText" 
+				placeholder="请选择行业>" 
+			>
+				<picker
+					@change="industryChange"
+					class="picker"
+					:range="industryArray"
+					:value="resume.industryCode"
+				>
+					<view class="select"></view>
+				</picker>
+			</InputCell>
 			<InputCell label="招聘联系人" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="resume.contactName" placeholder="请输入联系人" @on-input="contactNameChanged"></InputCell>
 			
 			<view class="upload-wrapper">
@@ -107,7 +124,8 @@
 				citySelected: ['510000','',''], // 已选中的城市
 				readySendCode: true,
 				surplusSecond: 0,
-				verifyCodeTimer: null
+				verifyCodeTimer: null,
+				industryArrayObject:[]
 			}
 		},
 		components: {
@@ -115,19 +133,22 @@
 			UploadItem
 		},
 		computed:{
-			// avatar(){
-			// 	if(this.avatarChanged){
-			// 		return this.uploadedAvatar
-			// 	}else{
-			// 		// 并未设置男女
-			// 		return '../../../static/img/avatar-man.png'
-			// 		// if(this.gender == 0){
-			// 		// 	return '../../../static/img/avatar-man.png'
-			// 		// }else{
-			// 		// 	return '../../static/img/avatar-women.png'
-			// 		// }
-			// 	}
-			// }
+			industryText(){
+				let text = ''
+				this.industryArrayObject.forEach(item=>{
+					if(item.code === this.resume.industryCode){
+						text = item.name
+					}
+				})
+				return text
+			},
+			industryArray(){
+				const tempArray = []
+				this.industryArrayObject.forEach(item=>{
+					tempArray.push(item.name)
+				})
+				return tempArray
+			}
 		},
 		onLoad(options){
 			if(options.isEdit === 'false'){
@@ -136,6 +157,7 @@
 			if(options.isEdit === 'true'){
 				this.isEdit = true
 			}
+			this.getIndustry()
 			if(options.isModify == 1){
 				this.isModify = true
 				this.btnText = '提交修改'
@@ -151,10 +173,31 @@
 					}
 				})
 			},
+			getIndustry(){
+				jobModel.getIndustry().then(res=>{
+					const { code, message, data } = res.data
+					if(code === '0'){
+						this.industryArrayObject = data
+					}else{
+						uni.showToast({
+							icon:'none',
+							title:message
+						})
+					}
+				}).catch(err=>{
+					uni.showToast({
+						icon:'none',
+						title:'获取行业信息失败'
+					})
+				})
+			},
+			industryChange(e){
+				this.resume.industryCode = this.industryArrayObject[e.target.value].code
+			},
 			cityPickerChange(e){
 				const { code, value } = e.detail
 				this.resume.cityCode = code.join(',')
-				this.cityCodeText = Array.from( new Set(value)).join('')
+				this.cityCodeText = Array.from( new Set(value)).join('-')
 			},
 			chooseAvatar(){
 				const that = this

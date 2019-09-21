@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "企业信息",
+  "usingComponents": {
+    "input-cell": "/components/InputCell/InputCell",
+    "upload-item": "/components/UploadItem/UploadItem",
+    "mpvue-city-picker": "/components/mpvue-citypicker/mpvueCityPicker"
+  }
+}

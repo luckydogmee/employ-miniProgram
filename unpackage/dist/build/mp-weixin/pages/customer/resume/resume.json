@@ -3,6 +3,7 @@
     "list-resume": "/components/ListResume/ListResume",
     "search": "/components/Search/Search",
     "uni-popup": "/components/uni-popup/uni-popup",
-    "dialog": "/components/Dialog/Dialog"
+    "dialog": "/components/Dialog/Dialog",
+    "h-time-picker": "/components/h-timePicker/h-timePicker"
   }
 }

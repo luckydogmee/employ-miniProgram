@@ -107,6 +107,12 @@ class UserModel  extends HTTP {
 			url: '/user/getUserDetail'
 		})
 	}
+	// 获取B端用户信息
+	getCompanyInfo(){
+		return this.request({
+			url: '/user/getCompanyInfo'
+		})
+	}
 	// 更改用户信息
 	updateUser(age,name,gender,avatar,phone){
 		return this.request({

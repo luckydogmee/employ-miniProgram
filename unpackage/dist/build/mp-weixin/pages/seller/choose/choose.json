@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "list-choose": "/components/ListChoose/ListChoose",
+    "search": "/components/Search/Search",
+    "dialog": "/components/Dialog/Dialog"
+  }
 }

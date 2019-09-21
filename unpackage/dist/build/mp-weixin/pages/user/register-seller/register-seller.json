@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "企业注册",
+  "usingComponents": {
+    "input-cell": "/components/InputCell/InputCell",
+    "upload-item": "/components/UploadItem/UploadItem"
+  }
+}

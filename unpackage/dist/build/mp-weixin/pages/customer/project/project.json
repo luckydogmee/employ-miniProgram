@@ -1,6 +1,8 @@
 {
   "navigationBarTitleText": "我的项目",
   "usingComponents": {
-    "list-project": "/components/ListProject/ListProject"
+    "list-project": "/components/ListProject/ListProject",
+    "uni-popup": "/components/uni-popup/uni-popup",
+    "h-time-picker": "/components/h-timePicker/h-timePicker"
   }
 }

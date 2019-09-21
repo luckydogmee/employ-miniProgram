@@ -160,19 +160,35 @@
 				// 	// 执行真正的登录
 				// 	return userModel.login(this.phone, 'A')
 				// })
+				uni.showLoading({
+					mask: true
+				})
 				userModel.login(this.phone, this.verifyCode, 'A').then(res=>{
+					uni.hideLoading()
 					const { code, data, message } = res.data
 					if(code === '0'){
-						// 登录成功
-						uni.showToast({
-							title: '登录成功，即将跳转到首页'
-						})
-						uni.setStorageSync('token', data.token)
-						setTimeout(()=>{
-							uni.reLaunch({
-								url: '../../customer/main/main'
+						if(data.isRegister == 0){
+							// 登录成功
+							uni.showToast({
+								title: '登录成功'
 							})
-						},2000)	
+							uni.setStorageSync('token', data.token)
+							uni.setStorageSync('isLogin',data.isLogin)
+							uni.setStorageSync('isRegister',data.isRegister)
+							setTimeout(()=>{
+								uni.reLaunch({
+									url: '../../customer/main/main'
+								})
+							},2000)		
+						}else{
+							uni.showToast({
+								icon: 'none',
+								title: '手机号未注册'
+							})
+							uni.navigateTo({
+								url: '../register/register'
+							})
+						}
 					}else{
 						uni.showToast({
 							icon: 'none',
@@ -182,6 +198,7 @@
 					
 				})
 				.catch(err=>{
+					uni.hideLoading()
 					uni.showToast({
 						icon: 'none',
 						title: '登录失败，请稍候再试'
@@ -268,6 +285,9 @@
 			font-size: 24upx;
 			bottom: 10upx;
 			background: #feae86; 
+			&.disabled{
+				background: #ddd;
+			}
 		}
 		.submit-btn{
 			height: 56upx;

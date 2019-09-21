@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "user-item": "/components/UserItem/UserItem"
+    "user-item": "/components/UserItem/UserItem",
+    "uni-popup": "/components/uni-popup/uni-popup"
   },
   "component": true
 }

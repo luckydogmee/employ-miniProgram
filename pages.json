@@ -26,7 +26,6 @@
 				"navigationBarTitleText": "岗位详情"
 			}
 		},
-		
 		{
 		    "path" : "pages/user/login/login",
 		    "style" : {
@@ -92,13 +91,19 @@
             "style" : {
 				"navigationBarTitleText": "添加项目"
 			}
-        }
-        ,{
+        },
+		{
             "path" : "pages/customer/user/detail",
             "style" : {
 				"navigationBarTitleText": "个人信息"
 			}
-        }
+        },
+		{
+		    "path" : "pages/seller/user/detail",
+		    "style" : {
+				"navigationBarTitleText": "企业信息"
+			}
+		}
     ],
     "globalStyle": {
         "navigationBarTextStyle": "white",

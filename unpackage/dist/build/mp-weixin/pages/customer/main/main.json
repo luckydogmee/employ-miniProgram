@@ -6,6 +6,7 @@
     "home": "/pages/customer/home/home",
     "project": "/pages/customer/project/project",
     "resume": "/pages/customer/resume/resume",
-    "user": "/pages/customer/user/user"
+    "user": "/pages/customer/user/user",
+    "uni-popup": "/components/uni-popup/uni-popup"
   }
 }

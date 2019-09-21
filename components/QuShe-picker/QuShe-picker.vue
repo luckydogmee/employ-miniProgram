@@ -397,35 +397,6 @@
 						this.days = days;
 						this.setObj = setObj;
 						break;
-					case 'city':
-						value = this.dataSet.defaultValue || [0, 0, 0];
-						provinceData = require('./city-data/province.js').default;
-						cityData = require('./city-data/city.js').default;
-						areaData = require('./city-data/area.js').default;
-						provinceDataList = provinceData;
-						cityDataList = cityData[value[0]];
-						areaDataList = areaData[value[0]][value[1]];
-						//city、provincialStreet
-						this.provinceDataList = provinceDataList;
-						this.cityDataList = cityDataList;
-						this.areaDataList = areaDataList;
-						break;
-					case 'provincialStreet':
-						value = this.dataSet.defaultValue || [0, 0, 0, 0];
-						provinceData = require('./city-data/province.js').default;
-						cityData = require('./city-data/city.js').default;
-						areaData = require('./city-data/area.js').default;
-						streetData = require('./city-data/streets.js').default;
-						provinceDataList = provinceData;
-						cityDataList = cityData[value[0]];
-						areaDataList = areaData[value[0]][value[1]];
-						streetDataList = streetData[value[0]][value[1]][value[2]];
-						//provincialStreet
-						this.provinceDataList = provinceDataList;
-						this.cityDataList = cityDataList;
-						this.areaDataList = areaDataList;
-						this.streetDataList = streetDataList;
-						break;
 					case 'custom':
 						setObj = _app.creatCustomObj(this.dataSet);
 						if (setObj.defaultValue) {

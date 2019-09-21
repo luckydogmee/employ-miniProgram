@@ -156,7 +156,7 @@
 				linkageNum: 2, //3 表示为3级联动
 				linkage: true //true 表示开启联动
 			}
-			if(option.id){
+			if(options.id){
 				this.job.id = option.id
 				this.getJobInfo()
 			}
