@@ -258,8 +258,27 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _process = _interopRequireDefault(__webpack_require__(/*! @/models/process.js */ 149));
-var _utils = __webpack_require__(/*! @/utils/utils.js */ 23);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var ListChoose = function ListChoose() {return __webpack_require__.e(/*! import() | components/ListChoose/ListChoose */ "components/ListChoose/ListChoose").then(__webpack_require__.bind(null, /*! @/components/ListChoose/ListChoose.vue */ 253));};var hTimePicker = function hTimePicker() {return __webpack_require__.e(/*! import() | components/h-timePicker/h-timePicker */ "components/h-timePicker/h-timePicker").then(__webpack_require__.bind(null, /*! @/components/h-timePicker/h-timePicker.vue */ 201));};var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 27));};
+var _utils = __webpack_require__(/*! @/utils/utils.js */ 23);
+var _config = __webpack_require__(/*! ../../../config.js */ 26);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var ListChoose = function ListChoose() {return __webpack_require__.e(/*! import() | components/ListChoose/ListChoose */ "components/ListChoose/ListChoose").then(__webpack_require__.bind(null, /*! @/components/ListChoose/ListChoose.vue */ 253));};var hTimePicker = function hTimePicker() {return __webpack_require__.e(/*! import() | components/h-timePicker/h-timePicker */ "components/h-timePicker/h-timePicker").then(__webpack_require__.bind(null, /*! @/components/h-timePicker/h-timePicker.vue */ 201));};var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 27));};
 var processModel = new _process.default();var _default =
 {
   data: function data() {
@@ -271,7 +290,9 @@ var processModel = new _process.default();var _default =
       entryTime: '',
       timeText: '面试',
       inputContent: '', // 申诉内容
-      tempItem: '' };
+      tempItem: '',
+      serviceTel: _config.config.serviceTel,
+      appealType: '' };
 
   },
   components: {
@@ -390,6 +411,12 @@ var processModel = new _process.default();var _default =
       if (btn.text === '申诉') {
         this.appeal(item);
       }
+      if (btn.text === '认可申诉') {
+        this.approvalAppeal(item);
+      }
+      if (btn.text === '申诉反馈') {
+        this.appealFeedback(item);
+      }
       if (btn.text === '认可') {
         this.approval(item);
       }
@@ -424,6 +451,9 @@ var processModel = new _process.default();var _default =
             console.log('success');
           } });
 
+      }
+      if (btn.text === '向平台申诉') {
+        this.$refs.notice.open();
       }
     },
     push: function push() {
@@ -586,6 +616,13 @@ var processModel = new _process.default();var _default =
     },
     appeal: function appeal(item) {
       this.tempItem = item;
+      this.appealType = "A";
+      this.$refs.inputDialog.open();
+    },
+    // B 申诉反馈
+    appealFeedback: function appealFeedback(item) {
+      this.tempItem = item;
+      this.appealType = "B";
       this.$refs.inputDialog.open();
     },
     appealSubmit: function appealSubmit() {
@@ -594,38 +631,61 @@ var processModel = new _process.default();var _default =
 
       var item = this.tempItem;
       var that = this;
-      processModel.appeal(item.id, this.inputContent).then(function (res) {
-        uni.hideLoading();
-        that.$refs.inputDialog.close();var _res$data7 =
-        res.data,code = _res$data7.code,message = _res$data7.message,data = _res$data7.data;
-        if (code === '0') {
-          that.getProcessList();
-        } else {
+      if (this.appealType === 'A') {
+        processModel.appeal(item.id, this.inputContent).then(function (res) {
+          uni.hideLoading();
+          that.$refs.inputDialog.close();var _res$data7 =
+          res.data,code = _res$data7.code,message = _res$data7.message,data = _res$data7.data;
+          if (code === '0') {
+            that.getProcessList();
+          } else {
+            uni.showToast({
+              icon: 'none',
+              title: message });
+
+          }
+        }).catch(function (err) {
+          uni.hideLoading();
           uni.showToast({
             icon: 'none',
-            title: message });
+            title: '提交失败' });
 
-        }
-      }).catch(function (err) {
-        uni.hideLoading();
-        uni.showToast({
-          icon: 'none',
-          title: '提交失败' });
+        });
+      } else if (this.appealType === 'B') {
+        processModel.appealFeedback(item.id, this.inputContent).then(function (res) {
+          uni.hideLoading();
+          that.$refs.inputDialog.close();var _res$data8 =
+          res.data,code = _res$data8.code,message = _res$data8.message,data = _res$data8.data;
+          if (code === '0') {
+            that.getProcessList();
+          } else {
+            uni.showToast({
+              icon: 'none',
+              title: message });
 
-      });
+          }
+        }).catch(function (err) {
+          uni.hideLoading();
+          uni.showToast({
+            icon: 'none',
+            title: '提交失败' });
+
+        });
+      }
+
     },
     appealCancel: function appealCancel() {
       this.$refs.inputDialog.close();
     },
-    // B 认可
+    // A 认可
     approval: function approval(item) {var _this = this;
       uni.showLoading({
         title: '请稍等...' });
 
       var that = this;
       processModel.approval(item.id, this.inputContent).then(function (res) {
-        uni.hideLoading();var _res$data8 =
-        res.data,code = _res$data8.code,message = _res$data8.message,data = _res$data8.data;
+        uni.hideLoading();var _res$data9 =
+        res.data,code = _res$data9.code,message = _res$data9.message,data = _res$data9.data;
         if (code === '0') {
           _this.processData.total += 1;
           _this.processData.list.push({
@@ -647,6 +707,40 @@ var processModel = new _process.default();var _default =
           title: '提交失败' });
 
       });
+    },
+    //B 认可申诉
+    approvalAppeal: function approvalAppeal() {var _this2 = this;
+      uni.showLoading({
+        title: '请稍等...' });
+
+      var that = this;
+      processModel.approvalAppeal(item.id, this.inputContent).then(function (res) {
+        uni.hideLoading();var _res$data10 =
+        res.data,code = _res$data10.code,message = _res$data10.message,data = _res$data10.data;
+        if (code === '0') {
+          _this2.processData.total += 1;
+          _this2.processData.list.push({
+            create_time: new Date(),
+            process_content: '认可申诉',
+            sort_number: item.sort_number + 1,
+            owner: item.owner == 1 ? 0 : 1 });
+
+        } else {
+          uni.showToast({
+            icon: 'none',
+            title: message });
+
+        }
+      }).catch(function (err) {
+        uni.hideLoading();
+        uni.showToast({
+          icon: 'none',
+          title: '提交失败' });
+
+      });
+    },
+    closeNotice: function closeNotice() {
+      this.$refs.notice.close();
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

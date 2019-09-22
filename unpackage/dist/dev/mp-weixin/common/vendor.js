@@ -2639,6 +2639,25 @@ ProcessModel = /*#__PURE__*/function (_HTTP) {_inherits(ProcessModel, _HTTP);
           processInfoId: processInfoId } });
 
 
+    }
+    // B申诉
+  }, { key: "appealFeedback", value: function appealFeedback(processInfoId, content) {
+      return this.request({
+        url: '/process/appealFeedback',
+        data: {
+          processInfoId: processInfoId,
+          content: content } });
+
+
+    }
+    // B认可
+  }, { key: "approvalAppeal", value: function approvalAppeal(processInfoId) {
+      return this.request({
+        url: '/process/approvalAppeal',
+        data: {
+          processInfoId: processInfoId } });
+
+
     } }]);return ProcessModel;}(_http.HTTP);var _default =
 
 
@@ -23385,7 +23404,8 @@ HTTP = /*#__PURE__*/function () {function HTTP() {_classCallCheck(this, HTTP);}_
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.config = void 0;var config = {
   base_url: 'http://wzkjsyp.natapp1.cc',
-  appkey: 'wx5666e9599cc559e6' };exports.config = config;
+  appkey: 'wx5666e9599cc559e6',
+  serviceTel: '1233131' };exports.config = config;
 
 /***/ }),
 

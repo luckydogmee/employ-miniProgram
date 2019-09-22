@@ -84,6 +84,25 @@ class ProcessModel extends HTTP {
 			}
 		})
 	}
+	// B申诉
+	appealFeedback(processInfoId, content){
+		return this.request({
+			url : '/process/appealFeedback',
+			data: {
+				processInfoId,
+				content
+			}
+		})
+	}
+	// B认可
+	approvalAppeal(processInfoId){
+		return this.request({
+			url : '/process/approvalAppeal',
+			data: {
+				processInfoId
+			}
+		})
+	}
 } 
 
 export default ProcessModel

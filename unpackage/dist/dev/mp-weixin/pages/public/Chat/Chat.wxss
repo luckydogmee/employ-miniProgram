@@ -156,4 +156,23 @@
   font-size: 22rpx;
   color: #ccc;
 }
+.notice-text {
+  font-size: 22rpx;
+  color: #595959;
+  text-indent: 44rpx;
+  padding: 20rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  line-height: 44rpx;
+}
+.selectDateDialog {
+  width: 462rpx;
+}
+.selectDate-footer .selectDate-btn {
+  height: 98%;
+}
+.selectDate-footer .singleBtn {
+  width: 462rpx;
+  height: 98%;
+}
 

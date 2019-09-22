@@ -62,7 +62,7 @@
 			</view>
 		</view>
 		<!-- 选择面试时间dialog -->
-		<uni-popup ref="selectDate" custom="true" :showMask="false" :maskClick="false">
+		<uni-popup ref="selectDate" custom="true">
 			<view class="selectDateDialog">
 				<view class="selectDate-title">
 					请选择{{timeText}}时间
@@ -89,7 +89,7 @@
 			</view>
 		</uni-popup>
 		<!-- 输入申诉内容dialog -->
-		<uni-popup ref="inputDialog" custom="true" :showMask="false" :maskClick="false">
+		<uni-popup ref="inputDialog" custom="true" >
 			<view class="selectDateDialog">
 				<view class="selectDate-title" style="text-align: center;font-size: 26upx;">
 					申诉
@@ -107,6 +107,24 @@
 				</view>
 			</view>
 		</uni-popup>
+		<!-- 向平台申诉 -->
+		<uni-popup ref="notice" custom="true">
+			<view class="selectDateDialog">
+				<view class="selectDate-title" style="text-align: center;font-size: 26upx;">
+					向平台申诉
+				</view>
+				<view class="selectDate-content" style="height: 140upx;padding-bottom:24upx;">
+					<view class="notice-text">
+						请与我们的客服人员联系，我们将竭诚为您解决问到的问题，客服电话：{{serviceTel}}
+					</view>
+				</view>
+				<view class="selectDate-footer">
+					<view class="selectDate-btn confirm singleBtn" @click="closeNotice">
+						确认
+					</view>
+				</view>
+			</view>
+		</uni-popup>
 	</view>
 </template>
 
@@ -116,6 +134,7 @@
 	import uniPopup from "@/components/uni-popup/uni-popup.vue"
 	import ProcessModel from '@/models/process.js'
 	import { formatDate } from '@/utils/utils.js'
+	import { config } from '../../../config.js'
 	const processModel = new ProcessModel()
 	export default {
 		data() {
@@ -128,6 +147,8 @@
 				timeText: '面试',
 				inputContent: '', // 申诉内容
 				tempItem: '',
+				serviceTel: config.serviceTel,
+				appealType: ''
 			};
 		},
 		components:{
@@ -246,6 +267,12 @@
 				if(btn.text === '申诉'){
 					this.appeal(item)
 				}
+				if(btn.text === '认可申诉'){
+					this.approvalAppeal(item)
+				}
+				if(btn.text === '申诉反馈'){
+					this.appealFeedback(item)
+				}
 				if(btn.text === '认可'){
 					this.approval(item)
 				}
@@ -280,6 +307,9 @@
 					        console.log('success');
 					    }
 					});
+				}
+				if(btn.text === '向平台申诉'){
+					this.$refs.notice.open()
 				}
 			},
 			push(){
@@ -442,6 +472,13 @@
 			},
 			appeal(item){
 				this.tempItem = item
+				this.appealType ="A"
+				this.$refs.inputDialog.open()
+			},
+			// B 申诉反馈
+			appealFeedback(item){
+				this.tempItem = item
+				this.appealType ="B"
 				this.$refs.inputDialog.open()
 			},
 			appealSubmit(){
@@ -450,30 +487,53 @@
 				})
 				const item = this.tempItem
 				const that = this
-				processModel.appeal(item.id,this.inputContent).then(res=>{
-					uni.hideLoading()
-					that.$refs.inputDialog.close()
-					const { code, message, data } = res.data
-					if(code === '0'){
-						that.getProcessList()
-					}else{
+				if(this.appealType === 'A'){
+					processModel.appeal(item.id,this.inputContent).then(res=>{
+						uni.hideLoading()
+						that.$refs.inputDialog.close()
+						const { code, message, data } = res.data
+						if(code === '0'){
+							that.getProcessList()
+						}else{
+							uni.showToast({
+								icon: 'none',
+								title: message
+							})
+						}
+					}).catch(err=>{
+						uni.hideLoading()
 						uni.showToast({
 							icon: 'none',
-							title: message
+							title: '提交失败'
 						})
-					}
-				}).catch(err=>{
-					uni.hideLoading()
-					uni.showToast({
-						icon: 'none',
-						title: '提交失败'
-					})
-				})
+					})	
+				}else if(this.appealType === 'B'){
+					processModel.appealFeedback(item.id,this.inputContent).then(res=>{
+						uni.hideLoading()
+						that.$refs.inputDialog.close()
+						const { code, message, data } = res.data
+						if(code === '0'){
+							that.getProcessList()
+						}else{
+							uni.showToast({
+								icon: 'none',
+								title: message
+							})
+						}
+					}).catch(err=>{
+						uni.hideLoading()
+						uni.showToast({
+							icon: 'none',
+							title: '提交失败'
+						})
+					})	
+				}
+				
 			},
 			appealCancel(){
 				this.$refs.inputDialog.close()
 			},
-			// B 认可
+			// A 认可
 			approval(item){
 				uni.showLoading({
 					title: '请稍等...'
@@ -503,6 +563,40 @@
 						title: '提交失败'
 					})
 				})
+			},
+			//B 认可申诉
+			approvalAppeal(){
+				uni.showLoading({
+					title: '请稍等...'
+				})
+				const that = this
+				processModel.approvalAppeal(item.id,this.inputContent).then(res=>{
+					uni.hideLoading()
+					const { code, message, data } = res.data
+					if(code === '0'){
+						this.processData.total += 1
+						this.processData.list.push({
+							create_time: new Date(),
+							process_content: '认可申诉',
+							sort_number: item.sort_number + 1,
+							owner: item.owner == 1? 0:1
+						})
+					}else{
+						uni.showToast({
+							icon: 'none',
+							title: message
+						})
+					}
+				}).catch(err=>{
+					uni.hideLoading()
+					uni.showToast({
+						icon: 'none',
+						title: '提交失败'
+					})
+				})
+			},
+			closeNotice(){
+				this.$refs.notice.close()
 			}
 		}
 	}
@@ -640,5 +734,23 @@
 	.textarea-place{
 		font-size: 22upx;
 		color:#ccc;
+	}
+	.notice-text{
+		font-size: 22upx;
+		color: #595959;
+		text-indent: 44upx;
+		padding: 20upx;
+		box-sizing: border-box;
+		line-height: 44upx;
+	}
+	.selectDateDialog{
+		width: 462upx;
+	}
+	.selectDate-footer .selectDate-btn{
+		height: 98%;
+	}
+	.selectDate-footer .singleBtn{
+		width: 462upx;
+		height: 98%;
 	}
 </style>
