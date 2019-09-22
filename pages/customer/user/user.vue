@@ -19,7 +19,7 @@
 			<view class="button-item navigate" @click="getCashoutList">
 				申请提现
 			</view>
-			<view class="button-item switch-account">
+			<view class="button-item switch-account" @click="switchAccount">
 				切换帐号
 			</view>
 		</view>
@@ -222,6 +222,12 @@
 						icon: 'none',
 						title: '获取提现记录失败'
 					})
+				})
+			},
+			// 切换账号
+			switchAccount(){
+				uni.navigateTo({
+					url: '../../public/switchAccount/switchAccount'
 				})
 			}
 		}

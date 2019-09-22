@@ -169,6 +169,21 @@ class UserModel  extends HTTP {
 			url: '/login/loginForB'
 		})
 	}
+	
+	// 切换账号
+	switchAccount(phone, code,type){
+		let url = '/login/switchAccount'
+		if(type == 'B'){
+			url = '/login/switchAccountForB'
+		}
+		return this.request({
+			url,
+			data:{
+				phone,
+				code
+			}
+		})
+	}
 }
 
 export default UserModel

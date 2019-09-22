@@ -5,7 +5,7 @@
 		</view>
 		<view class="chat-scroll">
 			<view v-for="item in processData.list" :key="item.id">
-				<view v-if="(item.owner == 0 && loginType == 'B')||(item.owner == 1 && loginType !== 'B')" class="message message-a">
+				<view v-if="((item.owner == 0 && loginType == 'B')||(item.owner == 1 && loginType !== 'B')) && (item.sort_number !=0 || loginType !='B' ) " class="message message-a">
 					<view class="message-time">
 						{{item.create_time|filterDate}}
 					</view>
@@ -32,7 +32,7 @@
 						</view>
 					</view>
 				</view>
-				<view v-else class="message message-b">
+				<view v-else-if="item.sort_number !=0 || loginType !='B'" class="message message-b">
 					<view class="message-time">
 						{{item.create_time|filterDate}}
 					</view>
@@ -41,7 +41,7 @@
 							<image src="../../../static/img/avatar-man.png" mode=""></image>
 						</view>
 						<view class="arrow"></view>
-						<view class="message-content message-content-withbtn"  v-if="item.sort_number == processData.total &&((loginType == 'B' && item.button_b.length>0)||loginType!='B' && item.button_a.length>0)">
+						<view class="message-content message-content-withbtn"  v-if="(item.sort_number == processData.total || item.sort_number == 0) &&((loginType == 'B' && item.button_b.length>0)||loginType!='B' && item.button_a.length>0)">
 							<view class="text">{{item.process_content}}</view>
 							<view class="btn-group" v-if="loginType == 'B'">
 								<view class="message-btn" v-for="btn in item.button_b" :key="btn.text" @click="handleBtnClick(btn,item)">
@@ -272,6 +272,14 @@
 					}
 					this.timeText = '离职'
 					this.$refs.selectDate.open()
+				}
+				if(btn.text === '复制文本'){
+					uni.setClipboardData({
+					    data: item.process_content,
+					    success: function () {
+					        console.log('success');
+					    }
+					});
 				}
 			},
 			push(){

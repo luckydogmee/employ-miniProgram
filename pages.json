@@ -103,7 +103,13 @@
 		    "style" : {
 				"navigationBarTitleText": "企业信息"
 			}
-		}
+		},
+        {
+            "path" : "pages/public/switchAccount/switchAccount",
+            "style" : {
+				"navigationBarTitleText": "切换账号"
+			}
+        }
     ],
     "globalStyle": {
         "navigationBarTextStyle": "white",

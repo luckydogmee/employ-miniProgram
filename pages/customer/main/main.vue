@@ -54,10 +54,14 @@
 						// 当前用户登录未过期，用原来的token即可
 						that.hasToken = true
 					}else{
+						uni.removeStorageSync('isLogin')
+						uni.removeStorageSync('isRegister')
 						that.login()
 					}
 				},
 				fail(err) {
+					uni.removeStorageSync('isLogin')
+					uni.removeStorageSync('isRegister')
 					that.login()
 				}
 			})	

@@ -157,7 +157,7 @@
 				linkage: true //true 表示开启联动
 			}
 			if(options.id){
-				this.job.id = option.id
+				this.job.id = options.id
 				this.getJobInfo()
 			}
 		},

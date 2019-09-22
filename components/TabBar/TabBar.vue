@@ -1,39 +1,39 @@
 <template>
 	<view class="tabbar-container">
 		<view class="tabbar tabbar-customer" v-if="type === 'customer'">
-			<view class="tabbar-item" @click="switchTab(0)">
+			<view class="tabbar-item" @click="switchTab(0,'customer')">
 				<image class="item-icon" v-if="activeTab === 0" src="../../static/icon/customer-post-active.png"></image>
 				<image class="item-icon" v-else src="../../static/icon/customer-post.png"></image>
 				<view class="tabbar-item-text" :class="activeTab === 0 ? 'text-active':''">岗位列表</view>
 			</view>
-			<view class="tabbar-item" @click="switchTab(1)">
+			<view class="tabbar-item" @click="switchTab(1,'customer')">
 				<image class="item-icon" v-if="activeTab === 1" src="../../static/icon/customer-project-active.png"></image>
 				<image class="item-icon" v-else src="../../static/icon/customer-project.png"></image>
 				<view class="tabbar-item-text" :class="activeTab === 1 ? 'text-active':''">我的项目</view>
 			</view>
-			<view class="tabbar-item" @click="switchTab(2)">
+			<view class="tabbar-item" @click="switchTab(2,'customer')">
 				<image class="item-icon" v-if="activeTab === 2" src="../../static/icon/customer-resume-active.png"></image>
 				<image class="item-icon" v-else src="../../static/icon/customer-resume.png"></image>
 				<view class="tabbar-item-text" :class="activeTab === 2 ? 'text-active':''">我的简历库</view>
 			</view>
-			<view class="tabbar-item" @click="switchTab(3)">
+			<view class="tabbar-item" @click="switchTab(3,'customer')">
 				<image class="item-icon" v-if="activeTab === 3" src="../../static/icon/customer-user-active.png"></image>
 				<image class="item-icon" v-else src="../../static/icon/customer-user.png"></image>
 				<view class="tabbar-item-text" :class="activeTab === 3 ? 'text-active':''">个人中心</view>
 			</view>	
 		</view>
 		<view class="tabbar tabber-seller" v-if="type === 'seller'">
-			<view class="tabbar-item" @click="switchTab(0)">
+			<view class="tabbar-item" @click="switchTab(0,'seller')">
 				<image class="item-icon" v-if="activeTab === 0" src="../../static/icon/seller-home-active.png"></image>
 				<image class="item-icon" v-else src="../../static/icon/seller-home.png"></image>
 				<view class="tabbar-item-text" :class="activeTab === 0 ? 'text-active':''">发布的项目</view>
 			</view>
-			<view class="tabbar-item" @click="switchTab(1)">
+			<view class="tabbar-item" @click="switchTab(1,'seller')">
 				<image class="item-icon" v-if="activeTab === 1" src="../../static/icon/seller-choose-active.png"></image>
 				<image class="item-icon" v-else src="../../static/icon/seller-choose.png"></image>
 				<view class="tabbar-item-text" :class="activeTab === 1 ? 'text-active':''">我的候选人</view>
 			</view>
-			<view class="tabbar-item" @click="switchTab(2)">
+			<view class="tabbar-item" @click="switchTab(2,'seller')">
 				<image class="item-icon" v-if="activeTab === 2" src="../../static/icon/seller-user-active.png"></image>
 				<image class="item-icon" v-else src="../../static/icon/seller-user.png"></image>
 				<view class="tabbar-item-text" :class="activeTab === 2 ? 'text-active':''">企业中心</view>
@@ -65,24 +65,17 @@
 			}
 		},
 		methods:{
-			switchTab(index){
+			switchTab(index,type){
 				const token = uni.getStorageSync('token')
 				const isLogin = uni.getStorageSync('isLogin')
 				const isRegister = uni.getStorageSync('isRegister')
 				const loginType = uni.getStorageSync('loginType')
-				if(index !== 0){
+				if(index !== 0 && loginType != 'B'){
 					if(!token || isLogin != 0 || isRegister != 0 ){
 						this.$emit('showLogin')
 						return 
 					}
 				}
-				// if(index === 3){
-				// 	if(isRegister != 0 ){
-				// 		this.$emit('@showLogin')
-				// 		return 
-				// 	}
-				// }
-				// this.activeTab = index
 				this.$emit('switchTab', index)
 			}
 		}

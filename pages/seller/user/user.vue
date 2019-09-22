@@ -19,7 +19,7 @@
 			<view class="button-item navigate">
 				使用指南
 			</view>
-			<view class="button-item switch-account">
+			<view class="button-item switch-account" @click="switchAccount">
 				切换帐号
 			</view>
 		</view>
@@ -126,6 +126,12 @@
 			closeCashoutDialog(){
 				this.$refs.recommendRecord.close()
 			},
+			// 切换账号
+			switchAccount(){
+				uni.navigateTo({
+					url: '../../public/switchAccount/switchAccount'
+				})
+			}
 		}
 	}
 </script>

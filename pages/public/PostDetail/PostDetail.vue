@@ -47,7 +47,7 @@
 		<view class="detail-footer" v-else>
 			<button v-if="jobInfo.collectionJobStatus === 0" class="default-btn" @click="recommend">推荐</button>
 			<button v-else class="default-btn" @click="recceiveOrder">接单</button>
-			<button class="default-btn">复制链接</button>
+			<button class="default-btn" @click="copyText">复制文字</button>
 			<button class="default-btn" open-type="share">分享</button>
 		</view>
 	</view>
@@ -250,6 +250,24 @@
 				uni.navigateTo({
 					url: '../addJob/addJob?id='+ this.jobInfo.id
 				})
+			},
+			copyText(){
+				const {storeName,num,address,jobName,description,probation,trialTime,trialSalary,officialSalary,avgSalary,interviewTime,educationDegree,workExperience} = this.jobInfo
+				let probationText = ''
+				let trialTimeText = ''
+				if(probation === 0){
+					probationText =  '无试用期'
+				}else{
+					trialTimeText = trialTime == 0 ? '一个月' : trialTime == 1 ? '两个月' : '三个月'
+				}
+				const jobLevel = computedRequired(this.jobInfo)
+				const text = `公司: ${storeName}\n招聘人数: ${num}\n地址: ${address}\n职位: ${jobName}\n职位描述: ${description}\n岗位要求: ${jobLevel}\n${'试用期薪资: '+trialSalary +'元/月\n'}转正后: ${officialSalary} 元/月\n月均收入: ${officialSalary} 元\n面试时间: ${interviewTime}`
+				uni.setClipboardData({
+				    data: text,
+				    success: function () {
+				        console.log('success');
+				    }
+				});
 			}
 		}
 	}

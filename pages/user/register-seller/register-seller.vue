@@ -169,7 +169,7 @@
 				jobModel.getIndustry().then(res=>{
 					const { code, message, data } = res.data
 					if(code === '0'){
-						
+						// 单独写了页面，此处废弃
 					}
 				})
 			},

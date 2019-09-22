@@ -482,11 +482,28 @@
 				})
 				// 再去验证验证码是否正确
 				userModel.verifyCode(this.phone, this.verifyCode).then(res=>{
+					const {data, message, code} = res.data
 					// 执行真正的登录
-					const avatar = this.avatarChanged ? this.avatar : ''
-					return userModel.register(this.name, this.age, this.phone,this.gender, avatar)
-					
-				}).then(res=>{
+					if(code == '0'){
+						this.realRegister()
+					}else{
+						uni.hideLoading()
+						uni.showToast({
+							icon: 'none',
+							title: message
+						})
+					}
+				}).catch(err=>{
+					uni.hideLoading()
+					uni.showToast({
+						icon: 'none',
+						title: '注册失败'
+					})
+				})
+			},
+			realRegister(){
+				const avatar = this.avatarChanged ? this.avatar : ''
+				userModel.register(this.name, this.age, this.phone,this.gender, avatar).then(res=>{
 					// 注册成功
 					const {data, message, code} = res.data
 					if(code === '0'){

@@ -2,30 +2,21 @@
 	<view class="register-container">
 		<view class="content">
 			<view class="logo">
-				<image src="../../../static/img/logo.png" mode=""></image>
+				<!-- <image src="../../../static/img/logo.png" mode=""></image> -->
 			</view>
 			<view class="form">
 				<view class="form-item form-input">
 					<input class="sy-input" :focus="focusArray[focusIndex] === 'phone'" 
-							v-model="phone" maxlength="15" placeholder="您的电话号码" placeholder-class="input-placeholder" 
-							@blur="handleBlur(0)" />
+							v-model="phone" maxlength="15" placeholder="手机号" placeholder-class="input-placeholder" />
 				</view>
 				<view class="form-item verfiy-item  form-input">
 					<input class="sy-input"  :focus="focusArray[focusIndex] === 'verify'" 
-							v-model="verifyCode" maxlength="6" placeholder="短信验证码" placeholder-class="input-placeholder" 
-							@blur="handleBlur(1)" />
+							v-model="verifyCode" maxlength="6" placeholder="短信验证码" placeholder-class="input-placeholder" />
 					<button class="default-btn verify-code-btn" :class="{'disabled':!readySendCode} " 
 						@click.stop="getVerifyCode">{{readySendCode ? '发送验证码' : surplusSecond + ' 秒' }}</button>
 				</view>
-				<!-- <view class="special-item">
-					<text class="savePhone">保存此号码供以后授权使用</text>
-					<switch :checked="savePhone" @change="savePhoneChange" color="#feae86" style="transform:scale(0.5)" />
-				</view> -->
 				<view class="form-item">
-					<button class="default-btn submit-btn" @click="submit" >登录</button>
-				</view>
-				<view class="form-item to-login">
-					<text @click="toRegister">还没有账号？点这里注册>></text>
+					<button class="default-btn submit-btn" @click="submit" >切换</button>
 				</view>
 			</view>
 		</view>
@@ -155,37 +146,32 @@
 					return
 				}
 				
-				// 再去验证验证码是否正确,这步省略，直接登录
-				// userModel.verifyCode(this.phone, this.verifyCode).then(res=>{
-				// 	// 执行真正的登录
-				// 	return userModel.login(this.phone, 'A')
-				// })
 				uni.showLoading({
 					mask: true
 				})
-				userModel.login(this.phone, this.verifyCode, 'A').then(res=>{
+				const type = uni.getStorageSync('loginType')
+				userModel.switchAccount(this.phone, this.verifyCode, type).then(res=>{
 					uni.hideLoading()
 					const { code, data, message } = res.data
 					if(code === '0'){
-						if(data.isRegister == 0){
-							// 登录成功
-							uni.showToast({
-								title: '登录成功'
-							})
-							uni.setStorageSync('token', data.token)
-							uni.setStorageSync('isLogin',data.isLogin)
-							uni.setStorageSync('isRegister',data.isRegister)
-							setTimeout(()=>{
+						uni.showToast({
+							title: '切换成功'
+						})
+						uni.setStorageSync('token', data.token)
+						uni.setStorageSync('isLogin',data.isLogin)
+						uni.setStorageSync('isRegister',data.isRegister)
+						setTimeout(()=>{
+							if(type == 'B'){
+								uni.reLaunch({
+									url: '../../seller/main/main'
+								})	
+							}else{
 								uni.reLaunch({
 									url: '../../customer/main/main'
 								})
-							},2000)		
-						}else{
-							uni.showToast({
-								icon: 'none',
-								title: '手机号未注册'
-							})
-						}
+							}
+							
+						},2000)		
 					}else{
 						uni.showToast({
 							icon: 'none',
