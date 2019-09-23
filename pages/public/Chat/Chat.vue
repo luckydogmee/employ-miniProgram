@@ -565,12 +565,12 @@
 				})
 			},
 			//B 认可申诉
-			approvalAppeal(){
+			approvalAppeal(item){
 				uni.showLoading({
 					title: '请稍等...'
 				})
 				const that = this
-				processModel.approvalAppeal(item.id,this.inputContent).then(res=>{
+				processModel.approvalAppeal(item.id).then(res=>{
 					uni.hideLoading()
 					const { code, message, data } = res.data
 					if(code === '0'){
@@ -581,6 +581,7 @@
 							sort_number: item.sort_number + 1,
 							owner: item.owner == 1? 0:1
 						})
+						that.getProcessList()
 					}else{
 						uni.showToast({
 							icon: 'none',
