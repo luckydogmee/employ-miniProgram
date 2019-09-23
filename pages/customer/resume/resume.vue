@@ -78,7 +78,7 @@
 						确认推荐后
 					</view>
 					<view class="text">
-						系统将自动向求职者发送面试邀请
+						请主动与求职者联系，可在流程中查看短信模板
 					</view>
 				</view>
 				<view class="selectDate-footer">
