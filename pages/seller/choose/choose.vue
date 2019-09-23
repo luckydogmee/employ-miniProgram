@@ -131,15 +131,18 @@
 		align-items: center;
 		justify-content: space-around;
 		background: #fff;
+		width: 750upx;
+		margin-bottom: 10upx;
 		.tab{
 			flex: 1;
 			height: 48upx;
 			line-height: 48upx;
-			font-size: 26upx;
-			color: #ff9058;
+			font-size: 30upx;
+			color: #999;
 			text-align: center;
 			&.active{
 				font-weight: 600;
+				color: #ff9058;
 			}
 		}
 	}

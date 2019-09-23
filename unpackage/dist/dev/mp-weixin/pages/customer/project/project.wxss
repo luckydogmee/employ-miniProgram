@@ -25,11 +25,12 @@
     height: 48rpx;
     line-height: 48rpx;
     font-size: 30rpx;
-    color: #ff9058;
+    color: #999;
     text-align: center;
 }
 .tab-container .tab.active {
       font-weight: 600;
+      color: #ff9058;
 }
 .project-list {
   width: 750px;

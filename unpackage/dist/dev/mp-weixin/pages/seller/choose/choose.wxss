@@ -120,6 +120,8 @@
       -ms-flex-pack: distribute;
           justify-content: space-around;
   background: #fff;
+  width: 750rpx;
+  margin-bottom: 10rpx;
 }
 .tab-container .tab {
     -webkit-box-flex: 1;
@@ -128,11 +130,12 @@
             flex: 1;
     height: 48rpx;
     line-height: 48rpx;
-    font-size: 26rpx;
-    color: #ff9058;
+    font-size: 30rpx;
+    color: #999;
     text-align: center;
 }
 .tab-container .tab.active {
       font-weight: 600;
+      color: #ff9058;
 }
 

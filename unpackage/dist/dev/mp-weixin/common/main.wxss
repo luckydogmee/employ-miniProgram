@@ -153,11 +153,11 @@ button.swiper-button:after {
 }
 .selectDateDialog {
   height: 360rpx;
-  width: 461rpx;
+  width: 511rpx;
 }
 .selectDate-footer {
   height: 86rpx;
-  width: 462rpx;
+  width: 511rpx;
   padding-top: 1rpx;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -176,7 +176,7 @@ button.swiper-button:after {
           align-items: center;
 }
 .selectDate-footer .selectDate-btn {
-    width: 230rpx;
+    width: 255rpx;
     height: 100%;
     line-height: 84rpx;
     background: #FFFFFF;
@@ -195,7 +195,7 @@ button.swiper-button:after {
 .selectDate-content {
   background: #FFFFFF;
   height: 210rpx;
-  width: 462rpx;
+  width: 511rpx;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -237,8 +237,8 @@ button.swiper-button:after {
 }
 .selectDate-content .selectDate-picker .selectDate-content {
       width: 340rpx;
-      height: 50rpx;
-      line-height: 50rpx;
+      height: 66rpx;
+      line-height: 66rpx;
       display: -webkit-box;
       display: -webkit-flex;
       display: -ms-flexbox;
@@ -259,9 +259,9 @@ button.swiper-button:after {
 }
 .selectDate-content .selectDate-picker .date-view {
       width: 340rpx;
-      height: 50rpx;
-      line-height: 50rpx;
-      font-size: 20rpx;
+      height: 66rpx;
+      line-height: 66rpx;
+      font-size: 22rpx;
       color: #666;
       text-align: center;
       border: 1rpx solid #fe9661;

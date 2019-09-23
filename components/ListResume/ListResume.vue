@@ -123,7 +123,6 @@
 		.describe-call{
 			width: 92upx;
 			height: 92upx;
-			margin-left: 60upx;
 			image{
 				height: 100%;
 				width: 100%;

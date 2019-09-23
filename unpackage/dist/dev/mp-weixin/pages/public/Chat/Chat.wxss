@@ -165,14 +165,11 @@
           box-sizing: border-box;
   line-height: 44rpx;
 }
-.selectDateDialog {
-  width: 462rpx;
-}
 .selectDate-footer .selectDate-btn {
   height: 98%;
 }
 .selectDate-footer .singleBtn {
-  width: 462rpx;
+  width: 511rpx;
   height: 98%;
 }
 

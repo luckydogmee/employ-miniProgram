@@ -744,14 +744,11 @@
 		box-sizing: border-box;
 		line-height: 44upx;
 	}
-	.selectDateDialog{
-		width: 462upx;
-	}
 	.selectDate-footer .selectDate-btn{
 		height: 98%;
 	}
 	.selectDate-footer .singleBtn{
-		width: 462upx;
+		width: 511upx;
 		height: 98%;
 	}
 </style>

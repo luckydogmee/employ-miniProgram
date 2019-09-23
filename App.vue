@@ -4,6 +4,9 @@
 	} from  'vuex'
 	export default {
 		computed: mapState(['userName']),
+		onLoad() {
+			uni.removeStorageSync('loginType')
+		}
 	}
 </script>
 <style lang="scss">
@@ -167,11 +170,11 @@
 	}
 	.selectDateDialog{
 		height: 360upx;
-		width: 461upx;
+		width: 511upx;
 	}
 	.selectDate-footer{
 		height: 86upx;
-		width: 462upx;
+		width: 511upx;
 		padding-top: 1upx;
 		box-sizing: border-box;
 		display: flex;
@@ -179,7 +182,7 @@
 		background:#e7e7e7;
 		align-items: center;
 		.selectDate-btn{
-			width: 230upx;
+			width: 255upx;
 			height: 100%;
 			line-height: 84upx;
 			background: #FFFFFF;
@@ -199,7 +202,7 @@
 	.selectDate-content{
 		background: #FFFFFF;
 		height: 210upx;
-		width: 462upx;
+		width: 511upx;
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
@@ -215,8 +218,8 @@
 			padding-bottom: 20upx;
 			.selectDate-content{
 				width: 340upx;
-				height: 50upx;
-				line-height: 50upx;
+				height: 66upx;
+				line-height: 66upx;
 				display: flex;
 				flex-direction: row;
 				align-items: center;
@@ -224,9 +227,9 @@
 			}
 			.date-view{
 				width: 340upx;
-				height: 50upx;
-				line-height: 50upx;
-				font-size: 20upx;
+				height: 66upx;
+				line-height: 66upx;
+				font-size: 22upx;
 				color: #666;
 				text-align: center;
 				border: 1upx solid #fe9661;

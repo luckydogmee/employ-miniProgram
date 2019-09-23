@@ -148,8 +148,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _user = _interopRequireDefault(__webpack_require__(/*! @/models/user.js */ 24));
-var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 47));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var ListItem = function ListItem() {return __webpack_require__.e(/*! import() | components/ListItem/ListItem */ "components/ListItem/ListItem").then(__webpack_require__.bind(null, /*! @/components/ListItem/ListItem.vue */ 296));};
+var _user = _interopRequireDefault(__webpack_require__(/*! @/models/user.js */ 47));
+var _job = _interopRequireDefault(__webpack_require__(/*! @/models/job.js */ 29));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var ListItem = function ListItem() {return __webpack_require__.e(/*! import() | components/ListItem/ListItem */ "components/ListItem/ListItem").then(__webpack_require__.bind(null, /*! @/components/ListItem/ListItem.vue */ 296));};
 
 var userModel = new _user.default();
 var postModel = new _job.default();var _default =
@@ -250,7 +250,10 @@ var postModel = new _job.default();var _default =
 
       userModel.loginForB().then(function (res) {
         uni.hideLoading();var _res$data2 =
-        res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
+        res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data,status = _res$data2.status;
+        if (status != 200) {
+          throwError();
+        }
         if (code === '0') {
           uni.setStorageSync('token', data.token);
           uni.setStorageSync('loginType', 'B');

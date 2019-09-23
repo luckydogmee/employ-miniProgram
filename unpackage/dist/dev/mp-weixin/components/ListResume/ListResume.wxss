@@ -50,7 +50,6 @@
 .info .describe-call {
     width: 92rpx;
     height: 92rpx;
-    margin-left: 60rpx;
 }
 .info .describe-call image {
       height: 100%;

@@ -4,7 +4,7 @@
 			提交成功！
 		</view>
 		<view class="success-tip">
-			我们将在24小时内审核完毕，并电话通知您支付{{amount}}元履约保证金，在您支付
+			我们将在24小时内审核完毕，并电话通知您支付<text>{{amount}}</text>元履约保证金，在您支付
 			保证金后系统功能将会自动开通，请您耐心等待。	
 		</view>
 		<view class="success-account">
@@ -46,13 +46,18 @@
 		padding: 0 80upx;
 		padding-top: 200upx;
 		color: #ff9058;
-		font-size: 22upx;
+		font-size: 26upx;
 		line-height: 32upx;
 	}
 	.success-title{
 		font-size: 34upx;
 		text-align: center;
 		margin-bottom: 50upx;
+	}
+	.success-tip{
+		text{
+			text-decoration: underline;
+		}
 	}
 	.success-account{
 		padding-left: 20upx;

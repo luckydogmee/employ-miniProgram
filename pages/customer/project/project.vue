@@ -252,11 +252,11 @@
 			height: 48upx;
 			line-height: 48upx;
 			font-size: 30upx;
-			
-			color: #ff9058;
+			color: #999;
 			text-align: center;
 			&.active{
 				font-weight: 600;
+				color: #ff9058;
 			}
 		}
 	}
