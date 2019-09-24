@@ -250,10 +250,7 @@ var postModel = new _job.default();var _default =
 
       userModel.loginForB().then(function (res) {
         uni.hideLoading();var _res$data2 =
-        res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data,status = _res$data2.status;
-        if (status != 200) {
-          throwError();
-        }
+        res.data,code = _res$data2.code,message = _res$data2.message,data = _res$data2.data;
         if (code === '0') {
           uni.setStorageSync('token', data.token);
           uni.setStorageSync('loginType', 'B');

@@ -17,7 +17,8 @@
     "pages/public/addJobSuccess/addJobSuccess",
     "pages/public/addJob/addJob",
     "pages/customer/user/detail",
-    "pages/seller/user/detail"
+    "pages/seller/user/detail",
+    "pages/public/switchAccount/switchAccount"
   ],
   "subPackages": [],
   "window": {
@@ -25,5 +26,6 @@
     "navigationBarBackgroundColor": "#e28f64",
     "backgroundColor": "#fbf9fe"
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
 }

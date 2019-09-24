@@ -48,25 +48,25 @@
 			// 第一次进入的时候
 			const that = this
 			const token = uni.getStorageSync('token')
-			uni.checkSession({
-				success(res) {
-					if(token){
-						// 当前用户登录未过期，用原来的token即可
-						that.hasToken = true
-					}else{
-						uni.removeStorageSync('isLogin')
-						uni.removeStorageSync('isRegister')
-						that.login()
-					}
-				},
-				fail(err) {
-					uni.removeStorageSync('isLogin')
-					uni.removeStorageSync('isRegister')
-					that.login()
-				}
-			})	
-			// 直接login，避免麻烦
-			// this.login()
+			// uni.checkSession({
+			// 	success(res) {
+			// 		if(token){
+			// 			// 当前用户登录未过期，用原来的token即可
+			// 			that.hasToken = true
+			// 		}else{
+			// 			uni.removeStorageSync('isLogin')
+			// 			uni.removeStorageSync('isRegister')
+			// 			that.login()
+			// 		}
+			// 	},
+			// 	fail(err) {
+			// 		uni.removeStorageSync('isLogin')
+			// 		uni.removeStorageSync('isRegister')
+			// 		that.login()
+			// 	}
+			// })	
+			// 直接login，避免麻烦同时避免进入时用的B端token
+			this.login()
 		},
 		onPullDownRefresh(){
 			if(this.tabIndex === 0){

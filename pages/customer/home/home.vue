@@ -143,10 +143,7 @@
 				})
 				userModel.loginForB().then(res=>{
 					uni.hideLoading()
-					const { code, message, data, status } = res.data
-					if(status != 200){
-						throwError()
-					}
+					const { code, message, data } = res.data
 					if(code === '0'){
 						uni.setStorageSync('token', data.token)
 						uni.setStorageSync('loginType', 'B')
