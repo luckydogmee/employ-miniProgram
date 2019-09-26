@@ -118,10 +118,10 @@ button.primary {
   padding-bottom: 100rpx;
 }
 button.swiper-button {
-  height: 40rpx;
-  width: 160rpx;
-  font-size: 20rpx;
-  line-height: 40rpx;
+  height: 46rpx;
+  width: 170rpx;
+  font-size: 22rpx;
+  line-height: 46rpx;
   background: #ff9058;
 }
 button.swiper-button:after {

@@ -2,7 +2,7 @@
 	<view class="upload-container">
 		<view class="upload-title">
 			<view>{{title}}</view>
-			<view class="upload-required">*</view>
+			<view v-if="required" class="upload-required">*</view>
 		</view>
 		<view class="upload-content">
 			<image :src="imgSrc" @click="selectImage" mode=""></image>

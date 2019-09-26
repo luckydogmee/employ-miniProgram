@@ -135,10 +135,10 @@
 		padding-bottom: 100upx;
 	}
 	button.swiper-button{
-		height: 40upx;
-		width: 160upx;
-		font-size: 20upx;
-		line-height: 40upx;
+		height: 46upx;
+		width: 170upx;
+		font-size: 22upx;
+		line-height: 46upx;
 		background: #ff9058;
 		&:after{
 			border: none;

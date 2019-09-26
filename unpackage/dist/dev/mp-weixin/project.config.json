@@ -4,26 +4,17 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
-		"es6": true,
+		"urlCheck": true,
 		"postcss": true,
-		"minified": true,
-		"newFeature": true,
-		"coverView": true,
-		"autoAudits": false,
-		"checkInvalidKey": true,
-		"checkSiteMap": true,
-		"uploadWithSourceMap": true,
-		"babelSetting": {
-			"ignore": [],
-			"disablePlugins": [],
-			"outputPath": ""
-		}
+		"es6": true,
+		"minified": true
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.7.0",
 	"appid": "wx5666e9599cc559e6",
 	"projectname": "miniProgram",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,

@@ -62,14 +62,14 @@
 					<view class="select"></view>
 				</picker>
 			</InputCell>
-			<InputCell v-if="job.probation === 1" label="底薪" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="job.trialSalary" inputType="number" placeholder="请输入底薪" @on-input="trialSalaryChanged"></InputCell>			
+			<InputCell v-if="job.probation === 1" label="底薪" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="job.trialSalary" inputType="number" placeholder="请输入底薪(元/月)" @on-input="trialSalaryChanged"></InputCell>			
 		</view>
 		<view class="add-bottom">
 			<view class="input-title">
 				转正后
 			</view>
-			<InputCell label="底薪" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="job.officialSalary" inputType="number" placeholder="请输入底薪" @on-input="officialSalaryChanged"></InputCell>
-			<InputCell label="平均收入" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="job.avgSalary" inputType="number" placeholder="请输入平均收入" @on-input="avgSalaryChanged"></InputCell>
+			<InputCell label="底薪" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="job.officialSalary" inputType="number" placeholder="请输入底薪(元/月)" @on-input="officialSalaryChanged"></InputCell>
+			<InputCell label="平均收入" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="job.avgSalary" inputType="number" placeholder="请输入平均收入(元/月)" @on-input="avgSalaryChanged"></InputCell>
 		</view>
 		<view class="add-bottom">
 			<view class="input-title">
@@ -123,8 +123,8 @@
 					overtime: '',
 					totalAmount: 0, // 履约金
 				},
-				educationDegreeArray: ['高中以下','高中','大专','本科及以上'],
-				workExperienceArray: ['一年以下', '一年至三年','三年至五年','五年以上'],
+				educationDegreeArray: ['不限','高中及以上','大专及以上','本科及以上'],
+				workExperienceArray: ['不限', '一年以上','三年以上','五年以上'],
 				overtimeArray: ['7天', '15天','30天'],
 				trialTimeArray:['一个月', '两个月','三个月'],
 				ageData:{}
@@ -348,16 +348,16 @@
 			},
 			renderAge(){
 				const array = []
-				for(let i=18; i <100; i++){
+				for(let i=18; i <61; i++){
 					array.push({name: i,value: i})
 				}
 				return array
 			},
 			renderAge2(){
 				const array = []
-				for(let i=18; i <100; i++){
+				for(let i=18; i <61; i++){
 					let tempArray = []
-					for(let j= i+1; j <100; j++){
+					for(let j= i+1; j <61; j++){
 						tempArray.push({name: j,value: j})
 					}
 					array.push(tempArray)
@@ -469,7 +469,7 @@
 	.description{
 		margin-top: 30upx;
 		.cell-title{
-			font-size: 24upx;
+			font-size: 26upx;
 			color: #272626;
 			.required{
 				color: #ff8352;

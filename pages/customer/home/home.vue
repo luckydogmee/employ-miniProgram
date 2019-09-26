@@ -153,9 +153,9 @@
 					}else{
 						uni.showModal({
 							title: '',
-							content: '当前账号尚未注册企业号!\r\n是否注册？',
+							content: '当前账号尚未注册企业号\r\n是否注册？',
 							confirmText: '立即注册',
-							cancelText: '算了吧',
+							cancelText: '再看看',
 							confirmColor: '#ff9058',
 							cancelColor: '#ff9058',
 							success: (response)=>{

@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/customer/main/main",
     "pages/seller/main/main",
+    "pages/customer/main/main",
     "pages/user/register/register",
     "pages/public/PostDetail/PostDetail",
     "pages/user/login/login",

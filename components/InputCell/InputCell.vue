@@ -118,7 +118,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.cell-container{
 		height: 70upx;
 		// width: 100%;
@@ -141,10 +141,10 @@
 			margin-bottom: unset;
 			height: 60upx;
 			line-height: 60upx;
-			font-size: 24upx;
+			font-size: 26upx;
 			.placeholder{
 				color: #595959;
-				font-size: 24upx;
+				font-size: 26upx;
 			}
 		}
 		.cell-title{
@@ -152,6 +152,7 @@
 		}
 		.cell-content{
 			color: #595959;
+			font-size: 26upx;
 		}
 		::-webkit-input-placeholder{
 			

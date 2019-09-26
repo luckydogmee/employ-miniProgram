@@ -54,9 +54,9 @@
 			<InputCell label="招聘联系人" :required="isEdit" :disabled="!isEdit" :isSell="true" :content="resume.contactName" placeholder="请输入联系人" @on-input="contactNameChanged"></InputCell>
 			
 			<view class="upload-wrapper">
-				<UploadItem title="上传营业执照" :imageUrl="resume.businessImg" @on-select-image="chooseBusinessImg" />
-				<UploadItem title="上传公司logo" :imageUrl="resume.logo" @on-select-image="chooseLogo" />
-				<UploadItem title="上传工作场景照" :imageUrl="resume.companyImg" @on-select-image="chooseCompanyImg" />
+				<UploadItem :required="true" title="上传营业执照" :imageUrl="resume.businessImg" @on-select-image="chooseBusinessImg" />
+				<UploadItem :required="false" title="上传公司logo" :imageUrl="resume.logo" @on-select-image="chooseLogo" />
+				<UploadItem :required="false" title="上传工作场景照" :imageUrl="resume.companyImg" @on-select-image="chooseCompanyImg" />
 			</view>	
 		</view>
 		<view class="add-bottom">
@@ -89,6 +89,7 @@
 	import StoreModel from '@/models/store.js'
 	import JobModel from '@/models/job.js'
 	import { config } from '../../../config.js'
+	import { verifyPhone } from '../../../utils/utils.js'
 	const userModel = new UserModel()
 	const storeModel = new StoreModel()
 	const jobModel = new JobModel()
@@ -260,6 +261,14 @@
 					})
 					return
 				}
+				const correctPhone = verifyPhone(this.resume.phone)
+				if(!correctPhone){
+					uni.showToast({
+						icon:'none',
+						title:'手机号码错误，请确认'
+					})
+					return
+				} 
 				uni.showLoading({
 					mask: true
 				})
@@ -300,6 +309,49 @@
 				})
 			},
 			postVerifyCode(){
+				// 表单验证
+				if(!this.resume.name){
+					uni.showToast({
+						icon:'none',
+						title:'请输入公司名称'
+					})
+					return
+				}
+				if(!this.resume.cityCode){
+					uni.showToast({
+						icon:'none',
+						title:'请选择区域'
+					})
+					return
+				}
+				if(!this.resume.address){
+					uni.showToast({
+						icon:'none',
+						title:'请输入地址'
+					})
+					return
+				}
+				if(!this.resume.industryCode){
+					uni.showToast({
+						icon:'none',
+						title:'请选择所在行业'
+					})
+					return
+				}
+				if(!this.resume.contactName){
+					uni.showToast({
+						icon:'none',
+						title:'请输入招聘联系人'
+					})
+					return
+				}
+				if(!this.resume.phone){
+					uni.showToast({
+						icon:'none',
+						title:'请输入电话号码'
+					})
+					return
+				}
 				const that = this
 				uni.showLoading({
 					title: '提交中...'

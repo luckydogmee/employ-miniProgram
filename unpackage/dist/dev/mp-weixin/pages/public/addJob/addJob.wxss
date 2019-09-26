@@ -74,7 +74,7 @@
   margin-top: 30rpx;
 }
 .description .cell-title {
-    font-size: 24rpx;
+    font-size: 26rpx;
     color: #272626;
 }
 .description .cell-title .required {
